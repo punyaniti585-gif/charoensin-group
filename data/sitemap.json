@@ -1,0 +1,606 @@
+{
+  "site_url": "https://csgok.sfinsulations.com/",
+  "updated_at": "2026-11-16",
+  "source": "โครงสร้างเมนูและ URL ที่ผู้ใช้ระบุในแชต",
+  "status_definitions": {
+    "existing_pending_review": "มีลิงก์แล้ว รอตรวจรับ",
+    "link_not_provided": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ รอตรวจสอบ",
+    "existing_pending_placement": "มีลิงก์แล้ว รอยืนยันตำแหน่งเมนู",
+    "not_started": "ตรวจแล้วว่ายังไม่ได้ทำ",
+    "in_progress": "กำลังทำ",
+    "done": "ตรวจรับแล้ว"
+  },
+  "menus": [
+    {
+      "title": "หน้าแรก",
+      "children": [],
+      "id": "01",
+      "status": "link_not_provided",
+      "owner": null,
+      "source_file": null,
+      "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+    },
+    {
+      "title": "เกี่ยวกับเรา",
+      "children": [
+        {
+          "title": "วิสัยทัศน์",
+          "children": [],
+          "url": "https://csgok.sfinsulations.com/visionbyclaude/",
+          "id": "02.01",
+          "status": "existing_pending_review",
+          "owner": null,
+          "source_file": null,
+          "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+        },
+        {
+          "title": "พันธกิจ",
+          "children": [],
+          "id": "02.02",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "ค่านิยมองค์กร",
+          "children": [],
+          "id": "02.03",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "ผู้นำของเรา",
+          "children": [],
+          "id": "02.04",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "อัตลักษณ์องค์กร",
+          "children": [],
+          "id": "02.05",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        }
+      ],
+      "id": "02",
+      "status": "link_not_provided",
+      "owner": null,
+      "source_file": null,
+      "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+    },
+    {
+      "title": "ธุรกิจของเรา",
+      "children": [
+        {
+          "title": "ธุรกิจอสังหาริมทรัพย์",
+          "children": [
+            {
+              "title": "บริษัท เจริญสิน แอสเสท จำกัด",
+              "children": [],
+              "id": "03.01.01",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท เจริญสิน พัฒนา จำกัด",
+              "children": [],
+              "id": "03.01.02",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            }
+          ],
+          "id": "03.01",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "ธุรกิจผลิตหนังและรองเท้า",
+          "children": [
+            {
+              "title": "ธุรกิจผลิตหนังแท้ — บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)",
+              "children": [],
+              "id": "03.02.01",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "ธุรกิจอุปกรณ์เซฟตี้ — บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)",
+              "children": [],
+              "id": "03.02.02",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท แมนวูด อินเตอร์เทรด จำกัด",
+              "children": [],
+              "id": "03.02.03",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            }
+          ],
+          "id": "03.02",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "ธุรกิจสิ่งทอ",
+          "children": [
+            {
+              "title": "บริษัท ทีทีเอ็น นันวูเว่น โซลูชั่น จำกัด",
+              "children": [],
+              "id": "03.03.01",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท ซงเม่า นันวูเว่น จำกัด",
+              "children": [],
+              "id": "03.03.02",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท เอฟแอนด์ที นันวูเว่น โซลูชั่น จำกัด",
+              "children": [],
+              "id": "03.03.03",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท เอชอาร์ที นันวูเว่น จำกัด",
+              "children": [],
+              "id": "03.03.04",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            }
+          ],
+          "id": "03.03",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "ธุรกิจเคมีภัณฑ์",
+          "children": [
+            {
+              "title": "บริษัท แอ็พพลาย ดีบี จำกัด (มหาชน)",
+              "children": [],
+              "id": "03.04.01",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท อีเกิ้ล เคมีคอล อินดัสตรี จำกัด",
+              "children": [],
+              "id": "03.04.02",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท ซี เอส รับเบอร์ อินดัสทรี่ จำกัด",
+              "children": [],
+              "id": "03.04.03",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท ซีเอส ยูนิเทล เทคโนโลยี จำกัด",
+              "children": [],
+              "id": "03.04.04",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท ซี เอส มิตซูฟุกุ อิลาสโตเมอร์ จำกัด",
+              "children": [],
+              "id": "03.04.05",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท ซีเอสเจ รับเบอร์ชีท จำกัด",
+              "children": [],
+              "id": "03.04.06",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            }
+          ],
+          "id": "03.04",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "ธุรกิจอื่นๆ",
+          "children": [
+            {
+              "title": "บริษัท เจริญสิน แคปปิตอล จำกัด",
+              "children": [],
+              "id": "03.05.01",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท ไทย ไวร์ริ่ง ซิสเต็ม จำกัด",
+              "children": [],
+              "id": "03.05.02",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท แสงบูรพา แพลนเทชั่น จำกัด",
+              "children": [],
+              "id": "03.05.03",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท ไฟน์ ฟู้ด แฟกเตอร์ จำกัด",
+              "children": [],
+              "id": "03.05.04",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท สมาร์ท เซนส์ อินดัสเตรียล ดีไซน์ จำกัด",
+              "children": [],
+              "id": "03.05.05",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท นาว เอนด์ออฟเวสท์ จำกัด",
+              "children": [],
+              "id": "03.05.06",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "บริษัท รักษาความปลอดภัย บี-เบสท์ เซอร์วิส จำกัด",
+              "children": [],
+              "id": "03.05.07",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            }
+          ],
+          "id": "03.05",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        }
+      ],
+      "url": "https://csgok.sfinsulations.com/charoensin-our-business-v3/",
+      "id": "03",
+      "status": "existing_pending_review",
+      "owner": null,
+      "source_file": null,
+      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+    },
+    {
+      "title": "มูลนิธิ",
+      "children": [],
+      "url": "https://csgok.sfinsulations.com/wongcharoensinfoundation2026/",
+      "id": "04",
+      "status": "existing_pending_review",
+      "owner": null,
+      "source_file": null,
+      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+    },
+    {
+      "title": "ข่าวสารและกิจกรรม",
+      "children": [
+        {
+          "title": "ข่าวสารผู้บริหาร",
+          "children": [],
+          "id": "05.01",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "ประกาศบริษัท",
+          "children": [],
+          "id": "05.02",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        }
+      ],
+      "url": "https://csgok.sfinsulations.com/new2026/",
+      "id": "05",
+      "status": "existing_pending_review",
+      "owner": null,
+      "source_file": null,
+      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+    },
+    {
+      "title": "ร่วมงานกับเรา",
+      "children": [
+        {
+          "title": "นโยบายการบริหารงานบุคคล",
+          "children": [],
+          "url": "https://csgok.sfinsulations.com/compliant_hr_2026/",
+          "id": "06.01",
+          "status": "existing_pending_review",
+          "owner": null,
+          "source_file": null,
+          "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+        },
+        {
+          "title": "ตำแหน่งงาน",
+          "children": [],
+          "url": "https://csgok.sfinsulations.com/mycareer2026/",
+          "id": "06.02",
+          "status": "existing_pending_review",
+          "owner": null,
+          "source_file": null,
+          "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+        },
+        {
+          "title": "ประกาศบริษัท",
+          "children": [],
+          "id": "06.03",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "การอบรมและสัมมนา",
+          "children": [],
+          "id": "06.04",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        }
+      ],
+      "id": "06",
+      "status": "link_not_provided",
+      "owner": null,
+      "source_file": null,
+      "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+    },
+    {
+      "title": "ติดต่อเรา",
+      "children": [],
+      "url": "https://csgok.sfinsulations.com/contact-us-2026-greenshift/",
+      "id": "07",
+      "status": "existing_pending_review",
+      "owner": null,
+      "source_file": null,
+      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+    },
+    {
+      "title": "รายงานกำกับดูแล",
+      "children": [
+        {
+          "title": "นโยบาย",
+          "children": [
+            {
+              "title": "นโยบายกำกับดูแล",
+              "children": [],
+              "id": "08.01.01",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "นโยบายการใช้ระบบเทคโนโลยี",
+              "children": [],
+              "id": "08.01.02",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "นโยบายการต่อต้านคอรัปชั่น",
+              "children": [],
+              "id": "08.01.03",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "นโยบายการให้และรับของขวัญ",
+              "children": [],
+              "id": "08.01.04",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "นโยบายการพิจารณาค่าตอบแทนกรรมการบริษัท และผู้บริหาร",
+              "children": [],
+              "id": "08.01.05",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "นโยบายการป้องกันความขัดแย้งทางผลประโยชน์",
+              "children": [],
+              "id": "08.01.06",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "นโยบายการใช้ข้อมูลและการซื้อขายหลักทรัพย์",
+              "children": [],
+              "id": "08.01.07",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "นโยบายและแนวปฏิบัติในการรักษาความมั่นคง",
+              "children": [],
+              "id": "08.01.08",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            }
+          ],
+          "id": "08.01",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "องค์กร",
+          "children": [
+            {
+              "title": "โครงสร้างองค์กร",
+              "children": [],
+              "id": "08.02.01",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "จรรยาบรรณธุรกิจและคู่ค้า",
+              "children": [],
+              "url": "https://csgok.sfinsulations.com/codeofconduct/",
+              "id": "08.02.02",
+              "status": "existing_pending_review",
+              "owner": null,
+              "source_file": null,
+              "notes": "ผู้ใช้ระบุลิงก์เป็นจรรยาบรรณองค์กร ต้องตรวจว่าครอบคลุมคู่ค้าหรือไม่"
+            },
+            {
+              "title": "รายงานผลการบริหารความเสี่ยง",
+              "children": [],
+              "id": "08.02.03",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            },
+            {
+              "title": "นโยบายคุ้มครองข้อมูลส่วนบุคคล",
+              "children": [],
+              "id": "08.02.04",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            }
+          ],
+          "id": "08.02",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        },
+        {
+          "title": "หลักการ",
+          "children": [
+            {
+              "title": "หลักการดูแลกำกับกิจการที่ดี",
+              "children": [],
+              "id": "08.03.01",
+              "status": "link_not_provided",
+              "owner": null,
+              "source_file": null,
+              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+            }
+          ],
+          "id": "08.03",
+          "status": "link_not_provided",
+          "owner": null,
+          "source_file": null,
+          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+        }
+      ],
+      "id": "08",
+      "status": "link_not_provided",
+      "owner": null,
+      "source_file": null,
+      "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+    }
+  ],
+  "unassigned_pages": [
+    {
+      "title": "นโยบายการใช้ AI",
+      "children": [],
+      "url": "https://csgok.sfinsulations.com/ai-policy2/",
+      "id": "EX-01",
+      "status": "existing_pending_placement",
+      "owner": null,
+      "source_file": null,
+      "notes": "รอยืนยันตำแหน่งเมนู ไม่เท่ากับนโยบายการใช้ระบบเทคโนโลยีโดยอัตโนมัติ"
+    }
+  ]
+}
