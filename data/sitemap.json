@@ -8,7 +8,8 @@
     "existing_pending_placement": "มีลิงก์แล้ว รอยืนยันตำแหน่งเมนู",
     "not_started": "ตรวจแล้วว่ายังไม่ได้ทำ",
     "in_progress": "กำลังทำ",
-    "done": "ตรวจรับแล้ว"
+    "done": "ตรวจรับแล้ว",
+    "pending_executive_review": "รอผู้บริหารตรวจสอบ"
   },
   "menus": [
     {
@@ -340,10 +341,18 @@
       "children": [],
       "url": "https://csgok.sfinsulations.com/wongcharoensinfoundation2026/",
       "id": "04",
-      "status": "existing_pending_review",
+      "status": "pending_executive_review",
       "owner": null,
       "source_file": null,
-      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+      "notes": "ส่งลิงก์ให้ผู้บริหารแล้ว รอความคิดเห็นก่อนแก้ไขเพิ่มเติม ไม่สร้างหน้าซ้ำ",
+      "review": {
+        "audience": "ผู้บริหาร",
+        "link_sent": true,
+        "sent_at": null,
+        "feedback": null,
+        "status_recorded_at": "2026-11-16",
+        "source": "เจ้าของงานแจ้งในแชต"
+      }
     },
     {
       "title": "ข่าวสารและกิจกรรม",
