@@ -17,10 +17,10 @@
       "title": "หน้าแรก",
       "children": [],
       "id": "01",
-      "status": "link_not_provided",
-      "owner": null,
+      "status": "in_progress",
+      "owner": "นายปัญญา นิธิธนิโยปกรณ์ (โอ๊ค)",
       "source_file": null,
-      "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+      "notes": "เริ่มพัฒนาหน้าแรกด้วย React + Tailwind CSS ณ (17/11/2026) อ้างอิง Issue #1"
     },
     {
       "title": "เกี่ยวกับเรา",
