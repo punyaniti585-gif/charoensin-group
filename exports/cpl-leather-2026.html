@@ -383,18 +383,47 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
   </div>
 </section>
 
-<section class="dir" id="direction">
-  <svg class="waves" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#B39B6B" stroke-width="1" opacity=".55">
-    <path data-draw pathLength="1" d="M0 470C240 410 420 540 720 480S1200 400 1440 470"/>
-    <path data-draw pathLength="1" d="M0 500C240 440 420 570 720 510S1200 430 1440 500"/>
-    <path data-draw pathLength="1" d="M0 530C240 470 420 600 720 540S1200 460 1440 530"/>
-    <path data-draw pathLength="1" d="M0 90C260 150 460 30 720 90S1180 150 1440 80"/>
-    <path data-draw pathLength="1" d="M0 60C260 120 460 0 720 60S1180 120 1440 50"/>
-  </svg>
+<section class="dir" id="direction" aria-labelledby="cpl-direction-title">
+  <style>
+    /* Board layout adapted from visionbyclaude/#board; scoped to this section. */
+    #csa #direction{display:block;min-height:0;padding-block:clamp(80px,10vw,140px);background:#F7F4EA;color:#231F20;overflow:hidden}
+    #csa #direction .cpl-board-head{display:flex;flex-direction:column;gap:6px}
+    #csa #direction .cpl-board-eyebrow{font-style:italic;color:#6B5A3A;font-size:18px;line-height:1.7}
+    #csa #direction #cpl-direction-title{font-size:clamp(34px,4.2vw,58px);line-height:1.2;font-weight:600;color:#231F20;margin:0;letter-spacing:0}
+    #csa #direction .cpl-board-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin-top:56px}
+    #csa #direction .cpl-board-person{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;min-width:0}
+    #csa #direction .cpl-board-person img{display:block;width:100%;max-width:220px;height:auto;transition:transform .6s cubic-bezier(.33,0,0,1)}
+    #csa #direction .cpl-board-name{font-weight:600;font-size:17px;margin-top:10px;line-height:1.5;overflow-wrap:anywhere}
+    @media(hover:hover){#csa #direction .cpl-board-person:hover img{transform:translateY(-6px)}}
+    @media(max-width:767px){#csa #direction .cpl-board-people{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:479px){#csa #direction .cpl-board-people{grid-template-columns:minmax(0,1fr);gap:36px}}
+    @media(prefers-reduced-motion:reduce){#csa #direction .cpl-board-person img{transition:none}}
+  </style>
   <div class="wrap">
-    <p class="label"><span class="num">04</span><i></i><span>ทิศทางธุรกิจ</span></p>
-    <div class="grid"><h3 data-words>บริษัทฯ มุ่งเน้นการเติบโตให้เป็นที่ไว้วางใจ น่าเชื่อถือ ได้รับการยอมรับจากลูกค้าทั่วโลก โดยสร้างความสัมพันธ์อันดี รักษาฐานลูกค้าเดิม ขยายฐานลูกค้าใหม่ ควบคู่กับความรับผิดชอบต่อสังคมสิ่งแวดล้อม และพัฒนาเพิ่มความมั่งคั่งในระยะยาว ให้แก่ผู้ถือหุ้นต่อไป</h3></div>
+    <div class="cpl-board-head"><span class="cpl-board-eyebrow" lang="en">Company Executives</span><h2 id="cpl-direction-title">คณะผู้บริหารบริษัท</h2></div>
+    <div class="cpl-board-people">
+      <article class="cpl-board-person"><img src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/suwatchai.png" alt="สุวัชชัย วงษ์เจริญสิน" width="480" height="480" loading="lazy" decoding="async"><span class="cpl-board-name">สุวัชชัย วงษ์เจริญสิน</span></article>
+      <article class="cpl-board-person"><img src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/puwanat.png" alt="ภูวสิษฏ์ วงษ์เจริญสิน" width="480" height="480" loading="lazy" decoding="async"><span class="cpl-board-name">ภูวสิษฏ์ วงษ์เจริญสิน</span></article>
+      <article class="cpl-board-person"><img src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/kittichai-1.png" alt="กิติชัย วงษ์เจริญสิน" width="480" height="480" loading="lazy" decoding="async"><span class="cpl-board-name">กิติชัย วงษ์เจริญสิน</span></article>
+    </div>
   </div>
+  <script>
+  (function(){
+    var section=document.getElementById('direction');
+    if(!section||window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;
+    var items=section.querySelectorAll('.cpl-board-person');
+    var observer=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting)return;
+        Array.prototype.forEach.call(items,function(item,index){
+          if(item.animate)item.animate([{opacity:0,transform:'translateY(32px)'},{opacity:1,transform:'translateY(0)'}],{duration:600,delay:index*100,easing:'cubic-bezier(.33,0,0,1)',fill:'backwards'});
+        });
+        observer.disconnect();
+      });
+    },{threshold:0.15});
+    observer.observe(section);
+  })();
+  </script>
 </section>
 
 <section class="sec" id="executives">
