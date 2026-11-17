@@ -34,7 +34,14 @@
           "owner": null,
           "source_file": null,
           "notes": "Section วิสัยทัศน์",
-          "source_page_id": 19044
+          "source_page_id": 19044,
+          "export": {
+            "exported_at": "2026-11-17",
+            "html": "exports/visionbyclaude.html",
+            "zip": "exports/visionbyclaude.zip",
+            "kind": "public_rendered_snapshot",
+            "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+          }
         },
         {
           "title": "พันธกิจ",
@@ -45,7 +52,14 @@
           "source_file": null,
           "notes": "พันธกิจอยู่ใน Section เดียวกับวิสัยทัศน์ ยังไม่มี anchor แยก จึงเปิดส่วนวิสัยทัศน์และพันธกิจร่วมกัน",
           "url": "https://csgok.sfinsulations.com/visionbyclaude/#vision",
-          "source_page_id": 19044
+          "source_page_id": 19044,
+          "export": {
+            "exported_at": "2026-11-17",
+            "html": "exports/visionbyclaude.html",
+            "zip": "exports/visionbyclaude.zip",
+            "kind": "public_rendered_snapshot",
+            "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+          }
         },
         {
           "title": "ค่านิยมองค์กร",
@@ -56,7 +70,14 @@
           "source_file": null,
           "notes": "Section ชื่อปรัชญาการทำงานของเจริญสิน",
           "url": "https://csgok.sfinsulations.com/visionbyclaude/#values",
-          "source_page_id": 19044
+          "source_page_id": 19044,
+          "export": {
+            "exported_at": "2026-11-17",
+            "html": "exports/visionbyclaude.html",
+            "zip": "exports/visionbyclaude.zip",
+            "kind": "public_rendered_snapshot",
+            "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+          }
         },
         {
           "title": "ผู้นำของเรา",
@@ -67,7 +88,14 @@
           "source_file": null,
           "notes": "Section คณะกรรมการบริษัท",
           "url": "https://csgok.sfinsulations.com/visionbyclaude/#board",
-          "source_page_id": 19044
+          "source_page_id": 19044,
+          "export": {
+            "exported_at": "2026-11-17",
+            "html": "exports/visionbyclaude.html",
+            "zip": "exports/visionbyclaude.zip",
+            "kind": "public_rendered_snapshot",
+            "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+          }
         },
         {
           "title": "อัตลักษณ์องค์กร",
@@ -78,7 +106,14 @@
           "source_file": null,
           "notes": "เปิดหน้ารวมได้ แต่ยังไม่พบ Section อัตลักษณ์องค์กรในต้นฉบับ ไม่ระบุ anchor ที่ไม่มีอยู่",
           "url": "https://csgok.sfinsulations.com/visionbyclaude/",
-          "source_page_id": 19044
+          "source_page_id": 19044,
+          "export": {
+            "exported_at": "2026-11-17",
+            "html": "exports/visionbyclaude.html",
+            "zip": "exports/visionbyclaude.zip",
+            "kind": "public_rendered_snapshot",
+            "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+          }
         }
       ],
       "id": "02",
@@ -87,7 +122,14 @@
       "source_file": null,
       "notes": "หน้ารวมเกี่ยวกับเรา รวมหลายหัวข้อในหน้าเดียว",
       "url": "https://csgok.sfinsulations.com/visionbyclaude/",
-      "source_page_id": 19044
+      "source_page_id": 19044,
+      "export": {
+        "exported_at": "2026-11-17",
+        "html": "exports/visionbyclaude.html",
+        "zip": "exports/visionbyclaude.zip",
+        "kind": "public_rendered_snapshot",
+        "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+      }
     },
     {
       "title": "ธุรกิจของเรา",
@@ -346,7 +388,14 @@
       "status": "existing_pending_review",
       "owner": null,
       "source_file": null,
-      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน",
+      "export": {
+        "exported_at": "2026-11-17",
+        "html": "exports/charoensin-our-business-v3.html",
+        "zip": "exports/charoensin-our-business-v3.zip",
+        "kind": "public_rendered_snapshot",
+        "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+      }
     },
     {
       "title": "มูลนิธิ",
@@ -364,6 +413,13 @@
         "feedback": null,
         "status_recorded_at": "2026-11-16",
         "source": "เจ้าของงานแจ้งในแชต"
+      },
+      "export": {
+        "exported_at": "2026-11-17",
+        "html": "exports/wongcharoensinfoundation2026.html",
+        "zip": "exports/wongcharoensinfoundation2026.zip",
+        "kind": "public_rendered_snapshot",
+        "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
       }
     },
     {
@@ -393,7 +449,14 @@
       "status": "existing_pending_review",
       "owner": null,
       "source_file": null,
-      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน",
+      "export": {
+        "exported_at": "2026-11-17",
+        "html": "exports/new2026.html",
+        "zip": "exports/new2026.zip",
+        "kind": "public_rendered_snapshot",
+        "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+      }
     },
     {
       "title": "ร่วมงานกับเรา",
@@ -406,7 +469,14 @@
           "status": "existing_pending_review",
           "owner": null,
           "source_file": null,
-          "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+          "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน",
+          "export": {
+            "exported_at": "2026-11-17",
+            "html": "exports/compliant_hr_2026.html",
+            "zip": "exports/compliant_hr_2026.zip",
+            "kind": "public_rendered_snapshot",
+            "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+          }
         },
         {
           "title": "ตำแหน่งงาน",
@@ -416,7 +486,14 @@
           "status": "existing_pending_review",
           "owner": null,
           "source_file": null,
-          "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+          "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน",
+          "export": {
+            "exported_at": "2026-11-17",
+            "html": "exports/mycareer2026.html",
+            "zip": "exports/mycareer2026.zip",
+            "kind": "public_rendered_snapshot",
+            "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+          }
         },
         {
           "title": "ประกาศบริษัท",
@@ -451,7 +528,14 @@
       "status": "existing_pending_review",
       "owner": null,
       "source_file": null,
-      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+      "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน",
+      "export": {
+        "exported_at": "2026-11-17",
+        "html": "exports/contact-us-2026-greenshift.html",
+        "zip": "exports/contact-us-2026-greenshift.zip",
+        "kind": "public_rendered_snapshot",
+        "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+      }
     },
     {
       "title": "รายงานกำกับดูแล",
@@ -558,7 +642,14 @@
               "status": "existing_pending_review",
               "owner": null,
               "source_file": null,
-              "notes": "ผู้ใช้ระบุลิงก์เป็นจรรยาบรรณองค์กร ต้องตรวจว่าครอบคลุมคู่ค้าหรือไม่"
+              "notes": "ผู้ใช้ระบุลิงก์เป็นจรรยาบรรณองค์กร ต้องตรวจว่าครอบคลุมคู่ค้าหรือไม่",
+              "export": {
+                "exported_at": "2026-11-17",
+                "html": "exports/codeofconduct.html",
+                "zip": "exports/codeofconduct.zip",
+                "kind": "public_rendered_snapshot",
+                "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+              }
             },
             {
               "title": "รายงานผลการบริหารความเสี่ยง",
@@ -621,7 +712,15 @@
       "status": "existing_pending_placement",
       "owner": null,
       "source_file": null,
-      "notes": "รอยืนยันตำแหน่งเมนู ไม่เท่ากับนโยบายการใช้ระบบเทคโนโลยีโดยอัตโนมัติ"
+      "notes": "รอยืนยันตำแหน่งเมนู ไม่เท่ากับนโยบายการใช้ระบบเทคโนโลยีโดยอัตโนมัติ",
+      "export": {
+        "exported_at": "2026-11-17",
+        "html": "exports/ai-policy2.html",
+        "zip": "exports/ai-policy2.zip",
+        "kind": "public_rendered_snapshot",
+        "notes": "CSS/JavaScript included where downloadable; media and WordPress API may require original site"
+      }
     }
-  ]
+  ],
+  "export_bundle": "exports/charoensin-html-handoff-2026-11-17.zip"
 }
