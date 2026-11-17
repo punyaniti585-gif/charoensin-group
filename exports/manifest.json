@@ -1,0 +1,115 @@
+{
+  "exported_at": "2026-11-17",
+  "source_site": "https://csgok.sfinsulations.com/",
+  "mode": "anonymous rendered HTML plus editable WordPress page content",
+  "pages": [
+    {
+      "id": 19044,
+      "title": "VisionByClaude",
+      "template": "csg-vision-by-claude",
+      "url": "https://csgok.sfinsulations.com/visionbyclaude/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 150608,
+      "content_bytes": 38388,
+      "scripts": 32,
+      "downloaded_assets": 47,
+      "remote_assets": 0
+    },
+    {
+      "id": 19124,
+      "title": "ข่าวสารและกิจกรรมองค์กร 2026",
+      "template": "csg-new2026",
+      "url": "https://csgok.sfinsulations.com/new2026/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 138205,
+      "content_bytes": 0,
+      "scripts": 3,
+      "downloaded_assets": 2,
+      "remote_assets": 0
+    },
+    {
+      "id": 19076,
+      "title": "mycareer2026",
+      "template": "csg-mycareer2026",
+      "url": "https://csgok.sfinsulations.com/mycareer2026/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 41518,
+      "content_bytes": 0,
+      "scripts": 1,
+      "downloaded_assets": 2,
+      "remote_assets": 0
+    },
+    {
+      "id": 19053,
+      "title": "WongcharoensinFoundation2026",
+      "template": "",
+      "url": "https://csgok.sfinsulations.com/wongcharoensinfoundation2026/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 126324,
+      "content_bytes": 125216,
+      "scripts": 3,
+      "downloaded_assets": 2,
+      "remote_assets": 0
+    },
+    {
+      "id": 19050,
+      "title": "ธุรกิจของเรา (v3 ร่าง)",
+      "template": "csg-charoensin-our-business",
+      "url": "https://csgok.sfinsulations.com/charoensin-our-business-v3/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 160634,
+      "content_bytes": 46080,
+      "scripts": 35,
+      "downloaded_assets": 48,
+      "remote_assets": 0
+    },
+    {
+      "id": 19020,
+      "title": "ติดต่อเรา 2026",
+      "template": "page-templates/full-width.php",
+      "url": "https://csgok.sfinsulations.com/contact-us-2026-greenshift/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 253313,
+      "content_bytes": 458027,
+      "scripts": 41,
+      "downloaded_assets": 59,
+      "remote_assets": 0
+    },
+    {
+      "id": 19040,
+      "title": "compliant_hr_2026",
+      "template": "csg-compliant-hr-2026",
+      "url": "https://csgok.sfinsulations.com/compliant_hr_2026/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 162297,
+      "content_bytes": 40333,
+      "scripts": 37,
+      "downloaded_assets": 55,
+      "remote_assets": 0
+    },
+    {
+      "id": 18561,
+      "title": "Ai-policy2",
+      "template": "elementor_canvas",
+      "url": "https://csgok.sfinsulations.com/ai-policy2/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 285955,
+      "content_bytes": 133961,
+      "scripts": 38,
+      "downloaded_assets": 56,
+      "remote_assets": 0
+    },
+    {
+      "id": 15702,
+      "title": "codeofconduct0406",
+      "template": "elementor_header_footer",
+      "url": "https://csgok.sfinsulations.com/codeofconduct/",
+      "exported_at": "2026-11-17",
+      "rendered_bytes": 373805,
+      "content_bytes": 113638,
+      "scripts": 38,
+      "downloaded_assets": 61,
+      "remote_assets": 0
+    }
+  ]
+}
