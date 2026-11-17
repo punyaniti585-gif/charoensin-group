@@ -1,6 +1,6 @@
 {
   "site_url": "https://csgok.sfinsulations.com/",
-  "updated_at": "2026-11-16",
+  "updated_at": "2026-11-17",
   "source": "โครงสร้างเมนูและ URL ที่ผู้ใช้ระบุในแชต",
   "status_definitions": {
     "existing_pending_review": "มีลิงก์แล้ว รอตรวจรับ",
@@ -9,7 +9,8 @@
     "not_started": "ตรวจแล้วว่ายังไม่ได้ทำ",
     "in_progress": "กำลังทำ",
     "done": "ตรวจรับแล้ว",
-    "pending_executive_review": "รอผู้บริหารตรวจสอบ"
+    "pending_executive_review": "รอผู้บริหารตรวจสอบ",
+    "section_not_found": "มีลิงก์หน้ารวม แต่ยังไม่พบ Section ที่ตรงหัวข้อ"
   },
   "menus": [
     {
@@ -27,55 +28,66 @@
         {
           "title": "วิสัยทัศน์",
           "children": [],
-          "url": "https://csgok.sfinsulations.com/visionbyclaude/",
+          "url": "https://csgok.sfinsulations.com/visionbyclaude/#vision",
           "id": "02.01",
           "status": "existing_pending_review",
           "owner": null,
           "source_file": null,
-          "notes": "ลิงก์จากผู้ใช้ ยังไม่ได้ตรวจรับเนื้อหาหรือฟังก์ชัน"
+          "notes": "Section วิสัยทัศน์",
+          "source_page_id": 19044
         },
         {
           "title": "พันธกิจ",
           "children": [],
           "id": "02.02",
-          "status": "link_not_provided",
+          "status": "existing_pending_review",
           "owner": null,
           "source_file": null,
-          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+          "notes": "พันธกิจอยู่ใน Section เดียวกับวิสัยทัศน์ ยังไม่มี anchor แยก จึงเปิดส่วนวิสัยทัศน์และพันธกิจร่วมกัน",
+          "url": "https://csgok.sfinsulations.com/visionbyclaude/#vision",
+          "source_page_id": 19044
         },
         {
           "title": "ค่านิยมองค์กร",
           "children": [],
           "id": "02.03",
-          "status": "link_not_provided",
+          "status": "existing_pending_review",
           "owner": null,
           "source_file": null,
-          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+          "notes": "Section ชื่อปรัชญาการทำงานของเจริญสิน",
+          "url": "https://csgok.sfinsulations.com/visionbyclaude/#values",
+          "source_page_id": 19044
         },
         {
           "title": "ผู้นำของเรา",
           "children": [],
           "id": "02.04",
-          "status": "link_not_provided",
+          "status": "existing_pending_review",
           "owner": null,
           "source_file": null,
-          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+          "notes": "Section คณะกรรมการบริษัท",
+          "url": "https://csgok.sfinsulations.com/visionbyclaude/#board",
+          "source_page_id": 19044
         },
         {
           "title": "อัตลักษณ์องค์กร",
           "children": [],
           "id": "02.05",
-          "status": "link_not_provided",
+          "status": "section_not_found",
           "owner": null,
           "source_file": null,
-          "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+          "notes": "เปิดหน้ารวมได้ แต่ยังไม่พบ Section อัตลักษณ์องค์กรในต้นฉบับ ไม่ระบุ anchor ที่ไม่มีอยู่",
+          "url": "https://csgok.sfinsulations.com/visionbyclaude/",
+          "source_page_id": 19044
         }
       ],
       "id": "02",
-      "status": "link_not_provided",
+      "status": "existing_pending_review",
       "owner": null,
       "source_file": null,
-      "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+      "notes": "หน้ารวมเกี่ยวกับเรา รวมหลายหัวข้อในหน้าเดียว",
+      "url": "https://csgok.sfinsulations.com/visionbyclaude/",
+      "source_page_id": 19044
     },
     {
       "title": "ธุรกิจของเรา",
