@@ -177,10 +177,12 @@
               "title": "ธุรกิจผลิตหนังแท้ — บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)",
               "children": [],
               "id": "03.02.01",
-              "status": "link_not_provided",
+              "status": "pending_review",
               "owner": null,
-              "source_file": null,
-              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+              "source_file": "exports/cpl-leather-2026.html",
+              "notes": "สร้าง HTML ธุรกิจผลิตหนังแท้ CPL โดยใช้ Layout และ Motion ของหน้าแอสเสท รอการตรวจสอบ",
+              "url": "https://csgok.sfinsulations.com/cpl-leather-2026.html",
+              "last_submitted_at": "2026-11-17"
             },
             {
               "title": "ธุรกิจอุปกรณ์เซฟตี้ — บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)",
