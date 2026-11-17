@@ -145,10 +145,8 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
 #csa .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(31,31,31,.62),rgba(31,31,31,.18) 70%),linear-gradient(rgba(31,31,31,0) 36.8%,rgba(31,31,31,.55))}
 #csa .hero-copy{position:relative;padding-top:calc(var(--hd) + 60px);padding-bottom:48px;align-items:end;row-gap:24px}
 #csa .hero h1{grid-column:1 / span 9;text-shadow:0 2px 24px rgba(31,31,31,.35)}
-#csa .hero-lead{grid-column:10 / span 3;padding-bottom:.6em}
-#csa .hero-lead p+p{margin-top:8px;color:var(--beige);font-size:var(--bs)}
-@media (max-width:1024px){#csa .hero h1{grid-column:1 / span 8}#csa .hero-lead{grid-column:9 / span 4}}
-@media (max-width:768px){#csa .hero-copy{text-align:center}#csa .hero h1,#csa .hero-lead{grid-column:1 / -1}}
+@media (max-width:1024px){#csa .hero h1{grid-column:1 / span 8}}
+@media (max-width:768px){#csa .hero-copy{text-align:center}#csa .hero h1{grid-column:1 / -1}}
 #csa .strip{position:relative;display:grid;grid-template-columns:repeat(var(--cols),1fr);grid-template-rows:repeat(var(--strip-rows),var(--sq))}
 #csa .tile{grid-column:var(--c) / span var(--w,1);grid-row:var(--r);position:relative;min-width:0}
 #csa .tile.page{background:var(--neutral);color:var(--charcoal)}
@@ -309,11 +307,10 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
 
 <main id="top">
 <section class="hero" data-hero>
-  <img class="hero-photo" data-hero-photo src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/DSC01900.jpg" alt="" fetchpriority="high">
+  <img class="hero-photo" data-hero-photo src="https://csgok.sfinsulations.com/wp-content/uploads/2026/11/banner-main-new01-3-2.webp" alt="" fetchpriority="high">
   <div class="hero-shade"></div>
   <div class="wrap grid hero-copy">
     <h1 data-hero-h1><span>บริษัท เจริญสิน</span><span>แอสเสท จำกัด</span></h1>
-    <div class="hero-lead" data-hero-lead><p class="b-l">ธุรกิจอสังหาริมทรัพย์</p><p>สมาชิกกลุ่มเจริญสิน</p></div>
   </div>
   <div class="strip" data-strip>
     <div class="tile page fact" data-held style="--c:2;--w:2;--r:1;--cm:1;--cs:1"><p>ดำเนินธุรกิจ มากกว่า</p><strong>35<small>ปี</small></strong></div>
@@ -593,10 +590,9 @@ var heroTl = null;
 (function () {
   var q = gsap.utils.selector(heroEl);
   var h1 = q("[data-hero-h1]")[0];
-  if (REDUCE) { heroTl = gsap.timeline({ paused: true }).from([header, h1].concat(q("[data-hero-lead], [data-strip]")), { opacity: 0, duration: 0.2 }); return; }
+  if (REDUCE) { heroTl = gsap.timeline({ paused: true }).from([header, h1].concat(q("[data-strip]")), { opacity: 0, duration: 0.2 }); return; }
   heroTl = gsap.timeline({ paused: true });
   heroTl.from(header, { opacity: 0, duration: d(400) }, 0);
-  heroTl.from(q("[data-hero-lead] > *"), { y: 16, opacity: 0, duration: d(600), ease: EASE_ENTER, stagger: 0.08 }, 0.2);
   hideHeading(h1);
   heroTl.add(function () { revealHeading(h1); }, 0);
   var tiles = q(".tile").filter(function (t) { return t.offsetParent; })
