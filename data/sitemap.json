@@ -10,7 +10,8 @@
     "in_progress": "กำลังทำ",
     "done": "ตรวจรับแล้ว",
     "pending_executive_review": "รอผู้บริหารตรวจสอบ",
-    "section_not_found": "มีลิงก์หน้ารวม แต่ยังไม่พบ Section ที่ตรงหัวข้อ"
+    "section_not_found": "มีลิงก์หน้ารวม แต่ยังไม่พบ Section ที่ตรงหัวข้อ",
+    "pending_review": "รอการตรวจสอบ"
   },
   "menus": [
     {
@@ -141,10 +142,17 @@
               "title": "บริษัท เจริญสิน แอสเสท จำกัด",
               "children": [],
               "id": "03.01.01",
-              "status": "link_not_provided",
+              "status": "pending_review",
               "owner": null,
-              "source_file": null,
-              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+              "source_file": "exports/charoensin-asset.html",
+              "notes": "หน้า HTML ตามไฟล์ที่เจ้าของงานแนบ สร้าง URL และส่งขึ้น GitHub แล้ว รอการตรวจสอบ",
+              "url": "https://csgok.sfinsulations.com/charoensin-asset-2026.html",
+              "latest_submitted_at": "2026-11-17",
+              "review": {
+                "status": "pending",
+                "submitted_at": "2026-11-17",
+                "reviewer": null
+              }
             },
             {
               "title": "บริษัท เจริญสิน พัฒนา จำกัด",
