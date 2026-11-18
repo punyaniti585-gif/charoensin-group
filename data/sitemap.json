@@ -145,14 +145,15 @@
               "status": "pending_review",
               "owner": null,
               "source_file": "exports/charoensin-asset.html",
-              "notes": "หน้า HTML ตามไฟล์ที่เจ้าของงานแนบ สร้าง URL และส่งขึ้น GitHub แล้ว รอการตรวจสอบ",
+              "notes": "อัปเดต Hero ชิดซ้าย ฟอนต์บางโทนเขียวเข้ม และ Fade-up โดยใช้ภาพ/ข้อมูลเดิม เอาป้ายกำลังโหลดมุมล่างขวาออก ส่งฉบับล่าสุด 18 พฤศจิกายน 2569 รอการตรวจสอบ",
               "url": "https://csgok.sfinsulations.com/charoensin-asset-2026.html",
               "latest_submitted_at": "2026-11-17",
               "review": {
                 "status": "pending",
                 "submitted_at": "2026-11-17",
                 "reviewer": null
-              }
+              },
+              "last_submitted_at": "2026-11-18"
             },
             {
               "title": "บริษัท เจริญสิน พัฒนา จำกัด",
