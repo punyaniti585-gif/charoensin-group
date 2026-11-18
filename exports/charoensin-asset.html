@@ -291,7 +291,7 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
 <div id="csa">
 
 <!-- 3. MARKUP -->
-<div id="csa-pre" aria-hidden="true"><div class="pre-count" data-pre-counter><p>กำลังโหลด</p><b class="num" data-pre-count>0</b></div></div>
+<div id="csa-pre" aria-hidden="true"><div class="pre-count" data-pre-counter hidden style="display:none"><p>กำลังโหลด</p><b class="num" data-pre-count>0</b></div></div>
 <div id="csa-cur" aria-hidden="true"></div>
 
 <header class="hdr" data-hdr>
@@ -306,27 +306,56 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
 </header>
 
 <main id="top">
-<section class="hero" data-hero>
+<section class="hero asset-hero" data-hero aria-labelledby="asset-hero-title">
+  <link href="https://db.onlinewebfonts.com/c/0e6de1ec911a2e267ff136bbdd384a44?family=Helvetica+Neue+Light" rel="stylesheet">
+  <style>
+    @keyframes asset-hero-fade-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #csa .asset-hero{display:block;position:relative;width:100%;height:100vh;min-height:700px;overflow:hidden;background:#faf8f5;color:#2d3a2e;font-family:"Helvetica Neue Light","Kanit",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    #csa .asset-hero .hero-photo{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center bottom;transform:none!important}
+    #csa .asset-hero .asset-hero-content{position:relative;z-index:10;display:flex;flex-direction:column;align-items:flex-start;width:100%;max-width:1280px;margin-inline:auto;padding:112px 24px 0}
+    #csa .asset-hero #asset-hero-title{margin:0;max-width:896px;color:#2d3a2e;font-family:"Helvetica Neue Light","Kanit",Helvetica,Arial,sans-serif;font-size:30px;font-weight:300;line-height:1.05;letter-spacing:-.025em;text-align:left;text-shadow:none;clip-path:none!important}
+    #csa .asset-hero .asset-hero-break{display:none}
+    #csa .asset-hero .asset-hero-facts{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:flex-start;width:100%;gap:24px;margin-top:32px}
+    #csa .asset-hero .asset-hero-facts>div{display:flex;flex-direction:column;gap:12px;min-width:0}
+    #csa .asset-hero .asset-hero-facts dt{font-family:inherit;font-size:12px;font-weight:300;line-height:1.5;letter-spacing:.04em;color:rgba(45,58,46,.65);text-align:left}
+    #csa .asset-hero .asset-hero-facts dd{margin:0;font-family:inherit;font-size:24px;font-weight:300;line-height:1.2;letter-spacing:-.02em;color:rgba(45,58,46,.8);white-space:nowrap;text-align:left}
+    #csa .asset-hero .asset-hero-facts dd small{margin-left:6px;font:inherit;font-size:14px;letter-spacing:0}
+    #csa .asset-hero [data-rise-layer]{display:none!important}
+    #csa .asset-hero[data-hero-entered] .asset-hero-animate{animation:asset-hero-fade-up .8s cubic-bezier(.16,1,.3,1) both}
+    #csa .asset-hero[data-hero-entered] .asset-hero-stagger-4{animation-delay:360ms}
+    #csa .asset-hero[data-hero-entered] .asset-hero-stagger-6{animation-delay:600ms}
+    @media(min-width:640px){#csa .asset-hero #asset-hero-title{font-size:36px}#csa .asset-hero .asset-hero-break{display:block}}
+    @media(min-width:768px){#csa .asset-hero .asset-hero-content{padding-top:144px}#csa .asset-hero #asset-hero-title{font-size:48px}#csa .asset-hero .asset-hero-facts{gap:48px;margin-top:40px}}
+    @media(min-width:1024px){#csa .asset-hero .asset-hero-content{padding-inline:32px}#csa .asset-hero #asset-hero-title{font-size:60px}#csa .asset-hero .asset-hero-facts{gap:64px}}
+    @media(prefers-reduced-motion:reduce){#csa .asset-hero[data-hero-entered] .asset-hero-animate{animation:none}}
+  </style>
   <img class="hero-photo" data-hero-photo src="https://csgok.sfinsulations.com/wp-content/uploads/2026/11/banner-main-new01-3-2.webp" alt="" fetchpriority="high">
-  <div class="hero-shade"></div>
-  <div class="wrap grid hero-copy">
-    <h1 data-hero-h1><span>บริษัท เจริญสิน</span><span>แอสเสท จำกัด</span></h1>
-  </div>
-  <div class="strip" data-strip>
-    <div class="tile page fact" data-held style="--c:2;--w:2;--r:1;--cm:1;--cs:1"><p>ดำเนินธุรกิจ มากกว่า</p><strong>35<small>ปี</small></strong></div>
-    <div class="tile glass" data-off="md sm" style="--c:5;--r:1"><u></u></div>
-    <div class="tile glass" data-off="md sm" style="--c:9;--r:1"><u></u></div>
-    <div class="tile glass" data-off="sm" style="--c:12;--r:1;--cm:8"><u></u></div>
-    <div class="tile page" style="--c:1;--r:2;--cm:5;--rm:1;--cs:4;--rs:1"></div>
-    <div class="tile glass" data-off="md sm" style="--c:2;--r:2"><u></u></div>
-    <div class="tile glass" data-off="md sm" style="--c:4;--r:2"><u></u></div>
-    <div class="tile page fact" data-held style="--c:5;--w:2;--r:2;--cm:3;--cs:2"><p>โครงการ</p><strong>25</strong></div>
-    <div class="tile live fact" data-held style="--c:7;--w:2;--r:2;--cm:5;--cs:1;--rs:3"><p>ห้องพักให้เช่า มากกว่า</p><strong><span data-count="40000" data-hero-count>40,000</span><small>ห้อง</small></strong></div>
-    <div class="tile glass" data-off="md sm" style="--c:9;--r:2"><u></u></div>
-    <div class="tile glass" data-off="md sm" style="--c:10;--r:2"><u></u></div>
-    <div class="tile page fact" data-held style="--c:11;--w:2;--r:2;--cm:7;--cs:3;--rs:3"><p>ปีที่ก่อตั้ง</p><strong>1989</strong></div>
+  <div class="asset-hero-content">
+    <h1 id="asset-hero-title" class="asset-hero-animate asset-hero-stagger-4" data-hero-h1>บริษัท เจริญสิน<br class="asset-hero-break"> แอสเสท จำกัด</h1>
+    <dl class="asset-hero-facts asset-hero-animate asset-hero-stagger-6" data-strip>
+      <div><dt>ดำเนินธุรกิจ มากกว่า</dt><dd>35<small>ปี</small></dd></div>
+      <div><dt>โครงการ</dt><dd>25</dd></div>
+      <div><dt>ห้องพักให้เช่า มากกว่า</dt><dd><span data-count="40000" data-hero-count>40,000</span><small>ห้อง</small></dd></div>
+      <div><dt>ปีที่ก่อตั้ง</dt><dd>1989</dd></div>
+    </dl>
   </div>
   <div class="rise" data-rise-layer aria-hidden="true"></div>
+  <script>
+  (function(){
+    var hero=document.currentScript.closest('.asset-hero');
+    var ready=function(){
+      var pre=document.getElementById('csa-pre');
+      var enter=function(){hero.setAttribute('data-hero-entered','');};
+      if(!pre||getComputedStyle(pre).display==='none'){enter();return;}
+      var observer=new MutationObserver(function(){if(getComputedStyle(pre).display==='none'){observer.disconnect();enter();}});
+      observer.observe(pre,{attributes:true,attributeFilter:['style','class']});
+    };
+    if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ready,{once:true});else ready();
+  })();
+  </script>
 </section>
 
 <section class="sec" id="about">
