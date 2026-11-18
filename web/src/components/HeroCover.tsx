@@ -80,6 +80,8 @@ export default function HeroCover() {
   const hubY = shouldReduceMotion ? 0 : rawHubY;
   const cardsOpacity = shouldReduceMotion ? 1 : rawCardsOpacity;
   const cardsScale = shouldReduceMotion ? 1 : rawCardsScale;
+  const rawCardsPointer = useTransform(scrollYProgress, (v) => (v >= 0.4 ? "auto" : "none"));
+  const cardsPointer = shouldReduceMotion ? "auto" : rawCardsPointer;
   const topCardsY = shouldReduceMotion ? 0 : rawTopCardsY;
   const sideCardsY = shouldReduceMotion ? 0 : rawSideCardsY;
   const otherCardY = shouldReduceMotion ? 0 : rawOtherCardY;
@@ -195,7 +197,7 @@ export default function HeroCover() {
             }}
           >
             {/* Top Region: Clear Blue Sky */}
-            <div className="absolute inset-x-0 top-0 h-[55%] w-full">
+            <div className="absolute inset-x-0 top-0 h-[65%] md:h-[55%] w-full">
               <Image
                 src={brandAssets.hero.coverBackground}
                 alt="ท้องฟ้ากลุ่มบริษัทเจริญสิน"
@@ -208,14 +210,14 @@ export default function HeroCover() {
             </div>
 
             {/* Bottom Region: Actual Charoensin Building Headquarters (ภาพอาคารเจริญสินจริง) */}
-            <div className="absolute inset-x-0 bottom-0 h-[72%] w-full [mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_18%,black_100%)]">
+            <div className="absolute inset-x-0 top-[30%] sm:top-[32%] md:top-auto md:bottom-0 h-[56%] md:h-[72%] w-full [mask-image:linear-gradient(to_bottom,transparent_0%,black_16%,black_100%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent_0%,black_16%,black_100%)]">
               <Image
                 src="/img/charoensin-building-hq.jpg"
                 alt="อาคารสำนักงานใหญ่ กลุ่มบริษัทเจริญสิน (Charoensin Building)"
                 fill
                 priority
                 sizes="100vw"
-                className="object-cover object-bottom"
+                className="object-cover object-[center_18%] sm:object-[center_20%] md:object-bottom"
               />
               {/* Subtle tint overlay to unify with CI Brand warm tone */}
               <div className="absolute inset-0 bg-[#F7F1E7]/15 mix-blend-color pointer-events-none" />
@@ -260,7 +262,7 @@ export default function HeroCover() {
 
         {/* ========================================================
             STAGE 1 (z-20): MINIMAL VERTICAL WHITE LOGO IN SKY
-            Pure white centerpiece at scrollYProgress = 0, fading out on scroll
+            Pure white centerpiece at scrollYProgress = 0, positioned in the blue sky on mobile
            ======================================================== */}
         <motion.div
           style={{
@@ -268,15 +270,15 @@ export default function HeroCover() {
             scale: whiteLogoScale,
             y: whiteLogoY,
           }}
-          className="absolute inset-0 z-20 flex flex-col items-center justify-center px-4 pointer-events-none select-none will-change-transform"
+          className="absolute inset-0 z-20 flex flex-col items-center justify-start pt-[20vh] sm:pt-[22vh] md:justify-center md:pt-0 px-4 pointer-events-none select-none will-change-transform"
         >
-          <div className="relative w-56 sm:w-72 md:w-84 lg:w-96 aspect-[1000/700] drop-shadow-[0_4px_24px_rgba(0,0,0,0.22)]">
+          <div className="relative w-52 sm:w-72 md:w-84 lg:w-96 aspect-[1000/700] drop-shadow-[0_4px_24px_rgba(0,0,0,0.38)] drop-shadow-[0_2px_8px_rgba(0,0,0,0.25)]">
             <Image
               src={brandAssets.logos.verticalWhite}
               alt="Charoensin Group"
               fill
               priority
-              sizes="(max-width: 640px) 224px, (max-width: 1024px) 336px, 384px"
+              sizes="(max-width: 640px) 208px, (max-width: 1024px) 336px, 384px"
               className="object-contain"
             />
           </div>
@@ -551,17 +553,22 @@ export default function HeroCover() {
 
           {/* ====================================================
               MOBILE & TABLET VIEW (< lg): Stacked Editorial Portrait Cards
+              Separate sequence: Only White Logo at scroll=0, fading out to reveal
+              80th Anniversary Hub & 5 Cards smoothly on scroll down.
              ==================================================== */}
-          <div className="lg:hidden flex flex-col items-center justify-between py-4 space-y-5">
+          <div className="lg:hidden flex flex-col items-center justify-center py-2 sm:py-4 space-y-2.5 sm:space-y-4 w-full">
             {/* Mobile 80th Anniversary Logo Centerpiece */}
-            <div className="flex flex-col items-center text-center">
-              <div className="relative w-44 h-44 flex items-center justify-center rounded-full bg-white/70 backdrop-blur-md border-2 border-white/90 shadow-[0_8px_32px_rgba(255,255,255,0.7),0_4px_20px_rgba(140,104,50,0.25)]">
+            <motion.div
+              style={{ opacity: hubOpacity, scale: hubScale }}
+              className="flex flex-col items-center text-center will-change-transform"
+            >
+              <div className="relative w-[clamp(100px,26vw,135px)] h-[clamp(100px,26vw,135px)] flex items-center justify-center rounded-full bg-white/70 backdrop-blur-md border-2 border-white/90 shadow-[0_8px_32px_rgba(255,255,255,0.7),0_4px_20px_rgba(140,104,50,0.25)]">
                 <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full pointer-events-none">
                   <circle cx="100" cy="100" r="90" fill="none" stroke="#CCA369" strokeWidth="1.2" strokeOpacity="0.8" />
                   <circle cx="100" cy="100" r="82" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.9" />
                 </svg>
                 <div
-                  className="relative w-36 h-36 aspect-square"
+                  className="relative w-[clamp(80px,21vw,110px)] h-[clamp(80px,21vw,110px)] aspect-square"
                   style={{
                     filter:
                       "drop-shadow(0 0 2px #FFFFFF) drop-shadow(0 0 10px rgba(255,255,255,0.95)) drop-shadow(0 4px 16px rgba(107,90,58,0.45)) saturate(1.22) contrast(1.1) brightness(1.04)",
@@ -576,62 +583,71 @@ export default function HeroCover() {
                   />
                 </div>
               </div>
-              <span className="mt-2 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#F7F1E7]/95 backdrop-blur-md border border-[#CCA369]/40 text-xs font-kanit text-[#6B5A3A]">
+              <span className="mt-1.5 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F7F1E7]/95 backdrop-blur-md border border-[#CCA369]/40 text-[clamp(9.5px,2.6vw,11.5px)] font-kanit text-[#6B5A3A]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#CCA369]" />
                 <span>สร้างคุณค่า เติบโตอย่างมั่นคง</span>
               </span>
-            </div>
+            </motion.div>
 
             {/* Mobile 5 Editorial Cards List */}
-            <div className="grid grid-cols-2 gap-2.5 w-full max-w-lg">
-              {pillars.slice(0, 4).map((item) => (
-                <Link
-                  key={`mob-${item.key}`}
-                  href="#businesses"
-                  className="rounded-2xl overflow-hidden backdrop-blur-md bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all relative p-0.5"
-                >
-                  <div className="relative h-20 w-full overflow-hidden rounded-t-[14px]">
-                    <Image src={item.image} alt={item.titleTh} fill className="object-cover" />
-                    <div className="absolute top-1.5 left-2 px-2 py-0.5 rounded-full bg-[#F7F1E7]/90 text-[10px] font-playfair font-bold text-[#6B5A3A]">
-                      {item.number}
+            <motion.div
+              style={{
+                opacity: cardsOpacity,
+                scale: cardsScale,
+                pointerEvents: cardsPointer as any,
+              }}
+              className="w-full max-w-[360px] sm:max-w-md will-change-transform"
+            >
+              <div className="grid grid-cols-2 gap-2 sm:gap-2.5 w-full">
+                {pillars.slice(0, 4).map((item) => (
+                  <Link
+                    key={`mob-${item.key}`}
+                    href="#businesses"
+                    className="rounded-2xl overflow-hidden backdrop-blur-md bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all relative p-0.5"
+                  >
+                    <div className="relative h-[clamp(54px,14vw,72px)] w-full overflow-hidden rounded-t-[14px]">
+                      <Image src={item.image} alt={item.titleTh} fill className="object-cover" />
+                      <div className="absolute top-1 left-1.5 px-1.5 py-0.5 rounded-full bg-[#F7F1E7]/90 text-[clamp(9px,2.3vw,10px)] font-playfair font-bold text-[#6B5A3A]">
+                        {item.number}
+                      </div>
                     </div>
-                  </div>
-                  <div className="p-2">
-                    <h5 className="font-kanit font-semibold text-[11px] text-[#1F1F1F] truncate">
-                      {item.titleTh}
-                    </h5>
-                    <span className="text-[9px] text-[#6B5A3A] font-inter uppercase block truncate">
-                      {item.titleEn}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-
-              {/* 5th Card spanning full width on mobile */}
-              <div className="col-span-2">
-                <Link
-                  href="#businesses"
-                  className="flex items-center gap-3 p-2.5 rounded-2xl backdrop-blur-md bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all"
-                >
-                  <div className="relative w-12 h-12 rounded-xl overflow-hidden shrink-0 border border-[#CCA369]/30">
-                    <Image src={pillars[4].image} alt={pillars[4].titleTh} fill className="object-cover" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between">
-                      <h5 className="font-kanit font-semibold text-xs text-[#1F1F1F] truncate">
-                        {pillars[4].titleTh}
+                    <div className="p-1.5 sm:p-2">
+                      <h5 className="font-kanit font-semibold text-[clamp(10px,2.8vw,11.5px)] text-[#1F1F1F] truncate">
+                        {item.titleTh}
                       </h5>
-                      <span className="font-playfair text-[11px] font-bold text-[#6B5A3A]">
-                        {pillars[4].number}
+                      <span className="text-[clamp(8px,2.2vw,9.5px)] text-[#6B5A3A] font-inter uppercase block truncate">
+                        {item.titleEn}
                       </span>
                     </div>
-                    <span className="text-[10px] text-[#6B5A3A] font-inter uppercase block truncate">
-                      {pillars[4].titleEn}
-                    </span>
-                  </div>
-                </Link>
+                  </Link>
+                ))}
+
+                {/* 5th Card spanning full width on mobile */}
+                <div className="col-span-2">
+                  <Link
+                    href="#businesses"
+                    className="flex items-center gap-2.5 p-2 sm:p-2.5 rounded-2xl backdrop-blur-md bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all"
+                  >
+                    <div className="relative w-[clamp(36px,10vw,44px)] h-[clamp(36px,10vw,44px)] rounded-xl overflow-hidden shrink-0 border border-[#CCA369]/30">
+                      <Image src={pillars[4].image} alt={pillars[4].titleTh} fill className="object-cover" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center justify-between">
+                        <h5 className="font-kanit font-semibold text-[clamp(10.5px,2.9vw,12px)] text-[#1F1F1F] truncate">
+                          {pillars[4].titleTh}
+                        </h5>
+                        <span className="font-playfair text-[clamp(9.5px,2.4vw,11px)] font-bold text-[#6B5A3A]">
+                          {pillars[4].number}
+                        </span>
+                      </div>
+                      <span className="text-[clamp(8.5px,2.3vw,10px)] text-[#6B5A3A] font-inter uppercase block truncate">
+                        {pillars[4].titleEn}
+                      </span>
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
 

@@ -546,14 +546,14 @@ export default function StatsAndGlobal() {
               {/* ------------------------------------------------
                   RIGHT COLUMN (60%): FULL-BLEED INTERACTIVE ARCHITECTURAL MAP
                  ------------------------------------------------ */}
-              <div className="w-full lg:w-[60%] relative rounded-2xl bg-white/95 backdrop-blur-md border border-[#B39B6B]/40 shadow-[0_4px_24px_rgba(179,155,107,0.12)] overflow-hidden min-h-[350px] sm:min-h-[380px] lg:min-h-0 flex items-stretch">
+              <div className="w-full lg:w-[60%] relative rounded-2xl bg-white/95 backdrop-blur-md border border-[#B39B6B]/40 shadow-[0_4px_24px_rgba(179,155,107,0.12)] overflow-hidden flex flex-col justify-between lg:min-h-0">
                 {/* Full-Bleed Map Canvas Area (Pannable & Interactive) */}
                 <div
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
                   onMouseUp={handleMouseUp}
                   onMouseLeave={handleMouseUp}
-                  className={`relative w-full h-full flex items-center justify-center overflow-hidden select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"
+                  className={`relative w-full aspect-[2/1] lg:aspect-auto lg:h-full lg:flex-1 flex items-center justify-center overflow-hidden select-none ${isDragging ? "cursor-grabbing" : "cursor-grab"
                     }`}
                 >
                   <svg
@@ -856,7 +856,7 @@ export default function StatsAndGlobal() {
                     </div>
                   </div>
 
-                  {/* Floating Coordinate & Role Card */}
+                  {/* Floating Coordinate & Role Card (Desktop >= lg) */}
                   <AnimatePresence>
                     {isMounted && currentCountry && (
                       <motion.div
@@ -865,7 +865,7 @@ export default function StatsAndGlobal() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 4, scale: 0.95 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute bottom-3 right-3 left-3 sm:left-auto sm:max-w-xs z-30 pointer-events-none"
+                        className="hidden lg:block absolute bottom-3 right-3 max-w-xs z-30 pointer-events-none"
                       >
                         <div className="p-2.5 sm:p-3 rounded-xl bg-white/95 backdrop-blur-md border border-[#B39B6B]/60 shadow-lg text-left">
                           <div className="flex items-center justify-between gap-2 mb-1">
@@ -906,6 +906,51 @@ export default function StatsAndGlobal() {
                       <span className="text-[11px] font-medium">เส้นทางสากล</span>
                     </span>
                   </div>
+                </div>
+
+                {/* Mobile Docked Country Detail Card (< lg): Clean bottom panel, never overlaps map pins */}
+                <div className="lg:hidden p-3 border-t border-[#B39B6B]/25 bg-[#FAF7F2]/90 backdrop-blur-xs">
+                  <AnimatePresence mode="wait">
+                    {isMounted && currentCountry && (
+                      <motion.div
+                        key={`mob-tip-${currentCountry.code}`}
+                        initial={{ opacity: 0, y: 4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -4 }}
+                        transition={{ duration: 0.15 }}
+                      >
+                        <div className="flex items-center justify-between gap-2 mb-1">
+                          <div className="flex items-center gap-1.5 min-w-0">
+                            <span className="w-2 h-2 rounded-full bg-[#B39B6B] animate-pulse shrink-0" />
+                            <span className="font-kanit font-bold text-xs text-[#1F1F1F] truncate">
+                              {currentCountry.nameTh} ({currentCountry.nameEn})
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-1.5 shrink-0">
+                            <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#D9CBAA]/50 text-[#6B5A3A]">
+                              {currentCountry.code}
+                            </span>
+                            {currentCountry.hub && (
+                              <span className="font-mono text-[9px] font-bold px-1.5 py-0.5 rounded bg-[#6B5A3A] text-white">
+                                REGIONAL HQ
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                        <p className="text-[11px] text-[#6B5A3A] font-sarabun leading-snug">
+                          {currentCountry.role}
+                        </p>
+                        <div className="mt-1.5 pt-1 border-t border-[#B39B6B]/20 flex items-center justify-between text-[10px] font-mono text-[#6B5A3A]/75">
+                          <span>
+                            {currentCountry.latitude.toFixed(1)}°N, {currentCountry.longitude.toFixed(1)}°E
+                          </span>
+                          <span className="text-[#6B5A3A]/70 text-[9.5px]">
+                            แตะจุดบนแผนที่หรือเลือกประเทศด้านล่าง
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
             </div>
