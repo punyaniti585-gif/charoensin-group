@@ -1,6 +1,6 @@
 {
   "site_url": "https://csgok.sfinsulations.com/",
-  "updated_at": "2026-11-17",
+  "updated_at": "2026-11-18",
   "source": "โครงสร้างเมนูและ URL ที่ผู้ใช้ระบุในแชต",
   "status_definitions": {
     "existing_pending_review": "มีลิงก์แล้ว รอตรวจรับ",
@@ -197,10 +197,17 @@
               "title": "บริษัท แมนวูด อินเตอร์เทรด จำกัด",
               "children": [],
               "id": "03.02.03",
-              "status": "link_not_provided",
+              "status": "pending_review",
               "owner": null,
-              "source_file": null,
-              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+              "source_file": "exports/manwood-intertrade-2026.html",
+              "notes": "ส่งหน้า HTML สำหรับตรวจงาน ใช้ Layout และ Motion แบบแอสเสท/CPL พร้อมเนื้อหาจากหน้าบริษัทเดิม รอการตรวจสอบ",
+              "url": "https://csgok.sfinsulations.com/manwood-intertrade-2026.html",
+              "last_submitted_at": "2026-11-18",
+              "export": {
+                "exported_at": "2026-11-17",
+                "html": "exports/manwood-intertrade-2026.html",
+                "kind": "standalone_html"
+              }
             }
           ],
           "id": "03.02",
@@ -216,19 +223,33 @@
               "title": "บริษัท ทีทีเอ็น นันวูเว่น โซลูชั่น จำกัด",
               "children": [],
               "id": "03.03.01",
-              "status": "link_not_provided",
+              "status": "pending_review",
               "owner": null,
-              "source_file": null,
-              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+              "source_file": "exports/ttn-nonwoven-2026.html",
+              "notes": "ส่งหน้า HTML สำหรับตรวจงาน ใช้ Layout และ Motion แบบแอสเสท/CPL พร้อมเนื้อหาจากหน้าบริษัทเดิม รอการตรวจสอบ",
+              "url": "https://csgok.sfinsulations.com/ttn-nonwoven-2026.html",
+              "last_submitted_at": "2026-11-18",
+              "export": {
+                "exported_at": "2026-11-17",
+                "html": "exports/ttn-nonwoven-2026.html",
+                "kind": "standalone_html"
+              }
             },
             {
               "title": "บริษัท ซงเม่า นันวูเว่น จำกัด",
               "children": [],
               "id": "03.03.02",
-              "status": "link_not_provided",
+              "status": "pending_review",
               "owner": null,
-              "source_file": null,
-              "notes": "ยังไม่มีลิงก์ในข้อมูลส่งมอบ ต้องค้นหาหน้าเดิมและส่วนในหน้ารวมก่อนสร้างใหม่"
+              "source_file": "exports/songmao-nonwoven-2026.html",
+              "notes": "ส่งหน้า HTML สำหรับตรวจงาน ใช้ Layout และ Motion แบบแอสเสท/CPL พร้อมเนื้อหาจากหน้าบริษัทเดิม รอการตรวจสอบ",
+              "url": "https://csgok.sfinsulations.com/songmao-nonwoven-2026.html",
+              "last_submitted_at": "2026-11-18",
+              "export": {
+                "exported_at": "2026-11-17",
+                "html": "exports/songmao-nonwoven-2026.html",
+                "kind": "standalone_html"
+              }
             },
             {
               "title": "บริษัท เอฟแอนด์ที นันวูเว่น โซลูชั่น จำกัด",
