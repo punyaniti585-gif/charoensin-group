@@ -1,0 +1,886 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน) | กลุ่มเจริญสิน</title>
+<meta name="description" content="บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน) ธุรกิจผลิตหนังแท้ สมาชิกกลุ่มเจริญสิน">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://csgok.sfinsulations.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Sarabun:wght@400;500;600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<script>
+/* 1. FAILURE BANNER: รูป ฟอนต์ หรือไลบรารีที่โหลดไม่ได้ ต้องแจ้งบนหน้าจอ ไม่ปล่อยให้เป็นช่องว่างเงียบๆ */
+(function () {
+  var failed = [];
+  window.__csaFail = function (url, why) {
+    if (failed.indexOf(url) >= 0) return;
+    failed.push(url);
+    if (window.console) console.error("[csa]", url, why);
+    var show = function () {
+      var b = document.getElementById("csa-asset-alert");
+      if (!b) {
+        b = document.createElement("div");
+        b.id = "csa-asset-alert";
+        b.setAttribute("role", "alert");
+        b.style.cssText = "position:fixed;left:0;right:0;bottom:0;z-index:100;padding:.75rem 1rem;font:500 13px/1.5 ui-monospace,monospace;background:#1F1F1F;color:#fff;text-align:center;overflow-wrap:anywhere";
+        document.body.appendChild(b);
+      }
+      b.textContent = "โหลดไฟล์ไม่สำเร็จ: " + failed[0] + " (" + why + ")" + (failed.length > 1 ? " และอีก " + (failed.length - 1) + " ไฟล์" : "");
+    };
+    if (document.body) show(); else document.addEventListener("DOMContentLoaded", show);
+  };
+  document.addEventListener("error", function (event) {
+    var t = event.target;
+    if (!t || !/^(IMG|SCRIPT|LINK)$/.test(t.tagName)) return;
+    var url = t.currentSrc || t.src || t.href;
+    if (url) window.__csaFail(url, t.tagName === "IMG" ? "รูปภาพ" : "ไฟล์ระบบ");
+  }, true);
+  var setVw = function () { document.documentElement.style.setProperty("--vw", document.documentElement.clientWidth + "px"); };
+  setVw();
+  window.addEventListener("resize", setVw);
+})();
+</script>
+<style>
+/* 2. STYLESHEET: Charoensin Brand Framework 2026 v1.1 (สี ฟอนต์) บนกริดโมดูลสี่เหลี่ยมจัตุรัส */
+:root{
+  --gold:#B39B6B; --bronze:#6B5A3A; --beige:#D9CBAA; --neutral:#F2EFE9; --charcoal:#1F1F1F; --white:#FFFFFF;
+  --gold-60:rgba(179,155,107,.6); --gold-40:rgba(179,155,107,.4); --gold-20:rgba(179,155,107,.2); --gold-10:rgba(179,155,107,.1);
+  --vw:100vw; --cols:12; --m:40px; --g:20px;
+  --sq:calc(var(--vw) / var(--cols));
+  --col:calc((min(var(--vw),1920px) - 2 * var(--m) - (var(--cols) - 1) * var(--g)) / var(--cols));
+  --hd:84px; --blk:128px; --pad:40px; --hc:64px; --pre:96px;
+  --disp:180px; --h1:86px; --h2:60px; --h3:44px; --tl:28px; --tm:22px; --bl:20px; --bm:17px; --bs:14px;
+  --strip-rows:2; --box-r:.507;
+  --th-d:"Kanit",sans-serif; --th-b:"Sarabun",sans-serif; --en-d:"Playfair Display",serif; --en-b:"Inter",sans-serif;
+}
+@media (max-width:1024px){:root{--m:20px;--hd:84px;--blk:112px;--pad:32px;--hc:56px;--pre:80px;--disp:132px;--h1:64px;--h2:48px;--h3:36px;--tl:26px}}
+@media (max-width:768px){:root{--cols:8;--hd:72px;--blk:96px;--hc:48px;--pre:64px;--disp:112px;--h1:56px;--h2:40px;--h3:32px;--tl:24px;--tm:20px;--bl:18px;--bm:16px}}
+@media (max-width:560px){:root{--cols:4;--hd:64px;--blk:80px;--pad:24px;--hc:40px;--pre:56px;--disp:80px;--h1:40px;--h2:32px;--h3:28px;--tl:22px;--strip-rows:3;--box-r:1.257}}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+.lenis.lenis-stopped{overflow:hidden}
+body{margin:0;background:var(--neutral);color:var(--charcoal)}
+#csa{font:400 var(--bm)/1.7 var(--th-b);text-transform:none;overflow-wrap:anywhere;overflow-x:clip;-webkit-font-smoothing:antialiased}
+#csa img{display:block;max-width:100%}
+#csa a{color:inherit;text-decoration:none}
+#csa h1,#csa h2,#csa h3,#csa p,#csa ol,#csa ul,#csa dl,#csa dd,#csa figure{margin:0;padding:0}
+#csa ol,#csa ul{list-style:none}
+#csa button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+#csa :focus-visible{outline:2px solid var(--bronze);outline-offset:4px}
+#csa .wrap{width:100%;max-width:1920px;margin-inline:auto;padding-inline:var(--m)}
+#csa .grid{display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));column-gap:var(--g)}
+#csa .grid>*{min-width:0}
+#csa .num{font-family:var(--en-d);font-variant-numeric:lining-nums tabular-nums}
+#csa .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+/* type */
+#csa h1{font:400 var(--h1)/1.2 var(--th-d)}
+#csa h2{font:300 var(--h2)/1.25 var(--th-d)}
+#csa h3{font:300 var(--h3)/1.3 var(--th-d)}
+#csa h1 span,#csa h2 span{display:block}
+#csa .t-l{font:400 var(--tl)/1.3 var(--th-d)}
+#csa .b-l{font-size:var(--bl);line-height:1.75}
+#csa .b-s{font-size:var(--bs);line-height:1.6}
+#csa .muted{color:var(--bronze)}
+
+/* section head: เลขกำกับแบบนิตยสาร + เส้นทองบาง */
+#csa section{position:relative}
+#csa .sec{padding-top:var(--blk)}
+#csa .label{display:flex;align-items:center;gap:16px;font:400 var(--bs)/1.6 var(--th-b);color:var(--bronze)}
+#csa .label .num{font-size:var(--h3);line-height:1;color:var(--gold)}
+#csa .label i{display:block;width:48px;height:1px;background:var(--gold)}
+#csa .head h2{margin-top:24px}
+#csa .head{margin-bottom:var(--hc)}
+
+/* plate button: ปุ่มหลักพื้น Deep Bronze ตัวหนังสือขาว + ช่องลูกศรแยก */
+#csa .plate{display:inline-flex;gap:4px;font:500 var(--bm)/1 var(--th-b);color:var(--white);vertical-align:top}
+#csa .plate-t,#csa .plate-a{height:52px;border-radius:6px;background:var(--bronze);transition:background-color .2s,transform .3s cubic-bezier(.22,1,.36,1)}
+#csa .plate-t{display:flex;align-items:center;padding:0 20px;overflow:hidden}
+#csa .plate-t span{display:grid;height:1.6em;line-height:1.6;overflow:hidden}
+#csa .plate-t b{font-weight:500;display:block;white-space:nowrap;transition:transform .3s cubic-bezier(.22,1,.36,1)}
+#csa .plate-a{width:52px;display:grid;place-items:center;flex:none}
+#csa .plate-a svg{width:16px;height:16px}
+#csa .plate:active{transform:scale(.98)}
+#csa .plate.ghost .plate-t,#csa .plate.ghost .plate-a{background:transparent;box-shadow:inset 0 0 0 1px var(--gold)}
+@media (hover:hover) and (min-width:1025px){
+  #csa .plate:hover .plate-t,#csa .plate:hover .plate-a{background:var(--charcoal)}
+  #csa .plate.ghost:hover .plate-t,#csa .plate.ghost:hover .plate-a{background:var(--gold-20)}
+  #csa .plate:hover .plate-t{transform:translateX(56px)}
+  #csa .plate:hover .plate-a{transform:translateX(calc(-1 * var(--tw,120px) - 4px))}
+  #csa .plate:hover .plate-t b{transform:translateY(-100%)}
+}
+
+/* preloader */
+#csa-pre{position:fixed;inset:0;z-index:60;display:grid;grid-template-columns:repeat(var(--cols),1fr);grid-auto-rows:var(--sq);align-content:end;overflow:hidden;background:var(--neutral)}
+#csa-pre.built{background:none}
+#csa-pre i{display:block;background:var(--neutral);margin:-1px}
+#csa-pre .pre-count{position:absolute;right:0;bottom:0;width:calc(var(--sq) * 3);height:calc(var(--sq) * 2);background:var(--charcoal);color:var(--white);padding:16px 20px;display:flex;flex-direction:column;justify-content:space-between}
+#csa-pre .pre-count p{font-size:var(--bs);color:var(--beige)}
+#csa-pre .pre-count b{font:400 var(--h1)/1 var(--en-d)}
+@media (max-width:768px){#csa-pre .pre-count{width:calc(var(--sq) * 2)}}
+
+/* header */
+#csa .hdr{position:fixed;inset:0 0 auto 0;z-index:40;height:var(--hd);display:flex;align-items:center;justify-content:space-between;gap:12px;padding-inline:var(--m);color:var(--white);transition:background-color .3s,color .3s,box-shadow .3s}
+#csa .hdr::before{content:"";position:absolute;inset:0 0 auto 0;height:160px;background:linear-gradient(rgba(31,31,31,.6),rgba(31,31,31,.3) 55%,rgba(31,31,31,0));pointer-events:none;z-index:-1;transition:opacity .3s}
+#csa .hdr[data-solid]{background:var(--neutral);color:var(--charcoal);box-shadow:0 1px 0 var(--gold-40)}
+#csa .hdr[data-solid]::before{opacity:0}
+#csa .brand{display:flex;align-items:center;gap:14px;min-width:0}
+#csa .brand-tile{height:52px;padding:6px 12px;background:var(--neutral);border-radius:6px;display:grid;place-items:center;flex:none}
+#csa .brand-tile img{height:40px;width:auto}
+#csa .brand small{font:400 var(--bs)/1.4 var(--th-b);white-space:nowrap}
+#csa .nav{display:flex;gap:30px;font:500 var(--bm)/1 var(--th-b)}
+#csa .nav a{position:relative;padding:8px 0;transition:opacity .2s}
+#csa .nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .13s linear}
+@media (hover:hover){#csa .nav:hover a{opacity:.55}#csa .nav a:hover{opacity:1}#csa .nav a:hover::after{transform:scaleX(1)}}
+@media (max-width:1024px){#csa .nav{display:none}}
+@media (max-width:560px){#csa .brand small{display:none}}
+
+/* hero */
+#csa .hero{min-height:max(100svh,760px);display:flex;flex-direction:column;justify-content:space-between;overflow:hidden;color:var(--white);background:radial-gradient(120% 90% at 30% 20%,#4a3f2a,var(--charcoal) 70%)}
+#csa .hero-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%;transform-origin:50% 50%}
+#csa .hero-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(31,31,31,.62),rgba(31,31,31,.18) 70%),linear-gradient(rgba(31,31,31,0) 36.8%,rgba(31,31,31,.55))}
+#csa .hero-copy{position:relative;padding-top:calc(var(--hd) + 60px);padding-bottom:48px;align-items:end;row-gap:24px}
+#csa .hero h1{grid-column:1 / span 9;text-shadow:0 2px 24px rgba(31,31,31,.35)}
+@media (max-width:1024px){#csa .hero h1{grid-column:1 / span 8}}
+@media (max-width:768px){#csa .hero-copy{text-align:center}#csa .hero h1{grid-column:1 / -1}}
+#csa .strip{position:relative;display:grid;grid-template-columns:repeat(var(--cols),1fr);grid-template-rows:repeat(var(--strip-rows),var(--sq))}
+#csa .tile{grid-column:var(--c) / span var(--w,1);grid-row:var(--r);position:relative;min-width:0}
+#csa .tile.page{background:var(--neutral);color:var(--charcoal)}
+#csa .tile.glass{background:linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,0)),rgba(242,239,233,.55);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px)}
+#csa .tile.glass u{position:absolute;inset:0;background:var(--neutral);opacity:0}
+#csa .tile.live{background:linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,0)),rgba(31,31,31,.4);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.2);color:var(--white)}
+#csa .fact{display:flex;flex-direction:column;justify-content:space-between;padding:12px 16px}
+#csa .fact p{font-size:var(--bs);line-height:1.4;color:var(--bronze)}
+#csa .fact.live p{color:var(--beige)}
+#csa .fact strong{font:400 var(--tl)/1.15 var(--en-d);font-variant-numeric:lining-nums tabular-nums;white-space:nowrap}
+#csa .fact strong small{font:400 var(--bs)/1 var(--th-b);margin-left:6px}
+#csa .fact.live strong{font-size:calc(var(--tl) * 1.3)}
+@media (max-width:1024px){#csa .fact{padding:10px 14px}#csa .fact p{font-size:13px}}
+@media (max-width:768px){
+  #csa .tile{grid-column:var(--cm,var(--c)) / span var(--wm,var(--w,1));grid-row:var(--rm,var(--r))}
+  #csa .tile[data-off~="md"]{display:none}
+  #csa .fact{padding:14px 18px}
+}
+@media (max-width:560px){
+  #csa .tile{grid-column:var(--cs,var(--c)) / span var(--ws,var(--w,1));grid-row:var(--rs,var(--r))}
+  #csa .tile[data-off~="sm"]{display:none}
+}
+#csa .rise{position:absolute;inset:auto 0 0 0;display:grid;grid-template-columns:repeat(var(--cols),1fr);pointer-events:none;z-index:3}
+#csa .rise i{display:block;background:var(--neutral);margin:-1px;opacity:0}
+
+/* 01 about */
+#csa .about-text{grid-column:1 / span 7}
+#csa .about-facts{grid-column:9 / span 4;align-self:end}
+#csa .rows>div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;min-height:55px;padding:12px 0;border-top:1px solid var(--gold-60)}
+#csa .rows>div:last-child{border-bottom:1px solid var(--gold-60)}
+#csa .rows dt{font-size:var(--bm);color:var(--bronze)}
+#csa .rows dd{font:400 var(--tl)/1.2 var(--th-d);text-align:right}
+#csa .rows dd .num{font-size:1.08em}
+#csa .rows dd small{font:400 var(--bs)/1 var(--th-b);margin-left:6px}
+@media (max-width:1024px){#csa .about-text{grid-column:1 / -1}#csa .about-facts{grid-column:1 / -1;margin-top:var(--hc)}}
+
+/* 02 process: กล่องภาพ ปักหมุด เปลี่ยนภาพเป็นโมดูลสี่เหลี่ยม */
+#csa .proc-head{align-items:end;margin-bottom:var(--hc)}
+#csa .proc-head .head{grid-column:1 / span 5;margin-bottom:0}
+#csa .proc-head .proc-lead{grid-column:7 / span 6}
+@media (max-width:1024px){#csa .proc-head .head{grid-column:1 / -1}#csa .proc-head .proc-lead{grid-column:1 / -1;margin-top:32px}}
+#csa .proc-pin{padding-bottom:20px}
+#csa .proc-box{position:relative;overflow:hidden;background:var(--beige);height:min(max(320px,calc(100svh - var(--hd) - 150px)),calc((min(var(--vw),1920px) - 2 * var(--m)) * var(--box-r)))}
+#csa .proc-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;visibility:hidden}
+#csa .proc-photo:first-of-type{opacity:1;visibility:visible}
+#csa .proc-squares{position:absolute;inset:0}
+#csa .proc-squares .sq{position:absolute;background-repeat:no-repeat;opacity:0;visibility:hidden}
+#csa .proc-squares .sq span{position:absolute;inset:0;background:var(--neutral);opacity:0}
+#csa .proc-shade{position:absolute;inset:auto 0 0 0;height:38%;background:linear-gradient(rgba(31,31,31,0),rgba(31,31,31,.75))}
+#csa .proc-word{position:absolute;left:var(--pad);bottom:calc(var(--pad) - .08em);height:1em;width:2.4em;overflow:hidden;font:400 var(--disp)/1 var(--en-d);font-variant-numeric:lining-nums tabular-nums;color:var(--white)}
+#csa .proc-word span{position:absolute;left:0;top:0;opacity:0;visibility:hidden}
+#csa .proc-word span:first-child{opacity:1;visibility:visible}
+#csa .proc-of{position:absolute;right:var(--pad);bottom:var(--pad);color:var(--white);font:400 var(--tl)/1 var(--en-d)}
+#csa .proc-line{position:relative;margin-top:28px;height:46px}
+#csa .proc-line .track{position:absolute;inset:7px 0 auto 0;height:1px;background:var(--gold-60)}
+#csa .proc-line [data-bar]{position:absolute;left:0;top:6px;height:3px;width:8px;background:var(--bronze)}
+#csa .proc-line [data-handle]{position:absolute;left:0;top:0;width:16px;height:16px;background:var(--bronze)}
+#csa .proc-line li{position:absolute;top:0;left:calc(8px + (100% - 16px) * var(--i) / 5);transform:translateX(-50%)}
+#csa .proc-line li::before{content:"";position:absolute;left:50%;top:3px;width:1px;height:9px;background:var(--gold)}
+#csa .proc-line button{white-space:nowrap;padding:22px 6px 0;font:400 var(--bs)/1.4 var(--en-d);color:var(--bronze);opacity:.8;transition:opacity .3s}
+#csa .proc-line button[aria-current]{opacity:1;color:var(--charcoal)}
+
+/* 03 locations */
+#csa .loc-side{grid-column:1 / span 5}
+#csa .loc-board{grid-column:7 / span 6;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;align-self:start}
+#csa .loc-side .head{margin-bottom:40px}
+#csa .ptile{position:relative;aspect-ratio:2 / 1;padding:14px 16px;display:flex;flex-direction:column;justify-content:space-between;background:var(--beige);box-shadow:inset 0 0 0 .5px var(--neutral);transition:background-color .2s,color .2s,transform .4s cubic-bezier(.22,1,.36,1),opacity .2s;min-width:0}
+#csa .ptile:nth-child(even){background:var(--white)}
+#csa .ptile .num{font-size:var(--bs);color:var(--bronze);transition:color .2s}
+#csa .ptile b{font:400 var(--tm)/1.3 var(--th-d)}
+#csa .ptile.deco{background:var(--gold)}
+#csa .ptile.dark{background:var(--charcoal);color:var(--white)}
+#csa .ptile.dark .num{font-size:var(--h3);line-height:1;color:var(--gold)}
+#csa .ptile.dark b{font-size:var(--bm);font-family:var(--th-b);color:var(--beige)}
+#csa .ptile.deco svg{position:absolute;inset:0;width:100%;height:100%}
+@media (hover:hover) and (min-width:1025px){
+  #csa .loc-board:has(.ptile.p:hover) .ptile.p:not(:hover){opacity:.45}
+  #csa .ptile.p:hover{background:var(--bronze);color:var(--white);transform:translateY(-6px);z-index:1}
+  #csa .ptile.p:hover .num{color:var(--beige)}
+}
+@media (max-width:1024px){#csa .loc-board{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:768px){#csa .loc-side{grid-column:1 / -1}#csa .loc-board{grid-column:1 / -1;margin-top:var(--hc);grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:560px){#csa .loc-board{grid-template-columns:repeat(2,minmax(0,1fr))}#csa .ptile{padding:10px 12px}}
+
+/* 04 direction: ประโยคเดียว ตัวใหญ่ ค่อยๆ เข้มขึ้นทีละคำ */
+#csa .dir{margin-top:var(--blk);padding-block:var(--blk);background:var(--beige);overflow:hidden}
+#csa .dir svg.waves{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+#csa .dir .label{justify-content:center;position:relative}
+#csa .dir h3{position:relative;grid-column:2 / span 10;text-align:center;margin-top:40px;text-wrap:balance}
+#csa .dir h3 .w{display:inline}
+@media (max-width:768px){#csa .dir h3{grid-column:1 / -1}}
+
+/* 05 executives */
+#csa .cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:var(--g)}
+#csa .card{position:relative;height:620px;border-radius:4px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+#csa .card.person{background:var(--beige)}
+#csa .card.person figure{position:relative;flex:1;min-height:0;margin:12px 12px 0;background:var(--neutral);overflow:hidden;border-radius:2px}
+#csa .card.person img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%}
+#csa .card.person .cap{padding:20px var(--pad) 28px;display:flex;align-items:center;gap:16px}
+#csa .card.person .cap i{width:12px;height:12px;background:var(--bronze);flex:none}
+#csa .card.member{background:var(--bronze);color:var(--white);padding:var(--pad);justify-content:space-between}
+#csa .card.member .mk{width:72px;height:72px;background:var(--neutral);display:grid;place-items:center;border-radius:2px}
+#csa .card.member .mk img{max-height:48px;width:auto}
+#csa .card.member h3{margin-top:28px;font-size:calc(var(--tl) * 1.25)}
+#csa .nw{white-space:nowrap}
+#csa .card.member .en{font:italic 400 var(--bm)/1.6 var(--en-d);color:var(--beige);margin-top:16px}
+#csa .card.member svg{position:absolute;inset:34% 0 auto 0;width:100%;height:34%}
+#csa .card.member>div{position:relative;z-index:1}
+@media (max-width:1024px){#csa .card{height:540px}}
+@media (max-width:768px){
+  #csa .cards{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:calc(-1 * var(--m));padding-inline:var(--m);scrollbar-width:thin;scrollbar-color:var(--bronze) var(--gold-20);padding-bottom:16px}
+  #csa .card{flex:0 0 300px;height:520px;scroll-snap-align:center}
+}
+
+/* footer / contact */
+#csa .foot{position:relative;margin-top:var(--pre);min-height:820px;padding:var(--m);padding-top:var(--blk);display:flex;flex-direction:column;justify-content:space-between;gap:48px;overflow:hidden;background:var(--charcoal);color:var(--white)}
+#csa .foot-bg{position:absolute;inset:-15% 0 0 0;width:100%;height:115%;object-fit:cover;object-position:50% 100%}
+#csa .foot-shade{position:absolute;inset:0;background:linear-gradient(rgba(31,31,31,.35),rgba(31,31,31,.35) 60%,rgba(31,31,31,.85))}
+#csa .foot-card{position:relative;max-width:1840px;width:100%;margin-inline:auto;padding:var(--pad);background:linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,0)),rgba(31,31,31,.55);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px var(--g)}
+#csa .foot-card .label{color:var(--beige)}
+#csa .foot-card h2{margin-top:24px}
+#csa .foot-card .member-line{margin-top:16px;color:var(--beige)}
+#csa .foot-card .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+#csa .foot-card .plate.ghost{color:var(--white)}
+#csa .foot-rows>div{border-color:rgba(217,203,170,.45)}
+#csa .foot-rows dt{color:var(--beige);flex:none}
+#csa .foot-rows dd{font:400 var(--bl)/1.6 var(--th-b)}
+#csa .foot-rows dd a{border-bottom:1px solid var(--gold)}
+#csa .foot-tile{position:absolute;right:0;bottom:0}
+#csa .foot-base{position:relative;max-width:1840px;width:100%;margin-inline:auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 32px;font-size:var(--bs);color:var(--beige)}
+@media (max-width:1024px){#csa .foot-card{grid-template-columns:minmax(0,1fr)}}
+
+/* cursor */
+#csa-cur{position:fixed;left:0;top:0;z-index:70;width:8px;height:8px;margin:-4px 0 0 -4px;background:var(--bronze);pointer-events:none;display:none;place-items:center;font:500 12px/1 var(--th-b);color:var(--white);overflow:hidden;white-space:nowrap}
+@media (hover:hover) and (pointer:fine) and (min-width:1025px){#csa-cur.on{display:grid}}
+
+@media (prefers-reduced-motion:reduce){#csa *{transition-duration:.01ms!important}}
+</style>
+<noscript><style>#csa-pre{display:none}</style></noscript>
+</head>
+<body>
+<div id="csa">
+
+<!-- 03.02.01 CPL genuine leather; layout and motion adapted from charoensin-asset-2026.html. Content source: WordPress page 838 and our-business #cpl. -->
+<div id="csa-pre" aria-hidden="true"><div class="pre-count" data-pre-counter><p>กำลังโหลด</p><b class="num" data-pre-count>0</b></div></div>
+<div id="csa-cur" aria-hidden="true"></div>
+
+<header class="hdr" data-hdr>
+  <a class="brand" href="#top" aria-label="บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)">
+    <span class="brand-tile"><img src="https://csgok.sfinsulations.com/wp-content/uploads/2019/06/cs-logo-1.png" alt="บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)"></span>
+    <small>สมาชิกกลุ่มเจริญสิน</small>
+  </a>
+  <nav class="nav" aria-label="เมนูหลัก">
+    <a href="#about">เกี่ยวกับบริษัท</a><a href="#production">การผลิต</a><a href="#markets">ตลาดและการบริการ</a><a href="#executives">ผู้บริหาร</a>
+  </nav>
+  <a class="plate" href="#contact"><span class="plate-t"><span><b>ติดต่อเรา</b><b aria-hidden="true">ติดต่อเรา</b></span></span><span class="plate-a"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></span></a>
+</header>
+
+<main id="top">
+<section class="hero" data-hero>
+  <img class="hero-photo" data-hero-photo src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/IMG_8302-1.jpg" alt="" fetchpriority="high">
+  <div class="hero-shade"></div>
+  <div class="wrap grid hero-copy">
+    <h1 data-hero-h1><span>บริษัท ซีพีแอล กรุ๊ป</span><span>จำกัด (มหาชน)</span></h1>
+  </div>
+  <div class="strip" data-strip>
+    <div class="tile page fact" data-held style="--c:2;--w:2;--r:1;--cm:1;--cs:1"><p>กำลังผลิตหนังสำเร็จรูป / เดือน</p><strong>3.0<small>ล้าน ตร.ฟุต</small></strong></div>
+    <div class="tile glass" data-off="md sm" style="--c:5;--r:1"><u></u></div>
+    <div class="tile glass" data-off="md sm" style="--c:9;--r:1"><u></u></div>
+    <div class="tile glass" data-off="sm" style="--c:12;--r:1;--cm:8"><u></u></div>
+    <div class="tile page" style="--c:1;--r:2;--cm:5;--rm:1;--cs:4;--rs:1"></div>
+    <div class="tile glass" data-off="md sm" style="--c:2;--r:2"><u></u></div>
+    <div class="tile glass" data-off="md sm" style="--c:4;--r:2"><u></u></div>
+    <div class="tile page fact" data-held style="--c:5;--w:2;--r:2;--cm:3;--cs:2"><p>กำลังผลิตหนังวัว / เดือน</p><strong>80,000<small>ตัว</small></strong></div>
+    <div class="tile live fact" data-held style="--c:7;--w:2;--r:2;--cm:5;--cs:1;--rs:3"><p>กำลังผลิตหนังหมู / เดือน</p><strong><span data-count="100000" data-hero-count>100,000</span><small>ตัว</small></strong></div>
+    <div class="tile glass" data-off="md sm" style="--c:9;--r:2"><u></u></div>
+    <div class="tile glass" data-off="md sm" style="--c:10;--r:2"><u></u></div>
+    <div class="tile page fact" data-held style="--c:11;--w:2;--r:2;--cm:7;--cs:3;--rs:3"><p>ปีที่จดทะเบียนในตลาดหลักทรัพย์</p><strong>1994</strong></div>
+  </div>
+  <div class="rise" data-rise-layer aria-hidden="true"></div>
+</section>
+
+<section class="sec" id="about">
+  <div class="wrap">
+    <div class="head"><p class="label"><span class="num">01</span><i></i><span>เกี่ยวกับบริษัท</span></p>
+      <h2 data-reveal><span>ผลิตหนังแท้ครบวงจร</span><span>เพื่อแบรนด์ระดับโลก</span></h2></div>
+    <div class="grid">
+      <p class="about-text b-l" data-rise>บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน) ได้จดทะเบียนในตลาดหลักทรัพย์แห่งประเทศไทย เมื่อปี 2537 โดยมีชื่อย่อว่า “CPL”  เป็นผู้ผลิตหนังวัวฟอกสำเร็จรูปครบวงจรรายใหญ่ในกลุ่มประเทศเอเชียตะวันออกเฉียงใต้ มีศักยภาพในการผลิตหนังสำเร็จรูปถึง 3.0 ล้านตารางฟุต/เดือน และมีกำลังผลิตหนังฟอกวัว 80,000 ตัว และหนังหมู 100,000 ตัวต่อเดือน เป็นที่ได้รับความไว้วางใจจากเจ้าของตราสินค้าระดับโลก เพื่อนำไปใช้เป็นวัตถุดิบหลักในการผลิตรองเท้ากีฬาและรองเท้าลำลองชั้นนำของโลก กระเป๋าหนัง และผลิตภัณฑ์เครื่องหนังทุกประเภท โดยจัดจำหน่ายส่งออกให้ลูกค้าในกลุ่มประเทศแถบเอเชียและเอเชียตะวันออกเฉียงใต้</p>
+      <dl class="about-facts rows" data-rise>
+        <div><dt>ประเภทธุรกิจ</dt><dd>ธุรกิจผลิตหนังแท้</dd></div>
+        <div><dt>ปีที่จดทะเบียนในตลาดหลักทรัพย์</dt><dd><span class="num">1994</span></dd></div>
+        <div><dt>ทุนจดทะเบียน</dt><dd><span class="num" data-count="439844000">439,844,000</span><small>บาท</small></dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="production" data-proc>
+  <div class="wrap">
+    <div class="grid proc-head">
+      <div class="head"><p class="label"><span class="num">02</span><i></i><span>ภาพธุรกิจผลิตหนังแท้</span></p>
+        <h2 data-reveal><span>หนังแท้คุณภาพ</span><span>สู่อุตสาหกรรมระดับสากล</span></h2></div>
+      <p class="proc-lead" data-rise>หนังวัวฟอกสำเร็จรูปสำหรับรองเท้ากีฬา รองเท้าลำลอง กระเป๋าหนัง และผลิตภัณฑ์เครื่องหนัง จัดจำหน่ายให้ลูกค้าในกลุ่มประเทศเอเชียและเอเชียตะวันออกเฉียงใต้ โดยมุ่งพัฒนาคุณภาพและการบริการอย่างต่อเนื่อง</p>
+    </div>
+    <div class="proc-pin">
+      <div class="proc-box" data-cursor="เลื่อน">
+        <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/IMG_8302-1.jpg" alt="ภาพธุรกิจผลิตหนังแท้ CPL ภาพที่ 1" decoding="async">
+        <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/IMG_8268.jpg" alt="ภาพธุรกิจผลิตหนังแท้ CPL ภาพที่ 2" decoding="async">
+        <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/DSCF8503.jpg" alt="ภาพธุรกิจผลิตหนังแท้ CPL ภาพที่ 3" decoding="async">
+        <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/DSCF8463.jpg" alt="ภาพธุรกิจผลิตหนังแท้ CPL ภาพที่ 4" decoding="async">
+        <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2019/10/DSCF8495.jpg" alt="ภาพธุรกิจผลิตหนังแท้ CPL ภาพที่ 5" decoding="async">
+        <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2020/02/DSC05934.jpg" alt="ภาพธุรกิจผลิตหนังแท้ CPL ภาพที่ 6" decoding="async">
+        <div class="proc-squares" aria-hidden="true"></div>
+        <div class="proc-shade"></div>
+        <div class="proc-word" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span></div>
+        <span class="proc-of num">/ 06</span>
+      </div>
+      <div class="proc-line">
+        <div class="track"></div><i data-bar></i><b data-handle></b>
+        <ol><li style="--i:0"><button type="button" aria-label="ภาพที่ 1">01</button></li><li style="--i:1"><button type="button" aria-label="ภาพที่ 2">02</button></li><li style="--i:2"><button type="button" aria-label="ภาพที่ 3">03</button></li><li style="--i:3"><button type="button" aria-label="ภาพที่ 4">04</button></li><li style="--i:4"><button type="button" aria-label="ภาพที่ 5">05</button></li><li style="--i:5"><button type="button" aria-label="ภาพที่ 6">06</button></li></ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="markets">
+  <div class="wrap grid">
+    <div class="loc-side">
+      <div class="head"><p class="label"><span class="num">03</span><i></i><span>ตลาดและการบริการ</span></p>
+        <h2 data-reveal><span>เชื่อมต่อธุรกิจ</span><span>ใกล้ชิดลูกค้าทั่วโลก</span></h2></div>
+      <dl class="rows" data-rise><div><dt>ฐานการผลิต</dt><dd>สมุทรปราการ ประเทศไทย</dd></div><div><dt>ผลิตภัณฑ์หลัก</dt><dd>หนังวัวฟอกสำเร็จรูป</dd></div><div><dt>ตลาดส่งออก</dt><dd>เอเชียและเอเชียตะวันออกเฉียงใต้</dd></div></dl><p class="b-l" data-rise>CPL เป็นหนึ่งในบริษัทฟอกหนังชั้นนำของโลก มีสถานที่ตั้งอยู่จังหวัดสมุทรปราการ ในประเทศไทย ระยะทางห่างจากกรุงเทพมหานคร ประมาณ 20 กิโลเมตร และอยู่ใกล้สนามบินนานาชาติแห่งใหม่ (สนามบินสุวรรณภูมิ) บริษัทฯ มีสำนักงานตัวแทนตั้งอยู่ที่ ประเทศจีน, ประเทศสหรัฐอเมริกา, ประเทศเวียดนาม และประเทศอินโดนีเซีย เพื่อสร้างช่องทางการติดต่อสื่อสารอย่างใกล้ชิดและพัฒนาการบริการหลังการขายให้แก่ลูกค้าได้อย่างต่อเนื่อง</p>
+    </div>
+    <ul class="loc-board" data-board><li class="ptile p"><span class="num">01</span><b>ประเทศไทย</b></li><li class="ptile p"><span class="num">02</span><b>ประเทศจีน</b></li><li class="ptile p"><span class="num">03</span><b>สหรัฐอเมริกา</b></li><li class="ptile p"><span class="num">04</span><b>เวียดนาม</b></li><li class="ptile p"><span class="num">05</span><b>อินโดนีเซีย</b></li><li class="ptile p"><span class="num">06</span><b>รองเท้ากีฬา</b></li><li class="ptile p"><span class="num">07</span><b>รองเท้าลำลอง</b></li><li class="ptile p"><span class="num">08</span><b>กระเป๋าหนัง</b></li><li class="ptile p"><span class="num">09</span><b>ผลิตภัณฑ์เครื่องหนัง</b></li><li class="ptile p"><span class="num">10</span><b>บริการหลังการขาย</b></li><li class="ptile deco" aria-hidden="true"></li><li class="ptile dark"><span class="num">CPL</span><b>ผลิตหนังแท้ครบวงจร</b></li></ul>
+  </div>
+</section>
+
+<section class="dir" id="direction">
+  <svg class="waves" viewBox="0 0 1440 600" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#B39B6B" stroke-width="1" opacity=".55">
+    <path data-draw pathLength="1" d="M0 470C240 410 420 540 720 480S1200 400 1440 470"/>
+    <path data-draw pathLength="1" d="M0 500C240 440 420 570 720 510S1200 430 1440 500"/>
+    <path data-draw pathLength="1" d="M0 530C240 470 420 600 720 540S1200 460 1440 530"/>
+    <path data-draw pathLength="1" d="M0 90C260 150 460 30 720 90S1180 150 1440 80"/>
+    <path data-draw pathLength="1" d="M0 60C260 120 460 0 720 60S1180 120 1440 50"/>
+  </svg>
+  <div class="wrap">
+    <p class="label"><span class="num">04</span><i></i><span>ทิศทางธุรกิจ</span></p>
+    <div class="grid"><h3 data-words>บริษัทฯ มุ่งเน้นการเติบโตให้เป็นที่ไว้วางใจ น่าเชื่อถือ ได้รับการยอมรับจากลูกค้าทั่วโลก โดยสร้างความสัมพันธ์อันดี รักษาฐานลูกค้าเดิม ขยายฐานลูกค้าใหม่ ควบคู่กับความรับผิดชอบต่อสังคมสิ่งแวดล้อม และพัฒนาเพิ่มความมั่งคั่งในระยะยาว ให้แก่ผู้ถือหุ้นต่อไป</h3></div>
+  </div>
+</section>
+
+<section class="sec" id="executives">
+  <div class="wrap">
+    <div class="head"><p class="label"><span class="num">05</span><i></i><span>ผู้บริหาร</span></p>
+      <h2 data-reveal>ผู้บริหารบริษัท</h2></div>
+    <div class="cards" data-cards>
+      <article class="card person"><figure><img src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/suwatchai.png" alt="สุวัชชัย วงษ์เจริญสิน" loading="lazy" decoding="async"></figure><div class="cap"><i></i><p class="t-l">สุวัชชัย วงษ์เจริญสิน</p></div></article>
+<article class="card person"><figure><img src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/puwanat.png" alt="ภูวสิษฏ์ วงษ์เจริญสิน" loading="lazy" decoding="async"></figure><div class="cap"><i></i><p class="t-l">ภูวสิษฏ์ วงษ์เจริญสิน</p></div></article>
+<article class="card person"><figure><img src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/kittichai-1.png" alt="กิติชัย วงษ์เจริญสิน" loading="lazy" decoding="async"></figure><div class="cap"><i></i><p class="t-l">กิติชัย วงษ์เจริญสิน</p></div></article>
+      <article class="card member">
+        <div><span class="mk"><img src="https://csgok.sfinsulations.com/wp-content/uploads/2019/06/cs-logo-1.png" alt="" loading="lazy"></span>
+          <h3>สมาชิก<span class="nw">กลุ่มเจริญสิน</span></h3></div>
+        <div><p class="t-l">สร้างคุณค่า เติบโตอย่างมั่นคง</p>
+          <p class="en" lang="en">Building value through trust, driving growth across generations.</p></div>
+        <svg viewBox="0 0 440 300" preserveAspectRatio="none" aria-hidden="true" fill="none" stroke="#B39B6B" stroke-width="1">
+          <path data-draw pathLength="1" d="M0 150C80 110 150 200 220 160S360 110 440 150"/>
+          <path data-draw pathLength="1" d="M0 180C80 140 150 230 220 190S360 140 440 180"/>
+          <path data-draw pathLength="1" d="M0 210C80 170 150 260 220 220S360 170 440 210"/>
+          <path data-draw pathLength="1" d="M0 240C80 200 150 290 220 250S360 200 440 240"/>
+        </svg>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot" id="contact" data-foot>
+  <img class="foot-bg" data-foot-bg src="https://csgok.sfinsulations.com/wp-content/uploads/2020/02/DSC05934.jpg" alt="" loading="lazy">
+  <div class="foot-shade"></div>
+  <div class="foot-card">
+    <div>
+      <p class="label"><span class="num">06</span><i></i><span>ติดต่อเรา</span></p>
+      <h2 data-reveal><span>บริษัท ซีพีแอล กรุ๊ป</span><span>จำกัด (มหาชน)</span></h2>
+      <p class="member-line">สมาชิกกลุ่มเจริญสิน</p>
+      <div class="btns">
+        <a class="plate" href="https://www.cpl.co.th/" target="_blank" rel="noopener"><span class="plate-t"><span><b>เยี่ยมชมเว็บไซต์</b><b aria-hidden="true">เยี่ยมชมเว็บไซต์</b></span></span><span class="plate-a"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></span></a>
+        <a class="plate ghost" href="tel:+6627095633"><span class="plate-t"><span><b class="num">+66 2709 5633</b><b class="num" aria-hidden="true">+66 2709 5633</b></span></span><span class="plate-a"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 8h11M9 3.5 13.5 8 9 12.5"/></svg></span></a>
+      </div>
+    </div>
+    <dl class="rows foot-rows" data-rise>
+      <div><dt>ที่อยู่</dt><dd>700 หมู่ 6 ถ.สุขุมวิท ต.บางปูใหม่ อ.เมือง จ.สมุทรปราการ 10280</dd></div>
+      <div><dt>โทรศัพท์</dt><dd><a class="num" href="tel:+6627095633">+66 2709 5633</a><br><a class="num" href="tel:+6622592680">+66 2259 2680</a></dd></div>
+      <div><dt>เว็บไซต์</dt><dd><a href="https://www.cpl.co.th/" target="_blank" rel="noopener" lang="en">www.cpl.co.th</a></dd></div>
+    </dl>
+  </div>
+  <div class="foot-base"><span>บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)</span><span>ธุรกิจผลิตหนังแท้</span><span>สมาชิกกลุ่มเจริญสิน</span></div>
+</footer>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+<script>
+/* 4. PAGE RUNTIME: ท่าเคลื่อนไหวแบบโมดูลสี่เหลี่ยม (GSAP 3.15 + ScrollTrigger + Lenis 1.3.26) */
+(function () {
+"use strict";
+var root = document.documentElement;
+var $ = function (s, c) { return (c || document).querySelector(s); };
+var $$ = function (s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
+var pre = $("#csa-pre");
+var gsap = window.gsap, ScrollTrigger = window.ScrollTrigger, Lenis = window.Lenis;
+if (!gsap || !ScrollTrigger) {
+  if (pre) pre.style.display = "none";
+  window.__csaFail("https://cdn.jsdelivr.net/npm/gsap@3.15.0", "ไลบรารีแอนิเมชัน");
+  return;
+}
+try {
+
+var REDUCE = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+var TOUCH = window.matchMedia("(hover: none), (pointer: coarse)").matches;
+var EASE_ENTER = "csaEnter", EASE_SCROLL = "csaScroll";
+var bezier = function (x1, y1, x2, y2) {
+  var sample = function (t, a, b) { return 3 * a * t * Math.pow(1 - t, 2) + 3 * b * t * t * (1 - t) + t * t * t; };
+  return function (x) {
+    var lo = 0, hi = 1;
+    for (var i = 0; i < 24; i++) { var mid = (lo + hi) / 2; if (sample(mid, x1, x2) < x) lo = mid; else hi = mid; }
+    return sample((lo + hi) / 2, y1, y2);
+  };
+};
+gsap.registerPlugin(ScrollTrigger);
+gsap.config({ nullTargetWarn: false });
+gsap.registerEase(EASE_ENTER, bezier(0.22, 1, 0.36, 1));
+gsap.registerEase(EASE_SCROLL, bezier(0.65, 0, 0.35, 1));
+// 200 hover, 300 link, 400 small, 600 appear, 800 large; สั้นลง 20 % ที่จอ ≤ 1024 หรือจอสัมผัส
+var d = function (ms) { return (ms / 1000) * (TOUCH || window.innerWidth <= 1024 ? 0.8 : 1); };
+var cols = function () { return parseInt(getComputedStyle(root).getPropertyValue("--cols"), 10) || 12; };
+var fmt = function (n) { return Math.round(n).toLocaleString("en-US"); };
+
+// Lenis: lerp .1, anchors glide
+var lenis = null;
+if (Lenis && !REDUCE) {
+  lenis = new Lenis({ smoothWheel: true, lerp: 0.1, anchors: true });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add(function (t) { lenis.raf(t * 1000); });
+  gsap.ticker.lagSmoothing(0);
+}
+
+// plate buttons: ความกว้างป้ายสำหรับท่าสลับที่
+var measurePlates = function () {
+  $$(".plate").forEach(function (p) { p.style.setProperty("--tw", $(".plate-t", p).offsetWidth + "px"); });
+};
+
+// ---------------------------------------------------------------------------
+// text reveal: หัวข้อเปิดผ่านช่องสี่เหลี่ยมขนาดครึ่งบรรทัด (700 ms, clip-path: path())
+// ---------------------------------------------------------------------------
+var OPEN_MS = 700, BLEED = 4;
+var scatter97 = function (n) { var v = Math.sin(n * 12.9898) * 43758.5453; return v - Math.floor(v); };
+var hideHeading = function (el) { el.style.clipPath = "inset(50%)"; };
+var revealHeading = function (el) {
+  var range = document.createRange();
+  range.selectNodeContents(el);
+  var box = el.getBoundingClientRect(), text = range.getBoundingClientRect();
+  var size = Math.max(8, Math.round(parseFloat(getComputedStyle(el).lineHeight) / 2));
+  var squares = [], left = text.left - box.left - BLEED, top = text.top - box.top - BLEED;
+  for (var y = top, row = 0; y < top + text.height + BLEED * 2; y += size, row++) {
+    for (var x = left, col = 0; x < left + text.width + BLEED * 2; x += size, col++) {
+      squares.push({ d: "M" + x + " " + y + "h" + (size + 1) + "v" + (size + 1) + "h" + -(size + 1) + "z", at: scatter97(row * 97 + col + 1) });
+    }
+  }
+  squares.sort(function (a, b) { return a.at - b.at; });
+  var shown = 0, path = "", progress = { value: 0 };
+  return gsap.to(progress, {
+    value: 1, duration: d(OPEN_MS), ease: "none",
+    onUpdate: function () {
+      var count = Math.ceil(progress.value * squares.length);
+      if (count === shown) return;
+      for (; shown < count; shown++) path += squares[shown].d;
+      el.style.clipPath = 'path("' + path + '")';
+    },
+    onComplete: function () { el.style.removeProperty("clip-path"); }
+  });
+};
+
+// ตัวเลขนับขึ้นจาก 0 แล้วหยุดที่ค่าจริงจากต้นฉบับ
+var countUp = function (el, ms) {
+  var to = Number(el.dataset.count), o = { v: 0 };
+  return gsap.to(o, {
+    v: to, duration: d(ms || 1200), ease: "power2.out",
+    onStart: function () { el.textContent = "0"; },
+    onUpdate: function () { el.textContent = fmt(o.v); },
+    onComplete: function () { el.textContent = fmt(to); }
+  });
+};
+
+// ---------------------------------------------------------------------------
+// header: วางบนภาพเหนือ hero; พ้น hero เป็นพื้นทึบ ซ่อนเมื่อเลื่อนลง กลับมาเมื่อเลื่อนขึ้น (300)
+// ---------------------------------------------------------------------------
+var header = $("[data-hdr]"), heroEl = $("[data-hero]");
+(function () {
+  var shown = true, last = window.scrollY;
+  var show = function (on) {
+    if (on === shown) return;
+    shown = on;
+    gsap.to(header, { yPercent: on || REDUCE ? 0 : -100, autoAlpha: on ? 1 : 0, duration: d(REDUCE ? 200 : 300), ease: EASE_ENTER, overwrite: "auto" });
+  };
+  var check = function () {
+    var y = window.scrollY;
+    var over = heroEl.getBoundingClientRect().bottom > header.offsetHeight;
+    header.toggleAttribute("data-solid", !over);
+    if (over) show(true); else if (Math.abs(y - last) > 2) show(y < last);
+    if (Math.abs(y - last) > 2) last = y;
+  };
+  check();
+  window.addEventListener("scroll", check, { passive: true });
+  window.addEventListener("resize", check);
+})();
+
+// ---------------------------------------------------------------------------
+// hero: ทางเข้า, พารัลแลกซ์ภาพ, กระเบื้องแก้วยกตัวตามเมาส์, ละลายเป็นโมดูลสีพื้นเมื่อเลื่อน
+// ---------------------------------------------------------------------------
+var LIFT = 6, LIFT_RADIUS = 1.5, LIGHTEN = 0.4, PHOTO_ZOOM = 1.08, PARALLAX = 0.1;
+var RISE_PACE = 1.05, RISE_FADE_MS = 300, RISE_SCATTER = 1.6, HELD_AT = 0.3, COUNT_UP_MS = 1200;
+var heroTl = null;
+(function () {
+  var q = gsap.utils.selector(heroEl);
+  var h1 = q("[data-hero-h1]")[0];
+  if (REDUCE) { heroTl = gsap.timeline({ paused: true }).from([header, h1].concat(q("[data-strip]")), { opacity: 0, duration: 0.2 }); return; }
+  heroTl = gsap.timeline({ paused: true });
+  heroTl.from(header, { opacity: 0, duration: d(400) }, 0);
+  hideHeading(h1);
+  heroTl.add(function () { revealHeading(h1); }, 0);
+  var tiles = q(".tile").filter(function (t) { return t.offsetParent; })
+    .sort(function (a, b) { return b.getBoundingClientRect().top - a.getBoundingClientRect().top; });
+  heroTl.from(tiles, { y: 8, opacity: 0, duration: d(400), ease: EASE_ENTER, stagger: 0.04, clearProps: "transform,opacity" }, 0);
+  heroTl.add(countUp(q("[data-hero-count]")[0], COUNT_UP_MS), 0.2);
+
+  gsap.to(q("[data-hero-photo]"), { scale: PHOTO_ZOOM, yPercent: PARALLAX * 100, ease: "none",
+    scrollTrigger: { trigger: heroEl, start: "top top", end: "bottom top", scrub: true } });
+
+  // the rise
+  var layer = q("[data-rise-layer]")[0], strip = q("[data-strip]")[0], cells = [], builtFor = "";
+  var scatterRise = function (seed) { var x = Math.sin(seed * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+  var buildRise = function () {
+    var n = cols(), size = heroEl.offsetWidth / n, rows = Math.ceil(heroEl.offsetHeight / size);
+    layer.replaceChildren();
+    layer.style.gridTemplateRows = "repeat(" + rows + ", " + size + "px)";
+    cells = [];
+    for (var r = 0; r < rows; r++) for (var k = 0; k < n; k++) {
+      var el = document.createElement("i");
+      el.style.gridRow = String(rows - r);
+      el.style.gridColumn = String(k + 1);
+      layer.append(el);
+      cells.push({ el: el, at: (r + scatterRise(k * 13 + r * 7) * RISE_SCATTER) / (rows + RISE_SCATTER), on: false });
+    }
+    var held = $$("[data-held]", strip).filter(function (t) { return t.offsetParent; }).map(function (t) { return t.getBoundingClientRect(); });
+    cells.forEach(function (cell) {
+      var b = cell.el.getBoundingClientRect(), x = b.left + b.width / 2, y = b.top + b.height / 2;
+      if (held.some(function (t) { return x > t.left && x < t.right && y > t.top && y < t.bottom; })) cell.at = Math.max(cell.at, HELD_AT);
+    });
+  };
+  var paint = function (progress, instant) {
+    cells.forEach(function (cell) {
+      var on = progress >= cell.at * RISE_PACE;
+      if (on === cell.on) return;
+      cell.on = on;
+      if (instant) gsap.set(cell.el, { opacity: on ? 1 : 0, overwrite: true });
+      else gsap.to(cell.el, { opacity: on ? 1 : 0, duration: d(RISE_FADE_MS), ease: EASE_ENTER, overwrite: true });
+    });
+  };
+  var build = function (progress) {
+    var size = heroEl.offsetWidth + "x" + heroEl.offsetHeight;
+    if (size !== builtFor) { builtFor = size; buildRise(); }
+    paint(progress, true);
+  };
+  var riseTrigger = ScrollTrigger.create({ trigger: heroEl, start: "top top", end: "bottom top",
+    onUpdate: function (self) { paint(self.progress); },
+    onRefresh: function (self) { build(self.progress); } });
+  build(riseTrigger.progress);
+
+  // หญ้าในสายลม: กระเบื้องแก้วในรัศมี 1.5 โมดูลจากเมาส์ยกตัว 6 px
+  if (TOUCH || window.innerWidth <= 1024) return;
+  var glass = q(".tile.glass").map(function (t) { return { el: t, light: t.firstElementChild, up: false }; });
+  var lift = function (x, y) {
+    var r = (heroEl.offsetWidth / cols()) * LIFT_RADIUS;
+    glass.forEach(function (g) {
+      var b = g.el.getBoundingClientRect();
+      var up = x !== null && Math.hypot(b.left + b.width / 2 - x, b.top + b.height / 2 - y) < r;
+      if (up === g.up) return;
+      g.up = up;
+      gsap.to(g.el, { y: up ? -LIFT : 0, duration: d(400), ease: EASE_ENTER, overwrite: "auto" });
+      gsap.to(g.light, { opacity: up ? LIGHTEN : 0, duration: d(400), ease: EASE_ENTER, overwrite: "auto" });
+    });
+  };
+  heroEl.addEventListener("pointermove", function (e) { lift(e.clientX, e.clientY); });
+  heroEl.addEventListener("pointerleave", function () { lift(null, null); });
+})();
+
+// ---------------------------------------------------------------------------
+// preloader: โมดูลสีพื้นหายทีละช่องตามความคืบหน้าจริง กระเบื้องเข้มมุมขวานับ 0 ถึง 100
+// ---------------------------------------------------------------------------
+(function () {
+  var SQUARE_MS = 200, STAGGER_S = 0.03, MAX_WAIT_MS = 6000;
+  var finish = function () { pre.style.display = "none"; heroTl.play(); };
+  var n = cols(), size = root.clientWidth / n, rows = Math.min(18, Math.ceil(window.innerHeight / size));
+  var frag = document.createDocumentFragment();
+  for (var i = 0; i < n * rows; i++) frag.append(document.createElement("i"));
+  pre.prepend(frag);
+  pre.classList.add("built");
+  var squares = gsap.utils.shuffle($$("i", pre));
+  var counter = $("[data-pre-counter]", pre), count = $("[data-pre-count]", pre);
+  var t0 = performance.now();
+  var progress = function () {
+    if (performance.now() - t0 > MAX_WAIT_MS) return 1;
+    var images = Array.prototype.filter.call(document.images, function (img) { return img.loading !== "lazy" && img.src; });
+    var done = images.filter(function (img) { return img.complete; }).length;
+    return (done + (document.readyState === "complete" ? 1 : 0)) / (images.length + 1);
+  };
+  var gone = 0, shown = 0;
+  var end = function () {
+    if (REDUCE) { gsap.to(pre, { opacity: 0, duration: 0.2, onComplete: finish }); return; }
+    gsap.timeline({ onComplete: finish })
+      .to(squares.slice(gone), { opacity: 0, duration: d(SQUARE_MS), ease: EASE_ENTER, stagger: STAGGER_S / 2 })
+      .to(counter, { opacity: 0, duration: d(SQUARE_MS) }, "<");
+  };
+  var tick = function () {
+    var gap = progress() * 100 - shown;
+    if (gap > 0) shown = Math.min(100, shown + Math.max(1, Math.round(gap * 0.08)));
+    count.textContent = String(shown);
+    if (!REDUCE) {
+      var target = Math.floor((shown / 100) * squares.length);
+      if (target > gone) {
+        gsap.to(squares.slice(gone, target), { opacity: 0, duration: d(SQUARE_MS), ease: EASE_ENTER, stagger: STAGGER_S });
+        gone = target;
+      }
+    }
+    if (shown >= 100) return end();
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+})();
+
+// ---------------------------------------------------------------------------
+// หัวข้อส่วนเปิดผ่านช่องสี่เหลี่ยม; เนื้อความลอยขึ้น 16 px แล้วจางเข้า (600)
+// ---------------------------------------------------------------------------
+if (!REDUCE) {
+  $$("[data-reveal]").forEach(function (h) {
+    hideHeading(h);
+    ScrollTrigger.create({ trigger: h, start: "top 88%", once: true, onEnter: function () { revealHeading(h); } });
+  });
+  $$("[data-rise]").forEach(function (el) {
+    gsap.from(el, { y: 16, opacity: 0, duration: d(600), ease: EASE_ENTER, scrollTrigger: { trigger: el, start: "top 88%", once: true } });
+  });
+  $$("main [data-count]:not([data-hero-count])").forEach(function (el) {
+    var final = el.textContent;
+    ScrollTrigger.create({ trigger: el, start: "top 90%", once: true, onEnter: function () { countUp(el, 1200).eventCallback("onComplete", function () { el.textContent = final; }); } });
+  });
+  $$("svg").forEach(function (svg) {
+    var paths = $$("[data-draw]", svg);
+    if (!paths.length) return;
+    gsap.set(paths, { strokeDasharray: 1, strokeDashoffset: 1 });
+    gsap.to(paths, { strokeDashoffset: 0, duration: d(800) * 2, ease: EASE_SCROLL, stagger: 0.12, scrollTrigger: { trigger: svg, start: "top 60%", once: true } });
+  });
+}
+
+// ---------------------------------------------------------------------------
+// 04 ประโยคเดียว: คำเริ่มที่ความทึบ 0.18 แล้วเข้มขึ้นทีละคำตามการเลื่อน (scrub)
+// ---------------------------------------------------------------------------
+(function () {
+  var el = $("[data-words]");
+  if (!el || REDUCE) return;
+  var text = el.textContent, parts = [];
+  if (window.Intl && Intl.Segmenter) {
+    var seg = new Intl.Segmenter("th", { granularity: "word" });
+    Array.from(seg.segment(text)).forEach(function (s) { parts.push(s.segment); });
+  } else parts = text.split(/(\s+)/);
+  el.setAttribute("aria-label", text);
+  el.innerHTML = "";
+  var words = [];
+  parts.forEach(function (p) {
+    if (!p) return;
+    if (/^\s+$/.test(p)) { el.append(document.createTextNode(p)); return; }
+    var s = document.createElement("span");
+    s.className = "w"; s.setAttribute("aria-hidden", "true"); s.textContent = p;
+    el.append(s); words.push(s);
+  });
+  gsap.fromTo(words, { opacity: 0.18 }, { opacity: 1, ease: "none", stagger: 0.1,
+    scrollTrigger: { trigger: el, start: "top 75%", end: "bottom 50%", scrub: true } });
+})();
+
+// ---------------------------------------------------------------------------
+// 02 กล่องภาพปักหมุด 400 %: แต่ละภาพได้ช่วงเท่ากัน ภาพถัดไปมาเป็นโมดูลสี่เหลี่ยม
+// ---------------------------------------------------------------------------
+(function () {
+  var sec = $("[data-proc]");
+  if (!sec) return;
+  var box = $(".proc-box", sec), grid = $(".proc-squares", sec), pinEl = $(".proc-pin", sec);
+  var photos = $$(".proc-photo", sec), words = $$(".proc-word span", sec), buttons = $$(".proc-line button", sec);
+  var bar = $("[data-bar]", sec), handle = $("[data-handle]", sec);
+  var N = photos.length, current = 0, tl = null, squares = [], size = 0;
+  var TILE_OPACITY = 0.5, TILE_LIFE = 600, SQUARE_FADE = 400, LANDING = 900, WORD_MS = 600, PIN_MARGIN = 20;
+
+  // ภาพโหลดและ decode เมื่อบล็อกอยู่ห่างหนึ่งหน้าจอ
+  var load = function () {
+    photos.forEach(function (p) {
+      if (p.getAttribute("src") || !p.dataset.src) return;
+      p.src = p.dataset.src;
+      if (p.decode) p.decode().catch(function () {});
+    });
+  };
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver(function (entries, io) { if (entries[0].isIntersecting) { load(); io.disconnect(); } }, { rootMargin: "100% 0px" }).observe(sec);
+  } else load();
+
+  var build = function () {
+    if (tl) tl.progress(1).kill();
+    var W = box.clientWidth, H = box.clientHeight, n = window.innerWidth <= 560 ? 4 : 12;
+    size = W / n;
+    var rows = Math.ceil(H / size), html = "";
+    for (var r = 0; r < rows; r++) for (var c = 0; c < n; c++) {
+      html += '<div class="sq" data-c="' + c + '" data-r="' + r + '" style="left:' + c * size + "px;top:" + r * size + "px;width:" + (size + 0.6) + "px;height:" + (size + 0.6) + 'px"><span></span></div>';
+    }
+    grid.innerHTML = html;
+    squares = $$(".sq", grid);
+  };
+  // แต่ละช่องแสดงส่วนของภาพถัดไปในกรอบเดียวกับ object-fit: cover
+  var paint = function (stage) {
+    var img = photos[stage];
+    if (!img.naturalWidth || !squares.length) return false;
+    var W = box.clientWidth, H = box.clientHeight, s = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+    var bw = img.naturalWidth * s, bh = img.naturalHeight * s, ox = (W - bw) / 2, oy = (H - bh) / 2;
+    squares.forEach(function (q) {
+      q.style.backgroundImage = 'url("' + img.currentSrc + '")';
+      q.style.backgroundSize = bw + "px " + bh + "px";
+      q.style.backgroundPosition = (ox - q.dataset.c * size) + "px " + (oy - q.dataset.r * size) + "px";
+    });
+    return true;
+  };
+  var setStage = function (next) {
+    buttons.forEach(function (b, i) { if (i === next) b.setAttribute("aria-current", "step"); else b.removeAttribute("aria-current"); });
+  };
+  var setProgress = function (t) {
+    bar.style.width = "calc(8px + (100% - 16px) * " + t + ")";
+    handle.style.left = "calc((100% - 16px) * " + t + ")";
+  };
+  var goTo = function (next) {
+    if (next === current) return;
+    var from = current, dir = next > from ? 1 : -1;
+    current = next;
+    setStage(next);
+    if (tl) tl.progress(1).kill();
+    tl = gsap.timeline();
+    tl.to(words[from], { yPercent: -100 * dir, autoAlpha: 0, duration: d(WORD_MS), ease: EASE_SCROLL }, 0)
+      .fromTo(words[next], { yPercent: 100 * dir, autoAlpha: 0 }, { yPercent: 0, autoAlpha: 1, duration: d(WORD_MS), ease: EASE_SCROLL }, 0);
+    if (REDUCE || !paint(next)) {
+      tl.to(photos[from], { autoAlpha: 0, duration: 0.2 }, 0).to(photos[next], { autoAlpha: 1, duration: 0.2 }, 0);
+      return;
+    }
+    squares.forEach(function (q) {
+      var tile = q.firstChild, at = d(LANDING) * Math.random();
+      tl.set(tile, { opacity: TILE_OPACITY }, 0)
+        .fromTo(q, { autoAlpha: 0 }, { autoAlpha: 1, duration: d(SQUARE_FADE), ease: EASE_ENTER, immediateRender: false }, at)
+        .to(tile, { opacity: 0, duration: d(TILE_LIFE), ease: EASE_ENTER }, at);
+    });
+    var landed = d(LANDING + Math.max(TILE_LIFE, SQUARE_FADE));
+    tl.set(photos[next], { autoAlpha: 1 }, landed).set(photos[from], { autoAlpha: 0 }, landed).set(squares, { autoAlpha: 0 }, landed);
+  };
+
+  setStage(0); setProgress(0); build();
+  var jump = function (i) { goTo(i); setProgress(i / (N - 1)); };
+  if (!REDUCE && window.innerHeight >= 560) {
+    var st = ScrollTrigger.create({
+      trigger: pinEl, pin: true, anticipatePin: 1,
+      start: function () { return "top top+=" + (header.offsetHeight + PIN_MARGIN); },
+      end: "+=400%",
+      onUpdate: function (self) {
+        goTo(Math.min(N - 1, Math.floor(self.progress * N)));
+        setProgress(Math.min(1, (self.progress * N) / (N - 1)));
+      },
+      onRefresh: build
+    });
+    jump = function (i) {
+      var y = st.start + (st.end - st.start) * ((i + 0.3) / N);
+      if (lenis) lenis.scrollTo(y); else window.scrollTo({ top: y, behavior: "smooth" });
+    };
+  } else window.addEventListener("resize", build);
+  buttons.forEach(function (b, i) { b.addEventListener("click", function () { jump(i); }); });
+})();
+
+// ---------------------------------------------------------------------------
+// 03 กระดานจังหวัดปรากฏทีละช่องแบบสุ่ม; 05 การ์ดลอยขึ้น 40 px ซ้ายไปขวา (600, stagger 80)
+// ---------------------------------------------------------------------------
+if (!REDUCE) {
+  var board = $("[data-board]");
+  if (board) gsap.from(gsap.utils.shuffle($$(".ptile", board)), { opacity: 0, duration: d(400), ease: EASE_ENTER, stagger: 0.03, clearProps: "opacity",
+    scrollTrigger: { trigger: board, start: "top 75%", once: true } });
+  var cards = $("[data-cards]");
+  if (cards) gsap.from($$(".card", cards), { y: 40, opacity: 0, duration: d(600), ease: EASE_ENTER, stagger: 0.08,
+    scrollTrigger: { trigger: cards, start: "top 80%", once: true } });
+  // footer: ภาพพื้นหลังเคลื่อนช้ากว่าหน้า 15 %
+  var foot = $("[data-foot]");
+  if (foot) gsap.fromTo($("[data-foot-bg]", foot), { yPercent: -15 }, { yPercent: 0, ease: "none",
+    scrollTrigger: { trigger: foot, start: "top bottom", end: "bottom bottom", scrub: true } });
+}
+
+// ---------------------------------------------------------------------------
+// cursor: สี่เหลี่ยม 8 px ตามเมาส์ (lerp 0.5); บน [data-cursor] ขยายเป็น 56 พร้อมป้าย
+// ---------------------------------------------------------------------------
+(function () {
+  var cur = $("#csa-cur");
+  if (!cur || TOUCH || REDUCE || window.innerWidth <= 1024) return;
+  var SIZE = 8, BIG = 56, LERP = 0.5, x = 0, y = 0, tx = 0, ty = 0, big = false;
+  var setX = gsap.quickSetter(cur, "x", "px"), setY = gsap.quickSetter(cur, "y", "px");
+  window.addEventListener("pointermove", function (e) {
+    if (!cur.classList.contains("on")) { cur.classList.add("on"); x = e.clientX; y = e.clientY; }
+    tx = e.clientX; ty = e.clientY;
+    var host = e.target.closest ? e.target.closest("[data-cursor]") : null;
+    if (!!host === big) return;
+    big = !!host;
+    cur.textContent = big ? host.dataset.cursor : "";
+    gsap.to(cur, { width: big ? BIG : SIZE, height: big ? BIG : SIZE, marginLeft: -(big ? BIG : SIZE) / 2, marginTop: -(big ? BIG : SIZE) / 2, duration: d(200), ease: EASE_ENTER });
+  }, { passive: true });
+  gsap.ticker.add(function () { x += (tx - x) * LERP; y += (ty - y) * LERP; setX(x); setY(y); });
+})();
+
+measurePlates();
+window.addEventListener("resize", measurePlates);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measurePlates(); ScrollTrigger.refresh(); });
+window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+
+} catch (err) {
+  if (pre) pre.style.display = "none";
+  if (window.console) console.error("[csa]", err);
+}
+})();
+</script>
+</body>
+</html>
+
