@@ -284,8 +284,253 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
 @media (hover:hover) and (pointer:fine) and (min-width:1025px){#csa-cur.on{display:grid}}
 
 @media (prefers-reduced-motion:reduce){#csa *{transition-duration:.01ms!important}}
+
+/* Viewport sections: center the content and let longer sections grow. */
+#csa {
+  --section-space: clamp(36px, 7svh, 96px);
+  --section-width: 1440px;
+}
+
+#csa :is(#about, #projects, #locations, #direction, #executives) {
+  min-height: 100svh;
+  display: grid;
+  align-items: center;
+  padding-block: var(--section-space);
+  scroll-margin-top: var(--hd);
+}
+#csa :is(#about, #projects, #locations, #direction, #executives) > .wrap {
+  max-width: var(--section-width);
+}
+#csa :is(#about, #projects, #locations, #executives) .head {
+  margin-bottom: clamp(24px, 4svh, 48px);
+}
+#csa #about .about-facts {
+  align-self: center;
+}
+#csa #locations > .grid {
+  align-items: center;
+}
+#csa #locations .loc-board {
+  align-self: center;
+}
+#csa #direction {
+  margin-top: 0;
+}
+
+#csa #projects {
+  --project-gutter: clamp(16px, 2.35vw, 36px);
+  --project-top: clamp(18px, 3.25svh, 28px);
+  --project-bottom: clamp(16px, 2.5svh, 24px);
+  align-items: stretch;
+  padding-block: var(--project-top) var(--project-bottom);
+  background: #eae4d9;
+}
+#csa #projects > .wrap {
+  display: grid;
+  max-width: none;
+  padding-inline: var(--project-gutter);
+}
+#csa #projects .proc-pin {
+  display: grid;
+  grid-template-rows: auto minmax(auto, 1fr) auto;
+  padding: 0;
+}
+#csa #projects .proc-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  margin: 0 0 14px;
+  padding: clamp(16px, 1.35vw, 21px);
+  border: 1px solid rgba(255, 255, 255, .66);
+  border-radius: 7px;
+  background: #f9f6ee;
+}
+#csa #projects .proc-head .head {
+  margin: 0;
+}
+#csa #projects .proc-head .label {
+  gap: 10px;
+  font-size: 13px;
+  color: #65543b;
+}
+#csa #projects .proc-head .label .num {
+  font-size: 22px;
+  color: #8b7348;
+}
+#csa #projects .proc-head .label i {
+  width: 26px;
+}
+#csa #projects .proc-head h2 {
+  margin-top: 12px;
+  font-size: clamp(28px, 2.1vw, 32px);
+  font-weight: 500;
+  line-height: 1.18;
+}
+#csa #projects .proc-lead {
+  margin: 0;
+  padding-top: 8px;
+  border-top: 1px solid rgba(173, 149, 102, .42);
+  color: #443c30;
+  font-size: 15px;
+  line-height: 1.5;
+}
+#csa #projects .proc-box {
+  height: auto;
+  min-height: clamp(230px, 58vw, 470px);
+  border-radius: 4px;
+}
+#csa #projects .proc-photo {
+  object-position: center top;
+}
+#csa #projects .proc-shade {
+  height: 36%;
+  background: linear-gradient(transparent, rgba(31, 31, 31, .58));
+}
+#csa #projects .proc-count {
+  position: absolute;
+  right: clamp(16px, 2.65vw, 40px);
+  bottom: clamp(14px, 3svh, 34px);
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+#csa #projects .proc-word {
+  position: relative;
+  inset: auto;
+  width: 1.5em;
+  font-size: clamp(34px, 3.85vw, 60px);
+}
+#csa #projects .proc-word span {
+  inset: 0 0 auto auto;
+}
+#csa #projects .proc-of {
+  position: static;
+  font-size: clamp(16px, 1.4vw, 22px);
+}
+#csa #projects .proc-line {
+  margin: 14px clamp(8px, 1.2vw, 18px) 0;
+  height: 42px;
+}
+
+@media (min-width: 900px) and (min-height: 620px) {
+  #csa #projects .proc-pin {
+    grid-template-rows: minmax(auto, 1fr) auto;
+  }
+  #csa #projects .proc-head,
+  #csa #projects .proc-box {
+    grid-area: 1 / 1;
+  }
+  #csa #projects .proc-head {
+    align-self: start;
+    justify-self: start;
+    width: clamp(324px, 24.4vw, 374px);
+    margin: var(--panel-top, 28px) 0 18px clamp(20px, 1.83vw, 28px);
+    background: rgba(249, 246, 238, .95);
+    box-shadow: 0 2px 14px rgba(37, 34, 30, .09);
+  }
+  #csa #projects .proc-lead {
+    font-size: 14.5px;
+    line-height: 1.42;
+  }
+  #csa #projects .proc-box {
+    min-height: clamp(460px, 70svh, 700px);
+  }
+  #csa #projects .proc-line {
+    grid-row: 2;
+  }
+}
+
+#csa #executives .card {
+  height: clamp(360px, 60svh, 620px);
+}
+#csa #contact {
+  min-height: 100svh;
+  margin-top: 0;
+  padding-block: var(--section-space) clamp(24px, 4svh, 48px);
+  scroll-margin-top: var(--hd);
+}
+#csa #contact .foot-card {
+  max-width: calc(var(--section-width) - 2 * var(--m));
+  margin-block: auto;
+}
+#csa #contact .foot-base {
+  max-width: calc(var(--section-width) - 2 * var(--m));
+}
+
+@media (hover: hover) and (pointer: fine) and (min-width: 1200px) and (min-height: 760px) {
+  #csa #projects {
+    --panel-top: max(28px, calc(var(--hd) + 12px - var(--project-top)));
+    scroll-margin-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  #csa #executives .card {
+    flex-basis: min(82%, 320px);
+  }
+  #csa #contact .foot-card {
+    gap: 24px;
+    padding: clamp(16px, 5vw, 32px);
+  }
+}
 </style>
 <noscript><style>#csa-pre{display:none}</style></noscript>
+
+<style id="csa-backgrounds">
+:root {
+  --cream: #F7F1E7;
+  --cream-card: rgba(247, 241, 231, .95);
+  --white-card: rgba(255, 255, 255, .94);
+  --gold-30: rgba(179, 155, 107, .3);
+  --beige-tint: rgba(217, 203, 170, .45);
+  --gold-tint: rgba(179, 155, 107, .24);
+  --floating-border: rgba(204, 163, 105, .4);
+  --dark-border: rgba(255, 255, 255, .2);
+  --photo-film: linear-gradient(to top, rgba(31, 31, 31, .9) 0%, rgba(31, 31, 31, .62) 58%, transparent 100%);
+}
+
+body, #csa, #csa section, #csa-pre, #csa-pre i, #csa .rise i,
+#csa .proc-squares .sq span, #csa #projects, #csa #direction {
+  background-color: var(--cream);
+}
+
+#csa .hdr, #csa .hdr[data-solid] {
+  background: rgba(255, 255, 255, .25);
+  color: var(--charcoal);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+#csa .hdr::before { display: none; }
+#csa .hdr .nav a, #csa .hdr .brand small {
+  text-shadow: 0 1px 3px rgba(255, 255, 255, .65);
+}
+#csa .brand-tile, #csa .card.member .mk { background: var(--white-card); }
+
+#csa .rows:where(:not(.foot-rows)) > div, #csa .rows:where(:not(.foot-rows)) > div:last-child { border-color: var(--gold-40); }
+#csa .proc-line .track { background-color: var(--gold-30); }
+#csa .proc-shade, #csa #projects .proc-shade { background: var(--photo-film); }
+#csa #projects .proc-head {
+  background: var(--cream-card);
+  border-color: var(--floating-border);
+}
+#csa #projects .proc-lead { border-color: var(--gold-40); }
+
+#csa .ptile {
+  background: var(--beige-tint);
+  box-shadow: inset 0 0 0 1px var(--gold-40);
+}
+#csa .ptile:nth-child(even) { background: var(--white-card); }
+#csa .ptile.deco { background: var(--gold-tint); }
+#csa .ptile.deco svg { stroke: var(--gold); }
+#csa .ptile.dark { background: var(--charcoal); box-shadow: inset 0 0 0 1px var(--dark-border); }
+
+#csa .card.person { background: var(--white-card); border: 1px solid var(--gold-40); }
+#csa .card.person figure { background: var(--cream); }
+#csa .card.member { background: var(--charcoal); border: 1px solid var(--dark-border); }
+</style>
 </head>
 <body>
 <div id="csa">
@@ -313,24 +558,26 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    #csa .asset-hero{display:block;position:relative;width:100%;height:100vh;min-height:700px;overflow:hidden;background:#faf8f5;color:#2d3a2e;font-family:"Helvetica Neue Light","Kanit",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+    #csa .asset-hero{display:block;position:relative;width:100%;height:auto;min-height:100svh;overflow:hidden;background:var(--cream);color:#fff;font-family:"Helvetica Neue Light","Kanit",Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
     #csa .asset-hero .hero-photo{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center bottom;transform:none!important}
-    #csa .asset-hero .asset-hero-content{position:relative;z-index:10;display:flex;flex-direction:column;align-items:flex-start;width:100%;max-width:1280px;margin-inline:auto;padding:112px 24px 0}
-    #csa .asset-hero #asset-hero-title{margin:0;max-width:896px;color:#2d3a2e;font-family:"Helvetica Neue Light","Kanit",Helvetica,Arial,sans-serif;font-size:30px;font-weight:300;line-height:1.05;letter-spacing:-.025em;text-align:left;text-shadow:none;clip-path:none!important}
+    #csa .asset-hero .asset-hero-content{position:relative;z-index:10;display:flex;flex-direction:column;align-items:flex-start;width:100%;max-width:1280px;margin-inline:auto;padding:clamp(calc(var(--hd) + 24px), 19svh, 144px) 24px var(--section-space)}
+    #csa .asset-hero #asset-hero-title{margin:0;max-width:896px;color:#fff;font-family:"Helvetica Neue Light","Kanit",Helvetica,Arial,sans-serif;font-size:30px;font-weight:400;line-height:1.05;letter-spacing:-.025em;text-align:left;text-shadow:0 1px 4px rgba(0,0,0,.35);clip-path:none!important}
     #csa .asset-hero .asset-hero-break{display:none}
     #csa .asset-hero .asset-hero-facts{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:flex-start;width:100%;gap:24px;margin-top:32px}
     #csa .asset-hero .asset-hero-facts>div{display:flex;flex-direction:column;gap:12px;min-width:0}
-    #csa .asset-hero .asset-hero-facts dt{font-family:inherit;font-size:12px;font-weight:300;line-height:1.5;letter-spacing:.04em;color:rgba(45,58,46,.65);text-align:left}
-    #csa .asset-hero .asset-hero-facts dd{margin:0;font-family:inherit;font-size:24px;font-weight:300;line-height:1.2;letter-spacing:-.02em;color:rgba(45,58,46,.8);white-space:nowrap;text-align:left}
+    #csa .asset-hero .asset-hero-facts dt{font-family:inherit;font-size:14px;font-weight:400;line-height:1.5;letter-spacing:.04em;color:#fff;text-align:left}
+    #csa .asset-hero .asset-hero-facts dd{margin:0;font-family:inherit;font-size:24px;font-weight:300;line-height:1.2;letter-spacing:-.02em;color:#fff;white-space:nowrap;text-align:left}
     #csa .asset-hero .asset-hero-facts dd small{margin-left:6px;font:inherit;font-size:14px;letter-spacing:0}
     #csa .asset-hero [data-rise-layer]{display:none!important}
     #csa .asset-hero[data-hero-entered] .asset-hero-animate{animation:asset-hero-fade-up .8s cubic-bezier(.16,1,.3,1) both}
     #csa .asset-hero[data-hero-entered] .asset-hero-stagger-4{animation-delay:360ms}
     #csa .asset-hero[data-hero-entered] .asset-hero-stagger-6{animation-delay:600ms}
     @media(min-width:640px){#csa .asset-hero #asset-hero-title{font-size:36px}#csa .asset-hero .asset-hero-break{display:block}}
-    @media(min-width:768px){#csa .asset-hero .asset-hero-content{padding-top:144px}#csa .asset-hero #asset-hero-title{font-size:48px}#csa .asset-hero .asset-hero-facts{gap:48px;margin-top:40px}}
+    @media(min-width:768px){#csa .asset-hero #asset-hero-title{font-size:48px}#csa .asset-hero .asset-hero-facts{gap:48px;margin-top:40px}}
     @media(min-width:1024px){#csa .asset-hero .asset-hero-content{padding-inline:32px}#csa .asset-hero #asset-hero-title{font-size:60px}#csa .asset-hero .asset-hero-facts{gap:64px}}
     @media(prefers-reduced-motion:reduce){#csa .asset-hero[data-hero-entered] .asset-hero-animate{animation:none}}
+
+    #csa .asset-hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:var(--photo-film)}
   </style>
   <img class="hero-photo" data-hero-photo src="https://csgok.sfinsulations.com/wp-content/uploads/2026/11/banner-main-new01-3-2.webp" alt="" fetchpriority="high">
   <div class="asset-hero-content">
@@ -375,12 +622,12 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
 
 <section class="sec" id="projects" data-proc>
   <div class="wrap">
-    <div class="grid proc-head">
-      <div class="head"><p class="label"><span class="num">02</span><i></i><span>โครงการและชุมชน</span></p>
-        <h2 data-reveal><span>ชุมชนน่าอยู่</span><span>สะอาด และปลอดภัย</span></h2></div>
-      <p class="proc-lead" data-rise>บริษัทฯ ใส่ใจถึงการพัฒนาคุณภาพชีวตที่ดี โดยดูแลโครงการให้เป็นชุมชนน่าอยู่ สะอาด และปลอดภัย พร้อมด้วยสรรพสิ่งอํานวยความสะดวกทุกอย่าง เพื่อการดํารงชีวิตประจําวัน เช่น ร้านค้า ร้านสะดวกซื้อ ที่จอดรถ CCTV รปภ.24 ชม. ฯลฯ นอกจากนี้บรษัทฯ ให้ความสําคัญกับการพัฒนาเทคโนโลยี โดยจัดทํา Mobile Application รองรับการจอง การชําระเงิน การซื้อของ การให้ข้อมูลข่าวสารต่างๆแก่ลูกค้า เพื่อความรวดเร็วสะดวกสบายยิ่งขึ้น</p>
-    </div>
     <div class="proc-pin">
+      <div class="grid proc-head">
+        <div class="head"><p class="label"><span class="num">02</span><i></i><span>โครงการและชุมชน</span></p>
+          <h2 data-reveal><span>ชุมชนน่าอยู่</span><span>สะอาด และปลอดภัย</span></h2></div>
+        <p class="proc-lead" data-rise>บริษัทฯ ใส่ใจถึงการพัฒนาคุณภาพชีวตที่ดี โดยดูแลโครงการให้เป็นชุมชนน่าอยู่ สะอาด และปลอดภัย พร้อมด้วยสรรพสิ่งอํานวยความสะดวกทุกอย่าง เพื่อการดํารงชีวิตประจําวัน เช่น ร้านค้า ร้านสะดวกซื้อ ที่จอดรถ CCTV รปภ.24 ชม. ฯลฯ นอกจากนี้บรษัทฯ ให้ความสําคัญกับการพัฒนาเทคโนโลยี โดยจัดทํา Mobile Application รองรับการจอง การชําระเงิน การซื้อของ การให้ข้อมูลข่าวสารต่างๆแก่ลูกค้า เพื่อความรวดเร็วสะดวกสบายยิ่งขึ้น</p>
+      </div>
       <div class="proc-box" data-cursor="เลื่อน">
         <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/DSC01900.jpg" alt="ภาพโครงการของบริษัท เจริญสิน แอสเสท จำกัด ภาพที่ 1" decoding="async">
         <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/LJYTE8917.jpg" alt="ภาพโครงการของบริษัท เจริญสิน แอสเสท จำกัด ภาพที่ 2" decoding="async">
@@ -392,8 +639,10 @@ body{margin:0;background:var(--neutral);color:var(--charcoal)}
         <img class="proc-photo" data-src="https://csgok.sfinsulations.com/wp-content/uploads/2019/09/IMG_0032-2.jpg" alt="ภาพโครงการของบริษัท เจริญสิน แอสเสท จำกัด ภาพที่ 8" decoding="async">
         <div class="proc-squares" aria-hidden="true"></div>
         <div class="proc-shade"></div>
-        <div class="proc-word" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span></div>
-        <span class="proc-of num">/ 08</span>
+        <div class="proc-count">
+          <div class="proc-word" aria-hidden="true"><span>01</span><span>02</span><span>03</span><span>04</span><span>05</span><span>06</span><span>07</span><span>08</span></div>
+          <span class="proc-of num">/ 08</span>
+        </div>
       </div>
       <div class="proc-line">
         <div class="track"></div><i data-bar></i><b data-handle></b>
@@ -788,11 +1037,11 @@ if (!REDUCE) {
 (function () {
   var sec = $("[data-proc]");
   if (!sec) return;
-  var box = $(".proc-box", sec), grid = $(".proc-squares", sec), pinEl = $(".proc-pin", sec);
+  var box = $(".proc-box", sec), grid = $(".proc-squares", sec);
   var photos = $$(".proc-photo", sec), words = $$(".proc-word span", sec), buttons = $$(".proc-line button", sec);
   var bar = $("[data-bar]", sec), handle = $("[data-handle]", sec);
   var N = photos.length, current = 0, tl = null, squares = [], size = 0;
-  var TILE_OPACITY = 0.5, TILE_LIFE = 600, SQUARE_FADE = 400, LANDING = 900, WORD_MS = 600, PIN_MARGIN = 20;
+  var TILE_OPACITY = 0.5, TILE_LIFE = 600, SQUARE_FADE = 400, LANDING = 900, WORD_MS = 600;
 
   // ภาพโหลดและ decode เมื่อบล็อกอยู่ห่างหนึ่งหน้าจอ
   var load = function () {
@@ -822,11 +1071,12 @@ if (!REDUCE) {
     var img = photos[stage];
     if (!img.naturalWidth || !squares.length) return false;
     var W = box.clientWidth, H = box.clientHeight, s = Math.max(W / img.naturalWidth, H / img.naturalHeight);
-    var bw = img.naturalWidth * s, bh = img.naturalHeight * s, ox = (W - bw) / 2, oy = (H - bh) / 2;
+    // Match the visible image’s center-top crop during tile transitions.
+    var bw = img.naturalWidth * s, bh = img.naturalHeight * s, ox = (W - bw) / 2;
     squares.forEach(function (q) {
       q.style.backgroundImage = 'url("' + img.currentSrc + '")';
       q.style.backgroundSize = bw + "px " + bh + "px";
-      q.style.backgroundPosition = (ox - q.dataset.c * size) + "px " + (oy - q.dataset.r * size) + "px";
+      q.style.backgroundPosition = (ox - q.dataset.c * size) + "px " + (-q.dataset.r * size) + "px";
     });
     return true;
   };
@@ -861,12 +1111,14 @@ if (!REDUCE) {
   };
 
   setStage(0); setProgress(0); build();
-  var jump = function (i) { goTo(i); setProgress(i / (N - 1)); };
-  if (!REDUCE && window.innerHeight >= 560) {
+  var jumpToPhoto = function (i) { goTo(i); setProgress(i / (N - 1)); };
+  var jump = jumpToPhoto;
+  window.addEventListener("resize", build);
+  if (!REDUCE) gsap.matchMedia().add("(hover: hover) and (pointer: fine) and (min-width: 1200px) and (min-height: 760px)", function () {
     var st = ScrollTrigger.create({
-      trigger: pinEl, pin: true, anticipatePin: 1,
-      start: function () { return "top top+=" + (header.offsetHeight + PIN_MARGIN); },
-      end: "+=400%",
+      trigger: sec, pin: true, anticipatePin: 1,
+      start: "top top",
+      end: "+=100%",
       onUpdate: function (self) {
         goTo(Math.min(N - 1, Math.floor(self.progress * N)));
         setProgress(Math.min(1, (self.progress * N) / (N - 1)));
@@ -877,7 +1129,8 @@ if (!REDUCE) {
       var y = st.start + (st.end - st.start) * ((i + 0.3) / N);
       if (lenis) lenis.scrollTo(y); else window.scrollTo({ top: y, behavior: "smooth" });
     };
-  } else window.addEventListener("resize", build);
+    return function () { jump = jumpToPhoto; };
+  });
   buttons.forEach(function (b, i) { b.addEventListener("click", function () { jump(i); }); });
 })();
 
