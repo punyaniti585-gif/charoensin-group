@@ -1,0 +1,1386 @@
+{
+  "schema_version": "1.0",
+  "source": {
+    "url": "https://csgok.sfinsulations.com/",
+    "page_id": 18865,
+    "page_title": "หน้าแรกV1",
+    "language": "th",
+    "exported_at": "2026-11-16T12:02:56.082435+07:00",
+    "page_modified_gmt": "2026-10-07 09:10:44",
+    "source_type": "public_homepage_html_and_embedded_display_data"
+  },
+  "notes": [
+    "ข้อมูลเนื้อหาสำหรับการแสดงผลหน้าแรก แยกเป็นส่วน ไม่ใช่ไฟล์เทมเพลตสำหรับนำเข้า Elementor",
+    "คงข้อความ ลิงก์ รูปภาพ และตัวเลขตามต้นฉบับ รวมข้อความตัวอย่างและลิงก์ example.com ที่ยังมีอยู่",
+    "displayed_text คือข้อความใน HTML ส่วน configured_value คือตัวเลขตั้งต้นที่สคริปต์ใช้ทำแอนิเมชัน ตัวเลขทั้งสองอาจต่างกัน",
+    "เนื้อหาโพสต์ Facebook เก็บเป็นลิงก์ฝัง ไม่ได้ดึงเนื้อหาจากภายใน iframe",
+    "ไม่ได้ใช้เบราว์เซอร์รัน JavaScript เพื่อตรวจสถานะการซ่อนหรือแสดงของทุกองค์ประกอบ"
+  ],
+  "header": {
+    "key": "header",
+    "source_id": null,
+    "source_classes": [
+      "glfw-section",
+      "alignfull",
+      "glfw-header",
+      "csg-header-section",
+      "alignfull"
+    ],
+    "text": "",
+    "headings": [],
+    "paragraphs": [],
+    "links": [
+      {
+        "text": "",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      }
+    ],
+    "images": [
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/02/LogoCSG2359.png",
+        "alt": "Charoensin Group"
+      }
+    ],
+    "media": [],
+    "statistics": [],
+    "background_images": []
+  },
+  "navigation": {
+    "key": "navigation",
+    "source_id": "csgNavPanel",
+    "source_classes": [
+      "csg-nav-panel"
+    ],
+    "text": "หน้าแรก เกี่ยวกับเรา วิสัยทัศน์ พันธกิจ ค่านิยมองค์กร ผู้นำของเรา อัตลักษณ์องค์กร ธุรกิจของเรา ธุรกิจอสังหาริมทรัพย์ บริษัท เจริญสิน แอสเสท จำกัด บริษัท เจริญสิน พัฒนา จำกัด ธุรกิจผลิตหนังและรองเท้า ธุรกิจผลิตหนังแท้ บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน) ธุรกิจอุปกรณ์เซฟตี้ บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน) บริษัท แมนวูด อินเตอร์เทรด จำกัด ธุรกิจสิ่งทอ บริษัท ทีทีเอ็น นันวูเว่น โซลูชั่น จำกัด บริษัท ซงเม่า นันวูเว่น จำกัด บริษัท เอฟแอนด์ที นันวูเว่น โซลูชั่น จำกัด บริษัท เอชอาร์ที นันวูเว่น จำกัด ธุรกิจเคมีภัณฑ์ บริษัท แอ็พพลาย ดีบี จำกัด (มหาชน) บริษัท อีเกิ้ล เคมีคอล อินดัสตรี จำกัด บริษัท ซี เอส รับเบอร์ อินดัสทรี่ จำกัด บริษัท ซีเอส ยูนิเทล เทคโนโลยี จำกัด บริษัท ซี เอส มิตซูฟุกุ อิลาสโตเมอร์ จำกัด บริษัท ซีเอสเจ รับเบอร์ชีท จำกัด ธุรกิจอื่นๆ บริษัท เจริญสิน แคปปิตอล จำกัด บริษัท ไทย ไวร์ริ่ง ซิสเต็ม จำกัด บริษัท แสงบูรพา แพลนเทชั่น จำกัด บริษัท ไฟน์ ฟู้ด แฟกเตอร์ จำกัด บริษัท สมาร์ท เซนส์ อินดัสเตรียล ดีไซน์ จำกัด บริษัท นาว เอนด์ออฟเวสท์ จำกัด บริษัท รักษาความปลอดภัย บี-เบสท์ เซอร์วิส จำกัด มูลนิธิ ข่าวสารและกิจกรรม ข่าวสารผู้บริหาร ประกาศบริษัท ร่วมงานกับเรา นโยบายการบริหารงานบุคคล ตำแหน่งงาน ประกาศบริษัท การอบรมและสัมมนา ติดต่อเรา รายงานกำกับดูแล นโยบาย นโยบายกำกับดูแล นโยบายการใช้ระบบเทคโนโลยี นโยบายการต่อต้านคอรัปชั่น นโยบายการให้และรับของขวัญ นโยบายการพิจารณาค่าตอบแทนกรรมการบริษัท และผู้บริหาร นโยบายการป้องกันความขัดแย้งทางผลประโยชน์ นโยบายการใช้ข้อมูลและการซื้อขายหลักทรัพย์ นโยบายและแนวปฏิบัติในการรักษาความมั่นคง องค์กร โครงสร้างองค์กร จรรยาบรรณธุรกิจและคู่ค้า รายงานผลการบริหารความเสี่ยง นโยบายคุ้มครองข้อมูลส่วนบุคคล หลักการ หลักการดูแลกำกับกิจการที่ดี © 2026 CSG GROUP",
+    "headings": [],
+    "paragraphs": [],
+    "links": [
+      {
+        "text": "หน้าแรก",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "เกี่ยวกับเรา",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "วิสัยทัศน์",
+        "url": "https://csgok.sfinsulations.com/vision/",
+        "aria_label": ""
+      },
+      {
+        "text": "พันธกิจ",
+        "url": "https://csgok.sfinsulations.com/vision/",
+        "aria_label": ""
+      },
+      {
+        "text": "ค่านิยมองค์กร",
+        "url": "https://csgok.sfinsulations.com/values",
+        "aria_label": ""
+      },
+      {
+        "text": "ผู้นำของเรา",
+        "url": "https://csgok.sfinsulations.com/leaders",
+        "aria_label": ""
+      },
+      {
+        "text": "อัตลักษณ์องค์กร",
+        "url": "https://csgok.sfinsulations.com/identity",
+        "aria_label": ""
+      },
+      {
+        "text": "ธุรกิจของเรา",
+        "url": "https://csgok.sfinsulations.com/ob2026/",
+        "aria_label": ""
+      },
+      {
+        "text": "ธุรกิจอสังหาริมทรัพย์",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท เจริญสิน แอสเสท จำกัด",
+        "url": "https://csgok.sfinsulations.com/ob2026/",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท เจริญสิน พัฒนา จำกัด",
+        "url": "https://csgok.sfinsulations.com/ob2026/",
+        "aria_label": ""
+      },
+      {
+        "text": "ธุรกิจผลิตหนังและรองเท้า",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "ธุรกิจผลิตหนังแท้ บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)",
+        "url": "https://csgok.sfinsulations.com/cpl-leather",
+        "aria_label": ""
+      },
+      {
+        "text": "ธุรกิจอุปกรณ์เซฟตี้ บริษัท ซีพีแอล กรุ๊ป จำกัด (มหาชน)",
+        "url": "https://csgok.sfinsulations.com/cpl-safety",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท แมนวูด อินเตอร์เทรด จำกัด",
+        "url": "https://csgok.sfinsulations.com/manwood",
+        "aria_label": ""
+      },
+      {
+        "text": "ธุรกิจสิ่งทอ",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท ทีทีเอ็น นันวูเว่น โซลูชั่น จำกัด",
+        "url": "https://csgok.sfinsulations.com/ttn",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท ซงเม่า นันวูเว่น จำกัด",
+        "url": "https://csgok.sfinsulations.com/songmao",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท เอฟแอนด์ที นันวูเว่น โซลูชั่น จำกัด",
+        "url": "https://csgok.sfinsulations.com/ft",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท เอชอาร์ที นันวูเว่น จำกัด",
+        "url": "https://csgok.sfinsulations.com/hrt",
+        "aria_label": ""
+      },
+      {
+        "text": "ธุรกิจเคมีภัณฑ์",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท แอ็พพลาย ดีบี จำกัด (มหาชน)",
+        "url": "https://csgok.sfinsulations.com/adb",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท อีเกิ้ล เคมีคอล อินดัสตรี จำกัด",
+        "url": "https://csgok.sfinsulations.com/eagle",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท ซี เอส รับเบอร์ อินดัสทรี่ จำกัด",
+        "url": "https://csgok.sfinsulations.com/cs-rubber",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท ซีเอส ยูนิเทล เทคโนโลยี จำกัด",
+        "url": "https://csgok.sfinsulations.com/cs-unitel",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท ซี เอส มิตซูฟุกุ อิลาสโตเมอร์ จำกัด",
+        "url": "https://csgok.sfinsulations.com/cs-mitsufuku",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท ซีเอสเจ รับเบอร์ชีท จำกัด",
+        "url": "https://csgok.sfinsulations.com/csj-rubber",
+        "aria_label": ""
+      },
+      {
+        "text": "ธุรกิจอื่นๆ",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท เจริญสิน แคปปิตอล จำกัด",
+        "url": "https://csgok.sfinsulations.com/capital",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท ไทย ไวร์ริ่ง ซิสเต็ม จำกัด",
+        "url": "https://csgok.sfinsulations.com/wiring",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท แสงบูรพา แพลนเทชั่น จำกัด",
+        "url": "https://csgok.sfinsulations.com/plantation",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท ไฟน์ ฟู้ด แฟกเตอร์ จำกัด",
+        "url": "https://csgok.sfinsulations.com/finefood",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท สมาร์ท เซนส์ อินดัสเตรียล ดีไซน์ จำกัด",
+        "url": "https://csgok.sfinsulations.com/smartsense",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท นาว เอนด์ออฟเวสท์ จำกัด",
+        "url": "https://csgok.sfinsulations.com/nowendofwaste",
+        "aria_label": ""
+      },
+      {
+        "text": "บริษัท รักษาความปลอดภัย บี-เบสท์ เซอร์วิส จำกัด",
+        "url": "https://csgok.sfinsulations.com/security",
+        "aria_label": ""
+      },
+      {
+        "text": "มูลนิธิ",
+        "url": "https://csgok.sfinsulations.com/charity-animation-addon/",
+        "aria_label": ""
+      },
+      {
+        "text": "ข่าวสารและกิจกรรม",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "ข่าวสารผู้บริหาร",
+        "url": "https://csgok.sfinsulations.com/news-executives",
+        "aria_label": ""
+      },
+      {
+        "text": "ประกาศบริษัท",
+        "url": "https://csgok.sfinsulations.com/announcements",
+        "aria_label": ""
+      },
+      {
+        "text": "ร่วมงานกับเรา",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายการบริหารงานบุคคล",
+        "url": "https://csgok.sfinsulations.com/charoensin-hr-policy/",
+        "aria_label": ""
+      },
+      {
+        "text": "ตำแหน่งงาน",
+        "url": "https://csgok.sfinsulations.com/careers",
+        "aria_label": ""
+      },
+      {
+        "text": "ประกาศบริษัท",
+        "url": "https://csgok.sfinsulations.com/announcements-hr",
+        "aria_label": ""
+      },
+      {
+        "text": "การอบรมและสัมมนา",
+        "url": "https://csgok.sfinsulations.com/training",
+        "aria_label": ""
+      },
+      {
+        "text": "ติดต่อเรา",
+        "url": "https://csgok.sfinsulations.com/testaielemetorpro/",
+        "aria_label": ""
+      },
+      {
+        "text": "รายงานกำกับดูแล",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบาย",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายกำกับดูแล",
+        "url": "https://csgok.sfinsulations.com/policy-governance",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายการใช้ระบบเทคโนโลยี",
+        "url": "https://csgok.sfinsulations.com/policy-it",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายการต่อต้านคอรัปชั่น",
+        "url": "https://csgok.sfinsulations.com/policy-anticorruption",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายการให้และรับของขวัญ",
+        "url": "https://csgok.sfinsulations.com/policy-gifts",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายการพิจารณาค่าตอบแทนกรรมการบริษัท และผู้บริหาร",
+        "url": "https://csgok.sfinsulations.com/policy-compensation",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายการป้องกันความขัดแย้งทางผลประโยชน์",
+        "url": "https://csgok.sfinsulations.com/policy-conflict",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายการใช้ข้อมูลและการซื้อขายหลักทรัพย์",
+        "url": "https://csgok.sfinsulations.com/policy-insider",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายและแนวปฏิบัติในการรักษาความมั่นคง",
+        "url": "https://csgok.sfinsulations.com/policy-security",
+        "aria_label": ""
+      },
+      {
+        "text": "องค์กร",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "โครงสร้างองค์กร",
+        "url": "https://csgok.sfinsulations.com/org-structure",
+        "aria_label": ""
+      },
+      {
+        "text": "จรรยาบรรณธุรกิจและคู่ค้า",
+        "url": "https://csgok.sfinsulations.com/codeofconduct/",
+        "aria_label": ""
+      },
+      {
+        "text": "รายงานผลการบริหารความเสี่ยง",
+        "url": "https://csgok.sfinsulations.com/org-risk",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายคุ้มครองข้อมูลส่วนบุคคล",
+        "url": "https://csgok.sfinsulations.com/org-pdpa",
+        "aria_label": ""
+      },
+      {
+        "text": "หลักการ",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "หลักการดูแลกำกับกิจการที่ดี",
+        "url": "https://csgok.sfinsulations.com/principles-cg",
+        "aria_label": ""
+      }
+    ],
+    "images": [
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/02/LogoCSG2359.png",
+        "alt": "Charoensin Group"
+      }
+    ],
+    "media": [],
+    "statistics": [],
+    "background_images": []
+  },
+  "sections": [
+    {
+      "key": "cover",
+      "source_id": null,
+      "source_classes": [
+        "glfw-section",
+        "alignfull",
+        "csg-cover-section",
+        "alignfull"
+      ],
+      "text": "ธุรกิจอสังหาริมทรัพย์ ธุรกิจผลิตหนังและรองเท้า ธุรกิจสิ่งทอ ธุรกิจเคมีภัณฑ์ ธุรกิจอื่นๆ",
+      "headings": [],
+      "paragraphs": [],
+      "links": [],
+      "images": [
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/09/ChatGPT-Image-Sep-17-2026-01_53_34-PM.webp",
+          "alt": "CSG Landscape Sky to Lake"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/08/LogoCSGWhiteBG-scaled.png",
+          "alt": "CSG Group Logo"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/08/Logo80WhiteBG-scaled.png",
+          "alt": "CSG 80th Anniversary Logo"
+        }
+      ],
+      "media": [],
+      "statistics": [],
+      "background_images": []
+    },
+    {
+      "key": "global_presence",
+      "source_id": null,
+      "source_classes": [
+        "glfw-section",
+        "alignfull",
+        "csg-globe-section",
+        "alignfull"
+      ],
+      "text": "ฐานธุรกิจ CHAROENSIN GROUP CSG ให้บริการลูกค้ากว่า 10 ล้านคน ใน 10 ประเทศทั่วโลก Feature one Feature two Feature three 0+ Video Production 0+ Reality Features 0+ Secure Payment",
+      "headings": [
+        {
+          "level": 2,
+          "text": "CHAROENSIN GROUP"
+        }
+      ],
+      "paragraphs": [
+        "CSG ให้บริการลูกค้ากว่า 10 ล้านคน ใน 10 ประเทศทั่วโลก"
+      ],
+      "links": [],
+      "images": [],
+      "media": [],
+      "statistics": [
+        {
+          "displayed_text": "0+",
+          "configured_value": "320",
+          "suffix": "+",
+          "context": "0+ Video Production"
+        },
+        {
+          "displayed_text": "0+",
+          "configured_value": "745",
+          "suffix": "+",
+          "context": "0+ Reality Features"
+        },
+        {
+          "displayed_text": "0+",
+          "configured_value": "864",
+          "suffix": "+",
+          "context": "0+ Secure Payment"
+        }
+      ],
+      "background_images": [],
+      "countries": [
+        {
+          "name_en": "Thailand",
+          "name_th": "ไทย",
+          "longitude": 100.99,
+          "latitude": 15.87,
+          "hub": true
+        },
+        {
+          "name_en": "China",
+          "name_th": "จีน",
+          "longitude": 104.2,
+          "latitude": 35.86,
+          "hub": false
+        },
+        {
+          "name_en": "South Korea",
+          "name_th": "เกาหลีใต้",
+          "longitude": 127.9,
+          "latitude": 36.5,
+          "hub": false
+        },
+        {
+          "name_en": "Japan",
+          "name_th": "ญี่ปุ่น",
+          "longitude": 138.25,
+          "latitude": 36.2,
+          "hub": false
+        },
+        {
+          "name_en": "India",
+          "name_th": "อินเดีย",
+          "longitude": 78.96,
+          "latitude": 22.5,
+          "hub": false
+        },
+        {
+          "name_en": "United Arab Emirates",
+          "name_th": "สหรัฐอาหรับเอมิเรตส์",
+          "longitude": 54.0,
+          "latitude": 24.0,
+          "hub": false
+        },
+        {
+          "name_en": "Germany",
+          "name_th": "เยอรมนี",
+          "longitude": 10.45,
+          "latitude": 51.16,
+          "hub": false
+        },
+        {
+          "name_en": "United Kingdom",
+          "name_th": "สหราชอาณาจักร",
+          "longitude": -1.5,
+          "latitude": 52.5,
+          "hub": false
+        },
+        {
+          "name_en": "United States of America",
+          "name_th": "สหรัฐอเมริกา",
+          "longitude": -98.5,
+          "latitude": 39.8,
+          "hub": false
+        },
+        {
+          "name_en": "Australia",
+          "name_th": "ออสเตรเลีย",
+          "longitude": 134.0,
+          "latitude": -25.6,
+          "hub": false
+        }
+      ]
+    },
+    {
+      "key": "about_and_business_categories",
+      "source_id": null,
+      "source_classes": [
+        "glfw-section",
+        "alignfull",
+        "csg-services-section",
+        "alignfull"
+      ],
+      "text": "ยินดีต้อนรับสู่ กลุ่มบริษัทเจริญสิน (Charoensin Group) กลุ่มบริษัทเจริญสินเป็นหนึ่งใน conglomerate หรือกลุ่มบริษัทข้ามอุตสาหกรรมชั้นนำของประเทศไทย ที่ดำเนินธุรกิจมาอย่างมั่นคงและยั่งยืนยาวนานกว่า 90 ปี นับตั้งแต่ก่อตั้งในปี พ.ศ. 2475 โดยมีจุดเริ่มต้นจากธุรกิจการค้าในรูปแบบครอบครัว ด้วยรากฐานที่แข็งแกร่งและวิสัยทัศน์แห่งการพัฒนาอย่างต่อเนื่อง วันนี้กลุ่มเจริญสินได้เติบโตและขยายธุรกิจครอบคลุมหลากหลายอุตสาหกรรมหลัก ได้แก่ ธุรกิจของเรา 1.อสังหาริมทรัพย์ Smart layouts that maximize flow, function, and the potential of your space. 2.ผลิตหนังและรองเท้า Curated pieces that blend comfort, quality, and timeless design. 3.สิ่งทอ Expert guidance to create harmonious palettes that reflect your style. 4.เคมีภัณฑ์ End-to-end transformations with meticulous attention to every detail. 5.ธุรกิจอื่นๆ Layered lighting solutions that elevate ambience and everyday living.",
+      "headings": [
+        {
+          "level": 2,
+          "text": "ยินดีต้อนรับสู่ กลุ่มบริษัทเจริญสิน (Charoensin Group)"
+        },
+        {
+          "level": 3,
+          "text": "1.อสังหาริมทรัพย์"
+        },
+        {
+          "level": 3,
+          "text": "2.ผลิตหนังและรองเท้า"
+        },
+        {
+          "level": 3,
+          "text": "3.สิ่งทอ"
+        },
+        {
+          "level": 3,
+          "text": "4.เคมีภัณฑ์"
+        },
+        {
+          "level": 3,
+          "text": "5.ธุรกิจอื่นๆ"
+        }
+      ],
+      "paragraphs": [
+        "กลุ่มบริษัทเจริญสินเป็นหนึ่งใน conglomerate หรือกลุ่มบริษัทข้ามอุตสาหกรรมชั้นนำของประเทศไทย ที่ดำเนินธุรกิจมาอย่างมั่นคงและยั่งยืนยาวนานกว่า 90 ปี นับตั้งแต่ก่อตั้งในปี พ.ศ. 2475 โดยมีจุดเริ่มต้นจากธุรกิจการค้าในรูปแบบครอบครัว ด้วยรากฐานที่แข็งแกร่งและวิสัยทัศน์แห่งการพัฒนาอย่างต่อเนื่อง วันนี้กลุ่มเจริญสินได้เติบโตและขยายธุรกิจครอบคลุมหลากหลายอุตสาหกรรมหลัก ได้แก่",
+        "Smart layouts that maximize flow, function, and the potential of your space.",
+        "Curated pieces that blend comfort, quality, and timeless design.",
+        "Expert guidance to create harmonious palettes that reflect your style.",
+        "End-to-end transformations with meticulous attention to every detail.",
+        "Layered lighting solutions that elevate ambience and everyday living."
+      ],
+      "links": [
+        {
+          "text": "ธุรกิจของเรา",
+          "url": "https://csgok.sfinsulations.com/#intd-service-cards",
+          "aria_label": ""
+        },
+        {
+          "text": "1.อสังหาริมทรัพย์ Smart layouts that maximize flow, function, and the potential of your space.",
+          "url": "https://csgok.sfinsulations.com/#intd-space-planning",
+          "aria_label": "1.อสังหาริมทรัพย์"
+        },
+        {
+          "text": "2.ผลิตหนังและรองเท้า Curated pieces that blend comfort, quality, and timeless design.",
+          "url": "https://csgok.sfinsulations.com/#intd-furniture-selection",
+          "aria_label": "2.ผลิตหนังและรองเท้า"
+        },
+        {
+          "text": "3.สิ่งทอ Expert guidance to create harmonious palettes that reflect your style.",
+          "url": "https://csgok.sfinsulations.com/#intd-color-consultation",
+          "aria_label": "3.สิ่งทอ"
+        },
+        {
+          "text": "4.เคมีภัณฑ์ End-to-end transformations with meticulous attention to every detail.",
+          "url": "https://csgok.sfinsulations.com/#intd-full-renovations",
+          "aria_label": "4.เคมีภัณฑ์"
+        },
+        {
+          "text": "5.ธุรกิจอื่นๆ Layered lighting solutions that elevate ambience and everyday living.",
+          "url": "https://csgok.sfinsulations.com/#intd-lighting-design",
+          "aria_label": "5.ธุรกิจอื่นๆ"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/05/ChatGPT-Image-22-%E0%B8%9E.%E0%B8%84.-2569-11_58_15.png",
+          "alt": "1.อสังหาริมทรัพย์"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/09/ฟอกหนัง.jpg",
+          "alt": "2.ผลิตหนังและรองเท้า"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/09/สิ่งทอ.jpg",
+          "alt": "3.สิ่งทอ"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/09/เคมีภัณฑ์.webp",
+          "alt": "4.เคมีภัณฑ์"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/09/fec0d951-878e-469e-9723-84a5597a22e6-1.png?auto=format&fit=crop&w=1200&q=88",
+          "alt": "5.ธุรกิจอื่นๆ"
+        }
+      ],
+      "media": [],
+      "statistics": [],
+      "background_images": []
+    },
+    {
+      "key": "company_statistics",
+      "source_id": null,
+      "source_classes": [
+        "glfw2-section",
+        "alignfull",
+        "csg-section-v1-home"
+      ],
+      "text": "กลุ่มบริษัทเจริญสิน ด้วยเครื่องจักรที่ทันสมัยและทีมงานมืออาชีพ เราช่วยให้ธุรกิจ การเกษตรของคุณดำเนินงานได้อย่างมีประสิทธิภาพ ลดการสูญเสีย 80 ปี ก่อตั้งมาแล้ว 16,890 ลูกค้าของเรา 1,390 พนักงานของเรา 99.90% อัตราความพึงพอใจ",
+      "headings": [
+        {
+          "level": 1,
+          "text": "กลุ่มบริษัทเจริญสิน"
+        }
+      ],
+      "paragraphs": [
+        "ด้วยเครื่องจักรที่ทันสมัยและทีมงานมืออาชีพ เราช่วยให้ธุรกิจ การเกษตรของคุณดำเนินงานได้อย่างมีประสิทธิภาพ ลดการสูญเสีย"
+      ],
+      "links": [],
+      "images": [],
+      "media": [
+        {
+          "type": "video",
+          "url": "https://app-uploads.krea.ai/wan-videos/7f348c17-c3aa-40c9-9d5b-a2bed9a72c2e.mp4",
+          "title": ""
+        }
+      ],
+      "statistics": [
+        {
+          "displayed_text": "80 ปี",
+          "configured_value": "80",
+          "suffix": " ปี",
+          "context": "80 ปี ก่อตั้งมาแล้ว"
+        },
+        {
+          "displayed_text": "16,890",
+          "configured_value": "16890",
+          "suffix": " ราย",
+          "context": "16,890 ลูกค้าของเรา"
+        },
+        {
+          "displayed_text": "1,390",
+          "configured_value": "1390",
+          "suffix": " คน",
+          "context": "1,390 พนักงานของเรา"
+        },
+        {
+          "displayed_text": "99.90%",
+          "configured_value": "99",
+          "suffix": "%",
+          "context": "99.90% อัตราความพึงพอใจ"
+        }
+      ],
+      "background_images": []
+    },
+    {
+      "key": "sustainability_and_group_businesses",
+      "source_id": "csgn-page",
+      "source_classes": [
+        "csgn-page",
+        "csgn-static"
+      ],
+      "text": "CHAROENSIN ปิดการเคลื่อนไหว CHAROENSIN · SUSTAINABILITY เจริญสินเพื่อความยั่งยืน เติบโตอย่างรับผิดชอบ เพื่ออนาคตที่ยั่งยืน Our commitment เจริญสิน แอสเสท ร่วมสร้างคุณค่าที่ยั่งยืนให้กับสิ่งแวดล้อม ชุมชน และสังคม ↓ SCROLL TO EXPLORE ภาพรวมการเติบโตธุรกิจ ในเครือของเรา 5 % + 2566 10 % + 2567 15 % + 2568 Our philosophy ปรัชญาของเรา 01 ความซื่อสัตย์ ยึดมั่นในความโปร่งใสและจริยธรรม 02 ทุกฝ่ายได้ประโยชน์ สร้างคุณค่าร่วมกันในทุกความสัมพันธ์ 03 พัฒนาอย่างต่อเนื่อง เรียนรู้และเติบโตไปด้วยกัน 04 ใส่ใจคุณภาพ ใส่ใจรายละเอียดในทุกขั้นตอน Charoensin Group CSG ก้าวสู่อนาคต ที่ยั่งยืน สร้างอนาคตให้เด็กที่ยากไร้ ชนบทที่ขาดแคลน ▶ Ⅱ ธุรกิจที่ขับเคลื่อนอนาคต ร่วมสร้างคุณค่าในทุกมิติ ↗ ADB แอ๊พพลาย ดีบี ผลิตภัณฑ์กาวและวัสดุสำหรับอุตสาหกรรม ▶ ↗ CPL ซีพีแอล กรุ๊ป ความเชี่ยวชาญด้านการผลิตและงานหนัง ▶ ↗ TTN ทีทีเอ็น นันวูเว่น โซลูชั่น วัสดุนอนวูเว่นเพื่อภาคอุตสาหกรรม ▶ ↗ TWS ทีดับบลิวเอส ผลิตภัณฑ์ลวดและโซลูชันงานวิศวกรรม ↗ ร่วมสร้างคุณค่า มูลนิธิร่วมเจริญสิน ส่งต่อโอกาส เพื่อชุมชนและสังคม ▶",
+      "headings": [
+        {
+          "level": 1,
+          "text": "เจริญสินเพื่อความยั่งยืน"
+        },
+        {
+          "level": 2,
+          "text": "เจริญสิน แอสเสท"
+        },
+        {
+          "level": 2,
+          "text": "ภาพรวมการเติบโตธุรกิจ ในเครือของเรา"
+        },
+        {
+          "level": 2,
+          "text": "ปรัชญาของเรา"
+        },
+        {
+          "level": 2,
+          "text": "CSG"
+        },
+        {
+          "level": 3,
+          "text": "ก้าวสู่อนาคต ที่ยั่งยืน"
+        },
+        {
+          "level": 2,
+          "text": "ธุรกิจที่ขับเคลื่อนอนาคต"
+        },
+        {
+          "level": 3,
+          "text": "แอ๊พพลาย ดีบี"
+        },
+        {
+          "level": 3,
+          "text": "ซีพีแอล กรุ๊ป"
+        },
+        {
+          "level": 3,
+          "text": "ทีทีเอ็น นันวูเว่น โซลูชั่น"
+        },
+        {
+          "level": 3,
+          "text": "ทีดับบลิวเอส"
+        },
+        {
+          "level": 3,
+          "text": "มูลนิธิร่วมเจริญสิน"
+        }
+      ],
+      "paragraphs": [
+        "CHAROENSIN · SUSTAINABILITY",
+        "เติบโตอย่างรับผิดชอบ เพื่ออนาคตที่ยั่งยืน",
+        "ร่วมสร้างคุณค่าที่ยั่งยืนให้กับสิ่งแวดล้อม ชุมชน และสังคม",
+        "สร้างอนาคตให้เด็กที่ยากไร้ ชนบทที่ขาดแคลน",
+        "ร่วมสร้างคุณค่าในทุกมิติ",
+        "ผลิตภัณฑ์กาวและวัสดุสำหรับอุตสาหกรรม",
+        "ความเชี่ยวชาญด้านการผลิตและงานหนัง",
+        "วัสดุนอนวูเว่นเพื่อภาคอุตสาหกรรม",
+        "ผลิตภัณฑ์ลวดและโซลูชันงานวิศวกรรม",
+        "ส่งต่อโอกาส เพื่อชุมชนและสังคม"
+      ],
+      "links": [
+        {
+          "text": "CHAROENSIN",
+          "url": "https://csgok.sfinsulations.com/#csgn-business",
+          "aria_label": ""
+        },
+        {
+          "text": "↗",
+          "url": "https://example.com/adb",
+          "aria_label": "แอ๊พพลาย ดีบี (เปิดหน้าต่างใหม่)"
+        },
+        {
+          "text": "↗",
+          "url": "https://example.com/cpl",
+          "aria_label": "ซีพีแอล กรุ๊ป (เปิดหน้าต่างใหม่)"
+        },
+        {
+          "text": "↗",
+          "url": "https://example.com/ttn",
+          "aria_label": "ทีทีเอ็น นันวูเว่น โซลูชั่น (เปิดหน้าต่างใหม่)"
+        },
+        {
+          "text": "↗",
+          "url": "https://example.com/tws",
+          "aria_label": "ทีดับบลิวเอส (เปิดหน้าต่างใหม่)"
+        },
+        {
+          "text": "↗",
+          "url": "https://example.com/foundation",
+          "aria_label": "มูลนิธิร่วมเจริญสิน (เปิดหน้าต่างใหม่)"
+        }
+      ],
+      "images": [
+        {
+          "src": "https://i.ytimg.com/vi/HnI4uXJYhfE/hqdefault.jpg",
+          "alt": "แอ๊พพลาย ดีบี"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/%E0%B9%80%E0%B8%AD%E0%B8%94%E0%B8%B5%E0%B8%9A%E0%B8%B5.png",
+          "alt": "โลโก้ ADB"
+        },
+        {
+          "src": "",
+          "alt": "ซีพีแอล กรุ๊ป"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/CPL.png",
+          "alt": "โลโก้ CPL"
+        },
+        {
+          "src": "https://i.ytimg.com/vi/0EEwVXLixNQ/hqdefault.jpg",
+          "alt": "ทีทีเอ็น นันวูเว่น โซลูชั่น"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/footer_logo_2x_1_.webp",
+          "alt": "โลโก้ TTN"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/04/Untitled-1.jpg",
+          "alt": "ทีดับบลิวเอส"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/TWS.png",
+          "alt": "โลโก้ TWS"
+        },
+        {
+          "src": "",
+          "alt": "มูลนิธิร่วมเจริญสิน"
+        },
+        {
+          "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/Logo_%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%99%E0%B8%B4%E0%B8%98%E0%B8%B4%E0%B8%A7%E0%B8%87%E0%B8%A9%E0%B9%8C%E0%B9%80%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%8D%E0%B8%AA%E0%B8%B4%E0%B8%99.png",
+          "alt": "โลโก้ ร่วมสร้างคุณค่า"
+        }
+      ],
+      "media": [
+        {
+          "type": "video",
+          "url": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/5290294_Architectural_Model_Architecture_1280x720.mp4",
+          "title": "วิดีโออาคารเจริญสิน"
+        },
+        {
+          "type": "video",
+          "url": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/0_Children_Boys_1280x720.mp4",
+          "title": "วิดีโอเด็กสี่คนสำหรับการ์ด PLY"
+        },
+        {
+          "type": "iframe",
+          "url": "https://www.youtube-nocookie.com/embed/HnI4uXJYhfE?autoplay=1&mute=1&loop=1&playlist=HnI4uXJYhfE&controls=0&playsinline=1&rel=0&disablekb=1&fs=0",
+          "title": "วิดีโอพื้นหลัง"
+        },
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/embed/HnI4uXJYhfE?autoplay=1&playsinline=1&rel=0",
+          "title": "เล่นวิดีโอ แอ๊พพลาย ดีบี"
+        },
+        {
+          "type": "video",
+          "url": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/0_Leatherworking_Leather_1280x720.mp4",
+          "title": ""
+        },
+        {
+          "type": "video",
+          "url": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/0_Leatherworking_Leather_1280x720.mp4",
+          "title": "เล่นวิดีโอ ซีพีแอล กรุ๊ป"
+        },
+        {
+          "type": "iframe",
+          "url": "https://www.youtube-nocookie.com/embed/0EEwVXLixNQ?autoplay=1&mute=1&loop=1&playlist=0EEwVXLixNQ&controls=0&playsinline=1&rel=0&disablekb=1&fs=0",
+          "title": "วิดีโอพื้นหลัง"
+        },
+        {
+          "type": "video",
+          "url": "https://www.youtube.com/embed/0EEwVXLixNQ?autoplay=1&playsinline=1&rel=0",
+          "title": "เล่นวิดีโอ ทีทีเอ็น นันวูเว่น โซลูชั่น"
+        },
+        {
+          "type": "video",
+          "url": "https://csgok.sfinsulations.com/wp-content/uploads/2026/03/%E0%B8%AA%E0%B8%99%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%99%E0%B8%B8%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B9%80%E0%B8%94%E0%B9%87%E0%B8%81.mp4",
+          "title": ""
+        },
+        {
+          "type": "video",
+          "url": "https://csgok.sfinsulations.com/wp-content/uploads/2026/03/%E0%B8%AA%E0%B8%99%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%99%E0%B8%B8%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B9%80%E0%B8%94%E0%B9%87%E0%B8%81.mp4",
+          "title": "เล่นวิดีโอ มูลนิธิร่วมเจริญสิน"
+        }
+      ],
+      "statistics": [
+        {
+          "displayed_text": "5",
+          "configured_value": "5",
+          "suffix": "",
+          "context": "5 %"
+        },
+        {
+          "displayed_text": "10",
+          "configured_value": "10",
+          "suffix": "",
+          "context": "10 %"
+        },
+        {
+          "displayed_text": "15",
+          "configured_value": "15",
+          "suffix": "",
+          "context": "15 %"
+        }
+      ],
+      "background_images": [],
+      "business_cards": [
+        {
+          "key": "business_1",
+          "source_id": null,
+          "source_classes": [
+            "csgn-card",
+            "csgn-business",
+            "csgn-business--adb",
+            "csgb-card",
+            "csgb-flagship"
+          ],
+          "text": "↗ ADB แอ๊พพลาย ดีบี ผลิตภัณฑ์กาวและวัสดุสำหรับอุตสาหกรรม ▶",
+          "headings": [
+            {
+              "level": 3,
+              "text": "แอ๊พพลาย ดีบี"
+            }
+          ],
+          "paragraphs": [
+            "ผลิตภัณฑ์กาวและวัสดุสำหรับอุตสาหกรรม"
+          ],
+          "links": [
+            {
+              "text": "↗",
+              "url": "https://example.com/adb",
+              "aria_label": "แอ๊พพลาย ดีบี (เปิดหน้าต่างใหม่)"
+            }
+          ],
+          "images": [
+            {
+              "src": "https://i.ytimg.com/vi/HnI4uXJYhfE/hqdefault.jpg",
+              "alt": "แอ๊พพลาย ดีบี"
+            },
+            {
+              "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/%E0%B9%80%E0%B8%AD%E0%B8%94%E0%B8%B5%E0%B8%9A%E0%B8%B5.png",
+              "alt": "โลโก้ ADB"
+            }
+          ],
+          "media": [
+            {
+              "type": "iframe",
+              "url": "https://www.youtube-nocookie.com/embed/HnI4uXJYhfE?autoplay=1&mute=1&loop=1&playlist=HnI4uXJYhfE&controls=0&playsinline=1&rel=0&disablekb=1&fs=0",
+              "title": "วิดีโอพื้นหลัง"
+            },
+            {
+              "type": "video",
+              "url": "https://www.youtube.com/embed/HnI4uXJYhfE?autoplay=1&playsinline=1&rel=0",
+              "title": "เล่นวิดีโอ แอ๊พพลาย ดีบี"
+            }
+          ],
+          "statistics": [],
+          "background_images": []
+        },
+        {
+          "key": "business_2",
+          "source_id": null,
+          "source_classes": [
+            "csgn-card",
+            "csgn-business",
+            "csgn-business--cpl",
+            "csgb-card",
+            "csgb-flagship"
+          ],
+          "text": "↗ CPL ซีพีแอล กรุ๊ป ความเชี่ยวชาญด้านการผลิตและงานหนัง ▶",
+          "headings": [
+            {
+              "level": 3,
+              "text": "ซีพีแอล กรุ๊ป"
+            }
+          ],
+          "paragraphs": [
+            "ความเชี่ยวชาญด้านการผลิตและงานหนัง"
+          ],
+          "links": [
+            {
+              "text": "↗",
+              "url": "https://example.com/cpl",
+              "aria_label": "ซีพีแอล กรุ๊ป (เปิดหน้าต่างใหม่)"
+            }
+          ],
+          "images": [
+            {
+              "src": "",
+              "alt": "ซีพีแอล กรุ๊ป"
+            },
+            {
+              "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/CPL.png",
+              "alt": "โลโก้ CPL"
+            }
+          ],
+          "media": [
+            {
+              "type": "video",
+              "url": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/0_Leatherworking_Leather_1280x720.mp4",
+              "title": ""
+            },
+            {
+              "type": "video",
+              "url": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/0_Leatherworking_Leather_1280x720.mp4",
+              "title": "เล่นวิดีโอ ซีพีแอล กรุ๊ป"
+            }
+          ],
+          "statistics": [],
+          "background_images": []
+        },
+        {
+          "key": "business_3",
+          "source_id": null,
+          "source_classes": [
+            "csgn-card",
+            "csgn-business",
+            "csgn-business--ttn",
+            "csgb-card"
+          ],
+          "text": "↗ TTN ทีทีเอ็น นันวูเว่น โซลูชั่น วัสดุนอนวูเว่นเพื่อภาคอุตสาหกรรม ▶",
+          "headings": [
+            {
+              "level": 3,
+              "text": "ทีทีเอ็น นันวูเว่น โซลูชั่น"
+            }
+          ],
+          "paragraphs": [
+            "วัสดุนอนวูเว่นเพื่อภาคอุตสาหกรรม"
+          ],
+          "links": [
+            {
+              "text": "↗",
+              "url": "https://example.com/ttn",
+              "aria_label": "ทีทีเอ็น นันวูเว่น โซลูชั่น (เปิดหน้าต่างใหม่)"
+            }
+          ],
+          "images": [
+            {
+              "src": "https://i.ytimg.com/vi/0EEwVXLixNQ/hqdefault.jpg",
+              "alt": "ทีทีเอ็น นันวูเว่น โซลูชั่น"
+            },
+            {
+              "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/footer_logo_2x_1_.webp",
+              "alt": "โลโก้ TTN"
+            }
+          ],
+          "media": [
+            {
+              "type": "iframe",
+              "url": "https://www.youtube-nocookie.com/embed/0EEwVXLixNQ?autoplay=1&mute=1&loop=1&playlist=0EEwVXLixNQ&controls=0&playsinline=1&rel=0&disablekb=1&fs=0",
+              "title": "วิดีโอพื้นหลัง"
+            },
+            {
+              "type": "video",
+              "url": "https://www.youtube.com/embed/0EEwVXLixNQ?autoplay=1&playsinline=1&rel=0",
+              "title": "เล่นวิดีโอ ทีทีเอ็น นันวูเว่น โซลูชั่น"
+            }
+          ],
+          "statistics": [],
+          "background_images": []
+        },
+        {
+          "key": "business_4",
+          "source_id": null,
+          "source_classes": [
+            "csgn-card",
+            "csgn-business",
+            "csgn-business--tws",
+            "csgb-card"
+          ],
+          "text": "↗ TWS ทีดับบลิวเอส ผลิตภัณฑ์ลวดและโซลูชันงานวิศวกรรม",
+          "headings": [
+            {
+              "level": 3,
+              "text": "ทีดับบลิวเอส"
+            }
+          ],
+          "paragraphs": [
+            "ผลิตภัณฑ์ลวดและโซลูชันงานวิศวกรรม"
+          ],
+          "links": [
+            {
+              "text": "↗",
+              "url": "https://example.com/tws",
+              "aria_label": "ทีดับบลิวเอส (เปิดหน้าต่างใหม่)"
+            }
+          ],
+          "images": [
+            {
+              "src": "https://csgok.sfinsulations.com/wp-content/uploads/2026/04/Untitled-1.jpg",
+              "alt": "ทีดับบลิวเอส"
+            },
+            {
+              "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/TWS.png",
+              "alt": "โลโก้ TWS"
+            }
+          ],
+          "media": [],
+          "statistics": [],
+          "background_images": []
+        },
+        {
+          "key": "business_5",
+          "source_id": null,
+          "source_classes": [
+            "csgn-card",
+            "csgn-business",
+            "csgn-business--foundation",
+            "csgb-card"
+          ],
+          "text": "↗ ร่วมสร้างคุณค่า มูลนิธิร่วมเจริญสิน ส่งต่อโอกาส เพื่อชุมชนและสังคม ▶",
+          "headings": [
+            {
+              "level": 3,
+              "text": "มูลนิธิร่วมเจริญสิน"
+            }
+          ],
+          "paragraphs": [
+            "ส่งต่อโอกาส เพื่อชุมชนและสังคม"
+          ],
+          "links": [
+            {
+              "text": "↗",
+              "url": "https://example.com/foundation",
+              "aria_label": "มูลนิธิร่วมเจริญสิน (เปิดหน้าต่างใหม่)"
+            }
+          ],
+          "images": [
+            {
+              "src": "",
+              "alt": "มูลนิธิร่วมเจริญสิน"
+            },
+            {
+              "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/12/Logo_%E0%B8%A1%E0%B8%B9%E0%B8%A5%E0%B8%99%E0%B8%B4%E0%B8%98%E0%B8%B4%E0%B8%A7%E0%B8%87%E0%B8%A9%E0%B9%8C%E0%B9%80%E0%B8%88%E0%B8%A3%E0%B8%B4%E0%B8%8D%E0%B8%AA%E0%B8%B4%E0%B8%99.png",
+              "alt": "โลโก้ ร่วมสร้างคุณค่า"
+            }
+          ],
+          "media": [
+            {
+              "type": "video",
+              "url": "https://csgok.sfinsulations.com/wp-content/uploads/2026/03/%E0%B8%AA%E0%B8%99%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%99%E0%B8%B8%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B9%80%E0%B8%94%E0%B9%87%E0%B8%81.mp4",
+              "title": ""
+            },
+            {
+              "type": "video",
+              "url": "https://csgok.sfinsulations.com/wp-content/uploads/2026/03/%E0%B8%AA%E0%B8%99%E0%B8%B1%E0%B8%9A%E0%B8%AA%E0%B8%99%E0%B8%B8%E0%B8%99%E0%B8%81%E0%B8%B2%E0%B8%A3%E0%B8%A8%E0%B8%B6%E0%B8%81%E0%B8%A9%E0%B8%B2%E0%B9%80%E0%B8%94%E0%B9%87%E0%B8%81.mp4",
+              "title": "เล่นวิดีโอ มูลนิธิร่วมเจริญสิน"
+            }
+          ],
+          "statistics": [],
+          "background_images": []
+        }
+      ]
+    },
+    {
+      "key": "news_and_activities",
+      "source_id": "csgf-news-section",
+      "source_classes": [
+        "csgf-section"
+      ],
+      "text": "ข่าวสารและกิจกรรม",
+      "headings": [
+        {
+          "level": 2,
+          "text": "ข่าวสารและกิจกรรม"
+        }
+      ],
+      "paragraphs": [],
+      "links": [],
+      "images": [],
+      "media": [
+        {
+          "type": "iframe",
+          "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FCharoensinGroup%2Fposts%2Fpfbid0FW9daEYB5PydsQwWyVNminAgi8TTsmwMrF3WAPmqzq5LmbTRLsv7i7CVdMR56pBJl&show_text=true",
+          "title": "Charoensin Group Facebook Post 1"
+        },
+        {
+          "type": "iframe",
+          "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FCharoensinGroup%2Fposts%2Fpfbid0mnFKdu35RDH4vmENDzmet3YuEF15QvKHVyDStmLY4jTJ1WJJTQN7zyvRDKXPqX2jl&show_text=true",
+          "title": "Charoensin Group Facebook Post 2"
+        },
+        {
+          "type": "iframe",
+          "url": "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FCharoensinGroup%2Fposts%2Fpfbid02AAKTeopJ26fkmqK9bqZcU7BAxVBd4kodHXsvPPAmV47ogyKbRzVAbCELvJkpvXCal&show_text=true",
+          "title": "Charoensin Group Facebook Post 3"
+        }
+      ],
+      "statistics": [],
+      "background_images": []
+    }
+  ],
+  "footer": {
+    "key": "footer",
+    "source_id": null,
+    "source_classes": [
+      "csgf7-footer"
+    ],
+    "text": "Today's Progress. Tomorrow's Greatness. ธุรกิจของเรา บริษัทในเครือ จรรยาบรรณ คู่มือพนักงาน โครงสร้างองค์กร ประวัติของเรา ประวัติความเป็นมา มูลนิธิวงษ์เจริญสิน ข่าวสารและกิจกรรม ติดต่อเรา สมัครงาน แจ้งเรื่องร้องเรียน ร่วมงานกับเรา ติดตามเรา CSG Group — 2026 All Right Reserved นโยบายความเป็นส่วนตัว เงื่อนไขการใช้งาน",
+    "headings": [
+      {
+        "level": 3,
+        "text": "ธุรกิจของเรา"
+      },
+      {
+        "level": 3,
+        "text": "ประวัติของเรา"
+      },
+      {
+        "level": 3,
+        "text": "ติดต่อเรา"
+      },
+      {
+        "level": 3,
+        "text": "ติดตามเรา"
+      }
+    ],
+    "paragraphs": [],
+    "links": [
+      {
+        "text": "บริษัทในเครือ",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "จรรยาบรรณ",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "คู่มือพนักงาน",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "โครงสร้างองค์กร",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "ประวัติความเป็นมา",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "มูลนิธิวงษ์เจริญสิน",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "ข่าวสารและกิจกรรม",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "สมัครงาน",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "แจ้งเรื่องร้องเรียน",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "ร่วมงานกับเรา",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "นโยบายความเป็นส่วนตัว",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      },
+      {
+        "text": "เงื่อนไขการใช้งาน",
+        "url": "https://csgok.sfinsulations.com/",
+        "aria_label": ""
+      }
+    ],
+    "images": [
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/เจริญสินแอสเสท1.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/CPL.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/pangolin.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/เอดีบี.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2022/09/Logo-CCAP-1.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2020/06/CSJ-11.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/logoเจริญสิน.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2022/09/Logo_Charoensin-05-1-1.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/marni.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/CSR.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/luigi.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/smn.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/TWS.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/ply.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/Galavela.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/smartsense.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/premium.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/caltree.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/Chub.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/CSUnitel.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/FTNnon.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/B-Best1.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/Untitled-design-19.png",
+        "alt": ""
+      },
+      {
+        "src": "https://csgok.sfinsulations.com/wp-content/uploads/2025/10/csmitsufuku1.png",
+        "alt": ""
+      }
+    ],
+    "media": [],
+    "statistics": [],
+    "background_images": []
+  },
+  "stylesheet_image_urls": [
+    "https://strvid.nyc3.cdn.digitaloceanspaces.com/cloudinary/ChatGPT_Image_Jul_8_2026_03_23_37_PM_1_h0ssma.png"
+  ]
+}
