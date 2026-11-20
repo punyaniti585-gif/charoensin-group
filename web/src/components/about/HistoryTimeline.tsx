@@ -92,13 +92,13 @@ export default function HistoryTimeline() {
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center filter grayscale contrast-[1.25] brightness-[0.62]"
+            className="object-cover object-center filter grayscale contrast-[1.1] brightness-[0.9]"
           />
         </motion.div>
 
-        {/* Cinematic Vignette & Radial Dark-Gold Glow */}
-        <div className="absolute inset-0 bg-radial from-black/35 via-black/70 to-black/90 pointer-events-none" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#161412] via-transparent to-[#161412]/80 pointer-events-none" />
+        {/* Light overlay so the building photo stays visible */}
+        <div className="absolute inset-0 bg-black/35 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#161412]/55 via-transparent to-[#161412]/40 pointer-events-none" />
 
         {/* Foreground Content with Gentle Counter-Parallax */}
         <motion.div
@@ -114,7 +114,7 @@ export default function HistoryTimeline() {
             className="flex items-center justify-center gap-3 sm:gap-4"
           >
             <div className="w-8 sm:w-16 h-px bg-gradient-to-r from-transparent to-[#CCA369]" />
-            <span className="font-kanit text-xs sm:text-sm uppercase tracking-[0.28em] text-[#E6C786] font-medium">
+            <span className="font-kanit text-xs sm:text-sm uppercase tracking-[0.28em] text-[#E6C786] font-medium drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
               {banner.kicker}
             </span>
             <div className="w-8 sm:w-16 h-px bg-gradient-to-l from-transparent to-[#CCA369]" />
@@ -140,7 +140,7 @@ export default function HistoryTimeline() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -28 }}
                 transition={{ duration: 0.5, ease: csgEase }}
-                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair italic font-medium text-[#CCA369] tracking-wide inline-block drop-shadow-[0_2px_16px_rgba(204,163,105,0.4)]"
+                className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-playfair italic font-medium text-[#CCA369] tracking-wide inline-block drop-shadow-[0_2px_12px_rgba(0,0,0,0.75)]"
               >
                 {banner.rotatingWords[bannerWordIdx]}
               </motion.span>
@@ -148,7 +148,7 @@ export default function HistoryTimeline() {
           </div>
 
           <div className="pt-2">
-            <span className="text-xs sm:text-sm font-kanit text-white/80 tracking-widest font-light">
+            <span className="text-xs sm:text-sm font-kanit text-white/90 tracking-widest font-light drop-shadow-[0_2px_8px_rgba(0,0,0,0.85)]">
               กลุ่มบริษัทเจริญสิน · รากฐานอุตสาหกรรมไทยสู่สากล
             </span>
           </div>
@@ -199,12 +199,12 @@ export default function HistoryTimeline() {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: csgEase }}
-            className="w-4 h-4 rounded-full bg-[#E6C786] border-2 border-[#6B5A3A] shadow-[0_0_12px_#CCA369] flex items-center justify-center relative"
+            className="w-3 h-3 rounded-full bg-[#E6C786] border-[1.5px] border-[#6B5A3A] shadow-[0_0_6px_rgba(204,163,105,0.6)] flex items-center justify-center relative"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#6B5A3A]" />
-            <span className="absolute -inset-2 rounded-full border border-[#CCA369]/60 animate-ping opacity-60" />
+            <span className="w-1 h-1 rounded-full bg-[#6B5A3A]" />
+            <span className="absolute -inset-1 rounded-full border border-[#CCA369]/50 animate-ping opacity-50" />
           </motion.div>
-          <div className="w-[2px] h-8 sm:h-10 border-l-2 border-dashed border-[#CCA369]/60 my-1" />
+          <div className="w-px h-8 sm:h-10 border-l border-dashed border-[#CCA369]/60 my-1" />
           <span className="text-[11px] font-mono tracking-widest text-[#9A7B3E] font-semibold uppercase bg-white/95 px-3 py-1 rounded-full border border-[#CCA369]/35 shadow-2xs">
             พ.ศ. 2475 · จุดเริ่มต้นประวัติศาสตร์
           </span>
@@ -215,7 +215,7 @@ export default function HistoryTimeline() {
            ------------------------------------------------------ */}
         <div ref={timelineRef} className="relative mt-6 sm:mt-8">
           {/* Central Vertical Golden Rail Line (Background Track) */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-[2px] bg-[#CCA369]/20" />
+          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-px bg-[#CCA369]/25" />
 
           {/* Dynamic Scroll-Drawn Golden Line */}
           {isMounted && (
@@ -225,7 +225,7 @@ export default function HistoryTimeline() {
                   scaleY: shouldReduceMotion ? 1 : timelineScroll,
                   originY: 0,
                 }}
-                className="absolute left-6 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-[2.5px] bg-gradient-to-b from-[#CCA369] via-[#E6C786] to-[#9A7B3E] shadow-[0_0_14px_rgba(204,163,105,0.85)] z-10 will-change-transform"
+                className="absolute left-6 md:left-1/2 top-0 bottom-0 -translate-x-1/2 w-[1px] bg-gradient-to-b from-[#CCA369] via-[#E6C786] to-[#9A7B3E] shadow-[0_0_6px_rgba(204,163,105,0.5)] z-10 will-change-transform"
               />
 
               {/* Glowing Head Indicator riding the leading edge of the drawn line */}
@@ -234,10 +234,10 @@ export default function HistoryTimeline() {
                   style={{
                     top: lineHeadTop,
                   }}
-                  className="absolute left-6 md:left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-[#E6C786] shadow-[0_0_16px_#CCA369] z-25 pointer-events-none will-change-transform flex items-center justify-center"
+                  className="absolute left-6 md:left-1/2 -translate-x-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-[#E6C786] shadow-[0_0_8px_rgba(204,163,105,0.7)] z-25 pointer-events-none will-change-transform flex items-center justify-center"
                 >
-                  <span className="w-2 h-2 rounded-full bg-[#6B5A3A]" />
-                  <span className="absolute inset-0 rounded-full bg-[#CCA369] animate-ping opacity-75" />
+                  <span className="w-1 h-1 rounded-full bg-[#6B5A3A]" />
+                  <span className="absolute inset-0 rounded-full bg-[#CCA369] animate-ping opacity-50" />
                 </motion.div>
               )}
             </>
@@ -340,22 +340,22 @@ function TimelineRowNode({
       >
         {/* Special Double Golden Ring Pulse for Founding Year 2475 */}
         {is2475 && (
-          <span className="absolute -inset-3 rounded-full border-2 border-[#CCA369]/60 animate-ping opacity-60" />
+          <span className="absolute -inset-1.5 rounded-full border border-[#CCA369]/50 animate-ping opacity-50" />
         )}
 
         <div
-          className={`rounded-full bg-white border-2 flex items-center justify-center transition-all duration-300 hover:scale-125 ${
+          className={`rounded-full bg-white border-[1.5px] flex items-center justify-center transition-all duration-300 hover:scale-125 ${
             is2475
-              ? "w-8 h-8 border-[#CCA369] shadow-[0_0_18px_rgba(204,163,105,0.9)] ring-4 ring-[#CCA369]/30"
-              : "w-5 h-5 border-[#CCA369] shadow-[0_0_12px_rgba(204,163,105,0.7)]"
+              ? "w-5 h-5 border-[#CCA369] shadow-[0_0_8px_rgba(204,163,105,0.6)] ring-2 ring-[#CCA369]/25"
+              : "w-3 h-3 border-[#CCA369] shadow-[0_0_5px_rgba(204,163,105,0.5)]"
           }`}
         >
           {/* Inner Golden Diamond / Dot */}
           <div
             className={`transition-all ${
               is2475
-                ? "w-3.5 h-3.5 rotate-45 bg-[#CCA369] rounded-xs"
-                : "w-2 h-2 rounded-full bg-[#6B5A3A]"
+                ? "w-2 h-2 rotate-45 bg-[#CCA369] rounded-[1px]"
+                : "w-1 h-1 rounded-full bg-[#6B5A3A]"
             }`}
           />
         </div>

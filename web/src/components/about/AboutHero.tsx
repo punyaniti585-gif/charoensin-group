@@ -7,10 +7,9 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
-  AnimatePresence,
+  type MotionValue,
 } from "framer-motion";
 import { aboutHeroData } from "@/data/about-data";
-import { csgEase } from "@/components/ui/MotionWrapper";
 import {
   ArrowUpRight,
   Compass,
@@ -21,24 +20,166 @@ import {
   ChevronDown,
 } from "lucide-react";
 
+// Architectural Luxury easing for typography reveals
+const revealEase = [0.22, 1, 0.36, 1] as const;
+
+const SHIMMER_PHRASE = "90 ปี";
+
+// Per-phrase mask box; padding keeps Thai upper/lower marks from being clipped
+const PHRASE_MASK_CLASS =
+  "inline-block overflow-hidden align-bottom pt-[0.18em] pb-[0.12em] -my-[0.15em]";
+
+interface HeroTypographyProps {
+  variant: "mobile" | "desktop";
+  reduceMotion: boolean;
+  /**
+   * Desktop-only scroll-linked text tone: dark ink on the cream base layer,
+   * crossfading to white + drop-shadow as the colour photo is revealed.
+   * Undefined = static white (e.g. reduced motion, where the photo shows fully).
+   */
+  tone?: HeroTone;
+}
+
+interface HeroTone {
+  headColor: MotionValue<string>;
+  subColor: MotionValue<string>;
+  shadow: MotionValue<string>;
+}
+
+/**
+ * Hero headline + gold divider + subheadline.
+ * - Masked slide-up reveal for each headline phrase (stagger 0.15s)
+ * - Gold hairline expands from the centre, then subheadline fades in (0.45s)
+ * - Slow gold shimmer across "90 ปี"
+ */
+function HeroTypography({
+  variant,
+  reduceMotion,
+  tone,
+}: HeroTypographyProps) {
+  const isDesktop = variant === "desktop";
+  const phrases = aboutHeroData.headline.split(" ");
+  const [subBefore, subAfter] = aboutHeroData.subheadline.split(SHIMMER_PHRASE);
+  const hasShimmer = subAfter !== undefined;
+
+  const headlineType = isDesktop
+    ? "text-4xl md:text-6xl lg:text-7xl font-bold font-kanit tracking-tight leading-[1.18]"
+    : "text-2xl xs:text-3xl font-bold font-kanit tracking-tight leading-snug";
+
+  const headlineClass = isDesktop
+    ? `${headlineType} text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.85)]`
+    : `${headlineType} text-[#1F1F1F]`;
+
+  const subClass = isDesktop
+    ? "text-base md:text-xl text-[#F7F1E7] font-kanit font-normal max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] drop-shadow-[0_3px_16px_rgba(0,0,0,0.8)]"
+    : "text-sm xs:text-base text-[#6B5A3A] font-kanit font-normal leading-relaxed max-w-md mx-auto";
+
+  return (
+    <>
+      <div className={isDesktop ? "max-w-5xl" : undefined}>
+        <motion.h1
+          className={headlineClass}
+          style={tone ? { color: tone.headColor, filter: tone.shadow } : undefined}
+          aria-label={aboutHeroData.headline}
+        >
+          {phrases.map((phrase, i) => (
+            <React.Fragment key={phrase}>
+              {/* Mask: padding keeps Thai upper/lower marks from being clipped */}
+              <span aria-hidden="true" className={PHRASE_MASK_CLASS}>
+                <motion.span
+                  className="inline-block"
+                  initial={reduceMotion ? false : { y: 40, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    duration: 0.9,
+                    delay: 0.1 + i * 0.15,
+                    ease: revealEase,
+                  }}
+                >
+                  {phrase}
+                </motion.span>
+              </span>
+              {i < phrases.length - 1 && " "}
+            </React.Fragment>
+          ))}
+        </motion.h1>
+      </div>
+
+      {/* Gold hairline divider — expands from the centre */}
+      <motion.div
+        aria-hidden="true"
+        className="h-[1.5px] w-24 bg-[#CCA369] mx-auto my-4 origin-center"
+        initial={reduceMotion ? false : { scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: 0.7, delay: 0.3, ease: revealEase }}
+      />
+
+      <motion.p
+        className={subClass}
+        style={
+          tone
+            ? ({
+                color: tone.subColor,
+                filter: tone.shadow,
+                "--shimmer-base": tone.subColor,
+              } as React.ComponentProps<typeof motion.p>["style"])
+            : undefined
+        }
+        initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.45, ease: revealEase }}
+      >
+        {hasShimmer ? (
+          <>
+            {subBefore}
+            <span
+              className={`text-gold-shimmer inline-block whitespace-nowrap ${
+                // desktop: inherits --shimmer-base from <p> (CSS default #F7F1E7)
+                isDesktop ? "" : "[--shimmer-base:#6B5A3A]"
+              }`}
+            >
+              {SHIMMER_PHRASE}
+            </span>
+            {subAfter}
+          </>
+        ) : (
+          aboutHeroData.subheadline
+        )}
+      </motion.p>
+    </>
+  );
+}
+
 export default function AboutHero() {
   const shouldReduceMotion = useReducedMotion();
   const [isMounted, setIsMounted] = useState(false);
   const [showFloatingDock, setShowFloatingDock] = useState(false);
   const heroRef = useRef<HTMLElement>(null);
+  const mobileHeroRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     setIsMounted(true);
 
-    const handleScroll = () => {
-      if (typeof window !== "undefined") {
-        // Show floating dock after scrolling past 650px
-        setShowFloatingDock(window.scrollY > 650);
-      }
+    // Floating dock stays hidden while the Hero (and its 5 jump cards) is still on
+    // screen; it slides in once the Hero has scrolled past and the Vision
+    // section (#vision, directly below) takes over the viewport.
+    const updateDock = () => {
+      const hero =
+        heroRef.current && heroRef.current.offsetHeight > 0
+          ? heroRef.current
+          : mobileHeroRef.current;
+      if (!hero) return;
+      const heroBottom = hero.getBoundingClientRect().bottom;
+      setShowFloatingDock(heroBottom <= window.innerHeight * 0.75);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    updateDock();
+    window.addEventListener("scroll", updateDock, { passive: true });
+    window.addEventListener("resize", updateDock);
+    return () => {
+      window.removeEventListener("scroll", updateDock);
+      window.removeEventListener("resize", updateDock);
+    };
   }, []);
 
   // useScroll linked to the 200vh hero section for Desktop Circular Mask Reveal
@@ -54,16 +195,18 @@ export default function AboutHero() {
     (pct) => `circle(${pct}% at 50% 50%)`
   );
 
-  // Expanding gold ring at the border of the mask reveal
-  const ringScale = useTransform(scrollYProgress, [0, 0.75], [0.3, 3.2]);
-  const ringOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.08, 0.65, 0.8],
-    [0, 0.75, 0.75, 0]
-  );
-
   // Prompt indicator fades out on scroll
   const hintOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+
+  // Desktop text tone: dark bronze ink on the cream base → white + shadow
+  // once the expanding circle has revealed the colour photo behind the text
+  const TONE_RANGE = [0.02, 0.18];
+  const headColor = useTransform(scrollYProgress, TONE_RANGE, ["#2B2418", "#FFFFFF"]);
+  const subColor = useTransform(scrollYProgress, TONE_RANGE, ["#6B5A3A", "#F7F1E7"]);
+  const toneShadow = useTransform(scrollYProgress, TONE_RANGE, [
+    "drop-shadow(0px 1px 10px rgba(255, 250, 240, 0.7)) drop-shadow(0px 4px 28px rgba(0, 0, 0, 0))",
+    "drop-shadow(0px 2px 12px rgba(0, 0, 0, 0.65)) drop-shadow(0px 4px 28px rgba(0, 0, 0, 0.85))",
+  ]);
 
   // 5 Jump to Section items
   const navJumps = [
@@ -95,7 +238,10 @@ export default function AboutHero() {
           - Charcoal (#1F1F1F) headline & Bronze (#6B5A3A) subheadline
           - Horizontal smooth swipeable jump cards
          ======================================================== */}
-      <section className="block md:hidden w-full bg-[#F7F1E7] border-b border-[#CCA369]/30 pt-20">
+      <section
+        ref={mobileHeroRef}
+        className="block md:hidden w-full bg-[#F7F1E7] border-b border-[#CCA369]/30 pt-20"
+      >
         {/* Top Part: Bright Full-Color Photo of Charoensin HQ */}
         <div className="relative w-full aspect-[4/3] xs:aspect-[16/11] overflow-hidden bg-[#FAF7F2]">
           <Image
@@ -112,23 +258,12 @@ export default function AboutHero() {
 
         {/* Bottom Part: Headline & Subheadline on Cream Background (#F7F1E7) */}
         <div className="px-4 pt-5 pb-7 text-center space-y-3">
-          <motion.h1
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: csgEase }}
-            className="text-2xl xs:text-3xl font-bold font-kanit tracking-tight text-[#1F1F1F] leading-snug"
-          >
-            {aboutHeroData.headline}
-          </motion.h1>
-
-          <motion.p
-            initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1, ease: csgEase }}
-            className="text-sm xs:text-base text-[#6B5A3A] font-kanit font-normal leading-relaxed max-w-md mx-auto"
-          >
-            {aboutHeroData.subheadline}
-          </motion.p>
+          <div>
+            <HeroTypography
+              variant="mobile"
+              reduceMotion={!!shouldReduceMotion}
+            />
+          </div>
 
           {/* Jump to Section (5 Cards) for Mobile */}
           <div className="pt-3">
@@ -170,47 +305,40 @@ export default function AboutHero() {
          ======================================================== */}
       <section
         ref={heroRef}
-        className="hidden md:block relative w-full h-[200vh] bg-[#161412] text-white"
+        className="hidden md:block relative w-full h-[200vh] bg-[#F4F0E8] text-white"
       >
         {/* Sticky Viewport Container */}
         <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-between">
           {/* ----------------------------------------------------
-              LAYER 1 (BASE): Architectural Luxury Monochrome Building
+              LAYER 1 (BASE): Soft Cream-Gold Architectural Wash
               Shown initially when scroll is at the top
              ---------------------------------------------------- */}
-          <div className="absolute inset-0 z-0">
-            {/* Monochrome / Architectural Sketch Filtered Image */}
+          <div className="absolute inset-0 z-0 bg-[#F4F0E8]">
+            {/* Building photo, sepia-toned & multiplied into the cream base */}
             <div className="relative w-full h-full">
               <Image
                 src="/img/charoensin-building-hq.jpg"
-                alt="สำนักงานใหญ่ กลุ่มบริษัทเจริญสิน (ภาพลายเส้นสถาปัตยกรรม)"
+                alt="สำนักงานใหญ่ กลุ่มบริษัทเจริญสิน (โทนครีมทอง)"
                 fill
                 priority
                 sizes="100vw"
-                className="object-cover object-center filter grayscale contrast-[1.4] brightness-[0.42] scale-105"
+                className="object-cover object-center filter grayscale sepia-[0.55] contrast-[0.9] brightness-[1.08] opacity-45 mix-blend-multiply scale-105"
               />
             </div>
 
+            {/* Light-gold atmosphere: warm wash + soft radial glow */}
+            <div className="absolute inset-0 bg-gradient-to-b from-[#E5D2B0]/30 via-[#CCA369]/10 to-[#E5D2B0]/35 mix-blend-multiply pointer-events-none" />
+            <div className="absolute inset-0 bg-radial from-[#F4F0E8]/60 via-[#F4F0E8]/25 to-[#CCA369]/25 pointer-events-none" />
+
             {/* Architectural Blueprint Grid Pattern Overlay */}
             <div
-              className="absolute inset-0 opacity-[0.14] pointer-events-none"
+              className="absolute inset-0 opacity-[0.12] pointer-events-none"
               style={{
                 backgroundImage:
                   "linear-gradient(to right, #CCA369 1px, transparent 1px), linear-gradient(to bottom, #CCA369 1px, transparent 1px)",
                 backgroundSize: "44px 44px",
               }}
             />
-
-            {/* Vignette Overlay for Crisp Typography Contrast */}
-            <div className="absolute inset-0 bg-radial from-black/20 via-black/60 to-black/90 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#161412] via-transparent to-[#161412]/80 pointer-events-none" />
-
-            {/* Center Golden Beacon Hint */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center">
-              <div className="w-32 h-32 rounded-full border border-[#CCA369]/30 animate-ping opacity-25" />
-              <div className="absolute w-20 h-20 rounded-full border border-[#CCA369]/50 animate-pulse" />
-              <div className="absolute w-2 h-2 rounded-full bg-[#E6C786]" />
-            </div>
           </div>
 
           {/* ----------------------------------------------------
@@ -244,48 +372,28 @@ export default function AboutHero() {
           </motion.div>
 
           {/* ----------------------------------------------------
-              EXPANDING GOLDEN RING BORDER ON THE CIRCULAR MASK
-             ---------------------------------------------------- */}
-          {isMounted && !shouldReduceMotion && (
-            <motion.div
-              style={{
-                scale: ringScale,
-                opacity: ringOpacity,
-              }}
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] rounded-full border-2 border-[#CCA369] shadow-[0_0_50px_rgba(204,163,105,0.7)] pointer-events-none z-15 will-change-transform"
-            />
-          )}
-
-          {/* ----------------------------------------------------
               FOREGROUND CONTENT: HEADLINE & SUBHEADLINE (DESKTOP)
-              Positioned in Center / Upper-Middle of Screen
+              Fixed (no scroll motion). Bottom edge is anchored to the
+              ceiling just above the 4 black lamps in the photo:
+              photo is 3:2 + object-cover, so that line sits at
+              ≈ 50% − 7.5vw from the top on typical desktop viewports.
              ---------------------------------------------------- */}
-          <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-8 w-full pt-32 sm:pt-36 flex flex-col items-center text-center">
-            {/* Main Headline: "สร้างคุณค่า เติบโตอย่างมั่นคง" with Enhanced Drop Shadow */}
-            <motion.h1
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, ease: csgEase }}
-              className="text-4xl md:text-6xl lg:text-7xl font-bold font-kanit tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] drop-shadow-[0_4px_28px_rgba(0,0,0,0.85)] max-w-4xl leading-[1.18]"
-            >
-              {aboutHeroData.headline}
-            </motion.h1>
-
-            {/* Editorial Subheadline with Enhanced Drop Shadow */}
-            <motion.p
-              initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15, ease: csgEase }}
-              className="mt-4 text-base md:text-xl text-[#F7F1E7] font-kanit font-normal max-w-2xl leading-relaxed drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] drop-shadow-[0_3px_16px_rgba(0,0,0,0.8)]"
-            >
-              {aboutHeroData.subheadline}
-            </motion.p>
+          <div className="absolute z-20 inset-x-0 bottom-[calc(50%+7.5vw)] max-w-7xl mx-auto px-6 lg:px-8 w-full flex flex-col items-center text-center">
+            <HeroTypography
+              variant="desktop"
+              reduceMotion={!!shouldReduceMotion}
+              tone={
+                isMounted && !shouldReduceMotion
+                  ? { headColor, subColor, shadow: toneShadow }
+                  : undefined
+              }
+            />
           </div>
 
           {/* ----------------------------------------------------
               BOTTOM BAR: JUMP TO SECTION (5 SECTIONS) - DESKTOP
              ---------------------------------------------------- */}
-          <div className="relative z-20 w-full max-w-7xl mx-auto px-6 lg:px-8 pb-7 flex flex-col items-center">
+          <div className="relative z-20 mt-auto w-full max-w-7xl mx-auto px-6 lg:px-8 pb-7 flex flex-col items-center">
             {/* Desktop Scroll Hint moved directly above the Jump Cards */}
             <motion.div
               style={{ opacity: hintOpacity }}
@@ -331,42 +439,47 @@ export default function AboutHero() {
       </section>
 
       {/* ========================================================
-          FLOATING DOCK BAR (WHEN SCROLLED DOWN)
-          Stays docked at the bottom center for instant navigation
+          FLOATING DOCK BAR (AFTER THE HERO)
+          Hidden over the Hero (avoids overlapping the 5 jump cards);
+          slides up once #vision takes over, slides back down on return.
          ======================================================== */}
-      <AnimatePresence>
-        {showFloatingDock && (
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 30 }}
-            transition={{ duration: 0.35, ease: csgEase }}
-            className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 max-w-[95vw] sm:max-w-max px-2"
-          >
-            <div className="flex items-center gap-1 sm:gap-1.5 p-1.5 rounded-full bg-[#1A1816]/92 backdrop-blur-lg border border-[#CCA369]/45 shadow-[0_12px_36px_rgba(0,0,0,0.55)] overflow-x-auto no-scrollbar">
-              <span className="hidden lg:inline-flex items-center gap-1.5 pl-3 pr-2 text-[11px] font-kanit font-semibold text-[#CCA369] border-r border-[#CCA369]/30 shrink-0">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#CCA369] animate-pulse" />
-                หัวข้อในหน้านี้
-              </span>
+      <motion.div
+        initial={false}
+        animate={
+          showFloatingDock ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }
+        }
+        transition={{
+          duration: shouldReduceMotion ? 0 : 0.35,
+          ease: revealEase,
+        }}
+        aria-hidden={!showFloatingDock}
+        inert={!showFloatingDock}
+        className={`fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-40 max-w-[95vw] sm:max-w-max px-2 ${
+          showFloatingDock ? "" : "pointer-events-none"
+        }`}
+      >
+        <div className="flex items-center gap-1 sm:gap-1.5 p-1.5 rounded-full bg-[#1A1816]/92 backdrop-blur-lg border border-[#CCA369]/45 shadow-[0_12px_36px_rgba(0,0,0,0.55)] overflow-x-auto no-scrollbar">
+          <span className="hidden lg:inline-flex items-center gap-1.5 pl-3 pr-2 text-[11px] font-kanit font-semibold text-[#CCA369] border-r border-[#CCA369]/30 shrink-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#CCA369] animate-pulse" />
+            หัวข้อในหน้านี้
+          </span>
 
-              {navJumps.map((jump) => {
-                const IconComponent = jump.icon;
-                return (
-                  <a
-                    key={jump.id}
-                    href={jump.href}
-                    onClick={(e) => handleScrollTo(e, jump.href)}
-                    className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/10 text-xs sm:text-[13px] font-kanit font-normal transition-all shrink-0 hover:border hover:border-[#CCA369]/40"
-                  >
-                    <IconComponent className="w-3.5 h-3.5 text-[#CCA369]" />
-                    <span>{jump.label}</span>
-                  </a>
-                );
-              })}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          {navJumps.map((jump) => {
+            const IconComponent = jump.icon;
+            return (
+              <a
+                key={jump.id}
+                href={jump.href}
+                onClick={(e) => handleScrollTo(e, jump.href)}
+                className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-full text-white/90 hover:text-white hover:bg-white/10 text-xs sm:text-[13px] font-kanit font-normal transition-all shrink-0 hover:border hover:border-[#CCA369]/40"
+              >
+                <IconComponent className="w-3.5 h-3.5 text-[#CCA369]" />
+                <span>{jump.label}</span>
+              </a>
+            );
+          })}
+        </div>
+      </motion.div>
     </>
   );
 }

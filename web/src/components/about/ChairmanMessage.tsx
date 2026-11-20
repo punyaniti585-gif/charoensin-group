@@ -38,16 +38,17 @@ export default function ChairmanMessage() {
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Left: Chairman Portrait with Gold Ring Frame & Signature */}
             <div className="lg:col-span-4 flex flex-col items-center text-center">
-              {/* Circular Portrait with Prestigious Double Gold Ring */}
-              <div className="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-60 lg:h-60 rounded-full p-1.5 bg-gradient-to-br from-[#E6C786] via-[#CCA369] to-[#9A7B3E] shadow-xl ring-4 ring-[#CCA369]/20 mb-4">
-                <div className="w-full h-full rounded-full overflow-hidden border-2 border-white relative bg-white">
+              {/* Cream circular portrait — same frame as the Leadership Team chairman card */}
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-60 lg:h-60 rounded-full overflow-hidden border-4 border-[#F7F1E7] shadow-md bg-[#F7F1E7] mb-4">
+                {/* Headroom: inset keeps the cream circle clear above the hair */}
+                <div className="absolute inset-x-[7%] top-[12%] bottom-0">
                   <Image
                     src={chairmanMessage.image}
                     alt={chairmanMessage.name}
                     fill
                     priority
                     sizes="(max-width: 640px) 176px, 240px"
-                    className="object-cover object-top origin-top filter contrast-[1.04]"
+                    className="object-cover object-top origin-top"
                   />
                 </div>
               </div>
