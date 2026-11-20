@@ -110,3 +110,42 @@ h1, h2, h3, h4, h5, h6 {
 .gold-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #B39B6B;
 }
+
+/* ========================================================
+   GOLD SHIMMER TEXT (About Hero "90 ปี")
+   Base colour via --shimmer-base (set per usage, default cream);
+   a slow gold band sweeps across the text
+   ======================================================== */
+@keyframes gold-shimmer {
+  0% { background-position: 150% 0; }
+  100% { background-position: -50% 0; }
+}
+
+.text-gold-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    var(--shimmer-base, #F7F1E7) 0%,
+    var(--shimmer-base, #F7F1E7) 38%,
+    #CCA369 46%,
+    #F3DFB2 50%,
+    #CCA369 54%,
+    var(--shimmer-base, #F7F1E7) 62%,
+    var(--shimmer-base, #F7F1E7) 100%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gold-shimmer 5.5s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gold-shimmer {
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: inherit;
+  }
+}

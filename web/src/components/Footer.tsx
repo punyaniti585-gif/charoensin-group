@@ -39,10 +39,10 @@ export default function Footer() {
     {
       title: "ประวัติของเรา",
       links: [
-        { label: "ประวัติความเป็นมา 90+ ปี", href: "https://csgok.sfinsulations.com/visionbyclaude/", isExternal: true },
-        { label: "วิสัยทัศน์และพันธกิจ", href: "https://csgok.sfinsulations.com/visionbyclaude/#vision", isExternal: true },
-        { label: "ค่านิยมและปรัชญาองค์กร", href: "https://csgok.sfinsulations.com/visionbyclaude/#values", isExternal: true },
-        { label: "คณะผู้บริหารและผู้นำของเรา", href: "https://csgok.sfinsulations.com/visionbyclaude/#board", isExternal: true },
+        { label: "ประวัติความเป็นมา 90+ ปี", href: "/about#history", isExternal: false },
+        { label: "วิสัยทัศน์และพันธกิจ", href: "/about#vision", isExternal: false },
+        { label: "ค่านิยมและปรัชญาองค์กร", href: "/about#values", isExternal: false },
+        { label: "คณะผู้บริหารและผู้นำของเรา", href: "/about#leadership", isExternal: false },
         { label: "มูลนิธิวงษ์เจริญสิน", href: "https://csgok.sfinsulations.com/wongcharoensinfoundation2026/", isExternal: true },
       ],
     },
