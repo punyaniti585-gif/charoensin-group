@@ -344,7 +344,7 @@ export const navigationMenu = [
   {
     id: "03",
     label: "ธุรกิจของเรา",
-    href: "https://csgok.sfinsulations.com/charoensin-our-business-v3/",
+    href: "/businesses",
     isMega: true,
     megaType: "business" as const,
   },

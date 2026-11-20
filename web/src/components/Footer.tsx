@@ -28,12 +28,12 @@ export default function Footer() {
     {
       title: "ธุรกิจของเรา",
       links: [
-        { label: "ภาพรวมธุรกิจทั้งหมด", href: "https://csgok.sfinsulations.com/charoensin-our-business-v3/", isExternal: true },
-        { label: "ธุรกิจอสังหาริมทรัพย์", href: "#businesses", isExternal: false },
-        { label: "ธุรกิจผลิตหนังและรองเท้า", href: "#businesses", isExternal: false },
-        { label: "ธุรกิจสิ่งทอ", href: "#businesses", isExternal: false },
-        { label: "ธุรกิจเคมีภัณฑ์", href: "#businesses", isExternal: false },
-        { label: "ธุรกิจอื่นๆ ในเครือ", href: "#businesses", isExternal: false },
+        { label: "ภาพรวมธุรกิจทั้งหมด", href: "/businesses", isExternal: false },
+        { label: "ธุรกิจอสังหาริมทรัพย์", href: "/businesses#real-estate", isExternal: false },
+        { label: "ธุรกิจผลิตหนังและรองเท้า", href: "/businesses#leather-footwear", isExternal: false },
+        { label: "ธุรกิจสิ่งทอ", href: "/businesses#non-woven", isExternal: false },
+        { label: "ธุรกิจเคมีภัณฑ์", href: "/businesses#chemical", isExternal: false },
+        { label: "ธุรกิจอื่นๆ ในเครือ", href: "/businesses#other", isExternal: false },
       ],
     },
     {

@@ -135,7 +135,13 @@ export default function Navbar() {
                                       {cat.number}
                                     </span>
                                     <h4 className="text-sm font-semibold text-[#1F1F1F] font-kanit group-hover/cat:text-[#6B5A3A] transition-colors">
-                                      {cat.titleTh.replace(/^[0-9]\./, "")}
+                                      <Link
+                                        href={`/businesses#${cat.key}`}
+                                        onClick={() => setActiveMega(null)}
+                                        className="hover:underline underline-offset-4 decoration-[#CCA369]"
+                                      >
+                                        {cat.titleTh.replace(/^[0-9]\./, "")}
+                                      </Link>
                                     </h4>
                                   </div>
                                   <p className="text-[11px] text-[#1F1F1F]/70 mb-3 line-clamp-2 leading-relaxed">
