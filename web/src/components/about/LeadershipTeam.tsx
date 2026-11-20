@@ -162,19 +162,18 @@ export default function LeadershipTeam() {
                         : "border-2 border-[#CCA369]/40 shadow-[0_12px_40px_rgba(107,90,58,0.1)] z-1"
                     }`}
                   >
-                    <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-[#F7F1E7] shadow-md bg-[#F7F1E7] mb-5">
-                      {/* Headroom: inset keeps the cream circle clear above the hair */}
-                      <div className="absolute inset-x-[7%] top-[12%] bottom-0">
-                        <Image
-                          src={groupChairman.image}
-                          alt={groupChairman.name}
-                          fill
-                          sizes="(max-width: 640px) 144px, 176px"
-                          className={`object-cover object-top origin-top transition-transform duration-500 ${
-                            isHovered ? "scale-[1.03]" : "scale-100"
-                          }`}
-                        />
-                      </div>
+                    <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden shadow-md bg-[#F7F1E7] mb-5">
+                      {/* Portrait scaled 1.15 from the top + nudged down 6%: the suit runs past
+                          the circle and is clipped flush along its bottom curve; ~7% headroom */}
+                      <Image
+                        src={groupChairman.image}
+                        alt={groupChairman.name}
+                        fill
+                        sizes="(max-width: 640px) 144px, 176px"
+                        className={`object-cover object-top origin-top translate-y-[6%] transition-transform duration-500 ${
+                          isHovered ? "scale-[1.18]" : "scale-[1.15]"
+                        }`}
+                      />
                     </div>
                     <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#FAF7F2] border border-[#CCA369]/40 text-[#6B5A3A] text-[11px] font-semibold tracking-wider font-kanit mb-2">
                       <Crown className="w-3 h-3 text-[#CCA369]" />
@@ -233,19 +232,18 @@ export default function LeadershipTeam() {
                           : "border border-[#CCA369]/35 shadow-xs z-1"
                       }`}
                     >
-                      <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden border-3 border-[#F7F1E7] shadow-sm bg-[#F7F1E7] mb-4">
-                        {/* Headroom: inset keeps the cream circle clear above the hair */}
-                        <div className="absolute inset-x-[7%] top-[12%] bottom-0">
-                          <Image
-                            src={person.image}
-                            alt={person.name}
-                            fill
-                            sizes="128px"
-                            className={`object-cover object-top origin-top transition-transform duration-500 ${
-                              isHovered ? "scale-[1.03]" : "scale-100"
-                            }`}
-                          />
-                        </div>
+                      <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full overflow-hidden shadow-sm bg-[#F7F1E7] mb-4">
+                        {/* Portrait scaled 1.15 from the top + nudged down 6%: the suit runs past
+                            the circle and is clipped flush along its bottom curve; ~7% headroom */}
+                        <Image
+                          src={person.image}
+                          alt={person.name}
+                          fill
+                          sizes="128px"
+                          className={`object-cover object-top origin-top translate-y-[6%] transition-transform duration-500 ${
+                            isHovered ? "scale-[1.18]" : "scale-[1.15]"
+                          }`}
+                        />
                       </div>
                       <h5 className="text-base sm:text-lg font-bold font-kanit text-[#1F1F1F]">
                         {person.name}
@@ -297,19 +295,18 @@ export default function LeadershipTeam() {
                           : "border border-[#CCA369]/30 shadow-2xs z-1"
                       }`}
                     >
-                      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-[#F7F1E7] shadow-2xs bg-[#F7F1E7] mb-3">
-                        {/* Headroom: inset keeps the cream circle clear above the hair */}
-                        <div className="absolute inset-x-[7%] top-[12%] bottom-0">
-                          <Image
-                            src={person.image}
-                            alt={person.name}
-                            fill
-                            sizes="96px"
-                            className={`object-cover object-top origin-top transition-transform duration-500 ${
-                              isHovered ? "scale-[1.03]" : "scale-100"
-                            }`}
-                          />
-                        </div>
+                      <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shadow-2xs bg-[#F7F1E7] mb-3">
+                        {/* Portrait scaled 1.15 from the top + nudged down 6%: the suit runs past
+                            the circle and is clipped flush along its bottom curve; ~7% headroom */}
+                        <Image
+                          src={person.image}
+                          alt={person.name}
+                          fill
+                          sizes="96px"
+                          className={`object-cover object-top origin-top translate-y-[6%] transition-transform duration-500 ${
+                            isHovered ? "scale-[1.18]" : "scale-[1.15]"
+                          }`}
+                        />
                       </div>
                       <h6 className="text-xs sm:text-sm font-bold font-kanit text-[#1F1F1F] line-clamp-1">
                         {person.name}
@@ -375,19 +372,18 @@ export default function LeadershipTeam() {
                         : "border border-[#CCA369]/35 shadow-2xs z-1"
                     }`}
                   >
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden border-2 border-[#F7F1E7] shadow-2xs bg-[#F7F1E7] mb-3">
-                      {/* Headroom: inset keeps the cream circle clear above the hair */}
-                      <div className="absolute inset-x-[7%] top-[12%] bottom-0">
-                        <Image
-                          src={person.image}
-                          alt={person.name}
-                          fill
-                          sizes="96px"
-                          className={`object-cover object-top origin-top transition-transform duration-500 ${
-                            isHovered ? "scale-[1.03]" : "scale-100"
-                          }`}
-                        />
-                      </div>
+                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden shadow-2xs bg-[#F7F1E7] mb-3">
+                      {/* Portrait scaled 1.15 from the top + nudged down 6%: the suit runs past
+                          the circle and is clipped flush along its bottom curve; ~7% headroom */}
+                      <Image
+                        src={person.image}
+                        alt={person.name}
+                        fill
+                        sizes="96px"
+                        className={`object-cover object-top origin-top translate-y-[6%] transition-transform duration-500 ${
+                          isHovered ? "scale-[1.18]" : "scale-[1.15]"
+                        }`}
+                      />
                     </div>
                     <h6 className="text-xs sm:text-sm font-bold font-kanit text-[#1F1F1F] line-clamp-2 min-h-[32px] flex items-center justify-center">
                       {person.name}
@@ -451,17 +447,16 @@ export default function LeadershipTeam() {
               {/* Modal Content */}
               <div className="flex flex-col items-center text-center pt-2">
                 {/* Person Portrait with Luxury Gold Halo */}
-                <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden border-4 border-white shadow-xl bg-[#F7F1E7] mb-5 ring-4 ring-[#CCA369]/30">
-                  {/* Headroom: inset keeps the cream circle clear above the hair */}
-                  <div className="absolute inset-x-[7%] top-[12%] bottom-0">
-                    <Image
-                      src={selectedPerson.image}
-                      alt={selectedPerson.name}
-                      fill
-                      sizes="176px"
-                      className="object-cover object-top"
-                    />
-                  </div>
+                <div className="relative w-36 h-36 sm:w-44 sm:h-44 rounded-full overflow-hidden shadow-xl bg-[#F7F1E7] mb-5 ring-4 ring-[#CCA369]/30">
+                  {/* Portrait scaled 1.15 from the top + nudged down 6%: the suit runs past
+                      the circle and is clipped flush along its bottom curve; ~7% headroom */}
+                  <Image
+                    src={selectedPerson.image}
+                    alt={selectedPerson.name}
+                    fill
+                    sizes="176px"
+                    className="object-cover object-top origin-top scale-[1.15] translate-y-[6%]"
+                  />
                 </div>
 
                 {/* Category Pill Tag */}

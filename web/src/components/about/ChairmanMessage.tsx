@@ -39,18 +39,17 @@ export default function ChairmanMessage() {
             {/* Left: Chairman Portrait with Gold Ring Frame & Signature */}
             <div className="lg:col-span-4 flex flex-col items-center text-center">
               {/* Cream circular portrait — same frame as the Leadership Team chairman card */}
-              <div className="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-60 lg:h-60 rounded-full overflow-hidden border-4 border-[#F7F1E7] shadow-md bg-[#F7F1E7] mb-4">
-                {/* Headroom: inset keeps the cream circle clear above the hair */}
-                <div className="absolute inset-x-[7%] top-[12%] bottom-0">
-                  <Image
-                    src={chairmanMessage.image}
-                    alt={chairmanMessage.name}
-                    fill
-                    priority
-                    sizes="(max-width: 640px) 176px, 240px"
-                    className="object-cover object-top origin-top"
-                  />
-                </div>
+              <div className="relative w-44 h-44 sm:w-52 sm:h-52 lg:w-60 lg:h-60 rounded-full overflow-hidden shadow-md bg-[#F7F1E7] mb-4">
+                {/* Portrait scaled 1.15 from the top + nudged down 6%: the suit runs past
+                    the circle and is clipped flush along its bottom curve; ~7% headroom */}
+                <Image
+                  src={chairmanMessage.image}
+                  alt={chairmanMessage.name}
+                  fill
+                  priority
+                  sizes="(max-width: 640px) 176px, 240px"
+                  className="object-cover object-top origin-top scale-[1.15] translate-y-[6%]"
+                />
               </div>
 
               <h3 className="text-xl sm:text-2xl font-bold font-kanit text-[#1F1F1F]">

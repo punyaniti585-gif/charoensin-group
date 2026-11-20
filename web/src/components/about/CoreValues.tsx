@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { coreValuesData, CoreValueItem } from "@/data/about-data";
 import { csgEase } from "@/components/ui/MotionWrapper";
 import {
@@ -14,21 +14,40 @@ import {
   FileText,
   ExternalLink,
   Sparkles,
+  ZoomIn,
+  X,
 } from "lucide-react";
 
 export default function CoreValues() {
   const shouldReduceMotion = useReducedMotion();
   const [isMounted, setIsMounted] = useState(false);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Lightbox: close on Escape + lock page scroll while open
+  useEffect(() => {
+    if (!isLightboxOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsLightboxOpen(false);
+    };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [isLightboxOpen]);
 
   const { values, oldPhoto, oldPhotoCaption, codeOfConduct } = coreValuesData;
 
   const valueIcons = [ShieldCheck, HeartHandshake, Mountain, Users2];
 
   return (
+    <>
     <section
       id="values"
       className="relative w-full py-12 md:py-16 bg-[#F7F1E7] overflow-hidden scroll-mt-28 border-b border-[#CCA369]/25"
@@ -63,16 +82,34 @@ export default function CoreValues() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: csgEase }}
-            className="lg:col-span-5 relative rounded-3xl overflow-hidden border border-[#CCA369]/40 shadow-[0_12px_36px_rgba(107,90,58,0.12)] bg-[#1F1F1F] min-h-[300px] lg:min-h-[480px] flex flex-col justify-end"
+            role="button"
+            tabIndex={0}
+            aria-label={`ดูภาพขยาย: ${oldPhotoCaption}`}
+            onClick={() => setIsLightboxOpen(true)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setIsLightboxOpen(true);
+              }
+            }}
+            className="group lg:col-span-5 relative rounded-3xl overflow-hidden border border-[#CCA369]/40 shadow-[0_12px_36px_rgba(107,90,58,0.12)] bg-[#1F1F1F] min-h-[300px] lg:min-h-[480px] flex flex-col justify-end cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCA369] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F7F1E7]"
           >
             <Image
               src={oldPhoto}
               alt={oldPhotoCaption}
               fill
               sizes="(max-width: 1024px) 100vw, 500px"
-              className="object-cover object-center filter contrast-[1.05] sepia-[0.15]"
+              className="object-cover object-center filter contrast-[1.05] sepia-[0.15] transition-transform duration-700 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent" />
+
+            {/* Zoom affordance (top-right corner) */}
+            <span
+              aria-hidden="true"
+              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/45 backdrop-blur-xs border border-white/30 text-white flex items-center justify-center shadow-md transition-all duration-300 group-hover:bg-[#CCA369] group-hover:border-[#CCA369] group-hover:text-[#1F1F1F] group-hover:scale-110"
+            >
+              <ZoomIn className="w-4 h-4" />
+            </span>
             <div className="relative p-6 sm:p-8 text-white z-10">
               <span className="text-xs uppercase font-inter tracking-[0.2em] text-[#CCA369] font-bold block mb-1">
                 HISTORIC HERITAGE
@@ -185,5 +222,65 @@ export default function CoreValues() {
         </motion.div>
       </div>
     </section>
+
+    {/* ========================================================
+        LIGHTBOX: Historic Heritage photograph (full size)
+        Click backdrop / X / Escape to close
+       ======================================================== */}
+    <AnimatePresence>
+      {isLightboxOpen && (
+        <motion.div
+          key="heritage-lightbox"
+          role="dialog"
+          aria-modal="true"
+          aria-label={oldPhotoCaption}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: shouldReduceMotion ? 0 : 0.25, ease: csgEase }}
+          onClick={() => setIsLightboxOpen(false)}
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 sm:p-8 cursor-zoom-out"
+        >
+          {/* Close button */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              setIsLightboxOpen(false);
+            }}
+            aria-label="ปิดภาพขยาย"
+            autoFocus
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-11 h-11 rounded-full bg-white/10 hover:bg-[#CCA369] border border-white/30 hover:border-[#CCA369] text-white hover:text-[#1F1F1F] flex items-center justify-center transition-all duration-200 cursor-pointer"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          {/* Full-size image (click on the image itself does not close) */}
+          <motion.figure
+            initial={shouldReduceMotion ? false : { scale: 0.96, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={shouldReduceMotion ? undefined : { scale: 0.96, opacity: 0 }}
+            transition={{ duration: 0.3, ease: csgEase }}
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full max-w-6xl cursor-default"
+          >
+            <div className="relative w-full h-[72vh] sm:h-[80vh]">
+              <Image
+                src={oldPhoto}
+                alt={oldPhotoCaption}
+                fill
+                sizes="(max-width: 1280px) 100vw, 1152px"
+                quality={95}
+                className="object-contain"
+              />
+            </div>
+            <figcaption className="mt-3 text-center text-xs sm:text-sm font-sarabun text-white/85">
+              {oldPhotoCaption}
+            </figcaption>
+          </motion.figure>
+        </motion.div>
+      )}
+    </AnimatePresence>
+    </>
   );
 }
