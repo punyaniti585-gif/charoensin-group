@@ -331,14 +331,14 @@ export const navigationMenu = [
   {
     id: "02",
     label: "เกี่ยวกับเรา",
-    href: "https://csgok.sfinsulations.com/visionbyclaude/",
+    href: "/about",
     isMega: false,
     children: [
-      { label: "วิสัยทัศน์", href: "https://csgok.sfinsulations.com/visionbyclaude/#vision" },
-      { label: "พันธกิจ", href: "https://csgok.sfinsulations.com/visionbyclaude/#vision" },
-      { label: "ค่านิยมองค์กร", href: "https://csgok.sfinsulations.com/visionbyclaude/#values" },
-      { label: "ผู้นำของเรา", href: "https://csgok.sfinsulations.com/visionbyclaude/#board" },
-      { label: "อัตลักษณ์องค์กร", href: "https://csgok.sfinsulations.com/visionbyclaude/" },
+      { label: "วิสัยทัศน์", href: "/about#vision" },
+      { label: "พันธกิจ", href: "/about#mission" },
+      { label: "ประวัติความเป็นมา", href: "/about#history" },
+      { label: "ค่านิยมองค์กร", href: "/about#values" },
+      { label: "ผู้นำของเรา", href: "/about#leadership" },
     ],
   },
   {
