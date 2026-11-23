@@ -136,7 +136,7 @@ export default function BusinessCategories() {
                           </div>
 
                           <Link
-                            href="https://csgok.sfinsulations.com/charoensin-our-business-v3/"
+                            href={`/businesses#${cat.key}`}
                             className="inline-flex items-center gap-2 text-xs font-semibold text-[#B39B6B] hover:text-white transition-colors group/btn"
                           >
                             <span>สำรวจธุรกิจกลุ่มนี้</span>
@@ -217,7 +217,7 @@ export default function BusinessCategories() {
                     </div>
 
                     <Link
-                      href="https://csgok.sfinsulations.com/charoensin-our-business-v3/"
+                      href={`/businesses#${cat.key}`}
                       className="inline-flex items-center gap-1.5 text-xs text-[#B39B6B] font-medium"
                     >
                       <span>ดูรายละเอียดกลุ่มธุรกิจ</span>

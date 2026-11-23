@@ -516,11 +516,9 @@ export default function SustainabilityAndPhilosophy() {
                         <div className="relative w-full h-[1px] bg-[#B39B6B]/30 overflow-hidden">
                           <motion.div
                             initial={false}
-                            animate={{
-                              width: isActive ? "100%" : "0%",
-                            }}
+                            animate={{ scaleX: isActive ? 1 : 0 }}
                             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-                            className="absolute top-0 left-0 h-full bg-[#6B5A3A]"
+                            className="absolute inset-0 origin-left bg-[#6B5A3A]"
                           />
                         </div>
 
