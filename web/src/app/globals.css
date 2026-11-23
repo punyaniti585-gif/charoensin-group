@@ -110,3 +110,78 @@ h1, h2, h3, h4, h5, h6 {
 .gold-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #B39B6B;
 }
+
+/* ========================================================
+   GOLD SHIMMER TEXT (About Hero "90 ปี", Businesses Hero title)
+   Base colour via --shimmer-base (set per usage, default cream);
+   a slow gold band sweeps across the text
+   ======================================================== */
+/* Position stays within 100% → 0% so the 250%-wide gradient always covers
+   the text (outside that range parts of the text had no background and,
+   with background-clip:text, vanished). Hold at the end = pause between sweeps. */
+@keyframes gold-shimmer {
+  0% { background-position: 100% 0; }
+  70% { background-position: 0% 0; }
+  100% { background-position: 0% 0; }
+}
+
+.text-gold-shimmer {
+  background-image: linear-gradient(
+    110deg,
+    var(--shimmer-base, #F7F1E7) 0%,
+    var(--shimmer-base, #F7F1E7) 38%,
+    #CCA369 46%,
+    #F3DFB2 50%,
+    #CCA369 54%,
+    var(--shimmer-base, #F7F1E7) 62%,
+    var(--shimmer-base, #F7F1E7) 100%
+  );
+  background-size: 250% 100%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gold-shimmer 5.5s cubic-bezier(0.45, 0, 0.55, 1) 1.2s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-gold-shimmer {
+    animation: none;
+    background: none;
+    -webkit-text-fill-color: currentColor;
+    color: inherit;
+  }
+}
+
+/* ========================================================
+   AMBIENT LOOPS (Home hero / stats) — pure CSS keyframes on
+   transform + opacity so they run on the compositor thread
+   instead of a JS animation loop on the main thread.
+   ======================================================== */
+@keyframes ken-burns {
+  0%, 100% { transform: translateX(-1%) scale(1.02); }
+  50% { transform: translateX(1%) scale(1.05); }
+}
+@keyframes light-sweep-hero {
+  0%, 100% { transform: translateX(-20%); opacity: 0.35; }
+  50% { transform: translateX(160%); opacity: 0.75; }
+}
+@keyframes light-sweep-stats {
+  0%, 100% { transform: translateX(-30%); opacity: 0.35; }
+  50% { transform: translateX(150%); opacity: 0.8; }
+}
+.animate-ken-burns { animation: ken-burns 35s ease-in-out infinite; will-change: transform; }
+.animate-light-sweep-hero { animation: light-sweep-hero 24s ease-in-out infinite; will-change: transform, opacity; }
+.animate-light-sweep-stats { animation: light-sweep-stats 18s ease-in-out infinite; will-change: transform, opacity; }
+@keyframes ring-rotate {
+  to { transform: rotate(360deg); }
+}
+.animate-spin-60 { animation: ring-rotate 60s linear infinite; will-change: transform; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ken-burns,
+  .animate-light-sweep-hero,
+  .animate-light-sweep-stats,
+  .animate-spin-60 { animation: none; }
+}

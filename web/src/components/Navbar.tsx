@@ -26,11 +26,20 @@ export default function Navbar() {
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
       setScrolled(window.scrollY > 15);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const toggleMobileSubmenu = (id: string) => {
@@ -41,7 +50,7 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-[#F2EFE9]/90 backdrop-blur-md shadow-sm border-b border-[#B39B6B]/25 py-2"
+          ? "bg-[#F2EFE9]/95 shadow-sm border-b border-[#B39B6B]/25 py-2"
           : "bg-white/25 backdrop-blur-md border-b border-white/25 py-2 sm:py-2.5"
       }`}
     >
@@ -135,7 +144,13 @@ export default function Navbar() {
                                       {cat.number}
                                     </span>
                                     <h4 className="text-sm font-semibold text-[#1F1F1F] font-kanit group-hover/cat:text-[#6B5A3A] transition-colors">
-                                      {cat.titleTh.replace(/^[0-9]\./, "")}
+                                      <Link
+                                        href={`/businesses#${cat.key}`}
+                                        onClick={() => setActiveMega(null)}
+                                        className="hover:underline underline-offset-4 decoration-[#CCA369]"
+                                      >
+                                        {cat.titleTh.replace(/^[0-9]\./, "")}
+                                      </Link>
                                     </h4>
                                   </div>
                                   <p className="text-[11px] text-[#1F1F1F]/70 mb-3 line-clamp-2 leading-relaxed">
