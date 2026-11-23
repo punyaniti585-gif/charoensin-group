@@ -3,7 +3,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useScroll, useTransform, useReducedMotion } from "framer-motion";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useReducedMotion,
+  useMotionValueEvent,
+} from "framer-motion";
 import { brandAssets } from "@/data/asset-map";
 import { ArrowDown, ArrowUpRight } from "lucide-react";
 
@@ -33,7 +39,8 @@ export default function HeroCover() {
   }, []);
 
   // =========================================================================
-  // SCROLL PROGRESS TRACKING (220vh sticky container for 3-stage cinematic sequence)
+  // SCROLL PROGRESS TRACKING (160vh sticky container → only 60vh of scroll travel)
+  // Direct useTransform (no spring) so every layer tracks the finger 1:1.
   // =========================================================================
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -43,31 +50,29 @@ export default function HeroCover() {
   // Scroll Parallax Pan: Sky down to Real Charoensin Headquarters Building
   const rawBgY = useTransform(scrollYProgress, [0, 1], ["0%", "-33%"]);
 
-  // Stage 1 -> 2: Vertical White Logo in Clear Sky (fades out smoothly on scroll)
-  const rawWhiteLogoOpacity = useTransform(scrollYProgress, [0, 0.22, 0.38], [1, 0.7, 0]);
-  const rawWhiteLogoScale = useTransform(scrollYProgress, [0, 0.38], [1, 1.18]);
-  const rawWhiteLogoY = useTransform(scrollYProgress, [0, 0.38], [0, -35]);
+  // Stage 1 -> 2: Vertical White Logo in Clear Sky (fades out quickly on scroll)
+  const rawWhiteLogoOpacity = useTransform(scrollYProgress, [0, 0.14, 0.28], [1, 0.7, 0]);
+  const rawWhiteLogoScale = useTransform(scrollYProgress, [0, 0.28], [1, 1.18]);
+  const rawWhiteLogoY = useTransform(scrollYProgress, [0, 0.28], [0, -35]);
 
   // Stage 2 -> 3: 80th Anniversary Gold Hub & Architectural Glass Ring
-  const rawHubOpacity = useTransform(scrollYProgress, [0.26, 0.50], [0, 1]);
-  const rawHubScale = useTransform(scrollYProgress, [0.26, 0.50], [0.82, 1]);
-  const rawHubY = useTransform(scrollYProgress, [0.26, 0.50, 1], [30, 0, -18]);
+  const rawHubOpacity = useTransform(scrollYProgress, [0.14, 0.4], [0, 1]);
+  const rawHubScale = useTransform(scrollYProgress, [0.14, 0.4], [0.82, 1]);
+  const rawHubY = useTransform(scrollYProgress, [0.14, 0.4, 1], [30, 0, -18]);
 
-  // Stage 3: 5 Editorial Portrait Cards (Real Estate, Leather, Chemical, Textile, Other)
-  const rawCardsOpacity = useTransform(scrollYProgress, [0.46, 0.70], [0, 1]);
-  const rawCardsScale = useTransform(scrollYProgress, [0.46, 0.70], [0.88, 1]);
-  // Top Cards (01, 02) subtle upward glide on deep scroll
-  const rawTopCardsY = useTransform(scrollYProgress, [0.46, 1], [25, -12]);
-  // Side Cards (03, 04) subtle upward glide on deep scroll
-  const rawSideCardsY = useTransform(scrollYProgress, [0.46, 1], [25, -12]);
-  // Bottom Center Card (05 - Other Ventures): settles smoothly at door frame level without rising into 80th logo or "อาคารเจริญสิน"
-  const rawOtherCardY = useTransform(scrollYProgress, [0.46, 0.72, 1], [30, 0, 0]);
+  // Stage 3: all 5 cards reveal together in ONE timed beat once the scroll
+  // crosses this threshold (no per-card scroll math on every frame).
+  const CARDS_THRESHOLD = 0.32;
+  const [cardsIn, setCardsIn] = useState(false);
+  useMotionValueEvent(scrollYProgress, "change", (v) => {
+    setCardsIn(v >= CARDS_THRESHOLD);
+  });
 
-  // End-of-Section Warm Gold Overlay & Subtle Blur (fades in from scroll 0.65 to 1.0)
-  const rawGoldOverlayOpacity = useTransform(scrollYProgress, [0.65, 1], [0, 0.78]);
+  // End-of-Section Warm Gold Overlay (fades in toward the end of the travel)
+  const rawGoldOverlayOpacity = useTransform(scrollYProgress, [0.5, 1], [0, 0.78]);
 
   // Initial Scroll Cue Prompt (fades out as soon as scroll begins)
-  const rawPromptOpacity = useTransform(scrollYProgress, [0, 0.12], [1, 0]);
+  const rawPromptOpacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
 
   // Accessibility fallbacks if prefers-reduced-motion is active
   const bgY = shouldReduceMotion ? "-20%" : rawBgY;
@@ -78,13 +83,13 @@ export default function HeroCover() {
   const hubOpacity = shouldReduceMotion ? 1 : rawHubOpacity;
   const hubScale = shouldReduceMotion ? 1 : rawHubScale;
   const hubY = shouldReduceMotion ? 0 : rawHubY;
-  const cardsOpacity = shouldReduceMotion ? 1 : rawCardsOpacity;
-  const cardsScale = shouldReduceMotion ? 1 : rawCardsScale;
-  const rawCardsPointer = useTransform(scrollYProgress, (v) => (v >= 0.4 ? "auto" : "none"));
-  const cardsPointer = shouldReduceMotion ? "auto" : rawCardsPointer;
-  const topCardsY = shouldReduceMotion ? 0 : rawTopCardsY;
-  const sideCardsY = shouldReduceMotion ? 0 : rawSideCardsY;
-  const otherCardY = shouldReduceMotion ? 0 : rawOtherCardY;
+  const showCards = shouldReduceMotion || cardsIn;
+  const cardsAnimate = showCards
+    ? { opacity: 1, scale: 1, y: 0 }
+    : { opacity: 0, scale: 0.94, y: 24 };
+  const cardsTransition = shouldReduceMotion
+    ? { duration: 0 }
+    : { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const };
   const promptOpacity = shouldReduceMotion ? 0 : rawPromptOpacity;
 
   // 5 Radial Pillars with Editorial Portrait Frame layout (แบบที่ 1)
@@ -164,7 +169,7 @@ export default function HeroCover() {
   return (
     <section
       ref={containerRef}
-      className={`relative w-full ${shouldReduceMotion ? "min-h-screen" : "h-[220vh]"
+      className={`relative w-full ${shouldReduceMotion ? "min-h-screen" : "h-[160vh]"
         } bg-[#F7F1E7]`}
     >
       {/* Sticky Viewport Container: Locks full height for scroll-driven sequence */}
@@ -254,7 +259,7 @@ export default function HeroCover() {
            ======================================================== */}
         <motion.div
           style={{ opacity: goldOverlayOpacity }}
-          className="absolute inset-0 z-10 bg-[#CCA369] backdrop-blur-[3px] pointer-events-none will-change-[opacity]"
+          className="absolute inset-0 z-10 bg-[#CCA369] pointer-events-none will-change-[opacity]"
         />
 
         {/* Top spacer for navbar headroom */}
@@ -291,8 +296,8 @@ export default function HeroCover() {
           {/* Desktop Radial View (lg and up) */}
           <div className="hidden lg:block relative w-full h-[560px] xl:h-[620px] max-h-[calc(100vh-130px)]">
             {/* SVG Connector Arrows Layer */}
-            <motion.svg
-              style={{ opacity: cardsOpacity }}
+            {/* Connector curves are only visible on card hover, so they need no scroll fade */}
+            <svg
               viewBox="0 0 1000 600"
               preserveAspectRatio="none"
               className="absolute inset-0 w-full h-full pointer-events-none z-10 overflow-visible"
@@ -363,7 +368,7 @@ export default function HeroCover() {
                   </g>
                 );
               })}
-            </motion.svg>
+            </svg>
 
             {/* ----------------------------------------------------
                 CENTRAL HUB: 80TH ANNIVERSARY GOLD LOGO + FROSTED WHITE GLASS RING
@@ -377,7 +382,7 @@ export default function HeroCover() {
               className="absolute left-1/2 top-[34%] xl:top-[35%] -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center select-none"
             >
               {/* Frosted White Glass Circle & Compass Rings */}
-              <div className="relative w-64 h-64 xl:w-72 xl:h-72 flex items-center justify-center rounded-full bg-white/70 backdrop-blur-md border-2 border-white/95 shadow-[0_12px_44px_rgba(255,255,255,0.7),0_8px_32px_rgba(140,104,50,0.25)]">
+              <div className="relative w-64 h-64 xl:w-72 xl:h-72 flex items-center justify-center rounded-full bg-white/80 border-2 border-white/95 shadow-[0_12px_44px_rgba(255,255,255,0.7),0_8px_32px_rgba(140,104,50,0.25)]">
                 {/* Rotating Fine Architectural Ring & Degree Ticks */}
                 <motion.svg
                   viewBox="0 0 280 280"
@@ -460,7 +465,7 @@ export default function HeroCover() {
 
               {/* Motto Under Logo */}
               <div className="mt-1.5 text-center">
-                <span className="inline-flex items-center gap-2 px-3.5 py-0.5 rounded-full bg-[#F7F1E7]/95 backdrop-blur-md border border-[#CCA369]/50 shadow-sm text-xs font-kanit font-medium text-[#6B5A3A] tracking-wider">
+                <span className="inline-flex items-center gap-2 px-3.5 py-0.5 rounded-full bg-[#F7F1E7]/95 border border-[#CCA369]/50 shadow-sm text-xs font-kanit font-medium text-[#6B5A3A] tracking-wider">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#CCA369]" />
                   <span>สร้างคุณค่า เติบโตอย่างมั่นคง</span>
                 </span>
@@ -470,28 +475,30 @@ export default function HeroCover() {
             {/* ----------------------------------------------------
                 STAGE 3: 5 EDITORIAL PORTRAIT CARDS (แบบที่ 1 — Double Inset Gold Hairline)
                ---------------------------------------------------- */}
+            {/* Single reveal wrapper: all 5 cards animate in together in one timed beat */}
+            <motion.div
+              initial={false}
+              animate={cardsAnimate}
+              transition={cardsTransition}
+              style={{ pointerEvents: showCards ? "auto" : "none" }}
+              className="absolute inset-0 z-30 will-change-transform"
+            >
             {pillars.map((item) => {
-              const isTop = item.key === "real-estate" || item.key === "leather-footwear";
               const isOther = item.key === "other";
-              const cardMotionY = isOther ? otherCardY : isTop ? topCardsY : sideCardsY;
               const isHovered = hoveredKey === item.key;
               const hasAnotherHovered = hoveredKey !== null && !isHovered;
 
               return (
-                <motion.div
+                <div
                   key={item.key}
-                  style={{
-                    opacity: cardsOpacity,
-                    scale: cardsScale,
-                    y: cardMotionY,
-                  }}
-                  className={`absolute ${item.cardPos.desktopClass} z-30 transition-all duration-300`}
+                  className={`absolute ${item.cardPos.desktopClass} z-30`}
                 >
                   <Link
                     href="#businesses"
+                    tabIndex={showCards ? undefined : -1}
                     onMouseEnter={() => setHoveredKey(item.key)}
                     onMouseLeave={() => setHoveredKey(null)}
-                    className={`group block w-56 sm:w-60 xl:w-64 rounded-2xl overflow-hidden backdrop-blur-md border transition-all duration-300 shadow-[0_6px_28px_rgba(204,163,105,0.14)] cursor-pointer select-none relative ${isHovered
+                    className={`group block w-56 sm:w-60 xl:w-64 rounded-2xl overflow-hidden bg-white/95 border transition-[transform,opacity,border-color,box-shadow] duration-300 shadow-[0_6px_28px_rgba(204,163,105,0.14)] cursor-pointer select-none relative ${isHovered
                       ? "scale-105 -translate-y-1.5 border-[#CCA369] shadow-[0_16px_36px_rgba(204,163,105,0.28)]"
                       : "border-[#CCA369]/40 hover:border-[#CCA369]/80"
                       } ${hasAnotherHovered ? "opacity-70" : "opacity-100"}`}
@@ -511,7 +518,7 @@ export default function HeroCover() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
                       {/* Number Badge floating on Photo */}
-                      <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded-full bg-[#F7F1E7]/95 backdrop-blur-md border border-[#CCA369]/50 shadow-xs">
+                      <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded-full bg-[#F7F1E7]/95 border border-[#CCA369]/50 shadow-xs">
                         <span className="font-playfair font-bold text-xs text-[#6B5A3A]">
                           {item.number}
                         </span>
@@ -519,7 +526,7 @@ export default function HeroCover() {
                     </div>
 
                     {/* Bottom Half: Editorial Info Area on Warm Champagne Cream */}
-                    <div className={`bg-[#F7F1E7]/95 backdrop-blur-md ${isOther ? "p-2.5 xl:p-3" : "p-3 xl:p-3.5"} border-t border-[#CCA369]/30 flex flex-col justify-between`}>
+                    <div className={`bg-[#F7F1E7]/95 ${isOther ? "p-2.5 xl:p-3" : "p-3 xl:p-3.5"} border-t border-[#CCA369]/30 flex flex-col justify-between`}>
                       {/* Business Title in Kanit (#1F1F1F) */}
                       <div className="flex items-center justify-between gap-1">
                         <h4 className="font-kanit font-semibold text-xs xl:text-sm text-[#1F1F1F] leading-tight truncate group-hover:text-[#8C6832] transition-colors">
@@ -546,9 +553,10 @@ export default function HeroCover() {
                       </p>
                     </div>
                   </Link>
-                </motion.div>
+                </div>
               );
             })}
+            </motion.div>
           </div>
 
           {/* ====================================================
@@ -562,7 +570,7 @@ export default function HeroCover() {
               style={{ opacity: hubOpacity, scale: hubScale }}
               className="flex flex-col items-center text-center will-change-transform"
             >
-              <div className="relative w-[clamp(100px,26vw,135px)] h-[clamp(100px,26vw,135px)] flex items-center justify-center rounded-full bg-white/70 backdrop-blur-md border-2 border-white/90 shadow-[0_8px_32px_rgba(255,255,255,0.7),0_4px_20px_rgba(140,104,50,0.25)]">
+              <div className="relative w-[clamp(100px,26vw,135px)] h-[clamp(100px,26vw,135px)] flex items-center justify-center rounded-full bg-white/80 border-2 border-white/90 shadow-[0_8px_32px_rgba(255,255,255,0.7),0_4px_20px_rgba(140,104,50,0.25)]">
                 <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full pointer-events-none">
                   <circle cx="100" cy="100" r="90" fill="none" stroke="#CCA369" strokeWidth="1.2" strokeOpacity="0.8" />
                   <circle cx="100" cy="100" r="82" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.9" />
@@ -583,7 +591,7 @@ export default function HeroCover() {
                   />
                 </div>
               </div>
-              <span className="mt-1.5 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F7F1E7]/95 backdrop-blur-md border border-[#CCA369]/40 text-[clamp(9.5px,2.6vw,11.5px)] font-kanit text-[#6B5A3A]">
+              <span className="mt-1.5 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F7F1E7]/95 border border-[#CCA369]/40 text-[clamp(9.5px,2.6vw,11.5px)] font-kanit text-[#6B5A3A]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#CCA369]" />
                 <span>สร้างคุณค่า เติบโตอย่างมั่นคง</span>
               </span>
@@ -591,11 +599,10 @@ export default function HeroCover() {
 
             {/* Mobile 5 Editorial Cards List */}
             <motion.div
-              style={{
-                opacity: cardsOpacity,
-                scale: cardsScale,
-                pointerEvents: cardsPointer as any,
-              }}
+              initial={false}
+              animate={cardsAnimate}
+              transition={cardsTransition}
+              style={{ pointerEvents: showCards ? "auto" : "none" }}
               className="w-full max-w-[360px] sm:max-w-md will-change-transform"
             >
               <div className="grid grid-cols-2 gap-2 sm:gap-2.5 w-full">
@@ -603,7 +610,7 @@ export default function HeroCover() {
                   <Link
                     key={`mob-${item.key}`}
                     href="#businesses"
-                    className="rounded-2xl overflow-hidden backdrop-blur-md bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all relative p-0.5"
+                    className="rounded-2xl overflow-hidden bg-white/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-colors relative p-0.5"
                   >
                     <div className="relative h-[clamp(54px,14vw,72px)] w-full overflow-hidden rounded-t-[14px]">
                       <Image src={item.image} alt={item.titleTh} fill className="object-cover" />
@@ -626,7 +633,7 @@ export default function HeroCover() {
                 <div className="col-span-2">
                   <Link
                     href="#businesses"
-                    className="flex items-center gap-2.5 p-2 sm:p-2.5 rounded-2xl backdrop-blur-md bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all"
+                    className="flex items-center gap-2.5 p-2 sm:p-2.5 rounded-2xl bg-white/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-colors"
                   >
                     <div className="relative w-[clamp(36px,10vw,44px)] h-[clamp(36px,10vw,44px)] rounded-xl overflow-hidden shrink-0 border border-[#CCA369]/30">
                       <Image src={pillars[4].image} alt={pillars[4].titleTh} fill className="object-cover" />
