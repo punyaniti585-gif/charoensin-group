@@ -95,7 +95,7 @@ export default function HeroCover() {
       titleTh: "ธุรกิจอสังหาริมทรัพย์",
       titleEn: "Real Estate",
       desc: "พัฒนาที่อยู่อาศัยและพื้นที่พาณิชย์",
-      image: "/img/cat-realestate.png",
+      image: "/img/cat-realestate.webp",
       cardPos: {
         desktopClass: "top-[1%] xl:top-[2%] left-[1%] xl:left-[3%]",
         lineStart: { x: 420, y: 165 },
@@ -109,7 +109,7 @@ export default function HeroCover() {
       titleTh: "ธุรกิจผลิตหนังและรองเท้า",
       titleEn: "Leather & Footwear",
       desc: "หนังฟอกและอุปกรณ์เซฟตี้สากล",
-      image: "/img/cat-leather.jpg",
+      image: "/img/cat-leather.webp",
       cardPos: {
         desktopClass: "top-[1%] xl:top-[2%] right-[1%] xl:right-[3%]",
         lineStart: { x: 580, y: 165 },
@@ -137,7 +137,7 @@ export default function HeroCover() {
       titleTh: "ธุรกิจสิ่งทอ",
       titleEn: "Non-Woven Textiles",
       desc: "เส้นใยและสิ่งทอไม่ถักทอ",
-      image: "/img/cat-textile.jpg",
+      image: "/img/cat-textile.webp",
       cardPos: {
         desktopClass: "top-[48%] xl:top-[50%] right-[1%] xl:right-[3%]",
         lineStart: { x: 590, y: 260 },
@@ -151,7 +151,7 @@ export default function HeroCover() {
       titleTh: "ธุรกิจอื่นๆ",
       titleEn: "Other Ventures",
       desc: "สินเชื่อ พลังงาน และกิจการเพื่อสังคม",
-      image: "/img/cat-other.png",
+      image: "/img/cat-other.webp",
       cardPos: {
         desktopClass: "top-[69%] xl:top-[70%] left-1/2 -translate-x-1/2",
         lineStart: { x: 500, y: 350 },
@@ -179,23 +179,8 @@ export default function HeroCover() {
           style={{ y: bgY }}
           className="absolute top-0 left-0 w-full h-[155%] z-0 will-change-transform overflow-hidden"
         >
-          {/* Ambient Ken Burns Drift Layer */}
-          <motion.div
-            className="w-full h-full will-change-transform relative"
-            animate={
-              shouldReduceMotion
-                ? {}
-                : {
-                  scale: [1.02, 1.05, 1.02],
-                  x: ["-1%", "1%", "-1%"],
-                }
-            }
-            transition={{
-              duration: 35,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
+          {/* Ambient Ken Burns Drift Layer (CSS keyframes → compositor thread) */}
+          <div className="w-full h-full relative animate-ken-burns">
             {/* Top Region: Clear Blue Sky */}
             <div className="absolute inset-x-0 top-0 h-[65%] md:h-[55%] w-full">
               <Image
@@ -222,23 +207,12 @@ export default function HeroCover() {
               {/* Subtle tint overlay to unify with CI Brand warm tone */}
               <div className="absolute inset-0 bg-[#F7F1E7]/15 mix-blend-color pointer-events-none" />
             </div>
-          </motion.div>
+          </div>
 
           {/* Warm Sunlight Sweep Layer (Looping 24s) */}
           {isMounted && !shouldReduceMotion && (
-            <div className="absolute inset-0 pointer-events-none overflow-hidden mix-blend-soft-light">
-              <motion.div
-                className="absolute -top-[50%] -left-[60%] w-[120%] h-[200%] bg-gradient-to-r from-transparent via-[#CCA369]/25 via-[#FAF7F2]/30 to-transparent transform -rotate-25 filter blur-3xl pointer-events-none"
-                animate={{
-                  x: ["-20%", "160%", "-20%"],
-                  opacity: [0.35, 0.75, 0.35],
-                }}
-                transition={{
-                  duration: 24,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-              />
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="absolute -top-[50%] -left-[60%] w-[120%] h-[200%] bg-gradient-to-r from-transparent via-[#CCA369]/15 via-[#FAF7F2]/20 to-transparent -rotate-25 blur-3xl pointer-events-none animate-light-sweep-hero" />
             </div>
           )}
 
@@ -254,7 +228,7 @@ export default function HeroCover() {
            ======================================================== */}
         <motion.div
           style={{ opacity: goldOverlayOpacity }}
-          className="absolute inset-0 z-10 bg-[#CCA369] backdrop-blur-[3px] pointer-events-none will-change-[opacity]"
+          className="absolute inset-0 z-10 bg-[#CCA369] pointer-events-none will-change-[opacity]"
         />
 
         {/* Top spacer for navbar headroom */}
@@ -374,24 +348,16 @@ export default function HeroCover() {
                 scale: hubScale,
                 y: hubY,
               }}
-              className="absolute left-1/2 top-[34%] xl:top-[35%] -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center select-none"
+              className="absolute left-1/2 top-[34%] xl:top-[35%] -translate-x-1/2 -translate-y-1/2 z-20 flex flex-col items-center justify-center select-none will-change-transform"
             >
               {/* Frosted White Glass Circle & Compass Rings */}
-              <div className="relative w-64 h-64 xl:w-72 xl:h-72 flex items-center justify-center rounded-full bg-white/70 backdrop-blur-md border-2 border-white/95 shadow-[0_12px_44px_rgba(255,255,255,0.7),0_8px_32px_rgba(140,104,50,0.25)]">
+              <div className="relative w-64 h-64 xl:w-72 xl:h-72 flex items-center justify-center rounded-full bg-white/80 border-2 border-white/95 shadow-[0_12px_44px_rgba(255,255,255,0.7),0_8px_32px_rgba(140,104,50,0.25)]">
                 {/* Rotating Fine Architectural Ring & Degree Ticks */}
-                <motion.svg
+                {/* Slow ring rotation as a CSS animation (compositor); pauses while a card is hovered */}
+                <svg
                   viewBox="0 0 280 280"
-                  className="absolute inset-0 w-full h-full pointer-events-none"
-                  animate={
-                    shouldReduceMotion
-                      ? {}
-                      : { rotate: hoveredKey ? 180 : [0, 360] }
-                  }
-                  transition={
-                    hoveredKey
-                      ? { duration: 1.2, ease: "easeOut" }
-                      : { duration: 60, repeat: Infinity, ease: "linear" }
-                  }
+                  className="absolute inset-0 w-full h-full pointer-events-none animate-spin-60"
+                  style={{ animationPlayState: hoveredKey ? "paused" : "running" }}
                 >
                   {/* Outer Fine Architectural Ring (1.5px Gold) */}
                   <circle
@@ -438,7 +404,7 @@ export default function HeroCover() {
                   <line x1="140" y1="236" x2="140" y2="250" stroke="#8C6832" strokeWidth="1.5" strokeOpacity="0.8" />
                   <line x1="30" y1="140" x2="44" y2="140" stroke="#8C6832" strokeWidth="1.5" strokeOpacity="0.8" />
                   <line x1="236" y1="140" x2="250" y2="140" stroke="#8C6832" strokeWidth="1.5" strokeOpacity="0.8" />
-                </motion.svg>
+                </svg>
 
                 {/* Gold 80th Anniversary Logo - Saturated, Radiant, and Crisp */}
                 <div
@@ -460,7 +426,7 @@ export default function HeroCover() {
 
               {/* Motto Under Logo */}
               <div className="mt-1.5 text-center">
-                <span className="inline-flex items-center gap-2 px-3.5 py-0.5 rounded-full bg-[#F7F1E7]/95 backdrop-blur-md border border-[#CCA369]/50 shadow-sm text-xs font-kanit font-medium text-[#6B5A3A] tracking-wider">
+                <span className="inline-flex items-center gap-2 px-3.5 py-0.5 rounded-full bg-[#F7F1E7]/95 border border-[#CCA369]/50 shadow-sm text-xs font-kanit font-medium text-[#6B5A3A] tracking-wider">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#CCA369]" />
                   <span>สร้างคุณค่า เติบโตอย่างมั่นคง</span>
                 </span>
@@ -485,13 +451,13 @@ export default function HeroCover() {
                     scale: cardsScale,
                     y: cardMotionY,
                   }}
-                  className={`absolute ${item.cardPos.desktopClass} z-30 transition-all duration-300`}
+                  className={`absolute ${item.cardPos.desktopClass} z-30 will-change-transform`}
                 >
                   <Link
                     href="#businesses"
                     onMouseEnter={() => setHoveredKey(item.key)}
                     onMouseLeave={() => setHoveredKey(null)}
-                    className={`group block w-56 sm:w-60 xl:w-64 rounded-2xl overflow-hidden backdrop-blur-md border transition-all duration-300 shadow-[0_6px_28px_rgba(204,163,105,0.14)] cursor-pointer select-none relative ${isHovered
+                    className={`group block w-56 sm:w-60 xl:w-64 rounded-2xl overflow-hidden bg-[#F7F1E7] border transition-[transform,opacity,border-color,box-shadow] duration-300 shadow-[0_6px_28px_rgba(204,163,105,0.14)] cursor-pointer select-none relative ${isHovered
                       ? "scale-105 -translate-y-1.5 border-[#CCA369] shadow-[0_16px_36px_rgba(204,163,105,0.28)]"
                       : "border-[#CCA369]/40 hover:border-[#CCA369]/80"
                       } ${hasAnotherHovered ? "opacity-70" : "opacity-100"}`}
@@ -511,7 +477,7 @@ export default function HeroCover() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
 
                       {/* Number Badge floating on Photo */}
-                      <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded-full bg-[#F7F1E7]/95 backdrop-blur-md border border-[#CCA369]/50 shadow-xs">
+                      <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded-full bg-[#F7F1E7]/95 border border-[#CCA369]/50 shadow-xs">
                         <span className="font-playfair font-bold text-xs text-[#6B5A3A]">
                           {item.number}
                         </span>
@@ -519,7 +485,7 @@ export default function HeroCover() {
                     </div>
 
                     {/* Bottom Half: Editorial Info Area on Warm Champagne Cream */}
-                    <div className={`bg-[#F7F1E7]/95 backdrop-blur-md ${isOther ? "p-2.5 xl:p-3" : "p-3 xl:p-3.5"} border-t border-[#CCA369]/30 flex flex-col justify-between`}>
+                    <div className={`bg-[#F7F1E7]/95 ${isOther ? "p-2.5 xl:p-3" : "p-3 xl:p-3.5"} border-t border-[#CCA369]/30 flex flex-col justify-between`}>
                       {/* Business Title in Kanit (#1F1F1F) */}
                       <div className="flex items-center justify-between gap-1">
                         <h4 className="font-kanit font-semibold text-xs xl:text-sm text-[#1F1F1F] leading-tight truncate group-hover:text-[#8C6832] transition-colors">
@@ -562,7 +528,7 @@ export default function HeroCover() {
               style={{ opacity: hubOpacity, scale: hubScale }}
               className="flex flex-col items-center text-center will-change-transform"
             >
-              <div className="relative w-[clamp(100px,26vw,135px)] h-[clamp(100px,26vw,135px)] flex items-center justify-center rounded-full bg-white/70 backdrop-blur-md border-2 border-white/90 shadow-[0_8px_32px_rgba(255,255,255,0.7),0_4px_20px_rgba(140,104,50,0.25)]">
+              <div className="relative w-[clamp(100px,26vw,135px)] h-[clamp(100px,26vw,135px)] flex items-center justify-center rounded-full bg-white/80 border-2 border-white/90 shadow-[0_8px_32px_rgba(255,255,255,0.7),0_4px_20px_rgba(140,104,50,0.25)]">
                 <svg viewBox="0 0 200 200" className="absolute inset-0 w-full h-full pointer-events-none">
                   <circle cx="100" cy="100" r="90" fill="none" stroke="#CCA369" strokeWidth="1.2" strokeOpacity="0.8" />
                   <circle cx="100" cy="100" r="82" fill="none" stroke="#FFFFFF" strokeWidth="1" strokeDasharray="3 3" strokeOpacity="0.9" />
@@ -583,7 +549,7 @@ export default function HeroCover() {
                   />
                 </div>
               </div>
-              <span className="mt-1.5 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F7F1E7]/95 backdrop-blur-md border border-[#CCA369]/40 text-[clamp(9.5px,2.6vw,11.5px)] font-kanit text-[#6B5A3A]">
+              <span className="mt-1.5 inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-[#F7F1E7]/95 border border-[#CCA369]/40 text-[clamp(9.5px,2.6vw,11.5px)] font-kanit text-[#6B5A3A]">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#CCA369]" />
                 <span>สร้างคุณค่า เติบโตอย่างมั่นคง</span>
               </span>
@@ -603,7 +569,7 @@ export default function HeroCover() {
                   <Link
                     key={`mob-${item.key}`}
                     href="#businesses"
-                    className="rounded-2xl overflow-hidden backdrop-blur-md bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all relative p-0.5"
+                    className="rounded-2xl overflow-hidden bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all relative p-0.5"
                   >
                     <div className="relative h-[clamp(54px,14vw,72px)] w-full overflow-hidden rounded-t-[14px]">
                       <Image src={item.image} alt={item.titleTh} fill className="object-cover" />
@@ -626,7 +592,7 @@ export default function HeroCover() {
                 <div className="col-span-2">
                   <Link
                     href="#businesses"
-                    className="flex items-center gap-2.5 p-2 sm:p-2.5 rounded-2xl backdrop-blur-md bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all"
+                    className="flex items-center gap-2.5 p-2 sm:p-2.5 rounded-2xl bg-[#F7F1E7]/95 border border-[#CCA369]/45 shadow-xs active:bg-white transition-all"
                   >
                     <div className="relative w-[clamp(36px,10vw,44px)] h-[clamp(36px,10vw,44px)] rounded-xl overflow-hidden shrink-0 border border-[#CCA369]/30">
                       <Image src={pillars[4].image} alt={pillars[4].titleTh} fill className="object-cover" />

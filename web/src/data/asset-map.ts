@@ -46,7 +46,7 @@ export const businessCategories = [
     titleTh: "ธุรกิจอสังหาริมทรัพย์",
     titleEn: "Real Estate",
     description: "การพัฒนาโครงการที่อยู่อาศัย ชุมชนน่าอยู่ และพื้นที่เชิงพาณิชย์",
-    image: "/img/cat-realestate.png",
+    image: "/img/cat-realestate.webp",
     companies: [
       {
         id: "csa",
@@ -72,7 +72,7 @@ export const businessCategories = [
     titleTh: "ธุรกิจผลิตหนังและรองเท้า",
     titleEn: "Leather & Footwear",
     description: "ผู้ผลิตหนังฟอกและอุปกรณ์ความปลอดภัยมาตรฐานสากล",
-    image: "/img/cat-leather.jpg",
+    image: "/img/cat-leather.webp",
     companies: [
       {
         id: "cpl",
@@ -106,7 +106,7 @@ export const businessCategories = [
     titleTh: "ธุรกิจสิ่งทอ",
     titleEn: "Non-woven Textiles",
     description: "นวัตกรรมเส้นใยและแผ่นสิ่งทอไม่ถักทอสำหรับอุตสาหกรรม",
-    image: "/img/cat-textile.jpg",
+    image: "/img/cat-textile.webp",
     companies: [
       {
         id: "ttn",
@@ -206,7 +206,7 @@ export const businessCategories = [
     titleTh: "ธุรกิจอื่นๆ",
     titleEn: "Other Ventures",
     description: "สินเชื่อ ลวดสลิง เกษตรกรรม อาหาร และการรักษาความปลอดภัย",
-    image: "/img/cat-other.png",
+    image: "/img/cat-other.webp",
     companies: [
       {
         id: "ccap",

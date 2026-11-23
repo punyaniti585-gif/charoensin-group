@@ -118,7 +118,7 @@ function StageCard({
   return (
     // Outer: placement + scroll motion
     <motion.div
-      className="absolute"
+      className="absolute will-change-transform"
       style={{
         left: slot.left,
         top: slot.top,
@@ -151,22 +151,36 @@ function StageCard({
             ? { duration: 0.5, ease: luxEase }
             : { duration: 0.9, ease: luxEase, delay: entered ? 0 : 0.25 + index * 0.12 }
         }
-        className="group block w-full h-full rounded-2xl overflow-hidden border border-white/50 bg-[#E9DFCC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCA369]"
-        style={{
-          boxShadow: hover
-            ? "0 34px 60px -18px rgba(31,31,31,0.45), 0 0 0 1px rgba(204,163,105,0.6)"
-            : "0 22px 44px -20px rgba(107,90,58,0.45)",
-          transition: "box-shadow 0.5s ease",
-        }}
+        className={`group block w-full h-full rounded-2xl overflow-hidden border bg-[#E9DFCC] shadow-[0_22px_44px_-20px_rgba(107,90,58,0.45)] transition-colors duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCA369] ${
+          hover ? "border-[#CCA369]" : "border-white/50"
+        }`}
       >
-        <CardFace tile={tile} sizes="(max-width: 1024px) 1px, 22vw" />
+        <CardFace tile={tile} sizes="(max-width: 1024px) 1px, 22vw" priority flatGlass />
       </motion.a>
     </motion.div>
   );
 }
 
 /** Photo + glass number badge + glass label */
-function CardFace({ tile, sizes, compact = false }: { tile: Tile; sizes: string; compact?: boolean }) {
+/**
+ * flatGlass: inside the moving 3D stage, backdrop-filter would be recomputed
+ * on every scroll frame, so the stage uses a tinted (non-blurred) glass.
+ */
+function CardFace({
+  tile,
+  sizes,
+  compact = false,
+  priority = false,
+  flatGlass = false,
+}: {
+  tile: Tile;
+  sizes: string;
+  compact?: boolean;
+  priority?: boolean;
+  flatGlass?: boolean;
+}) {
+  const glass = flatGlass ? "bg-[#1F1F1F]/40" : "bg-white/15 backdrop-blur-md";
+  const badgeGlass = flatGlass ? "bg-[#1F1F1F]/70" : "bg-[#1F1F1F]/55 backdrop-blur-md";
   return (
     <>
       <Image
@@ -174,22 +188,22 @@ function CardFace({ tile, sizes, compact = false }: { tile: Tile; sizes: string;
         alt={tile.alt}
         fill
         sizes={sizes}
-        priority={tile.number === "01"}
+        priority={priority}
         className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.06] motion-reduce:transition-none"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
 
       {/* Glass number badge */}
-      <span className="absolute top-2.5 left-2.5 inline-flex items-center justify-center min-w-10 h-10 px-2 rounded-full bg-[#1F1F1F]/55 backdrop-blur-md border border-[#E6C786]/70 font-playfair text-base font-semibold text-[#E6C786] shadow-[0_6px_16px_rgba(0,0,0,0.3)]">
+      <span className={`absolute top-2.5 left-2.5 inline-flex items-center justify-center min-w-10 h-10 px-2 rounded-full ${badgeGlass} border border-[#E6C786]/70 font-playfair text-base font-semibold text-[#E6C786] shadow-[0_6px_16px_rgba(0,0,0,0.3)]`}>
         {tile.number}
       </span>
-      <span className="absolute top-2.5 right-2.5 w-8 h-8 rounded-full bg-white/15 backdrop-blur-md border border-white/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <span className={`absolute top-2.5 right-2.5 w-8 h-8 rounded-full ${glass} border border-white/40 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
         <ArrowUpRight className="w-4 h-4" />
       </span>
 
       {/* Glass label */}
       <span
-        className={`absolute left-2.5 right-2.5 bottom-2.5 rounded-xl bg-white/15 backdrop-blur-md border border-white/35 text-white ${
+        className={`absolute left-2.5 right-2.5 bottom-2.5 rounded-xl ${glass} border border-white/35 text-white ${
           compact ? "px-2.5 py-1.5" : "px-3 py-2"
         }`}
       >

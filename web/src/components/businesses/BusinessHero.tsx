@@ -53,7 +53,7 @@ export default function BusinessHero({ hero, ctaTargetId }: Props) {
       />
       <div
         aria-hidden="true"
-        className="absolute -top-40 -right-40 w-[640px] h-[640px] rounded-full bg-radial from-[#CCA369]/15 via-transparent to-transparent blur-3xl pointer-events-none"
+        className="absolute -top-60 -right-60 w-[900px] h-[900px] rounded-full bg-radial from-[#CCA369]/14 via-[#CCA369]/4 to-transparent pointer-events-none"
       />
 
       <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

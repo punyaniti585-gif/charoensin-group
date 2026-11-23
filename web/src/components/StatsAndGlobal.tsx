@@ -311,9 +311,9 @@ export default function StatsAndGlobal() {
             y: shouldReduceMotion ? 0 : bgParallaxY,
             scale: shouldReduceMotion ? 1 : bgScale,
           }}
-          className="absolute inset-0 -top-10 -bottom-10 pointer-events-none z-0 overflow-hidden"
+          className="absolute inset-0 -top-10 -bottom-10 pointer-events-none z-0 overflow-hidden will-change-transform"
         >
-          <div className="relative w-full h-full opacity-25 mix-blend-multiply filter grayscale contrast-125">
+          <div className="relative w-full h-full opacity-25 filter grayscale contrast-125">
             <Image
               src="/img/cover-bg.webp"
               alt="Charoensin Group Architectural Texture"
@@ -327,18 +327,7 @@ export default function StatsAndGlobal() {
         {/* 2. Luxury Ambient Motion: Subtle Warm Light Sweep (18s Loop) */}
         {isMounted && !shouldReduceMotion && (
           <div className="absolute inset-0 pointer-events-none overflow-hidden z-1">
-            <motion.div
-              className="absolute -top-[60%] -left-[50%] w-[120%] h-[220%] bg-gradient-to-r from-transparent via-[#CCA369]/18 via-[#FAF7F2]/25 to-transparent transform -rotate-25 filter blur-3xl pointer-events-none"
-              animate={{
-                x: ["-30%", "150%", "-30%"],
-                opacity: [0.35, 0.8, 0.35],
-              }}
-              transition={{
-                duration: 18,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            />
+            <div className="absolute -top-[60%] -left-[50%] w-[120%] h-[220%] bg-gradient-to-r from-transparent via-[#CCA369]/18 via-[#FAF7F2]/25 to-transparent -rotate-25 blur-3xl pointer-events-none animate-light-sweep-stats" />
           </div>
         )}
 
@@ -376,7 +365,7 @@ export default function StatsAndGlobal() {
                   distance={24}
                   className="h-full"
                 >
-                  <div className="h-full p-6 sm:p-8 rounded-2xl bg-white/90 hover:bg-white backdrop-blur-md border border-[#B39B6B]/50 hover:border-[#B39B6B] transition-all duration-300 flex flex-col justify-between group shadow-[0_4px_20px_rgba(179,155,107,0.12)] hover:shadow-[0_8px_28px_rgba(179,155,107,0.22)] hover:-translate-y-1">
+                  <div className="h-full p-6 sm:p-8 rounded-2xl bg-white/90 hover:bg-white border border-[#B39B6B]/50 hover:border-[#B39B6B] transition-all duration-300 flex flex-col justify-between group shadow-[0_4px_20px_rgba(179,155,107,0.12)] hover:shadow-[0_8px_28px_rgba(179,155,107,0.22)] hover:-translate-y-1">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-11 h-11 rounded-xl bg-[#D9CBAA]/40 border border-[#B39B6B]/40 flex items-center justify-center text-[#6B5A3A] group-hover:scale-110 transition-transform">
                         <Icon className="w-5 h-5 text-[#6B5A3A]" />
@@ -454,7 +443,7 @@ export default function StatsAndGlobal() {
               {/* ------------------------------------------------
                   LEFT COLUMN (40%): EDITORIAL COUNTRY LIST (Scroll-to-Select)
                  ------------------------------------------------ */}
-              <div className="w-full lg:w-[40%] flex flex-col justify-between bg-white/95 backdrop-blur-md rounded-2xl border border-[#B39B6B]/40 p-4 sm:p-5 shadow-[0_4px_24px_rgba(179,155,107,0.12)]">
+              <div className="w-full lg:w-[40%] flex flex-col justify-between bg-white/95 rounded-2xl border border-[#B39B6B]/40 p-4 sm:p-5 shadow-[0_4px_24px_rgba(179,155,107,0.12)]">
                 <div>
                   <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-[#B39B6B]/30">
                     <span className="text-xs uppercase font-inter font-bold tracking-widest text-[#6B5A3A]">
@@ -546,7 +535,7 @@ export default function StatsAndGlobal() {
               {/* ------------------------------------------------
                   RIGHT COLUMN (60%): FULL-BLEED INTERACTIVE ARCHITECTURAL MAP
                  ------------------------------------------------ */}
-              <div className="w-full lg:w-[60%] relative rounded-2xl bg-white/95 backdrop-blur-md border border-[#B39B6B]/40 shadow-[0_4px_24px_rgba(179,155,107,0.12)] overflow-hidden flex flex-col justify-between lg:min-h-0">
+              <div className="w-full lg:w-[60%] relative rounded-2xl bg-white/95 border border-[#B39B6B]/40 shadow-[0_4px_24px_rgba(179,155,107,0.12)] overflow-hidden flex flex-col justify-between lg:min-h-0">
                 {/* Full-Bleed Map Canvas Area (Pannable & Interactive) */}
                 <div
                   onMouseDown={handleMouseDown}
@@ -814,7 +803,7 @@ export default function StatsAndGlobal() {
 
                   {/* Floating Header Toolbar Overlay */}
                   <div className="absolute top-3 left-3 right-3 z-20 flex items-center justify-between text-[10px] font-mono select-none pointer-events-none">
-                    <div className="flex items-center gap-2 bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-[#B39B6B]/40 shadow-xs pointer-events-auto text-[#6B5A3A]">
+                    <div className="flex items-center gap-2 bg-white/90 px-3 py-1.5 rounded-xl border border-[#B39B6B]/40 shadow-xs pointer-events-auto text-[#6B5A3A]">
                       <span className="font-bold tracking-wider">NETWORK RADAR</span>
                       <span className="text-[#B39B6B]/60">·</span>
                       <span className="text-[#B39B6B]/80 hidden sm:inline">
@@ -823,7 +812,7 @@ export default function StatsAndGlobal() {
                     </div>
 
                     {/* Compact Zoom Controls (+, -, Reset) */}
-                    <div className="flex items-center gap-1.5 bg-white/95 backdrop-blur-md p-1 rounded-xl border border-[#B39B6B]/40 shadow-xs pointer-events-auto">
+                    <div className="flex items-center gap-1.5 bg-white/95 p-1 rounded-xl border border-[#B39B6B]/40 shadow-xs pointer-events-auto">
                       <button
                         type="button"
                         onClick={handleZoomIn}
@@ -867,7 +856,7 @@ export default function StatsAndGlobal() {
                         transition={{ duration: 0.2 }}
                         className="hidden lg:block absolute bottom-3 right-3 max-w-xs z-30 pointer-events-none"
                       >
-                        <div className="p-2.5 sm:p-3 rounded-xl bg-white/95 backdrop-blur-md border border-[#B39B6B]/60 shadow-lg text-left">
+                        <div className="p-2.5 sm:p-3 rounded-xl bg-white/95 border border-[#B39B6B]/60 shadow-lg text-left">
                           <div className="flex items-center justify-between gap-2 mb-1">
                             <div className="flex items-center gap-1.5">
                               <span className="w-2 h-2 rounded-full bg-[#B39B6B] animate-pulse" />
@@ -896,7 +885,7 @@ export default function StatsAndGlobal() {
                   </AnimatePresence>
 
                   {/* Floating Map Bottom Legend Overlay (Visible on sm and up) */}
-                  <div className="absolute bottom-3 left-3 z-20 hidden sm:flex items-center gap-3.5 text-xs text-[#6B5A3A] font-sarabun bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-xl border border-[#B39B6B]/40 shadow-xs pointer-events-auto">
+                  <div className="absolute bottom-3 left-3 z-20 hidden sm:flex items-center gap-3.5 text-xs text-[#6B5A3A] font-sarabun bg-white/90 px-3 py-1.5 rounded-xl border border-[#B39B6B]/40 shadow-xs pointer-events-auto">
                     <span className="flex items-center gap-1.5">
                       <span className="w-2.5 h-2.5 rounded-full bg-[#B39B6B] border border-white" />
                       <span className="text-[11px] font-medium">ศูนย์กลาง (HQ HUB)</span>
@@ -909,7 +898,7 @@ export default function StatsAndGlobal() {
                 </div>
 
                 {/* Mobile Docked Country Detail Card (< lg): Clean bottom panel, never overlaps map pins */}
-                <div className="lg:hidden p-3 border-t border-[#B39B6B]/25 bg-[#FAF7F2]/90 backdrop-blur-xs">
+                <div className="lg:hidden p-3 border-t border-[#B39B6B]/25 bg-[#FAF7F2]/90">
                   <AnimatePresence mode="wait">
                     {isMounted && currentCountry && (
                       <motion.div

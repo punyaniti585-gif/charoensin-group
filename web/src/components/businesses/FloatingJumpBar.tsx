@@ -24,19 +24,25 @@ export default function FloatingJumpBar({ groups, revealAfterId }: Props) {
   const [activeId, setActiveId] = useState<string | null>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
 
-  // Show / hide
+  // Show / hide — measured at most once per animation frame
   useEffect(() => {
-    const update = () => {
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
       const target = document.getElementById(revealAfterId);
       if (!target) return;
       setShow(target.getBoundingClientRect().top <= window.innerHeight * 0.75);
     };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(measure);
+    };
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
     };
   }, [revealAfterId]);
 
@@ -92,7 +98,7 @@ export default function FloatingJumpBar({ groups, revealAfterId }: Props) {
     >
       <nav
         aria-label="ไปยังกลุ่มธุรกิจ"
-        className="rounded-full bg-[#1F1F1F]/95 backdrop-blur-md border border-[#CCA369]/45 shadow-[0_14px_36px_rgba(0,0,0,0.45)]"
+        className="rounded-full bg-[#1F1F1F]/95 border border-[#CCA369]/45 shadow-[0_14px_36px_rgba(0,0,0,0.45)]"
       >
         <div ref={scrollerRef} className="flex items-center gap-0.5 p-1.5 overflow-x-auto no-scrollbar">
           {groups.map((g) => {

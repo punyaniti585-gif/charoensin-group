@@ -32,8 +32,8 @@ export default function BusinessManifesto({ manifesto }: Props) {
             <span key={word} className="relative inline-block pb-3">
               <motion.span
                 className="inline-block"
-                initial={reduce ? false : { opacity: 0, y: 28, filter: "blur(6px)" }}
-                whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                initial={reduce ? false : { opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.8, delay: 0.15 + i * 0.22, ease: luxEase }}
               >

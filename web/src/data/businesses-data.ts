@@ -384,7 +384,7 @@ export const businessGroups: BusinessGroup[] = [
     tagline: "ธุรกิจใหม่ และการลงทุนในอุตสาหกรรมอนาคต",
     description:
       "การลงทุนที่ต่อยอดความแข็งแกร่งของกลุ่ม ครอบคลุมบริการทางการเงิน ระบบสายไฟ เกษตรกรรม อาหาร การออกแบบอุตสาหกรรม การจัดการของเสีย และการรักษาความปลอดภัย",
-    image: "/img/cat-other.png",
+    image: `${IMG}/other.webp`,
     imageAlt: "ธุรกิจอื่นๆ ของกลุ่มเจริญสิน",
     highlights: ["7 บริษัทในกลุ่ม", "การลงทุนในอุตสาหกรรมอนาคต"],
     companies: [
@@ -416,7 +416,7 @@ export const businessHero = {
     { number: "02", group: "ผลิตหนังและรองเท้า", src: `${IMG}/leather.webp`, alt: "โรงฟอกหนัง ซีพีแอล", label: "ซีพีแอล", caption: "ฟอกหนัง สมุทรปราการ", groupId: "leather-footwear" },
     { number: "03", group: "สิ่งทอ", src: `${IMG}/textile.webp`, alt: "ผ้าใยสังเคราะห์ ทีทีเอ็น", label: "ทีทีเอ็น นันวูเว่น โซลูชั่น", caption: "ผ้าใยสังเคราะห์และผ้าสักหลาด", groupId: "non-woven" },
     { number: "04", group: "เคมีภัณฑ์", src: `${IMG}/chemical.webp`, alt: "เม็ดพลาสติกคอมปาวด์ ADB", label: "แอ็พพลาย ดีบี (ADB)", caption: "เข้าตลาด mai ปี 2560", groupId: "chemical" },
-    { number: "05", group: "ธุรกิจอื่นๆ", src: "/img/cat-other.png", alt: "ธุรกิจอื่นๆ ของกลุ่มเจริญสิน", label: "เจริญสิน แคปปิตอล และอื่นๆ", caption: "7 บริษัท การลงทุนในอุตสาหกรรมอนาคต", groupId: "other" },
+    { number: "05", group: "ธุรกิจอื่นๆ", src: `${IMG}/other.webp`, alt: "ธุรกิจอื่นๆ ของกลุ่มเจริญสิน", label: "เจริญสิน แคปปิตอล และอื่นๆ", caption: "7 บริษัท การลงทุนในอุตสาหกรรมอนาคต", groupId: "other" },
   ],
 };
 

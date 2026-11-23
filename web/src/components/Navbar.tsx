@@ -26,11 +26,20 @@ export default function Navbar() {
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    const handleScroll = () => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
       setScrolled(window.scrollY > 15);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const toggleMobileSubmenu = (id: string) => {
@@ -41,7 +50,7 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-[#F2EFE9]/90 backdrop-blur-md shadow-sm border-b border-[#B39B6B]/25 py-2"
+          ? "bg-[#F2EFE9]/95 shadow-sm border-b border-[#B39B6B]/25 py-2"
           : "bg-white/25 backdrop-blur-md border-b border-white/25 py-2 sm:py-2.5"
       }`}
     >
