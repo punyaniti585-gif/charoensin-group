@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -16,31 +16,70 @@ import {
   businessCategories,
   navigationMenu,
 } from "@/data/asset-map";
+import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 
 const easeCurve = [0.16, 1, 0.3, 1] as const;
 
+/** Menu ids moved out of the main bar into the top utility bar */
+const CAREERS_ID = "06";
+const CONTACT_ID = "07";
+const careersItem = navigationMenu.find((i) => i.id === CAREERS_ID);
+const contactItem = navigationMenu.find((i) => i.id === CONTACT_ID);
+const mainMenu = navigationMenu.filter((i) => i.id !== CAREERS_ID && i.id !== CONTACT_ID);
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  /** Top utility bar folded away (past the first section) */
+  const [collapsed, setCollapsed] = useState(false);
+  const [topBarH, setTopBarH] = useState(0);
   const [activeMega, setActiveMega] = useState<string | null>(null);
+  const [careersOpen, setCareersOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileExpanded, setMobileExpanded] = useState<Record<string, boolean>>({});
+  const topBarRef = useRef<HTMLDivElement>(null);
+  const mainBarRef = useRef<HTMLDivElement>(null);
 
+  // Top bar height (0 below lg, where it is hidden) — the header slides up by
+  // exactly this much when collapsed, so only the main bar stays pinned.
+  useEffect(() => {
+    const el = topBarRef.current;
+    if (!el) return;
+    const measure = () => setTopBarH(el.offsetHeight);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // Collapse once the page's 2nd section reaches the main bar (works on every
+  // page and inside the home page's sticky stack); fallback: 85% of a screen.
   useEffect(() => {
     let frame = 0;
     const update = () => {
       frame = 0;
-      setScrolled(window.scrollY > 15);
+      const second = document.querySelector("main")?.children[1] as HTMLElement | undefined;
+      const barBottom = mainBarRef.current?.offsetHeight ?? 64;
+      const next = second
+        ? second.getBoundingClientRect().top <= barBottom
+        : window.scrollY > window.innerHeight * 0.85;
+      setCollapsed(next);
     };
     const handleScroll = () => {
       if (!frame) frame = requestAnimationFrame(update);
     };
     update();
     window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
     return () => {
       if (frame) cancelAnimationFrame(frame);
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
   }, []);
+
+  // Close the top-bar dropdown when the bar folds away
+  useEffect(() => {
+    if (collapsed) setCareersOpen(false);
+  }, [collapsed]);
 
   const toggleMobileSubmenu = (id: string) => {
     setMobileExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -48,13 +87,83 @@ export default function Navbar() {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
-        scrolled
-          ? "bg-[#F2EFE9]/95 shadow-sm border-b border-[#B39B6B]/25 py-2"
-          : "bg-white/25 backdrop-blur-md border-b border-white/25 py-2 sm:py-2.5"
+      // Collapse = slide the whole header up by the top bar's height (transform
+      // only — the header keeps its place in the flow, so the page never jumps).
+      // The transform + backdrop-filter also make the header the containing
+      // block for the `fixed` mega menus, so they always open right under it.
+      style={{ transform: `translate3d(0, ${collapsed ? -topBarH : 0}px, 0)` }}
+      className={`sticky top-0 z-50 w-full backdrop-blur-md border-b transition-[transform,background-color,box-shadow,border-color] duration-300 ease-out ${
+        collapsed
+          ? "bg-[#F3EFE6]/95 shadow-sm border-[#B39B6B]/25"
+          : "bg-[#FBF9F5]/85 border-[#a28757]/15"
       }`}
     >
-      <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+      {/* ================= Top Utility Bar (desktop, right-aligned) ================= */}
+      <div
+        ref={topBarRef}
+        inert={collapsed}
+        className={`hidden lg:block border-b border-black/5 transition-opacity duration-300 ease-out ${
+          collapsed ? "opacity-0 pointer-events-none" : "opacity-100"
+        }`}
+      >
+        <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 h-9 flex items-center justify-end gap-6 text-xs md:text-sm">
+          {careersItem && (
+            <div
+              className="relative"
+              onMouseEnter={() => setCareersOpen(true)}
+              onMouseLeave={() => setCareersOpen(false)}
+            >
+              <Link
+                href={careersItem.href}
+                className="inline-flex items-center gap-1 py-1 text-[#1F1F1F]/80 hover:text-[#6B5A3A] transition-colors whitespace-nowrap"
+              >
+                {careersItem.label}
+                {careersItem.children && careersItem.children.length > 0 && (
+                  <ChevronDown
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${careersOpen ? "rotate-180 text-[#B39B6B]" : "text-[#1F1F1F]/50"}`}
+                  />
+                )}
+              </Link>
+              <AnimatePresence>
+                {careersOpen && careersItem.children && careersItem.children.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: 4 }}
+                    transition={{ duration: 0.2, ease: easeCurve }}
+                    className="absolute right-0 top-full z-[60] pt-1.5 w-56"
+                  >
+                    <div className="rounded-xl bg-white shadow-xl border border-[#B39B6B]/25 py-2 overflow-hidden">
+                      {careersItem.children.map((sub) => (
+                        <Link
+                          key={sub.label}
+                          href={sub.href}
+                          className="block px-4 py-2.5 text-xs text-[#1F1F1F]/85 hover:bg-[#F2EFE9] hover:text-[#6B5A3A] transition-colors"
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          )}
+          {contactItem && (
+            <Link
+              href={contactItem.href}
+              className="py-1 text-[#1F1F1F]/80 hover:text-[#6B5A3A] transition-colors whitespace-nowrap"
+            >
+              {contactItem.label}
+            </Link>
+          )}
+          <span aria-hidden className="h-3.5 w-px bg-black/10" />
+          <LanguageSwitcher />
+        </div>
+      </div>
+
+      {/* ================= Main Navigation Bar ================= */}
+      <div ref={mainBarRef} className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-2 sm:py-2.5">
         <div className="flex items-center justify-between">
           {/* Brand Logo - Slim and Elegant (h-8 to h-10 on Desktop) */}
           <Link
@@ -75,9 +184,8 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links - Single-line whitespace-nowrap */}
           <nav className="hidden lg:flex items-center gap-1.5 xl:gap-3 2xl:gap-5 shrink-0">
-            {navigationMenu
-              .filter((item) => item.id !== "07") // ลบเมนู 'ติดต่อเรา' ซ้ำออก เหลือเฉพาะปุ่ม CTA ด้านขวา
-              .map((item) => {
+            {/* 6 main items — ร่วมงานกับเรา / ติดต่อเรา live in the top utility bar */}
+            {mainMenu.map((item) => {
               const isHovered = activeMega === item.id;
 
               if (item.isMega && item.megaType === "business") {
@@ -329,17 +437,6 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Right Action / Contact Button */}
-          <div className="hidden lg:flex items-center shrink-0 ml-2 xl:ml-4">
-            <Link
-              href="https://csgok.sfinsulations.com/contact-us-2026-greenshift/"
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 sm:py-2 rounded-full bg-[#6B5A3A] hover:bg-[#B39B6B] text-white text-xs sm:text-sm font-semibold font-kanit transition-all duration-300 shadow-sm hover:shadow-md whitespace-nowrap shrink-0"
-            >
-              <span className="whitespace-nowrap">ติดต่อเรา</span>
-              <ChevronRight className="w-3.5 h-3.5 shrink-0" />
-            </Link>
-          </div>
-
           {/* Mobile Menu Button */}
           <div className="flex lg:hidden items-center gap-2">
             <button
@@ -508,6 +605,12 @@ export default function Navbar() {
                   </Link>
                 );
               })}
+            </div>
+
+            {/* Language (mobile) */}
+            <div className="mt-5 flex items-center justify-between gap-3">
+              <span className="text-sm font-semibold text-[#6B5A3A] font-kanit">ภาษา / Language</span>
+              <LanguageSwitcher variant="inline" />
             </div>
           </motion.div>
         )}

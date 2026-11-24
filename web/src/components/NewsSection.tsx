@@ -1,46 +1,79 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
+import { motion, useInView, useReducedMotion } from "framer-motion";
 import { FadeUp } from "@/components/ui/MotionWrapper";
-import { Newspaper, ExternalLink, ArrowRight, Share2 } from "lucide-react";
+import { Newspaper, ArrowRight, ArrowUpRight } from "lucide-react";
+import {
+  NEWS_INDEX_HREF,
+  formatThaiDate,
+  getAllNews,
+  getLatestNews,
+  getUsedCategories,
+  type NewsCategory,
+  type NewsItem,
+} from "@/data/news-data";
 
+const MAX_CARDS = 6;
+const CARD_W = 240; // desktop card width (px) before scaling
+const luxEase = [0.22, 1, 0.36, 1] as const;
+type Filter = "all" | NewsCategory;
+
+/**
+ * ข่าวสารและกิจกรรม — Card Fan-Out deck.
+ * Desktop: cards start stacked in the centre and fan out into a gentle arc
+ * when the section scrolls into view (centre card largest). Picking a
+ * category folds the deck back to the centre and fans the new set out.
+ * Mobile: a swipeable horizontal row with snap points.
+ * All content comes from data/news-data.ts (single source of truth).
+ */
 export default function NewsSection() {
-  const newsPosts = [
-    {
-      id: "fb-post-1",
-      title: "Charoensin Group Facebook Post 1",
-      url: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FCharoensinGroup%2Fposts%2Fpfbid0FW9daEYB5PydsQwWyVNminAgi8TTsmwMrF3WAPmqzq5LmbTRLsv7i7CVdMR56pBJl&show_text=true",
-      directUrl:
-        "https://www.facebook.com/CharoensinGroup/posts/pfbid0FW9daEYB5PydsQwWyVNminAgi8TTsmwMrF3WAPmqzq5LmbTRLsv7i7CVdMR56pBJl",
-      category: "กิจกรรมองค์กร",
-      date: "ล่าสุด",
-    },
-    {
-      id: "fb-post-2",
-      title: "Charoensin Group Facebook Post 2",
-      url: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FCharoensinGroup%2Fposts%2Fpfbid0mnFKdu35RDH4vmENDzmet3YuEF15QvKHVyDStmLY4jTJ1WJJTQN7zyvRDKXPqX2jl&show_text=true",
-      directUrl:
-        "https://www.facebook.com/CharoensinGroup/posts/pfbid0mnFKdu35RDH4vmENDzmet3YuEF15QvKHVyDStmLY4jTJ1WJJTQN7zyvRDKXPqX2jl",
-      category: "ข่าวสารกลุ่มธุรกิจ",
-      date: "ล่าสุด",
-    },
-    {
-      id: "fb-post-3",
-      title: "Charoensin Group Facebook Post 3",
-      url: "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FCharoensinGroup%2Fposts%2Fpfbid02AAKTeopJ26fkmqK9bqZcU7BAxVBd4kodHXsvPPAmV47ogyKbRzVAbCELvJkpvXCal&show_text=true",
-      directUrl:
-        "https://www.facebook.com/CharoensinGroup/posts/pfbid02AAKTeopJ26fkmqK9bqZcU7BAxVBd4kodHXsvPPAmV47ogyKbRzVAbCELvJkpvXCal",
-      category: "นวัตกรรมและความยั่งยืน",
-      date: "ล่าสุด",
-    },
-  ];
+  const reduce = useReducedMotion();
+  const categories = useMemo(() => getUsedCategories(), []);
+  const totalCount = useMemo(() => getAllNews().length, []);
+
+  const [filter, setFilter] = useState<Filter>("all");
+  const [shownFilter, setShownFilter] = useState<Filter>("all");
+  const [fanned, setFanned] = useState(false);
+
+  const deckRef = useRef<HTMLDivElement>(null);
+  const inView = useInView(deckRef, { once: true, amount: 0.35 });
+
+  // First fan-out when the deck scrolls into view
+  useEffect(() => {
+    if (inView || reduce) setFanned(true);
+  }, [inView, reduce]);
+
+  // Category change: fold to the centre → swap the set → fan out again
+  useEffect(() => {
+    if (filter === shownFilter) return;
+    if (reduce) {
+      setShownFilter(filter);
+      return;
+    }
+    setFanned(false);
+    const t = window.setTimeout(() => {
+      setShownFilter(filter);
+      setFanned(true);
+    }, 380);
+    return () => window.clearTimeout(t);
+  }, [filter, shownFilter, reduce]);
+
+  const items = useMemo<NewsItem[]>(
+    () =>
+      shownFilter === "all"
+        ? getLatestNews(MAX_CARDS)
+        : getAllNews().filter((n) => n.category === shownFilter).slice(0, MAX_CARDS),
+    [shownFilter]
+  );
 
   return (
     <section id="news" className="relative w-full py-12 lg:py-16 bg-[#F7F1E7] overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 lg:mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6 lg:mb-8">
           <div>
             <FadeUp delay={0.1} distance={20}>
               <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#B39B6B]/20 border border-[#B39B6B]/40 text-[#6B5A3A] text-xs font-semibold tracking-widest uppercase mb-4">
@@ -57,81 +90,165 @@ export default function NewsSection() {
           </div>
 
           <FadeUp delay={0.2} distance={20}>
-            {/* Primary Action Button (CI Rule 7: Deep Bronze #6B5A3A with White Text) */}
             <Link
-              href="https://csgok.sfinsulations.com/new2026/"
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#6B5A3A] hover:bg-[#B39B6B] text-white font-semibold font-kanit text-sm transition-all duration-300 shadow-md hover:shadow-lg hover:scale-105 group/cta"
+              href={NEWS_INDEX_HREF}
+              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-[#6B5A3A] hover:bg-[#B39B6B] text-white font-semibold font-kanit text-sm transition-colors duration-300 shadow-md group/cta"
             >
               <span>ดูข่าวสารและกิจกรรมทั้งหมด</span>
+              <span className="rounded-full bg-white/20 px-2 py-0.5 text-xs font-inter">{totalCount}</span>
               <ArrowRight className="w-4 h-4 group-hover/cta:translate-x-1 transition-transform" />
             </Link>
           </FadeUp>
         </div>
 
-        {/* 3-Column Grid with Facebook Post Embeds */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsPosts.map((post, idx) => (
-            <FadeUp
-              key={post.id}
-              delay={0.2 + idx * 0.1}
-              distance={24}
-              className="h-full"
-            >
-              <div className="h-full flex flex-col bg-white rounded-3xl border border-[#B39B6B]/30 hover:border-[#B39B6B] shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group">
-                {/* Post Top Card Header */}
-                <div className="p-4 sm:p-5 border-b border-[#F2EFE9] flex items-center justify-between bg-white">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-[#B39B6B]" />
-                    <span className="text-xs font-semibold text-[#6B5A3A] font-kanit">
-                      {post.category}
-                    </span>
-                  </div>
+        {/* Category filter */}
+        <div
+          role="group"
+          aria-label="กรองตามหมวดหมู่"
+          className="flex gap-2 overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 lg:justify-center [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        >
+          {(["all", ...categories] as Filter[]).map((c) => {
+            const active = filter === c;
+            return (
+              <button
+                key={c}
+                type="button"
+                aria-pressed={active}
+                onClick={() => setFilter(c)}
+                className={`shrink-0 px-4 py-1.5 rounded-full border text-sm font-kanit transition-colors ${
+                  active
+                    ? "bg-[#6B5A3A] border-[#6B5A3A] text-white"
+                    : "bg-white/70 border-[#B39B6B]/40 text-[#6B5A3A] hover:border-[#B39B6B]"
+                }`}
+              >
+                {c === "all" ? "ทั้งหมด" : c}
+              </button>
+            );
+          })}
+        </div>
 
-                  <a
-                    href={post.directUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-[11px] text-[#6B5A3A] hover:text-[#1F1F1F] font-semibold transition-colors"
-                  >
-                    <span>เปิดโพสต์</span>
-                    <ExternalLink className="w-3 h-3 text-[#6B5A3A]" />
-                  </a>
-                </div>
+        {/* Desktop: fan-out deck */}
+        <div ref={deckRef} className="hidden lg:block">
+          <FanDeck items={items} fanned={fanned} reduce={!!reduce} />
+        </div>
 
-                {/* Facebook Embed iframe Frame */}
-                <div className="relative w-full min-h-[480px] sm:min-h-[520px] bg-[#FAFAFA] flex items-center justify-center p-2">
-                  <iframe
-                    src={post.url}
-                    width="100%"
-                    height="500"
-                    style={{ border: "none", overflow: "hidden" }}
-                    scrolling="no"
-                    frameBorder="0"
-                    allowFullScreen={true}
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                    title={post.title}
-                    className="w-full h-[500px] rounded-xl"
-                  />
-                </div>
-
-                {/* Card Footer */}
-                <div className="p-4 bg-[#F2EFE9]/40 border-t border-[#F2EFE9] mt-auto flex items-center justify-between text-xs text-[#1F1F1F]/60">
-                  <span className="font-sarabun">Charoensin Group Official Facebook</span>
-                  <a
-                    href={post.directUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[#6B5A3A] transition-colors"
-                    aria-label="แชร์โพสต์"
-                  >
-                    <Share2 className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-            </FadeUp>
+        {/* Mobile / tablet: swipeable row */}
+        <div className="lg:hidden mt-4 -mx-4 px-4 flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {items.map((item) => (
+            <div key={item.id} className="snap-center shrink-0 w-[78vw] max-w-[300px]">
+              <NewsCard item={item} />
+            </div>
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+/** Horizontal fan of absolutely-positioned cards (transform + opacity only) */
+function FanDeck({ items, fanned, reduce }: { items: NewsItem[]; fanned: boolean; reduce: boolean }) {
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [width, setWidth] = useState(1200);
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  useEffect(() => {
+    const el = boxRef.current;
+    if (!el) return;
+    const ro = new ResizeObserver(() => setWidth(el.clientWidth));
+    ro.observe(el);
+    setWidth(el.clientWidth);
+    return () => ro.disconnect();
+  }, []);
+
+  const n = items.length;
+  const center = (n - 1) / 2;
+  // Spread so the whole fan fits the container, with slight overlap at most
+  const spacing = n > 1 ? Math.min(CARD_W * 0.98, (width - CARD_W * 1.12) / (n - 1)) : 0;
+
+  return (
+    <div ref={boxRef} className="relative mt-6 h-[470px]">
+      {items.map((item, i) => {
+        const d = i - center;
+        const dist = Math.abs(d);
+        const fan = {
+          x: d * spacing,
+          y: dist * 12,
+          rotate: d * 2.2,
+          scale: 1.1 - dist * 0.06,
+          opacity: 1,
+        };
+        const stack = {
+          x: d * 8,
+          y: 18,
+          rotate: d * -3.5,
+          scale: 0.9,
+          opacity: dist > 2 ? 0 : 1,
+        };
+        const z = hovered === item.id ? 100 : 50 - Math.round(dist * 10);
+        return (
+          <motion.div
+            key={item.id}
+            initial={false}
+            animate={fanned ? fan : stack}
+            transition={
+              reduce
+                ? { duration: 0 }
+                : { duration: 0.6, ease: luxEase, delay: fanned ? dist * 0.07 : 0 }
+            }
+            onMouseEnter={() => setHovered(item.id)}
+            onMouseLeave={() => setHovered(null)}
+            onFocus={() => setHovered(item.id)}
+            onBlur={() => setHovered(null)}
+            style={{ zIndex: z, width: CARD_W, marginLeft: -CARD_W / 2 }}
+            className="absolute left-1/2 top-0 will-change-transform"
+          >
+            <div className="transition-transform duration-300 ease-out hover:-translate-y-2">
+              <NewsCard item={item} emphasis={dist < 1} />
+            </div>
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+function NewsCard({ item, emphasis = false }: { item: NewsItem; emphasis?: boolean }) {
+  return (
+    <a
+      href={item.externalUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`group block rounded-2xl overflow-hidden bg-white border transition-[border-color,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCA369] ${
+        emphasis
+          ? "border-[#CCA369] shadow-[0_18px_40px_rgba(107,90,58,0.22)]"
+          : "border-[#B39B6B]/30 shadow-[0_10px_26px_rgba(107,90,58,0.14)] hover:border-[#CCA369]"
+      }`}
+    >
+      <div className="relative aspect-[4/3] bg-[#E9DFCC] overflow-hidden">
+        <Image
+          src={item.image}
+          alt=""
+          fill
+          sizes="(max-width: 1024px) 78vw, 270px"
+          className="object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <span className="absolute top-3 left-3 rounded-full bg-[#1F1F1F]/65 px-2.5 py-1 text-[11px] font-kanit text-[#E6C786]">
+          {item.category}
+        </span>
+      </div>
+      <div className="p-4">
+        <time dateTime={item.date} className="font-sarabun text-xs text-[#9A7B3E]">
+          {formatThaiDate(item.date)}
+        </time>
+        <h3 className="mt-1 font-kanit text-[15px] font-semibold leading-snug text-[#1F1F1F] line-clamp-2 min-h-[2.6em]">
+          {item.title}
+        </h3>
+        <p className="mt-1.5 font-sarabun text-xs text-[#1F1F1F]/65 line-clamp-2 min-h-[2.5em]">{item.excerpt}</p>
+        <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold font-kanit text-[#6B5A3A] group-hover:text-[#B39B6B] transition-colors">
+          อ่านรายละเอียด
+          <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+        </span>
+      </div>
+    </a>
   );
 }

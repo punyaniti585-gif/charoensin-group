@@ -1,12 +1,23 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
 import { FadeUp, CountUp } from "@/components/ui/MotionWrapper";
 import { Leaf, TrendingUp, Compass, Plus } from "lucide-react";
 
 export default function SustainabilityAndPhilosophy() {
   const shouldReduceMotion = useReducedMotion();
+  // Ambient loops in the growth chart (light pulse, end-point ring) only run
+  // while the chart is on screen.
+  const chartRef = useRef<SVGSVGElement>(null);
+  const chartInView = useInView(chartRef, { margin: "100px 0px" });
+  // The travelling bead is SMIL (<animateMotion>) — pause the SVG's timeline too
+  useEffect(() => {
+    const svg = chartRef.current;
+    if (!svg) return;
+    if (chartInView) svg.unpauseAnimations();
+    else svg.pauseAnimations();
+  }, [chartInView]);
   const [isMounted, setIsMounted] = useState(false);
   const [activePhilIndex, setActivePhilIndex] = useState<number>(0);
   const [hoveredYear, setHoveredYear] = useState<string | null>(null);
@@ -124,7 +135,7 @@ export default function SustainabilityAndPhilosophy() {
           </FadeUp>
 
           {/* Stepped Trajectory Architectural Container with 40px Grid */}
-          <div className="relative w-full max-w-5xl mx-auto rounded-3xl p-6 sm:p-8 lg:p-10 bg-white/45 border border-[#CCA369]/30 backdrop-blur-xs overflow-hidden shadow-[0_4px_28px_rgba(204,163,105,0.08)]">
+          <div className="relative w-full max-w-5xl mx-auto rounded-3xl p-6 sm:p-8 lg:p-10 bg-white/70 border border-[#CCA369]/30 overflow-hidden shadow-[0_4px_28px_rgba(204,163,105,0.08)]">
             {/* Architectural Grid Pattern (40px x 40px with #CCA369/25 lines) */}
             <div
               className="absolute inset-0 pointer-events-none opacity-90"
@@ -142,6 +153,8 @@ export default function SustainabilityAndPhilosophy() {
             {/* Scroll-Drawn Architectural SVG Trajectory Line with Loop Motion */}
             <div className="hidden md:block absolute inset-x-6 lg:inset-x-10 top-6 lg:top-10 h-40 lg:h-44 pointer-events-none z-10 overflow-visible">
               <svg
+                ref={chartRef}
+                data-map-active={chartInView ? "true" : "false"}
                 viewBox="0 0 900 160"
                 preserveAspectRatio="none"
                 className="w-full h-full overflow-visible"
@@ -203,20 +216,14 @@ export default function SustainabilityAndPhilosophy() {
 
                 {/* Streaming Trailing Light Pulse along path */}
                 {isMounted && !shouldReduceMotion && (
-                  <motion.path
+                  <path
                     d={trajectoryPathD}
                     fill="none"
                     stroke="#CCA369"
                     strokeWidth="3"
                     strokeLinecap="round"
                     strokeDasharray="70 450"
-                    initial={{ strokeDashoffset: 520 }}
-                    animate={{ strokeDashoffset: 0 }}
-                    transition={{
-                      duration: 3.2,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
+                    className="chart-pulse-flow"
                     filter="url(#goldenPulseGlow)"
                     opacity={0.85}
                   />
@@ -273,15 +280,16 @@ export default function SustainabilityAndPhilosophy() {
                   className="transition-all duration-300"
                 />
                 {isMounted && !shouldReduceMotion && (
-                  <motion.circle
+                  <circle
                     cx={750}
                     cy={25}
                     r={6}
                     fill="none"
                     stroke="#CCA369"
                     strokeWidth="1.5"
-                    animate={{ r: [6, 20], opacity: [0.9, 0] }}
-                    transition={{ repeat: Infinity, duration: 2.2, ease: "easeOut" }}
+                    vectorEffect="non-scaling-stroke"
+                    className="map-hub-pulse"
+                    style={{ animationDuration: "2.2s" }}
                   />
                 )}
               </svg>
@@ -301,7 +309,7 @@ export default function SustainabilityAndPhilosophy() {
                       item.elevation
                     } ${
                       isHovered
-                        ? "bg-white/80 backdrop-blur-md shadow-[0_12px_32px_rgba(204,163,105,0.22)] -translate-y-2 border border-[#CCA369]/60"
+                        ? "bg-white/90 shadow-[0_12px_32px_rgba(204,163,105,0.22)] -translate-y-2 border border-[#CCA369]/60"
                         : "hover:bg-white/40 border border-transparent"
                     }`}
                   >

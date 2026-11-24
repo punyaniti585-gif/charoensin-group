@@ -3,16 +3,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { brandAssets, globalCountries } from "@/data/asset-map";
-import { FadeUp, CountUp } from "@/components/ui/MotionWrapper";
-import { motion, AnimatePresence, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { FadeUp } from "@/components/ui/MotionWrapper";
+import StatsStaticGrid, { type StaticStat } from "@/components/common/StatsStaticGrid";
+import { motion, AnimatePresence, useReducedMotion, useInView } from "framer-motion";
 import {
   Globe2,
-  Users,
-  Building,
-  TrendingUp,
-  Award,
   MapPin,
-  CheckCircle2,
   Compass,
   ZoomIn,
   ZoomOut,
@@ -134,12 +130,43 @@ export default function StatsAndGlobal() {
 
   // Section Parallax Ref & Transforms
   const statsSectionRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: statsSectionRef,
-    offset: ["start end", "end start"],
-  });
-  const bgParallaxY = useTransform(scrollYProgress, [0, 1], [-25, 25]);
-  const bgScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.04, 1.0, 1.04]);
+  const bgRef = useRef<HTMLDivElement>(null);
+
+  // Background parallax (−25px → +25px across the section's pass through the
+  // viewport). Read from the live rect, at most once per frame and only while
+  // on screen — useScroll({ target }) caches offsets that go stale inside the
+  // home page's sticky wrapper, which made the layer jump. No scroll-linked
+  // scale (a fixed 1.04 keeps the edges covered without re-rastering).
+  useEffect(() => {
+    const sec = statsSectionRef.current;
+    const bg = bgRef.current;
+    if (!sec || !bg || shouldReduceMotion) return;
+    let raf = 0;
+    const update = () => {
+      raf = 0;
+      const r = sec.getBoundingClientRect();
+      const vh = window.innerHeight;
+      if (r.bottom < 0 || r.top > vh) return;
+      const p = (vh - r.top) / (vh + r.height);
+      bg.style.transform = `translate3d(0, ${(-25 + 50 * p).toFixed(1)}px, 0) scale(1.04)`;
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [shouldReduceMotion]);
+
+  // Map ambient loops (flowing dashes, HQ pulse) only run while the map is on
+  // screen — they repaint the whole SVG every frame.
+  const mapRef = useRef<HTMLDivElement>(null);
+  const mapInView = useInView(mapRef, { margin: "100px 0px" });
 
   useEffect(() => {
     setIsMounted(true);
@@ -259,40 +286,32 @@ export default function StatsAndGlobal() {
     setIsDragging(false);
   };
 
-  const stats = [
+  const stats: StaticStat[] = [
     {
+      title: "ก่อตั้งมาแล้ว",
       value: 80,
-      decimals: 0,
-      suffix: " ปี",
-      label: "ก่อตั้งมาแล้ว",
-      sublabel: "รากฐานความมั่นคงกว่า 8 ทศวรรษ",
-      icon: Award,
+      unit: "ปี",
+      note: "รากฐานความมั่นคงกว่า 8 ทศวรรษ",
     },
     {
+      title: "ลูกค้าของเรา",
       value: 16890,
-      decimals: 0,
-      separator: ",",
-      suffix: " ราย",
-      label: "ลูกค้าของเรา",
-      sublabel: "ที่มอบความไว้วางใจในสินค้าและบริการ",
-      icon: Building,
+      unit: "ราย",
+      note: "ที่มอบความไว้วางใจในสินค้าและบริการ",
     },
     {
+      title: "พนักงานของเรา",
       value: 1390,
-      decimals: 0,
-      separator: ",",
-      suffix: " คน",
-      label: "พนักงานของเรา",
-      sublabel: "บุคลากรมืออาชีพที่ร่วมขับเคลื่อนองค์กร",
-      icon: Users,
+      unit: "คน",
+      note: "บุคลากรมืออาชีพที่ร่วมขับเคลื่อนองค์กร",
     },
     {
+      title: "อัตราความพึงพอใจ",
       value: 99.9,
-      decimals: 2,
+      decimals: 1,
       suffix: "%",
-      label: "อัตราความพึงพอใจ",
-      sublabel: "มาตรฐานคุณภาพและความพึงพอใจสูงสุด",
-      icon: TrendingUp,
+      unit: "ความพึงพอใจ",
+      note: "มาตรฐานคุณภาพและความพึงพอใจสูงสุด",
     },
   ];
 
@@ -306,11 +325,9 @@ export default function StatsAndGlobal() {
         className="relative w-full py-12 lg:py-16 overflow-hidden bg-gradient-to-b from-[#F7F1E7] via-[#F3ECE0] to-[#F7F1E7]"
       >
         {/* 1. Monochromatic Architectural Texture with Scroll Parallax (0.25 opacity & mix-blend-multiply) */}
-        <motion.div
-          style={{
-            y: shouldReduceMotion ? 0 : bgParallaxY,
-            scale: shouldReduceMotion ? 1 : bgScale,
-          }}
+        <div
+          ref={bgRef}
+          style={{ transform: "scale(1.04)" }}
           className="absolute inset-0 -top-10 -bottom-10 pointer-events-none z-0 overflow-hidden will-change-transform"
         >
           <div className="relative w-full h-full opacity-25 filter grayscale contrast-125">
@@ -322,7 +339,7 @@ export default function StatsAndGlobal() {
               className="object-cover object-center"
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* 2. Luxury Ambient Motion: Subtle Warm Light Sweep (18s Loop) */}
         {isMounted && !shouldReduceMotion && (
@@ -352,57 +369,8 @@ export default function StatsAndGlobal() {
             </FadeUp>
           </div>
 
-          {/* 4 Statistics Cards (White / Light Frosted with Gold Border) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {stats.map((item, idx) => {
-              const Icon = item.icon;
-
-              return (
-                <FadeUp
-                  key={item.label}
-                  delay={0.2 + idx * 0.1}
-                  duration={0.9}
-                  distance={24}
-                  className="h-full"
-                >
-                  <div className="h-full p-6 sm:p-8 rounded-2xl bg-white/90 hover:bg-white border border-[#B39B6B]/50 hover:border-[#B39B6B] transition-all duration-300 flex flex-col justify-between group shadow-[0_4px_20px_rgba(179,155,107,0.12)] hover:shadow-[0_8px_28px_rgba(179,155,107,0.22)] hover:-translate-y-1">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="w-11 h-11 rounded-xl bg-[#D9CBAA]/40 border border-[#B39B6B]/40 flex items-center justify-center text-[#6B5A3A] group-hover:scale-110 transition-transform">
-                        <Icon className="w-5 h-5 text-[#6B5A3A]" />
-                      </div>
-                      <span className="text-[11px] font-mono font-bold text-[#6B5A3A] tracking-wider">
-                        0{idx + 1}
-                      </span>
-                    </div>
-
-                    <div className="my-2">
-                      <div className="text-3xl sm:text-4xl lg:text-5xl font-bold font-inter text-[#1F1F1F] tracking-tight">
-                        <CountUp
-                          to={item.value}
-                          decimals={item.decimals}
-                          separator={item.separator || ","}
-                          suffix={item.suffix}
-                          duration={2.2}
-                          className="text-[#1F1F1F] group-hover:text-[#6B5A3A] transition-colors"
-                        />
-                      </div>
-                      <h3 className="mt-2 text-base sm:text-lg font-semibold font-kanit text-[#1F1F1F]">
-                        {item.label}
-                      </h3>
-                      <p className="mt-1 text-xs text-[#6B5A3A]/85 font-sarabun leading-relaxed">
-                        {item.sublabel}
-                      </p>
-                    </div>
-
-                    <div className="mt-4 pt-3 border-t border-[#B39B6B]/20 flex items-center gap-1.5 text-[11px] text-[#6B5A3A] font-medium">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-[#B39B6B]" />
-                      <span>ข้อมูลตรวจสอบอย่างเป็นทางการ</span>
-                    </div>
-                  </div>
-                </FadeUp>
-              );
-            })}
-          </div>
+          {/* 4 Statistics — static white tiles (no motion / hover) for smooth scrolling */}
+          <StatsStaticGrid stats={stats} />
         </div>
       </div>
 
@@ -538,6 +506,7 @@ export default function StatsAndGlobal() {
               <div className="w-full lg:w-[60%] relative rounded-2xl bg-white/95 border border-[#B39B6B]/40 shadow-[0_4px_24px_rgba(179,155,107,0.12)] overflow-hidden flex flex-col justify-between lg:min-h-0">
                 {/* Full-Bleed Map Canvas Area (Pannable & Interactive) */}
                 <div
+                  ref={mapRef}
                   onMouseDown={handleMouseDown}
                   onMouseMove={handleMouseMove}
                   onMouseUp={handleMouseUp}
@@ -549,7 +518,7 @@ export default function StatsAndGlobal() {
                     viewBox="0 0 1000 500"
                     preserveAspectRatio="xMidYMid meet"
                     className="w-full h-full select-none"
-                    style={{ filter: "drop-shadow(0 2px 8px rgba(179,155,107,0.08))" }}
+                    data-map-active={mapInView ? "true" : "false"}
                   >
                     <defs>
                       {/* Architectural Dot Grid Pattern */}
@@ -703,20 +672,17 @@ export default function StatsAndGlobal() {
                                 className="transition-all duration-300"
                               />
 
-                              {/* Animated Flowing Dash */}
+                              {/* Animated Flowing Dash — CSS keyframes (no JS per frame),
+                                  paused while the map is off screen */}
                               {isMounted && !shouldReduceMotion && (
-                                <motion.path
+                                <path
                                   d={arc.d}
                                   fill="none"
                                   stroke={isSelected ? "#6B5A3A" : "#B39B6B"}
                                   strokeWidth={isSelected ? "2.5" : "1.4"}
                                   strokeDasharray="5 6"
-                                  animate={{ strokeDashoffset: [0, -22] }}
-                                  transition={{
-                                    repeat: Infinity,
-                                    duration: isSelected ? 1.4 : 2.8,
-                                    ease: "linear",
-                                  }}
+                                  className="map-dash-flow"
+                                  style={{ animationDuration: isSelected ? "1.4s" : "2.8s" }}
                                   opacity={isSelected ? 1 : 0.5}
                                 />
                               )}
@@ -741,19 +707,15 @@ export default function StatsAndGlobal() {
                             >
                               {/* Thailand HQ Pulse Ring */}
                               {isHub && isMounted && !shouldReduceMotion && (
-                                <motion.circle
+                                <circle
                                   cx={c.x}
                                   cy={c.y}
                                   r={8}
                                   fill="none"
                                   stroke="#B39B6B"
                                   strokeWidth="2"
-                                  animate={{ r: [8, 26], opacity: [0.85, 0] }}
-                                  transition={{
-                                    repeat: Infinity,
-                                    duration: 2.4,
-                                    ease: "easeOut",
-                                  }}
+                                  vectorEffect="non-scaling-stroke"
+                                  className="map-hub-pulse"
                                 />
                               )}
 

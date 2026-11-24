@@ -41,6 +41,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Lenis (home page) owns the smoothing — never stack native smooth scroll on top */
+html.lenis {
+  scroll-behavior: auto;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-kanit), var(--font-sarabun), sans-serif;
 }
@@ -159,29 +164,82 @@ h1, h2, h3, h4, h5, h6 {
    transform + opacity so they run on the compositor thread
    instead of a JS animation loop on the main thread.
    ======================================================== */
-@keyframes ken-burns {
-  0%, 100% { transform: translateX(-1%) scale(1.02); }
-  50% { transform: translateX(1%) scale(1.05); }
-}
-@keyframes light-sweep-hero {
-  0%, 100% { transform: translateX(-20%); opacity: 0.35; }
-  50% { transform: translateX(160%); opacity: 0.75; }
-}
 @keyframes light-sweep-stats {
   0%, 100% { transform: translateX(-30%); opacity: 0.35; }
   50% { transform: translateX(150%); opacity: 0.8; }
 }
-.animate-ken-burns { animation: ken-burns 35s ease-in-out infinite; will-change: transform; }
-.animate-light-sweep-hero { animation: light-sweep-hero 24s ease-in-out infinite; will-change: transform, opacity; }
 .animate-light-sweep-stats { animation: light-sweep-stats 18s ease-in-out infinite; will-change: transform, opacity; }
-@keyframes ring-rotate {
-  to { transform: rotate(360deg); }
+
+/* Global-presence map (StatsAndGlobal): flowing route dashes + HQ pulse.
+   CSS instead of a JS loop; paused whenever the map is off screen
+   (svg[data-map-active="false"]) so they cost nothing while scrolling past. */
+@keyframes map-dash-flow {
+  to { stroke-dashoffset: -22; }
 }
-.animate-spin-60 { animation: ring-rotate 60s linear infinite; will-change: transform; }
+@keyframes map-hub-pulse {
+  from { transform: scale(1); opacity: 0.85; }
+  to { transform: scale(3.25); opacity: 0; }
+}
+.map-dash-flow { animation: map-dash-flow 2.8s linear infinite; }
+/* Sustainability growth chart: light pulse streaming along the trajectory */
+@keyframes chart-pulse-flow {
+  from { stroke-dashoffset: 520; }
+  to { stroke-dashoffset: 0; }
+}
+.chart-pulse-flow { animation: chart-pulse-flow 3.2s linear infinite; }
+.map-hub-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: map-hub-pulse 2.4s ease-out infinite;
+}
+svg[data-map-active="false"] .map-dash-flow,
+svg[data-map-active="false"] .chart-pulse-flow,
+svg[data-map-active="false"] .map-hub-pulse {
+  animation-play-state: paused;
+}
+
+/* Home hero (HeroStage): gold light sweep across the logo + scroll-hint pulse.
+   The sweep is masked to the logo shape (inline mask-image) and moves via
+   background-position over the logo's small box only; it rests most of the
+   cycle. The hint ring uses transform + opacity (compositor). No blur. */
+.hs-logo-sweep {
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  background-image: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 244, 214, 0.15) 44%,
+    rgba(255, 246, 222, 0.9) 50%,
+    rgba(255, 244, 214, 0.15) 56%,
+    transparent 62%
+  );
+  background-size: 260% 100%;
+  background-repeat: no-repeat;
+  background-position: 160% 0;
+  pointer-events: none;
+  animation: hs-logo-sweep 6.5s cubic-bezier(0.45, 0, 0.25, 1) 1.5s infinite;
+}
+@keyframes hs-logo-sweep {
+  0% { background-position: 160% 0; }
+  26%, 100% { background-position: -60% 0; }
+}
+.hs-hint-ring {
+  animation: hs-hint-ring 2.6s ease-out infinite;
+}
+@keyframes hs-hint-ring {
+  0% { transform: scale(1); opacity: 0.7; }
+  70%, 100% { transform: scale(1.12, 1.55); opacity: 0; }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-ken-burns,
-  .animate-light-sweep-hero,
+  .hs-logo-sweep,
+  .hs-hint-ring,
   .animate-light-sweep-stats,
-  .animate-spin-60 { animation: none; }
+  .map-dash-flow,
+  .chart-pulse-flow,
+  .map-hub-pulse { animation: none; }
 }
