@@ -1,11 +1,11 @@
 "use client";
 
 import React, { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { FadeUp } from "@/components/ui/MotionWrapper";
-import { Newspaper, ArrowRight, ArrowUpRight } from "lucide-react";
+import { Newspaper, ArrowRight } from "lucide-react";
+import NewsCard from "@/components/news/NewsCard";
 import {
   NEWS_INDEX_HREF,
   formatThaiDate,
@@ -70,7 +70,7 @@ export default function NewsSection() {
   );
 
   return (
-    <section id="news" className="relative w-full py-12 lg:py-16 bg-[#F7F1E7] overflow-hidden">
+    <section id="news" className="relative w-full pt-16 pb-20 lg:pt-24 lg:pb-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-6 lg:mb-8">
@@ -212,43 +212,3 @@ function FanDeck({ items, fanned, reduce }: { items: NewsItem[]; fanned: boolean
   );
 }
 
-function NewsCard({ item, emphasis = false }: { item: NewsItem; emphasis?: boolean }) {
-  return (
-    <a
-      href={item.externalUrl}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={`group block rounded-2xl overflow-hidden bg-white border transition-[border-color,box-shadow] duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCA369] ${
-        emphasis
-          ? "border-[#CCA369] shadow-[0_18px_40px_rgba(107,90,58,0.22)]"
-          : "border-[#B39B6B]/30 shadow-[0_10px_26px_rgba(107,90,58,0.14)] hover:border-[#CCA369]"
-      }`}
-    >
-      <div className="relative aspect-[4/3] bg-[#E9DFCC] overflow-hidden">
-        <Image
-          src={item.image}
-          alt=""
-          fill
-          sizes="(max-width: 1024px) 78vw, 270px"
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
-        />
-        <span className="absolute top-3 left-3 rounded-full bg-[#1F1F1F]/65 px-2.5 py-1 text-[11px] font-kanit text-[#E6C786]">
-          {item.category}
-        </span>
-      </div>
-      <div className="p-4">
-        <time dateTime={item.date} className="font-sarabun text-xs text-[#9A7B3E]">
-          {formatThaiDate(item.date)}
-        </time>
-        <h3 className="mt-1 font-kanit text-[15px] font-semibold leading-snug text-[#1F1F1F] line-clamp-2 min-h-[2.6em]">
-          {item.title}
-        </h3>
-        <p className="mt-1.5 font-sarabun text-xs text-[#1F1F1F]/65 line-clamp-2 min-h-[2.5em]">{item.excerpt}</p>
-        <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold font-kanit text-[#6B5A3A] group-hover:text-[#B39B6B] transition-colors">
-          อ่านรายละเอียด
-          <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-        </span>
-      </div>
-    </a>
-  );
-}

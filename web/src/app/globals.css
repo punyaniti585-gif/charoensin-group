@@ -164,11 +164,6 @@ h1, h2, h3, h4, h5, h6 {
    transform + opacity so they run on the compositor thread
    instead of a JS animation loop on the main thread.
    ======================================================== */
-@keyframes light-sweep-stats {
-  0%, 100% { transform: translateX(-30%); opacity: 0.35; }
-  50% { transform: translateX(150%); opacity: 0.8; }
-}
-.animate-light-sweep-stats { animation: light-sweep-stats 18s ease-in-out infinite; will-change: transform, opacity; }
 
 /* Global-presence map (StatsAndGlobal): flowing route dashes + HQ pulse.
    CSS instead of a JS loop; paused whenever the map is off screen
@@ -181,65 +176,136 @@ h1, h2, h3, h4, h5, h6 {
   to { transform: scale(3.25); opacity: 0; }
 }
 .map-dash-flow { animation: map-dash-flow 2.8s linear infinite; }
-/* Sustainability growth chart: light pulse streaming along the trajectory */
-@keyframes chart-pulse-flow {
-  from { stroke-dashoffset: 520; }
-  to { stroke-dashoffset: 0; }
+/* Growth S-curve comet: a short dash rides the whole path (2566 → 2568), loops.
+   --len = path length, --seg = comet length (set inline on the parent <g>). */
+@keyframes growth-comet {
+  from { stroke-dashoffset: var(--seg); }
+  to { stroke-dashoffset: calc(-1 * var(--len)); }
 }
-.chart-pulse-flow { animation: chart-pulse-flow 3.2s linear infinite; }
+.growth-comet {
+  stroke-dasharray: var(--seg) var(--len);
+  stroke-dashoffset: var(--seg);
+  animation: growth-comet 3.4s cubic-bezier(0.45, 0, 0.25, 1) 1.4s infinite;
+}
 .map-hub-pulse {
   transform-box: fill-box;
   transform-origin: center;
   animation: map-hub-pulse 2.4s ease-out infinite;
 }
+svg[data-map-active="false"] .growth-comet,
 svg[data-map-active="false"] .map-dash-flow,
-svg[data-map-active="false"] .chart-pulse-flow,
 svg[data-map-active="false"] .map-hub-pulse {
   animation-play-state: paused;
 }
 
-/* Home hero (HeroStage): gold light sweep across the logo + scroll-hint pulse.
-   The sweep is masked to the logo shape (inline mask-image) and moves via
-   background-position over the logo's small box only; it rests most of the
-   cycle. The hint ring uses transform + opacity (compositor). No blur. */
-.hs-logo-sweep {
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-  -webkit-mask-position: center;
-  mask-position: center;
+/* Home hero (HeroStage — editorial split + 5-pillar dock).
+   Entry reveal, Ken Burns and the dock progress line are pure CSS on
+   transform + opacity (compositor). No blur anywhere. */
+.hero-rise { animation: hero-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes hero-rise {
+  from { opacity: 0; transform: translate3d(0, 24px, 0); }
+  to { opacity: 1; transform: none; }
+}
+.hero-mask { animation: hero-mask 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes hero-mask {
+  from { opacity: 0; transform: translate3d(0, 105%, 0); }
+  to { opacity: 1; transform: none; }
+}
+.hero-drop { animation: hero-drop 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes hero-drop {
+  from { opacity: 0; transform: translate3d(0, -10px, 0); }
+  to { opacity: 1; transform: none; }
+}
+/* Giant display word: a gold light band runs slowly through the letters.
+   background-clip:text + background-position over a seamless repeating
+   gradient (tile = 200% wide, so shifting by 200% loops without a seam). */
+.hero-gold-text {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
   background-image: linear-gradient(
-    105deg,
-    transparent 38%,
-    rgba(255, 244, 214, 0.15) 44%,
-    rgba(255, 246, 222, 0.9) 50%,
-    rgba(255, 244, 214, 0.15) 56%,
-    transparent 62%
+    100deg,
+    #fff8e7 0%,
+    #e5c778 22%,
+    #a28757 40%,
+    #fff8e7 55%,
+    #e5c778 75%,
+    #fff8e7 100%
   );
-  background-size: 260% 100%;
-  background-repeat: no-repeat;
-  background-position: 160% 0;
-  pointer-events: none;
-  animation: hs-logo-sweep 6.5s cubic-bezier(0.45, 0, 0.25, 1) 1.5s infinite;
+  background-size: 200% 100%;
+  background-repeat: repeat-x;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: hero-gold-text 9s linear infinite;
 }
-@keyframes hs-logo-sweep {
-  0% { background-position: 160% 0; }
-  26%, 100% { background-position: -60% 0; }
+@keyframes hero-gold-text {
+  from { background-position: 0% 0; }
+  to { background-position: 200% 0; }
 }
-.hs-hint-ring {
-  animation: hs-hint-ring 2.6s ease-out infinite;
+.hero-kenburns { animation: hero-kenburns 9s cubic-bezier(0.25, 0.1, 0.25, 1) forwards; will-change: transform; }
+@keyframes hero-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.05); }
 }
-@keyframes hs-hint-ring {
-  0% { transform: scale(1); opacity: 0.7; }
-  70%, 100% { transform: scale(1.12, 1.55); opacity: 0; }
+.hero-card-in { animation: hero-card-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes hero-card-in {
+  from { opacity: 0; transform: translate3d(0, 10px, 0); }
+  to { opacity: 1; transform: none; }
+}
+.hero-dock-progress { animation-name: hero-dock-progress; animation-timing-function: linear; animation-fill-mode: both; }
+@keyframes hero-dock-progress {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.hero-fade { animation: hero-fade 0.6s ease both; }
+@keyframes hero-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Home intro (HeroStage) — gold drop → splash → CSG emblem rises → the HQ
+   frame opens out of the emblem (circular clip-path) to full screen.
+   transform / opacity / clip-path only; the stage is pointer-events:none
+   and is unmounted once the frame has fully opened. */
+.intro-drop { animation: intro-drop 0.45s cubic-bezier(0.55, 0, 1, 0.45) both; }
+@keyframes intro-drop {
+  from { opacity: 1; transform: translate3d(0, -66svh, 0) scaleY(1.25); }
+  92% { opacity: 1; transform: translate3d(0, 0, 0) scaleY(1.15); }
+  to { opacity: 0; transform: translate3d(0, 0, 0) scale(1.6, 0.4); }
+}
+.intro-splash { animation: intro-splash 0.9s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes intro-splash {
+  from { opacity: 0.95; transform: scale(0.15); }
+  to { opacity: 0; transform: scale(3.2); }
+}
+.intro-emblem { animation: intro-emblem 1.25s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes intro-emblem {
+  0% { opacity: 0; transform: translate3d(0, 34px, 0) scale(0.6); }
+  40% { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+  76% { opacity: 1; transform: translate3d(0, 0, 0) scale(1.03); }
+  100% { opacity: 0; transform: translate3d(0, 0, 0) scale(1.15); }
+}
+.intro-reflection { animation: intro-reflection 1.25s ease both; }
+@keyframes intro-reflection {
+  0% { opacity: 0; }
+  40%, 76% { opacity: 0.3; }
+  100% { opacity: 0; }
+}
+.intro-open { animation: intro-open 0.75s cubic-bezier(0.65, 0, 0.35, 1) both; }
+@keyframes intro-open {
+  from { clip-path: circle(0% at 50% 44%); }
+  to { clip-path: circle(80% at 50% 50%); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hs-logo-sweep,
-  .hs-hint-ring,
-  .animate-light-sweep-stats,
+  .hero-fade,
+  .hero-rise,
+  .hero-drop,
+  .hero-gold-text,
+  .hero-mask,
+  .hero-kenburns,
+  .hero-card-in,
   .map-dash-flow,
-  .chart-pulse-flow,
+  .growth-comet,
   .map-hub-pulse { animation: none; }
 }

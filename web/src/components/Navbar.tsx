@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Menu as MenuIcon,
@@ -76,6 +77,34 @@ export default function Navbar() {
     };
   }, []);
 
+  // Home page only: keep the header out of the Hero's first act (cinematic
+  // full-screen opening) and slide it in once the visitor scrolls into Act 2.
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+  const [homeHidden, setHomeHidden] = useState(isHome);
+  useEffect(() => {
+    if (!isHome) {
+      setHomeHidden(false);
+      return;
+    }
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      setHomeHidden(window.scrollY <= window.innerHeight * 0.45);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+  }, [isHome]);
+
   // Close the top-bar dropdown when the bar folds away
   useEffect(() => {
     if (collapsed) setCareersOpen(false);
@@ -91,11 +120,19 @@ export default function Navbar() {
       // only — the header keeps its place in the flow, so the page never jumps).
       // The transform + backdrop-filter also make the header the containing
       // block for the `fixed` mega menus, so they always open right under it.
-      style={{ transform: `translate3d(0, ${collapsed ? -topBarH : 0}px, 0)` }}
-      className={`sticky top-0 z-50 w-full backdrop-blur-md border-b transition-[transform,background-color,box-shadow,border-color] duration-300 ease-out ${
+      // Home page: hidden during the Hero's Act 1, slides in for Act 2.
+      style={{
+        transform: homeHidden
+          ? "translate3d(0, -100%, 0)"
+          : `translate3d(0, ${collapsed ? -topBarH : 0}px, 0)`,
+      }}
+      inert={homeHidden}
+      className={`sticky top-0 z-50 w-full backdrop-blur-md border-b transition-[transform,opacity,background-color,box-shadow,border-color] duration-500 ease-out ${
+        homeHidden ? "opacity-0 pointer-events-none" : "opacity-100"
+      } ${
         collapsed
           ? "bg-[#F3EFE6]/95 shadow-sm border-[#B39B6B]/25"
-          : "bg-[#FBF9F5]/85 border-[#a28757]/15"
+          : "bg-[#FAF8F3]/90 border-[#a28757]/15"
       }`}
     >
       {/* ================= Top Utility Bar (desktop, right-aligned) ================= */}
