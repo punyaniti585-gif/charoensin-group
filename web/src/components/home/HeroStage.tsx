@@ -6,6 +6,9 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { motion, type Variants } from "framer-motion";
 import { heroCopy, heroPillars } from "./hero-data";
+import MenuOverlay from "@/components/common/MenuOverlay";
+import HeroWordmark from "./HeroWordmark";
+import PillarModal from "./PillarModal";
 
 /* ==========================================================================
    Home Hero — 2-Act Cinematic Typography → Frame Zoom-Out Reveal
@@ -14,7 +17,7 @@ import { heroCopy, heroPillars } from "./hero-data";
      reflective floor (0–0.45s) → splash ripples → the CSG emblem rises out of
      the splash (0.5s) → the HQ frame opens out of the emblem with a circular
      clip-path to full screen (1.2–1.95s) → centred eyebrow + CHAROENSIN rise
-     (1.8s) and the corner logo/emblem fade in (2.0s). The stage is
+     (1.8s) and the corner logo / MENU button fade in (2.0s). The stage is
      pointer-events:none, unmounts at 2.3s, and scrolling skips it.
      Reload/F5 always starts at the top (manual scroll restoration).
    Act 1 (progress 0): full-bleed HQ photo in warm daylight, a micro card
@@ -39,7 +42,6 @@ const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 const pad2 = (s: string) => s.padStart(2, "0");
 
-const MotionLink = motion.create(Link);
 
 /** Act 2 cards: auto-play stagger (0.12s apart), y 24 → 0, 0.5s */
 const cardVariants: Variants = {
@@ -71,6 +73,12 @@ export default function HeroStage() {
   /** Intro: re-keyed on every mount / bfcache restore so it always replays */
   const [animKey, setAnimKey] = useState(0);
   const [introDone, setIntroDone] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = React.useCallback(() => setMenuOpen(false), []);
+  const menuBtnRef = useRef<HTMLButtonElement>(null);
+  /** Act 2 card expanded into the centred detail card */
+  const [openPillar, setOpenPillar] = useState<{ index: number; rect: DOMRect; trigger: HTMLElement } | null>(null);
+  const closePillar = React.useCallback(() => setOpenPillar(null), []);
   const skipIntro = useRef<() => void>(() => {});
   skipIntro.current = () => {
     if (!introDone) setIntroDone(true);
@@ -172,6 +180,8 @@ export default function HeroStage() {
       a1.style.opacity = (1 - e1).toFixed(3);
       a1.style.transform = `translate3d(0, ${(e1 * 40).toFixed(2)}px, 0)`;
       a1.style.visibility = e1 >= 1 ? "hidden" : "";
+      // Backdrop blur on the wordmark frame only while at rest
+      a1.classList.toggle("hero-still", p < 0.005);
 
       // Camera pull-back: full-screen frame → slot
       const e2 = easeInOut(range(p, 0.1, 0.68));
@@ -228,7 +238,7 @@ export default function HeroStage() {
     >
       <div
         ref={viewportRef}
-        className={`${reduce ? "relative" : "sticky top-0"} h-[100svh] w-full overflow-hidden`}
+        className={`hero-vp ${reduce ? "relative" : "sticky top-0"} h-[100svh] w-full overflow-hidden`}
       >
         {/* Warm cream backdrop revealed by the pull-back */}
         <div
@@ -258,17 +268,25 @@ export default function HeroStage() {
             {heroPillars.map((p, i) => {
               const shown = reduce || stage2;
               return (
-              <MotionLink
+              // Wrapper = grid placement + hover spotlight (CSS `scale`/opacity,
+              // see .hero-pillar in globals.css); the button inside keeps the
+              // framer reveal transform.
+              <div
                 key={p.id}
-                href={p.href}
+                className={`hero-pillar col-start-2 row-start-auto ${PLACEMENT[i]} w-full lg:w-[min(100%,19.5rem)] ${openPillar?.index === i ? "is-open" : ""}`}
+              >
+              <motion.button
+                type="button"
                 custom={i}
                 variants={cardVariants}
                 initial={false}
                 animate={shown ? "show" : "hidden"}
                 tabIndex={shown ? 0 : -1}
                 aria-hidden={!shown || undefined}
+                aria-haspopup="dialog"
+                onClick={(e) => setOpenPillar({ index: i, rect: e.currentTarget.getBoundingClientRect(), trigger: e.currentTarget })}
                 style={{ pointerEvents: shown ? "auto" : "none" }}
-                className={`group col-start-2 row-start-auto ${PLACEMENT[i]} w-full lg:w-[min(100%,19.5rem)] flex lg:block items-center gap-3 rounded-xl lg:rounded-2xl bg-white/95 ring-1 ring-[#a28757]/20 shadow-[0_18px_40px_-22px_rgba(60,45,20,0.55)] overflow-hidden transition-shadow duration-300 hover:shadow-[0_22px_48px_-20px_rgba(60,45,20,0.6)] hover:ring-[#a28757]/50 will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a28757]`}
+                className={`group w-full text-left flex lg:block items-center gap-3 rounded-xl lg:rounded-2xl bg-white/95 ring-1 ring-[#a28757]/20 shadow-[0_18px_40px_-22px_rgba(60,45,20,0.55)] overflow-hidden transition-shadow duration-300 hover:shadow-[0_22px_48px_-20px_rgba(60,45,20,0.6)] hover:ring-[1.5px] hover:ring-[#a28757] will-change-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a28757]`}
               >
                 <div className="relative hidden lg:block h-[clamp(64px,11vh,120px)] overflow-hidden bg-[#E9DFCC]">
                   <Image src={p.image} alt="" fill sizes="320px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
@@ -281,7 +299,8 @@ export default function HeroStage() {
                   </div>
                   <ArrowUpRight className="hidden sm:block h-4 w-4 shrink-0 text-[#a28757] transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
-              </MotionLink>
+              </motion.button>
+              </div>
               );
             })}
           </div>
@@ -326,7 +345,7 @@ export default function HeroStage() {
         {/* ================= The frame (full-bleed in Act 1 → framed in Act 2) ================= */}
         <div
           ref={frameRef}
-          className={`absolute inset-0 z-20 overflow-hidden rounded-[1.75rem] bg-[#E9DFCC] shadow-[0_40px_90px_-30px_rgba(40,30,15,0.55)] will-change-transform pointer-events-none ${showIntro ? "intro-open" : ""}`}
+          className={`hero-frame absolute inset-0 z-20 overflow-hidden rounded-[1.75rem] bg-[#E9DFCC] shadow-[0_40px_90px_-30px_rgba(40,30,15,0.55)] will-change-transform pointer-events-none ${showIntro ? "intro-open" : ""}`}
           style={{ transformOrigin: "50% 50%", animationDelay: showIntro ? `${OPEN_AT}s` : undefined }}
         >
           <div ref={frameImgRef} className="absolute inset-0 will-change-transform" style={{ transform: "scale(1.12)" }}>
@@ -348,55 +367,57 @@ export default function HeroStage() {
          {/* Re-keyed with the intro so every entry replays from the start */}
          <div key={`act1-${animKey}`} className="absolute inset-0">
           {/* Legibility grades (fade in as the frame opens): soft cream at the
-              top for the corners, a warm-dark centre pool behind the type */}
+              top for the corners, warm dark at the bottom behind the giant word */}
           <div aria-hidden className="hero-fade absolute inset-x-0 top-0 h-[26%] bg-[linear-gradient(180deg,rgba(250,248,243,0.55),rgba(250,248,243,0))]" style={{ animationDelay: "1.5s" }} />
-          <div aria-hidden className="hero-fade absolute inset-0 bg-[radial-gradient(72%_50%_at_50%_50%,rgba(28,20,10,0.72),rgba(28,20,10,0.36)_55%,rgba(28,20,10,0.06)_90%)]" style={{ animationDelay: "1.5s" }} />
+          <div aria-hidden className="hero-fade absolute inset-x-0 bottom-0 h-[58%] bg-[linear-gradient(0deg,rgba(28,20,10,0.66),rgba(28,20,10,0.3)_50%,rgba(28,20,10,0))]" style={{ animationDelay: "1.5s" }} />
 
-          {/* Top corners: CSG logo (left) + 80th Anniversary emblem (right).
+          {/* Top corners: CSG logo (left) + MENU button (right).
               The navbar is hidden during Act 1, so these sit right at the top. */}
           <div className="absolute inset-x-0 top-[clamp(0.9rem,3vh,1.75rem)] px-4 sm:px-6 lg:px-10">
             <div className="mx-auto max-w-[90rem] flex items-center justify-between gap-3">
               <div
-                className="hero-drop inline-flex items-center rounded-full border border-[#a28757]/35 bg-[#E6E4E0]/95 px-4 py-2 sm:px-5 sm:py-2.5 shadow-[0_6px_18px_-8px_rgba(20,23,31,0.35)]"
+                className="hero-drop inline-flex items-center rounded-full border border-white/20 bg-[#2A2D34]/75 backdrop-blur-md px-4 py-2 sm:px-5 sm:py-2.5 shadow-md"
                 style={{ animationDelay: "2s" }}
               >
                 <span className="relative block h-6 sm:h-7 lg:h-8 aspect-[1490/351]">
-                  <Image src={heroCopy.logo} alt="Charoensin Group" fill priority sizes="200px" className="object-contain" />
+                  {/* White version of the wordmark (static filter, no repaint cost) */}
+                  <Image src={heroCopy.logo} alt="Charoensin Group" fill priority sizes="200px" className="object-contain brightness-0 invert" />
                 </span>
               </div>
-              <div
-                className="hero-drop grid place-items-center rounded-full border border-[#a28757]/35 bg-[#E6E4E0]/95 p-1 shadow-[0_6px_18px_-8px_rgba(20,23,31,0.35)]"
+              {/* MENU = — opens the full-screen navigation overlay */}
+              <button
+                type="button"
+                ref={menuBtnRef}
+                onClick={() => setMenuOpen(true)}
+                aria-haspopup="dialog"
+                aria-expanded={menuOpen}
+                className="hero-drop group pointer-events-auto inline-flex items-center gap-3 rounded-full border border-white/20 bg-[#2A2D34]/75 backdrop-blur-md px-5 py-2.5 sm:py-3 text-white shadow-md transition-[background-color,border-color] duration-300 hover:border-[#cfc29f]/60 hover:bg-[#2A2D34]/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cfc29f]"
                 style={{ animationDelay: "2s" }}
               >
-                <span className="relative block h-12 w-12 md:h-14 md:w-14">
-                  <Image src={heroCopy.emblem} alt="80th Anniversary — Charoensin Group" fill priority sizes="56px" className="object-contain" />
+                <span className="font-inter text-[12px] sm:text-[13px] font-medium uppercase tracking-[0.22em] transition-colors duration-300 group-hover:text-[#cfc29f]">Menu</span>
+                <span aria-hidden className="flex w-5 flex-col items-end gap-[5px]">
+                  <span className="block h-[1.5px] w-5 rounded-full bg-current transition-[width,background-color] duration-300 group-hover:bg-[#cfc29f]" />
+                  <span className="block h-[1.5px] w-3.5 rounded-full bg-current transition-[width,background-color] duration-300 group-hover:w-5 group-hover:bg-[#cfc29f]" />
                 </span>
-              </div>
+              </button>
             </div>
           </div>
 
-          {/* Centred display typography: eyebrow over the giant word */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center px-3 sm:px-6 lg:px-10 text-center">
-            <h1 className="relative mx-auto max-w-[90rem] text-center">
-              <span className="sr-only">{heroCopy.displaySr}</span>
-              <span
-                aria-hidden
-                className="hero-rise block mb-[clamp(0.6rem,2.2vh,1.5rem)] font-inter font-normal uppercase tracking-[0.28em] text-[clamp(0.6rem,0.95vw,0.85rem)] text-[#E6C786] [text-shadow:0_2px_12px_rgba(20,14,6,0.55)]"
-                style={{ animationDelay: "1.8s" }}
-              >
-                {heroCopy.eyebrow1}
-              </span>
-              <span aria-hidden className="hero-rise block" style={{ animationDelay: "1.92s" }}>
-                {/* Gold light running through the letters (background-clip: text) */}
-                <span className="hero-gold-text block font-playfair font-normal uppercase leading-[0.9] tracking-[0.02em] text-[13.2vw]">
-                  {heroCopy.display}
-                </span>
-              </span>
-            </h1>
-          </div>
+          {/* Smoked-glass wordmark: script line + per-letter CHAROENSIN reveal */}
+          <HeroWordmark replay={animKey > 0} reduce={reduce} />
          </div>
         </div>
       </div>
+      <MenuOverlay open={menuOpen} onClose={closeMenu} triggerRef={menuBtnRef} />
+      {openPillar && (
+        <PillarModal
+          key={openPillar.index}
+          pillar={heroPillars[openPillar.index]}
+          origin={openPillar.rect}
+          trigger={openPillar.trigger}
+          onClose={closePillar}
+        />
+      )}
     </section>
   );
 }

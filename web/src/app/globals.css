@@ -241,6 +241,38 @@ svg[data-map-active="false"] .map-hub-pulse {
   from { background-position: 0% 0; }
   to { background-position: 200% 0; }
 }
+/* Same sweep, split per letter (HeroWordmark): every letter paints the same
+   2×word-wide tile shifted by its own x (--gx) in the word (--gw), so the
+   light still reads as one continuous band across the whole word. */
+.hero-gold-char {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(
+    100deg,
+    #fff8e7 0%,
+    #e5c778 22%,
+    #a28757 40%,
+    #fff8e7 55%,
+    #e5c778 75%,
+    #fff8e7 100%
+  );
+  background-size: calc(var(--gw, 6.6em) * 2) 100%;
+  background-repeat: repeat-x;
+  background-position: calc(-1 * var(--gx, 0px)) 0;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: hero-gold-char 9s linear infinite;
+}
+@keyframes hero-gold-char {
+  from { background-position: calc(-1 * var(--gx, 0px)) 0; }
+  to { background-position: calc(-1 * var(--gx, 0px) - 2 * var(--gw, 6.6em)) 0; }
+}
+/* Smoked-glass frame behind the wordmark: blur only while the hero is at
+   rest (backdrop-blur-sm, 4px) — removed as soon as scrolling starts. */
+.hero-still .hero-smoke {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
 .hero-kenburns { animation: hero-kenburns 9s cubic-bezier(0.25, 0.1, 0.25, 1) forwards; will-change: transform; }
 @keyframes hero-kenburns {
   from { transform: scale(1); }
@@ -302,10 +334,41 @@ svg[data-map-active="false"] .map-hub-pulse {
   .hero-rise,
   .hero-drop,
   .hero-gold-text,
+  .hero-gold-char,
   .hero-mask,
   .hero-kenburns,
   .hero-card-in,
   .map-dash-flow,
   .growth-comet,
   .map-hub-pulse { animation: none; }
+}
+
+/* ========================================================
+   HOME HERO — Act 2 business cards (HeroStage)
+   Hover spotlight: the hovered card lifts (CSS `scale`/`translate`, separate
+   from framer's transform on the inner button) and every other card + the
+   centre photo fades back. Pure CSS (:has) — no re-render on hover.
+   ======================================================== */
+.hero-pillar {
+  transition: opacity 0.35s ease, scale 0.35s cubic-bezier(0.22, 1, 0.36, 1), translate 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hero-frame { transition: opacity 0.35s ease; }
+@media (hover: hover) {
+  .hero-vp:has(.hero-pillar:hover) .hero-pillar:not(:hover),
+  .hero-vp:has(.hero-pillar:hover) .hero-frame {
+    opacity: 0.42;
+    scale: 0.98;
+  }
+  .hero-vp .hero-pillar:hover {
+    scale: 1.035;
+    translate: 0 -3px;
+  }
+}
+/* The card that opened the expanded view steps aside while it's open */
+.hero-pillar.is-open { opacity: 0; }
+/* Expanded card content: staggered rise after the morph */
+.pillar-in { animation: hero-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-pillar, .hero-frame { transition: none; }
+  .pillar-in { animation: none; }
 }

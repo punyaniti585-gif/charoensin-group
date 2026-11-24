@@ -5,8 +5,8 @@
 import { businessGroups } from "@/data/businesses-data";
 
 export const heroCopy = {
-  /** Act 1 — eyebrow line over the giant display word (centred) */
-  eyebrow1: "Trusted, Established, Future-Focused • 80th Anniversary",
+  /** Act 1 — script line over the giant display word */
+  script: "80th Anniversary • Since 1946",
   /** Intro — emblem that rises out of the gold splash */
   introEmblem: "/img/csg-emblem.png",
   display: "CHAROENSIN",
@@ -32,6 +32,10 @@ export interface HeroPillar {
   image: string;
   imageAlt: string;
   href: string;
+  /** Expanded card (click) — from businesses-data.ts */
+  description: string;
+  highlights: string[];
+  companies: string[];
 }
 
 /** Card labels follow the home-page naming of the 5 groups */
@@ -52,5 +56,8 @@ export const heroPillars: HeroPillar[] = businessGroups.map((g) => ({
   image: g.image,
   imageAlt: g.imageAlt,
   href: `/businesses#${g.id}`,
+  description: g.description,
+  highlights: g.highlights,
+  companies: g.companies.map((c) => c.shortName),
 }));
 
