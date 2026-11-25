@@ -65,10 +65,16 @@ export interface BusinessGroup {
 }
 
 export interface BusinessStat {
+  /** Card heading (moves to the top on hover) */
+  title: string;
   value: number;
   suffix?: string;
-  label: string;
+  /** Unit under the number */
+  unit: string;
   note?: string;
+  /** Photo revealed on hover */
+  image: string;
+  imageAlt: string;
 }
 
 export interface BusinessPrinciple {
@@ -421,10 +427,10 @@ export const businessHero = {
 };
 
 export const businessStats: BusinessStat[] = [
-  { value: businessGroups.length, label: "กลุ่มธุรกิจ" },
-  { value: companyCount, label: "บริษัทและธุรกิจในเครือ" },
-  { value: 40000, suffix: "+", label: "ห้องพักในโครงการ", note: "เจริญสิน แอสเสท" },
-  { value: 9000, suffix: "+", label: "ลูกค้าธุรกิจ" },
+  { title: "กลุ่มธุรกิจหลัก", value: businessGroups.length, unit: "กลุ่มธุรกิจ", image: `${IMG}/building.webp`, imageAlt: "อาคารสำนักงานใหญ่กลุ่มเจริญสิน" },
+  { title: "บริษัทในเครือ", value: companyCount, unit: "บริษัท", image: `${IMG}/other.webp`, imageAlt: "อุตสาหกรรมและเทคโนโลยีของบริษัทในเครือ" },
+  { title: "ห้องพักในความดูแล", value: 40000, suffix: "+", unit: "ห้องพัก", note: "เจริญสิน แอสเสท", image: `${IMG}/asset-condo.webp`, imageAlt: "โครงการอพาร์ตเมนต์ของเจริญสิน แอสเสท" },
+  { title: "ลูกค้าธุรกิจทั่วประเทศ", value: 9000, suffix: "+", unit: "ราย", image: `${IMG}/leather.webp`, imageAlt: "สายการผลิตในโรงงานของกลุ่มเจริญสิน" },
 ];
 
 export const businessManifesto = {
