@@ -328,7 +328,7 @@ export default function HeroStage() {
             <div className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2">
               <div className="intro-emblem grid h-[clamp(104px,14vw,176px)] aspect-square place-items-center rounded-full border-[1.5px] border-[#e5c778]/80 bg-[#111e46] shadow-[0_0_40px_-6px_rgba(229,199,120,0.45)]" style={{ animationDelay: "0.5s" }}>
                 <span className="relative block h-[62%] w-[62%]">
-                  <Image src={heroCopy.introEmblem} alt="" fill priority sizes="176px" className="object-contain" />
+                  <Image src={heroCopy.introEmblem} alt="" fill loading="eager" sizes="176px" className="object-contain" />
                 </span>
               </div>
             </div>
@@ -353,7 +353,8 @@ export default function HeroStage() {
               src={heroCopy.frameImage}
               alt={heroCopy.frameAlt}
               fill
-              priority
+              loading="eager"
+              fetchPriority="high"
               sizes="100vw"
               className="object-cover object-[center_60%]"
             />
@@ -381,7 +382,7 @@ export default function HeroStage() {
               >
                 <span className="relative block h-6 sm:h-7 lg:h-8 aspect-[1490/351]">
                   {/* White version of the wordmark (static filter, no repaint cost) */}
-                  <Image src={heroCopy.logo} alt="Charoensin Group" fill priority sizes="200px" className="object-contain brightness-0 invert" />
+                  <Image src={heroCopy.logo} alt="Charoensin Group" fill loading="eager" sizes="200px" className="object-contain brightness-0 invert" />
                 </span>
               </div>
               {/* MENU = — opens the full-screen navigation overlay */}

@@ -15,7 +15,7 @@ export const manifesto = {
   image: "/img/charoensin-building-hq.jpg",
   imageAlt: "อาคารสำนักงานใหญ่ กลุ่มบริษัทเจริญสิน",
   imageLabel: "อาคารสำนักงานใหญ่ กลุ่มบริษัทเจริญสิน",
-  cta: { label: "รู้จักเจริญสิน", href: "/about" },
+  cta: { label: "รู้จักเรามากขึ้น", href: "/about" },
 };
 
 export interface HomeStat {
@@ -32,6 +32,14 @@ export const homeStats: HomeStat[] = [
   { label: "ลูกค้าของเรา", value: 16890, unit: "ราย", note: "ที่มอบความไว้วางใจในสินค้าและบริการ" },
   { label: "พนักงานของเรา", value: 1390, unit: "คน", note: "บุคลากรมืออาชีพที่ร่วมขับเคลื่อนองค์กร" },
   { label: "อัตราความพึงพอใจ", value: 99.9, decimals: 1, suffix: "%", unit: "ความพึงพอใจ", note: "มาตรฐานคุณภาพและความพึงพอใจสูงสุด" },
+];
+
+/** Section 2 showcase card — stats cycling over real photos (public/img) */
+export const manifestoStats = [
+  { value: "80", unit: "ปี", label: "ก่อตั้งมาแล้ว", image: "/img/charoensin-building-hq.jpg", imageAlt: "อาคารสำนักงานใหญ่ กลุ่มบริษัทเจริญสิน", position: "center 60%" },
+  { value: "16,890", unit: "ราย", label: "ลูกค้าของเรา", image: "/img/businesses/chemical.webp", imageAlt: "ธุรกิจและอุตสาหกรรมในเครือเจริญสิน", position: "center" },
+  { value: "1,390", unit: "คน", label: "พนักงานของเรา", image: "/img/about/vision.webp", imageAlt: "ทีมงานและบุคลากรของกลุ่มเจริญสิน", position: "center 30%" },
+  { value: "99.90", unit: "%", label: "อัตราความพึงพอใจ", image: "/img/businesses/other.webp", imageAlt: "มาตรฐานคุณภาพและนวัตกรรม", position: "center 25%" },
 ];
 
 /* ---------- Section 3 — Global footprint + growth ---------- */

@@ -214,7 +214,7 @@ export default function Navbar() {
                 fill
                 sizes="(max-width: 640px) 130px, (max-width: 1024px) 150px, 170px"
                 className="object-contain"
-                priority
+                loading="eager"
               />
             </div>
           </Link>
