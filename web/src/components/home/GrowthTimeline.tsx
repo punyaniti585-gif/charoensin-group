@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { growthMilestones } from "@/data/home-data";
+import { fill, useHomeCopy } from "@/i18n";
 import { CountUp, luxEase } from "./motion";
 
 /**
@@ -53,7 +54,8 @@ const dotV: Variants = {
   show: (t: number) => ({ scale: [0.3, 1.35, 1], opacity: 1, transition: { duration: 0.5, delay: t, ease: luxEase } }),
 };
 
-export default function GrowthTimeline({ title }: { title: string }) {
+export default function GrowthTimeline({ title, subtitle }: { title: string; subtitle?: string }) {
+  const g = useHomeCopy().global;
   const frameRef = useRef<HTMLDivElement>(null);
   const boxRef = useRef<HTMLDivElement>(null);
   const dotRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -147,13 +149,21 @@ export default function GrowthTimeline({ title }: { title: string }) {
   const half = SPOT / 2;
 
   return (
-    <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="mx-auto w-full max-w-[1280px]">
+    <motion.div initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.3 }} className="mx-auto w-full max-w-[1440px]">
       <motion.h3
         variants={{ hidden: { opacity: 0, y: 16 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: luxEase } } }}
         className="text-center font-kanit font-normal text-2xl sm:text-3xl text-[#14171F]"
       >
         {title}
       </motion.h3>
+      {subtitle && (
+        <motion.p
+          variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.08, ease: luxEase } } }}
+          className="mt-2 text-center font-sarabun text-sm sm:text-base text-[#14171F]/60"
+        >
+          {subtitle}
+        </motion.p>
+      )}
 
       <div
         ref={frameRef}
@@ -247,11 +257,11 @@ export default function GrowthTimeline({ title }: { title: string }) {
 
                 {/* Milestone card — lifts + brightens on hover */}
                 <div className="mt-3 w-full max-w-xs rounded-2xl border border-transparent px-4 py-4 transition-[translate,background-color,border-color,box-shadow] duration-300 group-hover:-translate-y-1.5 group-hover:border-[#a28757]/40 group-hover:bg-white/95 group-hover:shadow-md">
-                  <p className="text-xs font-medium text-[#8c7344] font-sarabun">ปี พ.ศ. {m.year}</p>
+                  <p className="text-xs font-medium text-[#8c7344] font-sarabun">{fill(g.yearLabel, { y: g.milestones[i]?.year ?? m.year })}</p>
                   <p className="mt-2 font-inter text-4xl lg:text-5xl font-light leading-none tracking-tight text-[#1C1F26] transition-colors duration-300 group-hover:text-[#a28757]">
                     <CountUp value={m.value} suffix="%+" duration={1.4} />
                   </p>
-                  <p className="mt-3 font-sarabun text-sm leading-relaxed text-[#1C1F26]/65">{m.desc}</p>
+                  <p className="mt-3 font-sarabun text-sm leading-relaxed text-[#1C1F26]/65">{g.milestones[i]?.desc ?? m.desc}</p>
                 </div>
               </motion.li>
             ))}

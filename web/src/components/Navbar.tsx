@@ -18,6 +18,7 @@ import {
   navigationMenu,
 } from "@/data/asset-map";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
+import { useMenuT } from "@/i18n";
 
 const easeCurve = [0.16, 1, 0.3, 1] as const;
 
@@ -29,6 +30,7 @@ const contactItem = navigationMenu.find((i) => i.id === CONTACT_ID);
 const mainMenu = navigationMenu.filter((i) => i.id !== CAREERS_ID && i.id !== CONTACT_ID);
 
 export default function Navbar() {
+  const tm = useMenuT();
   /** Top utility bar folded away (past the first section) */
   const [collapsed, setCollapsed] = useState(false);
   const [topBarH, setTopBarH] = useState(0);
@@ -154,7 +156,7 @@ export default function Navbar() {
                 href={careersItem.href}
                 className="inline-flex items-center gap-1 py-1 text-[#1F1F1F]/80 hover:text-[#6B5A3A] transition-colors whitespace-nowrap"
               >
-                {careersItem.label}
+                {tm(careersItem.label)}
                 {careersItem.children && careersItem.children.length > 0 && (
                   <ChevronDown
                     className={`w-3.5 h-3.5 transition-transform duration-200 ${careersOpen ? "rotate-180 text-[#B39B6B]" : "text-[#1F1F1F]/50"}`}
@@ -173,11 +175,11 @@ export default function Navbar() {
                     <div className="rounded-xl bg-white shadow-xl border border-[#B39B6B]/25 py-2 overflow-hidden">
                       {careersItem.children.map((sub) => (
                         <Link
-                          key={sub.label}
+                          key={tm(sub.label)}
                           href={sub.href}
                           className="block px-4 py-2.5 text-xs text-[#1F1F1F]/85 hover:bg-[#F2EFE9] hover:text-[#6B5A3A] transition-colors"
                         >
-                          {sub.label}
+                          {tm(sub.label)}
                         </Link>
                       ))}
                     </div>
@@ -191,7 +193,7 @@ export default function Navbar() {
               href={contactItem.href}
               className="py-1 text-[#1F1F1F]/80 hover:text-[#6B5A3A] transition-colors whitespace-nowrap"
             >
-              {contactItem.label}
+              {tm(contactItem.label)}
             </Link>
           )}
           <span aria-hidden className="h-3.5 w-px bg-black/10" />
@@ -210,7 +212,7 @@ export default function Navbar() {
             <div className="relative h-8 sm:h-9 md:h-10 w-auto aspect-[1490/351]">
               <Image
                 src={brandAssets.logos.primary}
-                alt="กลุ่มบริษัทเจริญสิน (Charoensin Group)"
+                alt={tm("กลุ่มบริษัทเจริญสิน (Charoensin Group)")}
                 fill
                 sizes="(max-width: 640px) 130px, (max-width: 1024px) 150px, 170px"
                 className="object-contain"
@@ -241,7 +243,7 @@ export default function Navbar() {
                           : "text-[#1F1F1F] hover:text-[#6B5A3A] hover:bg-black/[0.03]"
                       }`}
                     >
-                      <span className="whitespace-nowrap">{item.label}</span>
+                      <span className="whitespace-nowrap">{tm(item.label)}</span>
                       <ChevronDown
                         className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${
                           isHovered ? "rotate-180 text-[#B39B6B]" : "text-[#1F1F1F]/60"
@@ -266,14 +268,14 @@ export default function Navbar() {
                                   Charoensin Group Businesses
                                 </span>
                                 <h3 className="text-xl font-semibold text-[#1F1F1F] font-kanit">
-                                  5 เสาหลักกลุ่มธุรกิจเจริญสิน
+                                  {tm("5 เสาหลักกลุ่มธุรกิจเจริญสิน")}
                                 </h3>
                               </div>
                               <Link
                                 href={item.href}
                                 className="inline-flex items-center gap-1.5 text-xs font-medium text-[#6B5A3A] hover:text-[#B39B6B] transition-colors"
                               >
-                                <span>ดูภาพรวมทุกธุรกิจ</span>
+                                <span>{tm("ดูภาพรวมทุกธุรกิจ")}</span>
                                 <ExternalLink className="w-3.5 h-3.5" />
                               </Link>
                             </div>
@@ -349,7 +351,7 @@ export default function Navbar() {
                           : "text-[#1F1F1F] hover:text-[#6B5A3A] hover:bg-black/[0.03]"
                       }`}
                     >
-                      <span className="whitespace-nowrap">{item.label}</span>
+                      <span className="whitespace-nowrap">{tm(item.label)}</span>
                       <ChevronDown
                         className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${
                           isHovered ? "rotate-180 text-[#B39B6B]" : "text-[#1F1F1F]/60"
@@ -374,28 +376,28 @@ export default function Navbar() {
                                   Corporate Governance & Transparency
                                 </span>
                                 <h3 className="text-xl font-semibold text-[#1F1F1F] font-kanit">
-                                  รายงานกำกับดูแลและนโยบายองค์กร
+                                  {tm("รายงานกำกับดูแลและนโยบายองค์กร")}
                                 </h3>
                               </div>
                               <span className="text-xs text-[#1F1F1F]/60">
-                                ดำเนินงานด้วยความซื่อสัตย์ โปร่งใส มีธรรมาภิบาล
+                                {tm("ดำเนินงานด้วยความซื่อสัตย์ โปร่งใส มีธรรมาภิบาล")}
                               </span>
                             </div>
 
                             <div className="grid grid-cols-3 gap-8">
                               {item.governanceCategories?.map((gov) => (
-                                <div key={gov.title} className="flex flex-col">
+                                <div key={tm(gov.title)} className="flex flex-col">
                                   <h4 className="text-sm font-semibold text-[#6B5A3A] font-kanit mb-3 pb-2 border-b border-[#B39B6B]/20">
-                                    {gov.title}
+                                    {tm(gov.title)}
                                   </h4>
                                   <ul className="space-y-2">
                                     {gov.items.map((sub) => (
-                                      <li key={sub.label}>
+                                      <li key={tm(sub.label)}>
                                         <Link
                                           href={sub.href}
                                           className="text-xs text-[#1F1F1F]/80 hover:text-[#6B5A3A] hover:translate-x-1 transition-all flex items-center justify-between group/link py-1"
                                         >
-                                          <span className="line-clamp-1">{sub.label}</span>
+                                          <span className="line-clamp-1">{tm(sub.label)}</span>
                                           <ChevronRight className="w-3 h-3 text-[#B39B6B] opacity-0 group-hover/link:opacity-100 transition-opacity" />
                                         </Link>
                                       </li>
@@ -428,7 +430,7 @@ export default function Navbar() {
                           : "text-[#1F1F1F] hover:text-[#6B5A3A] hover:bg-black/[0.03]"
                       }`}
                     >
-                      <span className="whitespace-nowrap">{item.label}</span>
+                      <span className="whitespace-nowrap">{tm(item.label)}</span>
                       <ChevronDown
                         className={`w-3.5 h-3.5 shrink-0 transition-transform duration-200 ${
                           isHovered ? "rotate-180 text-[#B39B6B]" : "text-[#1F1F1F]/60"
@@ -448,11 +450,11 @@ export default function Navbar() {
                         >
                           {item.children.map((sub) => (
                             <Link
-                              key={sub.label}
+                              key={tm(sub.label)}
                               href={sub.href}
                               className="block px-4 py-2.5 text-xs text-[#1F1F1F]/85 hover:bg-[#F2EFE9] hover:text-[#6B5A3A] transition-colors"
                             >
-                              {sub.label}
+                              {tm(sub.label)}
                             </Link>
                           ))}
                         </motion.div>
@@ -468,7 +470,7 @@ export default function Navbar() {
                   href={item.href}
                   className="px-2.5 py-1.5 text-sm font-medium text-[#1F1F1F] hover:text-[#6B5A3A] hover:bg-black/[0.03] transition-colors rounded-md whitespace-nowrap"
                 >
-                  <span className="whitespace-nowrap">{item.label}</span>
+                  <span className="whitespace-nowrap">{tm(item.label)}</span>
                 </Link>
               );
             })}
@@ -510,7 +512,7 @@ export default function Navbar() {
                         onClick={() => toggleMobileSubmenu(item.id)}
                         className="w-full flex items-center justify-between py-2 text-base font-semibold text-[#1F1F1F] font-kanit"
                       >
-                        <span>{item.label}</span>
+                        <span>{tm(item.label)}</span>
                         <ChevronDown
                           className={`w-4 h-4 text-[#B39B6B] transition-transform ${
                             isExpanded ? "rotate-180" : ""
@@ -526,7 +528,7 @@ export default function Navbar() {
                                 <span className="w-4 h-4 rounded-full bg-[#B39B6B]/20 text-[10px] flex items-center justify-center">
                                   {cat.number}
                                 </span>
-                                {cat.titleTh}
+                                {tm(cat.titleTh)}
                               </span>
                               <div className="grid grid-cols-1 gap-1.5 pl-5">
                                 {cat.companies.map((c) => (
@@ -562,7 +564,7 @@ export default function Navbar() {
                         onClick={() => toggleMobileSubmenu(item.id)}
                         className="w-full flex items-center justify-between py-2 text-base font-semibold text-[#1F1F1F] font-kanit"
                       >
-                        <span>{item.label}</span>
+                        <span>{tm(item.label)}</span>
                         <ChevronDown
                           className={`w-4 h-4 text-[#B39B6B] transition-transform ${
                             isExpanded ? "rotate-180" : ""
@@ -573,19 +575,19 @@ export default function Navbar() {
                       {isExpanded && (
                         <div className="pl-3 mt-2 space-y-3">
                           {item.governanceCategories?.map((g) => (
-                            <div key={g.title} className="space-y-1">
+                            <div key={tm(g.title)} className="space-y-1">
                               <span className="text-xs font-semibold text-[#6B5A3A] block">
-                                {g.title}
+                                {tm(g.title)}
                               </span>
                               <div className="space-y-1 pl-2">
                                 {g.items.map((sub) => (
                                   <Link
-                                    key={sub.label}
+                                    key={tm(sub.label)}
                                     href={sub.href}
                                     onClick={() => setMobileOpen(false)}
                                     className="block text-xs text-[#1F1F1F]/80 py-0.5 hover:text-[#6B5A3A]"
                                   >
-                                    {sub.label}
+                                    {tm(sub.label)}
                                   </Link>
                                 ))}
                               </div>
@@ -605,7 +607,7 @@ export default function Navbar() {
                         onClick={() => toggleMobileSubmenu(item.id)}
                         className="w-full flex items-center justify-between py-2 text-base font-semibold text-[#1F1F1F] font-kanit"
                       >
-                        <span>{item.label}</span>
+                        <span>{tm(item.label)}</span>
                         <ChevronDown
                           className={`w-4 h-4 text-[#B39B6B] transition-transform ${
                             isExpanded ? "rotate-180" : ""
@@ -617,12 +619,12 @@ export default function Navbar() {
                         <div className="pl-4 mt-1 space-y-1">
                           {item.children.map((sub) => (
                             <Link
-                              key={sub.label}
+                              key={tm(sub.label)}
                               href={sub.href}
                               onClick={() => setMobileOpen(false)}
                               className="block py-1 text-xs text-[#1F1F1F]/80 hover:text-[#6B5A3A]"
                             >
-                              {sub.label}
+                              {tm(sub.label)}
                             </Link>
                           ))}
                         </div>
@@ -638,7 +640,7 @@ export default function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className="block py-2.5 text-base font-semibold text-[#1F1F1F] font-kanit border-b border-[#B39B6B]/15 hover:text-[#6B5A3A]"
                   >
-                    {item.label}
+                    {tm(item.label)}
                   </Link>
                 );
               })}
@@ -646,7 +648,7 @@ export default function Navbar() {
 
             {/* Language (mobile) */}
             <div className="mt-5 flex items-center justify-between gap-3">
-              <span className="text-sm font-semibold text-[#6B5A3A] font-kanit">ภาษา / Language</span>
+              <span className="text-sm font-semibold text-[#6B5A3A] font-kanit">{tm("ภาษา / Language")}</span>
               <LanguageSwitcher variant="inline" />
             </div>
           </motion.div>

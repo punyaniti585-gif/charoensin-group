@@ -3,10 +3,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { heroCopy } from "./hero-data";
+import { useHomeCopy, useT } from "@/i18n";
 
 /* ==========================================================================
-   Hero wordmark — "80th Anniversary • Since 1946" + CHAROENSIN on a smoked
-   glass frame, bottom-centre of the hero.
+   Hero wordmark (V.3) — italic kicker "Trusted. Established. Future-Focused."
+   over the giant serif "Charoensin", bottom-left of the frame, straight on
+   the photo (the frame's scrim keeps it legible — no box behind it).
 
    • Per-character staggered mask reveal: every letter sits in its own
      overflow-hidden inline-block and rises y 105% → 0 (0.045s apart).
@@ -17,8 +19,6 @@ import { heroCopy } from "./hero-data";
    • Timing follows the CSS intro: the reveal starts ~1.9s after first paint
      (time already elapsed before hydration is subtracted), and the whole
      component remounts — so it replays — on every load / bfcache restore.
-   • The frame's backdrop blur is only applied while the hero is at rest
-     (.hero-still on the Act-1 layer), never while scrolling.
    ========================================================================== */
 
 const REVEAL_AT = 1.9; // s after first paint (frame has opened by then)
@@ -40,7 +40,10 @@ export default function HeroWordmark({ replay, reduce }: { replay: boolean; redu
     return Math.max(0.15, REVEAL_AT - performance.now() / 1000);
   });
   const wordRef = useRef<HTMLSpanElement>(null);
-  const chars = heroCopy.display.split("");
+  // zh-CN / zh-TW show the Chinese name 陳振誠集團; other languages "Charoensin"
+  const display = useHomeCopy().hero.display;
+  const { t } = useT();
+  const chars = Array.from(display);
 
   // Measure word width + each letter's x for the continuous gold sweep
   useEffect(() => {
@@ -57,15 +60,12 @@ export default function HeroWordmark({ replay, reduce }: { replay: boolean; redu
     ro.observe(word);
     document.fonts?.ready.then(measure).catch(() => {});
     return () => ro.disconnect();
-  }, []);
+  }, [display]);
 
   return (
-    <div className="absolute inset-x-0 bottom-[clamp(0.75rem,3.5vh,2.5rem)] flex justify-center px-[3vw]">
-      <h1
-        className="hero-smoke hero-fade relative mx-auto w-fit max-w-[94vw] text-center rounded-2xl md:rounded-3xl bg-gradient-to-b from-[#1C1F26]/28 via-[#1C1F26]/42 to-[#1C1F26]/50 border border-[#cfc29f]/30 px-6 py-3.5 md:px-10 md:py-5 shadow-[0_14px_40px_rgba(0,0,0,0.22),inset_0_1px_0_rgba(255,255,255,0.18)]"
-        style={{ animationDelay: "1.6s" }}
-      >
-        <span className="sr-only">{heroCopy.displaySr}</span>
+    <div className="absolute inset-x-0 bottom-0 px-5 pb-5 sm:px-12 sm:pb-12">
+      <h1 className="relative w-fit max-w-full text-left">
+        <span className="sr-only">{display === heroCopy.display ? t(heroCopy.displaySr) : display}</span>
 
         <motion.span
           aria-hidden
@@ -73,23 +73,22 @@ export default function HeroWordmark({ replay, reduce }: { replay: boolean; redu
           variants={scriptV}
           initial={reduce ? false : "hidden"}
           animate="show"
-          className="block mb-[clamp(0.15rem,0.8vh,0.6rem)] font-playfair italic font-normal normal-case tracking-[0.04em] text-[clamp(0.85rem,1.5vw,1.35rem)] text-[#E6C786] will-change-transform"
+          className="block mb-2.5 font-playfair italic font-normal text-lg sm:text-xl leading-snug text-[#E6C786] will-change-transform"
         >
           {heroCopy.script}
         </motion.span>
 
-        {/* Font size: the word (≈6.6em wide) fills the frame's inner width at
-            any viewport — 94vw minus the frame's horizontal padding. */}
+        {/* V.3 size: 14.5vw on phones, 10.5vw from 640px */}
         <motion.span
           ref={wordRef}
           aria-hidden
           initial={reduce ? false : "hidden"}
           animate="show"
           variants={{ hidden: {}, show: { transition: { staggerChildren: 0.045, delayChildren: delay } } }}
-          className="relative block whitespace-nowrap font-playfair font-normal uppercase leading-[0.82] tracking-[0.02em] [font-kerning:none] text-[calc((94vw_-_3rem_-_2px)/6.7)] md:text-[calc((94vw_-_5rem_-_2px)/6.7)]"
+          className="relative block whitespace-nowrap font-playfair font-normal leading-[0.86] tracking-[-0.025em] [font-kerning:none] text-[14.5vw] sm:text-[10.5vw]"
         >
           {chars.map((c, i) => (
-            <span key={i} data-ch className="inline-block overflow-hidden align-bottom">
+            <span key={`${display}-${i}`} data-ch className="inline-block overflow-hidden align-bottom pt-[0.12em] pb-[0.1em] -mt-[0.12em]">
               <motion.span variants={charV} className="hero-gold-char inline-block will-change-transform">
                 {c}
               </motion.span>

@@ -41,7 +41,7 @@ export interface Venture {
   logo: string;
   fact: { value: string; unit?: string; label: string };
   highlight: string;
-  list: { title: string; items: { name: string; note?: string }[] };
+  list: { title: string; items: { name: string; en?: string; note?: string }[] };
   /** "Group" tile: where the venture sits in the Charoensin structure */
   group: { label: string; name: string; href: string };
   /** Detail CTA */
@@ -63,6 +63,8 @@ const company = (g: BusinessGroup, id: string): Company => {
 const shortList = (g: BusinessGroup) =>
   g.companies.map((c) => ({
     name: c.nameTh.replace(/^บริษัท\s*/, "").replace(/\s*จำกัด.*$/, ""),
+    /** Registered English short name, shown in non-Thai languages */
+    en: (c.nameEn ?? c.shortName).replace(/\s*\(.*?\)\s*$/, "").replace(/\s*(Public\s+)?Co\.,?\s*Ltd\.?$/i, ""),
     note: c.tagline,
   }));
 

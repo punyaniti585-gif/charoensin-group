@@ -5,9 +5,11 @@ import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { X } from "lucide-react";
 import type { VentureVideo } from "@/data/ventures-data";
+import { useT } from "@/i18n";
 
 /** Fullscreen video modal (YouTube embed or MP4), portalled to <body>. */
 export default function VideoModal({ video, onClose }: { video: VentureVideo | null; onClose: () => void }) {
+  const { t } = useT();
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function VideoModal({ video, onClose }: { video: VentureVideo | n
           onClick={onClose}
           role="dialog"
           aria-modal="true"
-          aria-label={video.title}
+          aria-label={t(video.title)}
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0, y: 16 }}
@@ -43,13 +45,13 @@ export default function VideoModal({ video, onClose }: { video: VentureVideo | n
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between p-4 sm:p-5 border-b border-white/10 bg-[#1F1F1F]">
-              <h4 className="text-sm sm:text-base font-semibold font-kanit text-white">{video.title}</h4>
+              <h4 className="text-sm sm:text-base font-semibold font-kanit text-white">{t(video.title)}</h4>
               <button
                 type="button"
                 onClick={onClose}
                 autoFocus
                 className="p-1.5 rounded-full bg-white/10 hover:bg-[#B39B6B] text-white hover:text-black transition-colors"
-                aria-label="ปิดหน้าต่างวิดีโอ"
+                aria-label={t("ปิดหน้าต่างวิดีโอ")}
               >
                 <X className="w-5 h-5" />
               </button>
@@ -58,14 +60,14 @@ export default function VideoModal({ video, onClose }: { video: VentureVideo | n
               {video.type === "youtube" ? (
                 <iframe
                   src={video.url}
-                  title={video.title}
+                  title={t(video.title)}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                   className="w-full h-full border-0"
                 />
               ) : (
                 <video src={video.url} controls autoPlay playsInline className="w-full h-full object-contain">
-                  เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอนี้
+                  {t("เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอนี้")}
                 </video>
               )}
             </div>

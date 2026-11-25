@@ -7,16 +7,30 @@ import {
   LANGUAGE_EVENT,
   LANGUAGE_STORAGE_KEY,
   LANGUAGES,
+  toLanguageCode,
   type LanguageCode,
 } from "@/data/languages";
+import { translateMenuLabel } from "@/i18n/menu";
 
-/** Chosen language, persisted in localStorage and shared across instances */
+/** Reflect the language on <html lang> — drives the per-language font stacks */
+function applyDocumentLang(code: LanguageCode) {
+  if (document.documentElement.lang !== code) document.documentElement.lang = code;
+}
+
+/**
+ * Chosen language, persisted in localStorage and shared across every
+ * instance (Navbar, drawer, full-screen menu, translated sections) through a
+ * window event. The static HTML is Thai; the saved choice applies on mount.
+ */
 export function useLanguage() {
   const [lang, setLangState] = useState<LanguageCode>(DEFAULT_LANGUAGE);
 
   useEffect(() => {
-    const saved = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    if (saved && LANGUAGES.some((l) => l.code === saved)) setLangState(saved as LanguageCode);
+    const saved = toLanguageCode(window.localStorage.getItem(LANGUAGE_STORAGE_KEY));
+    if (saved) {
+      setLangState(saved);
+      applyDocumentLang(saved);
+    }
     const onChange = (e: Event) => setLangState((e as CustomEvent<LanguageCode>).detail);
     window.addEventListener(LANGUAGE_EVENT, onChange);
     return () => window.removeEventListener(LANGUAGE_EVENT, onChange);
@@ -25,6 +39,7 @@ export function useLanguage() {
   const setLang = useCallback((code: LanguageCode) => {
     window.localStorage.setItem(LANGUAGE_STORAGE_KEY, code);
     setLangState(code);
+    applyDocumentLang(code);
     window.dispatchEvent(new CustomEvent<LanguageCode>(LANGUAGE_EVENT, { detail: code }));
   }, []);
 
@@ -34,7 +49,7 @@ export function useLanguage() {
 /**
  * Language switcher.
  *  - variant "dropdown": "TH ▾" button; opens on hover or click (desktop top bar)
- *  - variant "inline"  : TH / EN / ZH segmented buttons (mobile drawer)
+ *  - variant "inline"  : TH / EN / 简 / 繁 / JA segmented buttons (mobile drawer)
  */
 export default function LanguageSwitcher({
   variant = "dropdown",
@@ -65,7 +80,7 @@ export default function LanguageSwitcher({
 
   if (variant === "inline") {
     return (
-      <div role="radiogroup" aria-label="เลือกภาษา" className={`inline-flex rounded-full border border-[#B39B6B]/40 bg-white/70 p-0.5 ${className}`}>
+      <div role="radiogroup" aria-label={translateMenuLabel("เลือกภาษา", lang)} className={`inline-flex rounded-full border border-[#B39B6B]/40 bg-white/70 p-0.5 ${className}`}>
         {LANGUAGES.map((l) => {
           const active = l.code === lang;
           return (
@@ -99,7 +114,7 @@ export default function LanguageSwitcher({
         type="button"
         aria-haspopup="listbox"
         aria-expanded={open}
-        aria-label={`ภาษา: ${current.name}`}
+        aria-label={`${translateMenuLabel("ภาษา", lang)}: ${current.name}`}
         onClick={() => setOpen((o) => !o)}
         className="inline-flex items-center gap-1 py-1 font-inter font-semibold text-[#1F1F1F]/80 hover:text-[#6B5A3A] transition-colors"
       >
@@ -111,7 +126,7 @@ export default function LanguageSwitcher({
       {open && (
         <div
           role="listbox"
-          aria-label="เลือกภาษา"
+          aria-label={translateMenuLabel("เลือกภาษา", lang)}
           className="absolute right-0 top-full z-[60] pt-1.5 w-40"
         >
           <div className="rounded-xl bg-white shadow-xl border border-[#B39B6B]/25 py-1.5">

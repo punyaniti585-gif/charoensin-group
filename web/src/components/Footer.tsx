@@ -7,6 +7,11 @@ import { useReducedMotion } from "framer-motion";
 import { footerAffiliateLogos } from "@/data/asset-map";
 import { FadeUp } from "@/components/ui/MotionWrapper";
 import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/components/common/LanguageSwitcher";
+import { useT } from "@/i18n";
+
+/** The group's Chinese name — replaces "Charoensin Group" on zh-CN / zh-TW */
+const ZH_NAME = "陳振誠集團";
 
 /* ------------------------------------------------------------------
    Social channels. lucide-react 1.x ships no brand icons, so the
@@ -47,7 +52,7 @@ const footerSections = [
   {
     title: "ประวัติของเรา",
     links: [
-      { label: "ประวัติความเป็นมา 90+ ปี", href: "/about#history", isExternal: false },
+      { label: "ประวัติความเป็นมา 80+ ปี", href: "/about#history", isExternal: false },
       { label: "วิสัยทัศน์และพันธกิจ", href: "/about#vision", isExternal: false },
       { label: "ค่านิยมและปรัชญาองค์กร", href: "/about#values", isExternal: false },
       { label: "คณะผู้บริหารและผู้นำของเรา", href: "/about#leadership", isExternal: false },
@@ -79,7 +84,14 @@ const footerSections = [
 const linkClass =
   "group/link inline-flex items-start gap-1.5 text-[12.5px] sm:text-[13px] leading-relaxed text-[#E5E7EB] hover:text-[#9CA3AF] transition-colors duration-200";
 
-export default function Footer() {
+/**
+ * @param hideAffiliates  drop the running affiliate-logo band (home page —
+ *   keeps the page clean and stops the infinite marquee animation)
+ */
+export default function Footer({ hideAffiliates = false }: { hideAffiliates?: boolean } = {}) {
+  const [lang] = useLanguage();
+  const zh = lang === "zh-CN" || lang === "zh-TW";
+  const { t } = useT();
   const shouldReduceMotion = useReducedMotion();
   const half = Math.ceil(footerAffiliateLogos.length / 2);
   const row1 = footerAffiliateLogos.slice(0, half);
@@ -91,6 +103,7 @@ export default function Footer() {
           PART 1: AFFILIATE LOGOS BAND (cream — the 24 colour logos
           are JPG/PNG on light grounds and read poorly on dark)
          ======================================================== */}
+      {!hideAffiliates && (
       <div className="bg-[#F7F1E7] border-t border-[#B39B6B]/30 pt-12 lg:pt-14 pb-6 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeUp delay={0.1} distance={20}>
@@ -100,11 +113,11 @@ export default function Footer() {
                   AFFILIATE COMPANIES & BRANDS
                 </span>
                 <h4 className="text-lg sm:text-xl font-bold font-kanit text-[#1F1F1F]">
-                  บริษัทและแบรนด์ในเครือกลุ่มเจริญสิน
+                  {t("บริษัทและแบรนด์ในเครือกลุ่มเจริญสิน")}
                 </h4>
               </div>
               <span className="hidden sm:inline-block text-xs text-[#6B5A3A] font-sarabun">
-                ชี้เมาส์ที่โลโก้เพื่อดูชื่อบริษัท
+                {t("ชี้เมาส์ที่โลโก้เพื่อดูชื่อบริษัท")}
               </span>
             </div>
 
@@ -131,6 +144,7 @@ export default function Footer() {
           </FadeUp>
         </div>
       </div>
+      )}
 
       {/* ========================================================
           PART 2: DARK CHARCOAL-INDIGO MAIN FOOTER
@@ -158,7 +172,10 @@ export default function Footer() {
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,2.6fr)] gap-12 lg:gap-14 xl:gap-20">
             {/* ---------------- Brand & Social ---------------- */}
             <div>
-              <Link href="/" aria-label="Charoensin Group — หน้าแรก" className="inline-block">
+              <Link href="/" aria-label={t("Charoensin Group — หน้าแรก")} className="inline-block">
+                {zh ? (
+                  <p className="font-playfair text-[2.1rem] sm:text-[2.5rem] xl:text-[2.75rem] leading-[1.1] tracking-[0.12em] text-[#CCA369]">{ZH_NAME}</p>
+                ) : (
                 <p className="font-playfair uppercase leading-[0.95] tracking-[0.14em]">
                   <span className="block text-[2.1rem] sm:text-[2.5rem] xl:text-[2.75rem] font-semibold text-[#CCA369]">
                     Charoensin
@@ -167,15 +184,16 @@ export default function Footer() {
                     Group
                   </span>
                 </p>
+                )}
               </Link>
 
               <div className="mt-5 h-px w-14 bg-[#CCA369]/60" />
 
               <p className="mt-5 font-kanit text-base sm:text-lg text-[#E5E7EB]/85">
-                สร้างคุณค่า เติบโตอย่างมั่นคง
+                {t("สร้างคุณค่า เติบโตอย่างมั่นคง")}
               </p>
               <p className="mt-1 font-sarabun text-xs text-[#9CA3AF]">
-                สถาปนา พ.ศ. 2475 · Today&apos;s Progress. Tomorrow&apos;s Greatness.
+                {t("สถาปนา พ.ศ. 2489")} · Today&apos;s Progress. Tomorrow&apos;s Greatness.
               </p>
 
               <ul className="mt-7 flex items-center gap-3">
@@ -205,7 +223,7 @@ export default function Footer() {
               {footerSections.map((sec) => (
                 <div key={sec.title} className="min-w-0">
                   <h4 className="font-kanit text-[15px] font-medium text-[#CCA369] flex items-center gap-2 mb-5">
-                    <span>{sec.title}</span>
+                    <span>{t(sec.title)}</span>
                     <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-[#CCA369]" />
                   </h4>
                   <ul className="space-y-2.5 sm:space-y-3 font-sarabun">
@@ -213,12 +231,12 @@ export default function Footer() {
                       <li key={link.label}>
                         {link.isExternal ? (
                           <a href={link.href} target="_blank" rel="noopener noreferrer" className={linkClass}>
-                            <span>{link.label}</span>
+                            <span>{t(link.label)}</span>
                             <ArrowUpRight className="mt-[0.3em] h-3 w-3 shrink-0 text-[#CCA369]/0 group-hover/link:text-[#CCA369] transition-colors" />
                           </a>
                         ) : (
                           <Link href={link.href} className={linkClass}>
-                            <span>{link.label}</span>
+                            <span>{t(link.label)}</span>
                           </Link>
                         )}
                       </li>
@@ -231,9 +249,9 @@ export default function Footer() {
 
           {/* ---------------- Bottom Bar ---------------- */}
           <div className="mt-14 lg:mt-16 pt-6 border-t border-[#CCA369]/15 flex flex-col md:flex-row md:items-center md:justify-between gap-3 text-xs text-[#9CA3AF] font-sarabun text-center md:text-left">
-            <p>&copy; 2026 Charoensin Group &mdash; All Rights Reserved.</p>
+            <p>&copy; 2026 {zh ? ZH_NAME : "Charoensin Group"} &mdash; All Rights Reserved.</p>
             <p className="flex flex-wrap items-center justify-center md:justify-end gap-x-3 gap-y-1">
-              <span className="whitespace-nowrap">ความมั่นคง ปลอดภัย และธรรมาภิบาล</span>
+              <span className="whitespace-nowrap">{t("ความมั่นคง ปลอดภัย และธรรมาภิบาล")}</span>
               <span aria-hidden className="text-[#6B7280]">|</span>
               <span className="whitespace-nowrap font-inter">Static Export Production Ready</span>
             </p>
@@ -256,13 +274,14 @@ function AffiliateLogo({
   tooltip: "top" | "bottom";
   fluid?: boolean;
 }) {
+  const { name } = useT();
   const below = tooltip === "bottom";
   return (
     <div
       className={`group/logo relative h-9 sm:h-10 ${fluid ? "w-full" : "w-32 sm:w-36 shrink-0"} flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110`}
     >
       <div className="relative w-full h-full">
-        <Image src={item.logo} alt={item.name} fill sizes="(max-width: 640px) 140px, 180px" className="object-contain" />
+        <Image src={item.logo} alt={name(item.name)} fill sizes="(max-width: 640px) 140px, 180px" className="object-contain" />
       </div>
       <div
         className={`absolute ${below ? "-bottom-8" : "-top-8"} left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-[#1F1F1F] text-white text-xs font-sarabun whitespace-nowrap opacity-0 group-hover/logo:opacity-100 transition-opacity duration-200 pointer-events-none z-50 shadow-xl border border-[#B39B6B]/40 flex items-center gap-1.5`}
@@ -271,7 +290,7 @@ function AffiliateLogo({
           className={`absolute ${below ? "-top-1 border-l border-t" : "-bottom-1 border-r border-b"} left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 bg-[#1F1F1F] border-[#B39B6B]/40`}
         />
         <span className="w-1.5 h-1.5 rounded-full bg-[#B39B6B] shrink-0" />
-        <span className="font-medium">{item.name}</span>
+        <span className="font-medium">{name(item.name)}</span>
       </div>
     </div>
   );

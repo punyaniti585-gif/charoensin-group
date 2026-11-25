@@ -4,7 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { philosophies, philosophyCopy } from "@/data/home-data";
+import { philosophies } from "@/data/home-data";
+import { useHomeCopy, useT } from "@/i18n";
 import { Reveal, SectionHeading, fadeUp, luxEase } from "./motion";
 
 const SHOWCASE_S = 5;
@@ -21,6 +22,8 @@ const SHOWCASE_S = 5;
  * the section is off screen. Transform + opacity only.
  */
 export default function PhilosophySection() {
+  const philosophyCopy = useHomeCopy().philosophy;
+  const { t: tr } = useT();
   const reduce = useReducedMotion();
   const [active, setActive] = useState(0);
   const [hovering, setHovering] = useState(false);
@@ -44,9 +47,9 @@ export default function PhilosophySection() {
 
   return (
     <section ref={sectionRef} aria-labelledby="philosophy-title" className="relative bg-[#FAF8F3] py-16 sm:py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="home-shell">
         <div id="philosophy-title">
-          <SectionHeading eyebrow={philosophyCopy.eyebrow} title={philosophyCopy.title} />
+          <SectionHeading eyebrow={philosophyCopy.eyebrow} title={philosophyCopy.title} lead={philosophyCopy.lead} />
         </div>
 
         <div
@@ -75,7 +78,7 @@ export default function PhilosophySection() {
               >
                 <Image
                   src={p.image}
-                  alt={p.imageAlt}
+                  alt={tr(p.imageAlt)}
                   fill
                   sizes="(max-width: 1024px) 100vw, 50vw"
                   className="object-cover"
@@ -97,8 +100,8 @@ export default function PhilosophySection() {
                 >
                   <span className="block font-playfair text-6xl lg:text-7xl leading-none text-[#cfc29f]">{p.number}</span>
                   <p className="mt-4 font-inter text-[11px] uppercase tracking-[0.3em] text-[#cfc29f]">{p.enTitle}</p>
-                  <h3 className="mt-2 font-kanit font-normal text-3xl lg:text-4xl text-white">{p.title}</h3>
-                  <p className="mt-3 max-w-xl font-sarabun text-base leading-relaxed text-white/80">{p.desc}</p>
+                  <h3 className="mt-2 font-kanit font-normal text-3xl lg:text-4xl text-white">{philosophyCopy.items[active]?.title ?? p.title}</h3>
+                  <p className="mt-3 max-w-xl font-sarabun text-base leading-relaxed text-white/80">{philosophyCopy.items[active]?.desc ?? p.desc}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -126,7 +129,7 @@ export default function PhilosophySection() {
                     </span>
                     <span className="min-w-0 flex-1">
                       <span className={`block font-kanit text-lg lg:text-xl transition-colors ${on ? "text-[#14171F]" : "text-[#14171F]/60 group-hover:text-[#14171F]/85"}`}>
-                        {ph.title}
+                        {philosophyCopy.items[i]?.title ?? ph.title}
                       </span>
                       <span className="mt-0.5 block font-inter text-[10px] uppercase tracking-[0.2em] text-[#14171F]/40">{ph.enTitle}</span>
                     </span>

@@ -85,18 +85,21 @@ export function CountUp({
   suffix = "",
   duration = 1.6,
   className = "",
+  pad = 1,
 }: {
   value: number;
   decimals?: number;
   suffix?: string;
   duration?: number;
   className?: string;
+  /** minimum integer digits ("05") */
+  pad?: number;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const reduce = useReducedMotion();
   const fmt = (n: number) =>
-    n.toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+    n.toLocaleString("en-US", { minimumIntegerDigits: pad, minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
 
   // Once hydrated (and before it is seen) start from 0 so the count-up reads cleanly
   const started = useRef(false);

@@ -1,18 +1,20 @@
 /**
  * Home page (sections after the Hero) — content.
  * Numbers, growth milestones and the 4 philosophies are the figures already
- * published on the home page; the vision line comes from about-data.ts.
+ * published on the home page; headings and copy follow V.1 (main).
  */
-import { visionAndMissionData } from "./about-data";
 
-/* ---------- Section 2 — Manifesto + stats ---------- */
+/* ---------- Section 2 — About (V.1 copy) + stats ---------- */
 export const manifesto = {
-  tag: "SINCE 1946 • 80 YEARS OF EXCELLENCE",
-  title: "มุ่งมั่นสู่การเป็นองค์กรชั้นนำ ที่เติบโตอย่างมั่นคง",
-  vision: visionAndMissionData.vision.lead,
+  tag: "ABOUT CHAROENSIN GROUP",
+  title: "เกี่ยวกับกลุ่มเจริญสิน",
+  // V.1 paragraph (main). Founding year aligned with the Hero: 80 ปี / พ.ศ. 2489 (1946)
+  vision:
+    "กลุ่มบริษัทเจริญสินเป็นหนึ่งในกลุ่มบริษัทข้ามอุตสาหกรรม (conglomerate) ชั้นนำของประเทศไทย ที่ดำเนินธุรกิจมาอย่างมั่นคงและยั่งยืนยาวนานกว่า 80 ปี นับตั้งแต่ก่อตั้งในปี พ.ศ. 2489 โดยมีจุดเริ่มต้นจากธุรกิจการค้าในรูปแบบครอบครัว ด้วยรากฐานที่แข็งแกร่งและวิสัยทัศน์แห่งการพัฒนาอย่างต่อเนื่อง วันนี้กลุ่มเจริญสินได้เติบโตและขยายธุรกิจครอบคลุม 5 เสาหลักอุตสาหกรรม",
+  // V.1 stats lead (EXCELLENCE & INTEGRITY)
   story:
-    "จากกิจการครอบครัวที่เริ่มต้นด้วยงานฟอกหนัง สู่กลุ่มบริษัทข้ามอุตสาหกรรมที่ครอบคลุมอสังหาริมทรัพย์ หนังและรองเท้า สิ่งทอ เคมีภัณฑ์ และธุรกิจแห่งอนาคต ด้วยความซื่อสัตย์ ความใส่ใจในคุณภาพ และการพัฒนาอย่างต่อเนื่องตลอดกว่า 8 ทศวรรษ",
-  image: "/img/charoensin-building-hq.jpg",
+    "ด้วยเครื่องจักรที่ทันสมัยและทีมงานมืออาชีพ เราช่วยให้ธุรกิจของคู่ค้าและพันธมิตรดำเนินงานได้อย่างมีประสิทธิภาพ ลดการสูญเสีย และเติบโตอย่างยั่งยืน",
+  image: "/img/Modern%20Chareonsin%20Group%20Entrance.jpg",
   imageAlt: "อาคารสำนักงานใหญ่ กลุ่มบริษัทเจริญสิน",
   imageLabel: "อาคารสำนักงานใหญ่ กลุ่มบริษัทเจริญสิน",
   cta: { label: "รู้จักเรามากขึ้น", href: "/about" },
@@ -36,18 +38,20 @@ export const homeStats: HomeStat[] = [
 
 /** Section 2 showcase card — stats cycling over real photos (public/img) */
 export const manifestoStats = [
-  { value: "80", unit: "ปี", label: "ก่อตั้งมาแล้ว", image: "/img/charoensin-building-hq.jpg", imageAlt: "อาคารสำนักงานใหญ่ กลุ่มบริษัทเจริญสิน", position: "center 60%" },
-  { value: "16,890", unit: "ราย", label: "ลูกค้าของเรา", image: "/img/businesses/chemical.webp", imageAlt: "ธุรกิจและอุตสาหกรรมในเครือเจริญสิน", position: "center" },
-  { value: "1,390", unit: "คน", label: "พนักงานของเรา", image: "/img/about/vision.webp", imageAlt: "ทีมงานและบุคลากรของกลุ่มเจริญสิน", position: "center 30%" },
-  { value: "99.90", unit: "%", label: "อัตราความพึงพอใจ", image: "/img/businesses/other.webp", imageAlt: "มาตรฐานคุณภาพและนวัตกรรม", position: "center 25%" },
+  { value: "80", unit: "ปี", label: "ก่อตั้งมาแล้ว", note: "รากฐานความมั่นคงกว่า 8 ทศวรรษ", image: "/img/Modern%20Chareonsin%20Group%20Entrance.jpg", imageAlt: "อาคารสำนักงานใหญ่ กลุ่มบริษัทเจริญสิน", position: "center" },
+  { value: "16,890", unit: "ราย", label: "ลูกค้าของเรา", note: "ที่มอบความไว้วางใจในสินค้าและบริการ", image: "/img/businesses/chemical.webp", imageAlt: "ธุรกิจและอุตสาหกรรมในเครือเจริญสิน", position: "center" },
+  { value: "1,390", unit: "คน", label: "พนักงานของเรา", note: "บุคลากรมืออาชีพที่ร่วมขับเคลื่อนองค์กร", image: "/img/about/vision.webp", imageAlt: "ทีมงานและบุคลากรของกลุ่มเจริญสิน", position: "center 30%" },
+  { value: "99.90", unit: "%", label: "อัตราความพึงพอใจ", note: "มาตรฐานคุณภาพและความพึงพอใจสูงสุด", image: "/img/businesses/other.webp", imageAlt: "มาตรฐานคุณภาพและนวัตกรรม", position: "center 25%" },
 ];
 
 /* ---------- Section 3 — Global footprint + growth ---------- */
 export const globalCopy = {
-  eyebrow: "10 GLOBAL HUBS & MARKETS",
-  title: "ฐานธุรกิจและเครือข่ายระดับสากล",
-  lead: "จากสำนักงานใหญ่ในประเทศไทย สู่ตลาดและพันธมิตรใน 10 ประเทศทั่วโลก",
-  growthTitle: "ภาพรวมการเติบโตธุรกิจในเครือ",
+  eyebrow: "GLOBAL FOOTPRINT & ARCHITECTURAL NETWORK",
+  title: "ฐานธุรกิจ CHAROENSIN GROUP",
+  lead: "CSG ให้บริการลูกค้ากว่า 10 ล้านคน ใน 10 ประเทศทั่วโลก",
+  sub: "เชื่อมโยงเครือข่ายคู่ค้า ผู้จัดจำหน่าย และฐานการผลิตข้ามทวีป สร้างเสถียรภาพและความเชื่อมั่นในระดับสากล",
+  growthTitle: "ภาพรวมการเติบโตธุรกิจ ในเครือของเรา",
+  growthSub: "การเติบโตอย่างมั่นคงและยั่งยืนต่อเนื่อง",
 };
 
 /** Growth milestones — bar = height relative to the tallest year */
@@ -60,7 +64,8 @@ export const growthMilestones = [
 /* ---------- Section 4 — Philosophy ---------- */
 export const philosophyCopy = {
   eyebrow: "OUR PHILOSOPHY",
-  title: "ปรัชญาการดำเนินธุรกิจ 4 ประการ",
+  title: "ปรัชญาของเรา",
+  lead: "รากฐานความเชื่อและแนวคิดที่ยึดถือในการดำเนินธุรกิจ ส่งต่อคุณค่าจากรุ่นสู่รุ่น เป็นเข็มทิศนำทางสร้างความมั่นคงที่ยั่งยืน",
 };
 
 export const philosophies = [

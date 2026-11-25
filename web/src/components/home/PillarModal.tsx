@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, X } from "lucide-react";
 import type { HeroPillar } from "./hero-data";
+import { useHomeCopy, useT } from "@/i18n";
 
 /* ==========================================================================
    Expanded business card (Hero Act 2 → click a card).
@@ -33,6 +34,8 @@ export default function PillarModal({ pillar, origin, trigger, onClose }: Props)
   const panelRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const [mounted, setMounted] = useState(false);
+  const { t, name } = useT();
+  const pillarCopy = useHomeCopy().hero.pillars[pillar.id];
   const [shown, setShown] = useState(false); // backdrop + content state
   const closing = useRef(false);
 
@@ -103,7 +106,7 @@ export default function PillarModal({ pillar, origin, trigger, onClose }: Props)
       {/* Backdrop */}
       <button
         type="button"
-        aria-label="ปิด"
+        aria-label={t("ปิด")}
         tabIndex={-1}
         onClick={close}
         className={`absolute inset-0 cursor-default bg-[#14171F]/45 transition-opacity duration-400 ${shown ? "opacity-100" : "opacity-0"}`}
@@ -119,7 +122,7 @@ export default function PillarModal({ pillar, origin, trigger, onClose }: Props)
       >
         {/* Photo */}
         <div className="relative h-44 shrink-0 bg-[#E9DFCC] md:h-auto">
-          <Image src={pillar.image} alt={pillar.imageAlt} fill sizes="(max-width: 768px) 92vw, 380px" className="object-cover" />
+          <Image src={pillar.image} alt={t(pillar.imageAlt)} fill sizes="(max-width: 768px) 92vw, 380px" className="object-cover" />
           <div aria-hidden className="absolute inset-0 bg-[linear-gradient(0deg,rgba(20,15,5,0.25),transparent_45%)]" />
         </div>
 
@@ -134,10 +137,10 @@ export default function PillarModal({ pillar, origin, trigger, onClose }: Props)
                 {pillar.nameEn}
               </p>
               <h3 id="pillar-title" className="pillar-in mt-1 font-kanit font-normal text-2xl lg:text-[1.75rem] leading-snug text-[#14171F]" style={d(1)}>
-                {pillar.nameTh}
+                {pillarCopy?.name ?? pillar.nameTh}
               </h3>
               <p className="pillar-in mt-3 font-sarabun text-[15px] leading-relaxed text-[#14171F]/70 line-clamp-4" style={d(2)}>
-                {pillar.description}
+                {t(pillar.description)}
               </p>
 
               {pillar.highlights.length > 0 && (
@@ -145,7 +148,7 @@ export default function PillarModal({ pillar, origin, trigger, onClose }: Props)
                   {pillar.highlights.map((h) => (
                     <li key={h} className="flex items-center gap-1.5">
                       <span aria-hidden className="h-1 w-1 rounded-full bg-[#a28757]" />
-                      {h}
+                      {t(h)}
                     </li>
                   ))}
                 </ul>
@@ -153,11 +156,11 @@ export default function PillarModal({ pillar, origin, trigger, onClose }: Props)
 
               {chips.length > 0 && (
                 <div className="pillar-in mt-4" style={d(3)}>
-                  <p className="font-inter text-[10px] uppercase tracking-[0.2em] text-[#14171F]/40">บริษัทในเครือ</p>
+                  <p className="font-inter text-[10px] uppercase tracking-[0.2em] text-[#14171F]/40">{t("บริษัทในเครือ")}</p>
                   <ul className="mt-2 flex flex-wrap gap-1.5">
                     {chips.map((c) => (
                       <li key={c} className="rounded-full bg-[#F3EDE1] px-2.5 py-1 font-sarabun text-xs text-[#6B5A3A]">
-                        {c}
+                        {name(c)}
                       </li>
                     ))}
                     {more > 0 && <li className="rounded-full border border-[#a28757]/25 px-2.5 py-1 font-sarabun text-xs text-[#8a7146]">+{more}</li>}
@@ -170,7 +173,7 @@ export default function PillarModal({ pillar, origin, trigger, onClose }: Props)
                   href={pillar.href}
                   className="group inline-flex items-center gap-2 rounded-full bg-[#a28757] px-6 py-3 font-kanit text-[15px] text-white transition-colors hover:bg-[#8c7344] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a28757] focus-visible:ring-offset-2"
                 >
-                  ดูธุรกิจนี้
+                  {t("ดูธุรกิจนี้")}
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
@@ -183,7 +186,7 @@ export default function PillarModal({ pillar, origin, trigger, onClose }: Props)
           ref={closeRef}
           type="button"
           onClick={close}
-          aria-label="ปิดรายละเอียด"
+          aria-label={t("ปิดรายละเอียด")}
           className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-[#6B5A3A] shadow-sm ring-1 ring-[#a28757]/20 transition-[background-color,transform] duration-300 hover:rotate-90 hover:bg-[#F3EDE1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#a28757]"
         >
           <X className="h-4 w-4" />

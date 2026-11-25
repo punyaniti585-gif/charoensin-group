@@ -5,7 +5,7 @@ import Image from "next/image";
 import { AnimatePresence, motion, useInView, useReducedMotion, type Variants } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { ventures, type VentureVideo } from "@/data/ventures-data";
-import { venturesCopy } from "@/data/home-data";
+import { useHomeCopy, useT } from "@/i18n";
 import { SectionHeading, luxEase } from "./motion";
 import VideoModal from "./VideoModal";
 
@@ -39,6 +39,10 @@ const swapV: Variants = {
  * 0.06s stagger. transform + opacity only.
  */
 export default function VenturesShowcase() {
+  const venturesCopy = useHomeCopy().ventures;
+  const { t, tf, name, lang } = useT();
+  /** Buddhist-era years (e.g. ADB "2548") read as CE outside Thai */
+  const factValue = (v: string) => (lang !== "th" && /^25dd$/.test(v) ? String(Number(v) - 543) : v);
   const reduce = useReducedMotion();
   const [idx, setIdx] = useState(0);
   const [video, setVideo] = useState<VentureVideo | null>(null);
@@ -68,14 +72,14 @@ export default function VenturesShowcase() {
   return (
     <section ref={sectionRef} aria-labelledby="ventures-title" className="relative bg-[#111e46] py-16 sm:py-20 lg:py-24 text-white overflow-hidden">
       <div aria-hidden className="absolute inset-0 bg-[radial-gradient(50%_60%_at_85%_0%,rgba(162,135,87,0.18),transparent_70%)]" />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="relative home-shell">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <div id="ventures-title">
             <SectionHeading eyebrow={venturesCopy.eyebrow} title={venturesCopy.title} lead={venturesCopy.lead} dark />
           </div>
 
           {/* Organisation tabs — the active one carries the 5s gold timer */}
-          <div role="tablist" aria-label="เลือกองค์กร" className="-mx-4 px-4 sm:mx-0 sm:px-0 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          <div role="tablist" aria-label={t("เลือกองค์กร")} className="-mx-4 px-4 sm:mx-0 sm:px-0 flex gap-2 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {ventures.map((x, i) => {
               const on = i === idx;
               return (
@@ -91,7 +95,7 @@ export default function VenturesShowcase() {
                   }`}
                 >
                   <span className={`font-playfair ${on ? "text-white" : "text-[#cfc29f]"}`}>{pad2(i + 1)}</span>
-                  {x.code === "CSR" ? "มูลนิธิ" : x.code}
+                  {x.code === "CSR" ? t("มูลนิธิ") : x.code}
                   {on && !reduce && (
                     <span aria-hidden className="absolute inset-x-3 bottom-[3px] h-[2px] overflow-hidden rounded-full bg-white/25">
                       {!hold && (
@@ -130,7 +134,7 @@ export default function VenturesShowcase() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.55, ease: luxEase }}
               >
-                <Image src={v.heroImage} alt={v.nameTh} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover transition-transform duration-500 group-hover/hero:scale-[1.03]" />
+                <Image src={v.heroImage} alt={name(v.nameTh, v.nameEn)} fill sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover transition-transform duration-500 group-hover/hero:scale-[1.03]" />
               </motion.div>
             </AnimatePresence>
             <div aria-hidden className="absolute inset-0 bg-[linear-gradient(to_top,rgba(10,16,40,0.88),rgba(10,16,40,0.2)_55%,rgba(10,16,40,0))]" />
@@ -146,16 +150,16 @@ export default function VenturesShowcase() {
               >
                 <div className="min-w-0">
                   <p className="font-inter text-[10px] uppercase tracking-[0.24em] text-[#cfc29f]">
-                    {pad2(idx + 1)} / {pad2(ventures.length)} · {v.nameEn}
+                    {pad2(idx + 1)} / {pad2(ventures.length)} · {lang.startsWith("zh") && /charoensin/i.test(v.nameEn) ? name(v.nameTh, v.nameEn) : v.nameEn}
                   </p>
-                  <h3 className="mt-2 font-kanit font-normal text-3xl sm:text-4xl leading-tight">{v.nameTh}</h3>
-                  <p className="mt-2 max-w-md font-sarabun text-sm text-white/75 line-clamp-2">{v.tagline}</p>
+                  <h3 className="mt-2 font-kanit font-normal text-3xl sm:text-4xl leading-tight">{name(v.nameTh, v.nameEn)}</h3>
+                  <p className="mt-2 max-w-md font-sarabun text-sm text-white/75 line-clamp-2">{t(v.tagline)}</p>
                 </div>
                 {v.video && (
                   <button
                     type="button"
                     onClick={() => setVideo(v.video)}
-                    aria-label={`เล่นวิดีโอ ${v.nameTh}`}
+                    aria-label={`${t("เล่นวิดีโอ")} ${name(v.nameTh, v.nameEn)}`}
                     className="grid h-12 w-12 sm:h-14 sm:w-14 shrink-0 place-items-center rounded-full border border-[#cfc29f]/70 text-white transition-colors hover:bg-[#a28757] hover:border-[#a28757]"
                   >
                     <Play className="ml-0.5 h-5 w-5 fill-current" />
@@ -178,9 +182,9 @@ export default function VenturesShowcase() {
                 className="flex h-full flex-col items-center justify-center gap-3"
               >
                 <div className="relative h-16 w-[75%]">
-                  <Image src={v.logo} alt={`โลโก้ ${v.nameTh}`} fill sizes="240px" className="object-contain" />
+                  <Image src={v.logo} alt={`${t("โลโก้")} ${name(v.nameTh, v.nameEn)}`} fill sizes="240px" className="object-contain" />
                 </div>
-                <p className="font-kanit text-sm text-[#14171F]/70">{v.nameTh}</p>
+                <p className="font-kanit text-sm text-[#14171F]/70">{name(v.nameTh, v.nameEn)}</p>
               </motion.div>
             </AnimatePresence>
           </article>
@@ -197,12 +201,12 @@ export default function VenturesShowcase() {
                 exit="exit"
                 className="flex h-full flex-col justify-between gap-3"
               >
-                <p className="font-inter text-[10px] uppercase tracking-[0.22em] text-white/80">{v.fact.label}</p>
+                <p className="font-inter text-[10px] uppercase tracking-[0.22em] text-white/80">{t(v.fact.label)}</p>
                 <p className="font-inter font-extralight text-5xl leading-none">
-                  {v.fact.value}
-                  {v.fact.unit && <small className="ml-1.5 font-kanit font-light text-base text-white/85">{v.fact.unit}</small>}
+                  {factValue(v.fact.value)}
+                  {v.fact.unit && <small className="ml-1.5 font-kanit font-light text-base text-white/85">{t(v.fact.unit)}</small>}
                 </p>
-                <p className="font-kanit text-sm leading-snug text-white/90">{v.highlight}</p>
+                <p className="font-kanit text-sm leading-snug text-white/90">{t(v.highlight)}</p>
               </motion.div>
             </AnimatePresence>
           </article>
@@ -220,24 +224,24 @@ export default function VenturesShowcase() {
                 className="flex h-full flex-col justify-between gap-5"
               >
                 <div>
-                  <p className="font-inter text-[10px] uppercase tracking-[0.22em] text-[#cfc29f]">{v.list.title}</p>
+                  <p className="font-inter text-[10px] uppercase tracking-[0.22em] text-[#cfc29f]">{t(v.list.title)}</p>
                   <ul className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-1.5 font-sarabun text-sm text-white/80">
                     {v.list.items.slice(0, 6).map((it) => (
                       <li key={it.name} className="relative pl-3.5 before:absolute before:left-0 before:top-[0.65em] before:h-px before:w-1.5 before:bg-[#cfc29f]">
-                        {it.name}
+                        {name(it.name, it.en)}
                       </li>
                     ))}
-                    {v.list.items.length > 6 && <li className="pl-3.5 text-white/50">และอีก {v.list.items.length - 6} บริษัท</li>}
+                    {v.list.items.length > 6 && <li className="pl-3.5 text-white/50">{tf("และอีก {n} บริษัท", { n: v.list.items.length - 6 })}</li>}
                   </ul>
                 </div>
                 <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-4">
-                  <p className="font-sarabun text-xs text-white/50 line-clamp-1">{v.group.label} · {v.group.name}</p>
+                  <p className="font-sarabun text-xs text-white/50 line-clamp-1">{t(v.group.label)} · {t(v.group.name)}</p>
                   <a
                     href={v.href}
                     {...(isExternal(v.href) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className="group inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 font-kanit text-sm text-[#14171F] transition-colors hover:bg-[#cfc29f]"
                   >
-                    ดูรายละเอียด
+                    {venturesCopy.details}
                     {isExternal(v.href) ? (
                       <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                     ) : (

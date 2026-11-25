@@ -3,7 +3,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import FootprintMap from "./FootprintMap";
-import { globalCopy } from "@/data/home-data";
+import { useHomeCopy } from "@/i18n";
 import GrowthTimeline from "./GrowthTimeline";
 import { Reveal, VIEWPORT, fadeUp } from "./motion";
 
@@ -14,9 +14,10 @@ import { Reveal, VIEWPORT, fadeUp } from "./motion";
  * that draws across as it scrolls into view. Transform/opacity only.
  */
 export default function GlobalSection() {
+  const globalCopy = useHomeCopy().global;
   return (
-    <section aria-labelledby="global-title" className="relative bg-white py-10 sm:py-12 lg:py-14">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section aria-labelledby="global-title" className="relative bg-white py-8 lg:py-10">
+      <div className="home-shell">
         {/* Compact header: eyebrow + title left, short lead right */}
         <Reveal className="flex flex-col gap-2 lg:flex-row lg:items-end lg:justify-between">
           <div>
@@ -28,19 +29,20 @@ export default function GlobalSection() {
               {globalCopy.title}
             </motion.h2>
           </div>
-          <motion.p variants={fadeUp} className="max-w-md font-sarabun text-sm text-[#14171F]/60 lg:text-right">
-            {globalCopy.lead}
-          </motion.p>
+          <motion.div variants={fadeUp} className="max-w-md lg:text-right">
+            <p className="font-kanit text-base text-[#6B5A3A]">{globalCopy.lead}</p>
+            <p className="mt-1 font-sarabun text-sm text-[#14171F]/60">{globalCopy.sub}</p>
+          </motion.div>
         </Reveal>
 
         {/* Real-country map with travel routes from Bangkok */}
-        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={VIEWPORT} className="mt-5">
+        <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={VIEWPORT} className="mt-4">
           <FootprintMap />
         </motion.div>
 
         {/* Growth milestones */}
         <div className="mt-16 lg:mt-20">
-          <GrowthTimeline title={globalCopy.growthTitle} />
+          <GrowthTimeline title={globalCopy.growthTitle} subtitle={globalCopy.growthSub} />
         </div>
       </div>
     </section>

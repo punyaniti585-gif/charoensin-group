@@ -7,8 +7,9 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronDown, ChevronRight, X } from "lucide-react";
 import { brandAssets, businessCategories, navigationMenu } from "@/data/asset-map";
-import { LANGUAGES, type LanguageCode } from "@/data/languages";
+import { LANGUAGES } from "@/data/languages";
 import { useLanguage } from "@/components/common/LanguageSwitcher";
+import { useMenuT } from "@/i18n";
 
 /* ==========================================================================
    Full-screen navigation overlay (navy #111e46, CI 2025).
@@ -46,9 +47,6 @@ const MENU: MenuEntry[] = navigationMenu.map((item) => {
 
 const CONTACT = MENU.find((m) => m.id === "07");
 
-/** Overlay language labels (codes from the shared language list) */
-const LANG_LABEL: Record<LanguageCode, string> = { th: "ไทย", en: "English", zh: "简体中文" };
-
 // TODO: only the Facebook URL is in the project — replace the "#" placeholders
 // with the official X / Instagram / LinkedIn / TikTok channels.
 const SOCIALS = [
@@ -72,10 +70,11 @@ function NavLink({ href, className, children, onNavigate }: { href: string; clas
 }
 
 function SubMenu({ entry, onNavigate }: { entry: MenuEntry; onNavigate: () => void }) {
+  const tm = useMenuT();
   if (!entry.groups.length) {
     return (
       <NavLink href={entry.href} onNavigate={onNavigate} className="group inline-flex items-center gap-2 font-kanit text-lg text-white/80 hover:text-[#cfc29f] transition-colors">
-        ไปที่หน้า {entry.label}
+        {tm("ไปที่หน้า")} {tm(entry.label)}
         <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
       </NavLink>
     );
@@ -84,12 +83,12 @@ function SubMenu({ entry, onNavigate }: { entry: MenuEntry; onNavigate: () => vo
     <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
       {entry.groups.map((g) => (
         <div key={g.title}>
-          <p className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#cfc29f]/80">{g.title}</p>
+          <p className="font-inter text-[11px] uppercase tracking-[0.2em] text-[#cfc29f]/80">{tm(g.title)}</p>
           <ul className="mt-3 space-y-2">
             {g.links.map((l, i) => (
               <li key={`${l.label}-${i}`}>
                 <NavLink href={l.href} onNavigate={onNavigate} className="font-sarabun text-[15px] leading-snug text-white/75 hover:text-white transition-colors">
-                  {l.label}
+                  {tm(l.label)}
                 </NavLink>
               </li>
             ))}
@@ -114,6 +113,7 @@ export default function MenuOverlay({
   const [active, setActive] = useState(MENU[1]?.id ?? MENU[0].id);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [lang, setLang] = useLanguage();
+  const tm = useMenuT();
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => setMounted(true), []);
@@ -146,7 +146,7 @@ export default function MenuOverlay({
           key="menu-overlay"
           role="dialog"
           aria-modal="true"
-          aria-label="เมนูหลัก"
+          aria-label={tm("เมนูหลัก")}
           data-lenis-prevent
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
@@ -156,14 +156,14 @@ export default function MenuOverlay({
         >
           {/* Top bar */}
           <div className="flex items-center justify-between px-5 sm:px-8 lg:px-12 py-5 lg:py-6">
-            <Link href="/" onClick={onClose} className="relative block h-7 sm:h-8 aspect-[1490/351]" aria-label="Charoensin Group — หน้าแรก">
-              <Image src={brandAssets.logos.primary} alt="Charoensin Group" fill sizes="200px" className="object-contain brightness-0 invert" />
+            <Link href="/" onClick={onClose} className="relative block h-7 sm:h-8 aspect-[1490/351]" aria-label={tm("Charoensin Group — หน้าแรก")}>
+              <Image src={brandAssets.logos.primary} alt={tm("กลุ่มบริษัทเจริญสิน")} fill sizes="200px" className="object-contain brightness-0 invert" />
             </Link>
             <button
               ref={closeRef}
               type="button"
               onClick={onClose}
-              aria-label="ปิดเมนู"
+              aria-label={tm("ปิดเมนู")}
               className="grid h-11 w-11 place-items-center rounded-full border border-white/25 text-white transition-[background-color,border-color,transform] duration-300 hover:rotate-90 hover:border-[#cfc29f] hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#cfc29f]"
             >
               <X className="h-5 w-5" />
@@ -172,7 +172,7 @@ export default function MenuOverlay({
 
           {/* Main: list | sub-menu */}
           <div className="mx-5 sm:mx-8 lg:mx-12 flex-1 grid lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] border-t border-white/10">
-            <nav aria-label="เมนูหลัก" className="py-6 lg:py-10 lg:pr-12 lg:border-r lg:border-white/10">
+            <nav aria-label={tm("เมนูหลัก")} className="py-6 lg:py-10 lg:pr-12 lg:border-r lg:border-white/10">
               <ul>
                 {MENU.map((m) => {
                   const on = m.id === active;
@@ -194,7 +194,7 @@ export default function MenuOverlay({
                         <span
                           className={`font-kanit text-2xl xl:text-[1.9rem] leading-tight transition-colors duration-300 ${on ? "text-[#cfc29f]" : "text-white/85 group-hover:text-[#cfc29f]"}`}
                         >
-                          {m.label}
+                          {tm(m.label)}
                         </span>
                         <ChevronRight
                           className={`h-5 w-5 text-[#cfc29f] transition-[opacity,transform] duration-300 ${on ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"}`}
@@ -206,13 +206,13 @@ export default function MenuOverlay({
                         <div className="flex items-center gap-4 py-3.5">
                           <span className="w-6 font-playfair text-sm text-[#a28757]">{m.id}</span>
                           <NavLink href={m.href} onNavigate={onClose} className="flex-1 font-kanit text-xl text-white/90 active:text-[#cfc29f]">
-                            {m.label}
+                            {tm(m.label)}
                           </NavLink>
                           {m.groups.length > 0 && (
                             <button
                               type="button"
                               aria-expanded={isOpen}
-                              aria-label={`${isOpen ? "ซ่อน" : "แสดง"}เมนูย่อย ${m.label}`}
+                              aria-label={`${tm(isOpen ? "ซ่อนเมนูย่อย" : "แสดงเมนูย่อย")} ${tm(m.label)}`}
                               onClick={() => setExpanded(isOpen ? null : m.id)}
                               className="grid h-10 w-10 place-items-center rounded-full border border-white/15"
                             >
@@ -253,7 +253,7 @@ export default function MenuOverlay({
                   transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <p className="font-playfair text-sm text-[#a28757]">{current.id}</p>
-                  <h2 className="mt-1 mb-8 font-kanit font-normal text-3xl text-white">{current.label}</h2>
+                  <h2 className="mt-1 mb-8 font-kanit font-normal text-3xl text-white">{tm(current.label)}</h2>
                   <SubMenu entry={current} onNavigate={onClose} />
                 </motion.div>
               </AnimatePresence>
@@ -268,12 +268,12 @@ export default function MenuOverlay({
                 onNavigate={onClose}
                 className="group inline-flex w-fit items-center gap-2 rounded-full bg-[#a28757] px-6 py-3 font-kanit text-[15px] text-white transition-colors hover:bg-[#b89a62]"
               >
-                ติดต่อเรา
+                {tm("ติดต่อเรา")}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </NavLink>
             )}
 
-            <div role="group" aria-label="เลือกภาษา" className="flex items-center gap-1 font-sarabun text-sm">
+            <div role="group" aria-label={tm("เลือกภาษา")} className="flex items-center gap-1 font-sarabun text-sm">
               {LANGUAGES.map((l, i) => (
                 <React.Fragment key={l.code}>
                   {i > 0 && <span aria-hidden className="text-white/25">/</span>}
@@ -283,7 +283,7 @@ export default function MenuOverlay({
                     onClick={() => setLang(l.code)}
                     className={`rounded-full px-3 py-1.5 transition-colors ${lang === l.code ? "text-[#cfc29f]" : "text-white/60 hover:text-white"}`}
                   >
-                    {LANG_LABEL[l.code]}
+                    {l.name}
                   </button>
                 </React.Fragment>
               ))}
