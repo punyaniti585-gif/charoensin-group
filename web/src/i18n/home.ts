@@ -97,6 +97,7 @@ const th = {
     details: "ดูรายละเอียด",
   },
   news: {
+    eyebrow: "NEWS & ACTIVITIES",
     title: "ข่าวสารและกิจกรรม",
     sub: "ติดตามความเคลื่อนไหว ประกาศองค์กร และกิจกรรมเพื่อสังคมล่าสุดจากกลุ่มบริษัทเจริญสิน",
     cta: "ดูข่าวสารและกิจกรรมทั้งหมด",
@@ -198,6 +199,7 @@ const en: DeepPartial<HomeDict> = {
     details: "View details",
   },
   news: {
+    eyebrow: "NEWS & ACTIVITIES",
     title: "News & Activities",
     sub: "Follow the latest updates, corporate announcements and social activities from Charoensin Group.",
     cta: "View all news and activities",
@@ -298,6 +300,7 @@ const zhCN: DeepPartial<HomeDict> = {
     details: "查看详情",
   },
   news: {
+    eyebrow: "最新动态",
     title: "新闻与活动",
     sub: "关注陳振誠集團的最新动态、企业公告与社会公益活动。",
     cta: "查看全部新闻与活动",
@@ -398,6 +401,7 @@ const zhTW: DeepPartial<HomeDict> = {
     details: "查看詳情",
   },
   news: {
+    eyebrow: "最新動態",
     title: "新聞與活動",
     sub: "關注陳振誠集團的最新動態、企業公告與社會公益活動。",
     cta: "查看全部新聞與活動",
@@ -497,6 +501,7 @@ const ja: DeepPartial<HomeDict> = {
     details: "詳細を見る",
   },
   news: {
+    eyebrow: "ニュース",
     title: "ニュース・活動",
     sub: "チャルンシン・グループの最新情報、企業からのお知らせ、社会貢献活動をご覧ください。",
     cta: "すべてのニュース・活動を見る",
