@@ -4,6 +4,7 @@ import { useCallback, useMemo } from "react";
 import { useLanguage } from "@/components/common/LanguageSwitcher";
 import { FALLBACK_LANGUAGE, type LanguageCode } from "@/data/languages";
 import { homeDict, type HomeDict } from "./home";
+import { foundationDict, type FoundationDict } from "./foundation";
 import { translateMenuLabel } from "./menu";
 
 /* Translation hooks. The page is exported as static Thai HTML; on mount each
@@ -43,6 +44,24 @@ export function getHomeCopy(lang: LanguageCode): HomeDict {
 export function useHomeCopy() {
   const [lang] = useLanguage();
   return useMemo(() => getHomeCopy(lang), [lang]);
+}
+
+const foundationCache = new Map<LanguageCode, FoundationDict>();
+
+/** Foundation page strings in the visitor's language (chosen → English → Thai) */
+export function useFoundationCopy() {
+  const [lang] = useLanguage();
+  return useMemo(() => {
+    let hit = foundationCache.get(lang);
+    if (!hit) {
+      hit =
+        lang === "th"
+          ? foundationDict.th
+          : merge(merge(foundationDict.th, foundationDict[FALLBACK_LANGUAGE]), foundationDict[lang]);
+      foundationCache.set(lang, hit);
+    }
+    return hit;
+  }, [lang]);
 }
 
 /** Main-menu label translator: tm("เกี่ยวกับเรา") → "About Us" / "关于我们" … */

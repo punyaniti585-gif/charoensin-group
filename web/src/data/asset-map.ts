@@ -351,7 +351,7 @@ export const navigationMenu = [
   {
     id: "04",
     label: "มูลนิธิ",
-    href: "https://csgok.sfinsulations.com/wongcharoensinfoundation2026/",
+    href: "/foundation",
     isMega: false,
   },
   {

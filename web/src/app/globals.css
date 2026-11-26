@@ -456,3 +456,8 @@ svg[data-map-active="false"] ~ div .atlas-float { animation-play-state: paused; 
 html[lang="zh-CN"] { --stack-display: var(--g), var(--nf-noto-sc), "Noto Serif SC", "Songti SC", serif; }
 html[lang="zh-TW"] { --stack-display: var(--g), var(--nf-noto-tc), "Noto Serif TC", "PMingLiU", serif; }
 html[lang="ja"] { --stack-display: var(--g), var(--nf-noto-jp), "Noto Serif JP", "Yu Mincho", serif; }
+
+/* Foundation page: supported-organisations marquee (two copies → -50%) */
+@keyframes foundation-marquee {
+  to { transform: translateX(-50%); }
+}
