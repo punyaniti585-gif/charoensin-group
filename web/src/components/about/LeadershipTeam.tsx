@@ -65,7 +65,7 @@ export default function LeadershipTeam() {
   return (
     <section
       id="leadership"
-      className="relative w-full py-12 md:py-16 bg-gradient-to-b from-[#F7F1E7] via-white to-[#F7F1E7] overflow-hidden scroll-mt-28"
+      className="relative w-full py-12 md:py-16 bg-gradient-to-b from-[#FCFBF9] via-white to-[#FCFBF9] overflow-hidden scroll-mt-28"
     >
       {/* Decorative Gold Elements */}
       <div className="absolute inset-0 pointer-events-none">

@@ -17,7 +17,7 @@ export default function VisionAndMission() {
   const { vision, mission } = visionAndMissionData;
 
   return (
-    <section className="relative w-full py-12 md:py-16 bg-[#F7F1E7]">
+    <section className="relative w-full py-12 md:py-16 bg-[#FCFBF9]">
       {/* Background Subtle Gradient & Light Bloom (Isolated overflow to preserve sticky context) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <div className="absolute top-1/4 -right-40 w-[600px] h-[600px] bg-radial from-[#CCA369]/10 via-transparent to-transparent blur-3xl" />

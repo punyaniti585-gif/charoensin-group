@@ -69,7 +69,7 @@ export default function HistoryTimeline() {
   const { banner, intro, rows, endCallout } = historyTimelineData;
 
   return (
-    <section className="relative w-full bg-[#F7F1E7]">
+    <section className="relative w-full bg-[#FCFBF9]">
       {/* ========================================================
           PART 1: FULL-SCREEN PARALLAX BANNER (MONOCHROME + SLOW ZOOM)
           "History of buildings" with rotating "Succeed" / "Charoensin"

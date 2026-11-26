@@ -456,3 +456,14 @@ svg[data-map-active="false"] ~ div .atlas-float { animation-play-state: paused; 
 html[lang="zh-CN"] { --stack-display: var(--g), var(--nf-noto-sc), "Noto Serif SC", "Songti SC", serif; }
 html[lang="zh-TW"] { --stack-display: var(--g), var(--nf-noto-tc), "Noto Serif TC", "PMingLiU", serif; }
 html[lang="ja"] { --stack-display: var(--g), var(--nf-noto-jp), "Noto Serif JP", "Yu Mincho", serif; }
+
+/* /about affiliate logos (AboutAffiliates) — V.3 frameless strip + spotlight.
+   Hovering or focusing one logo dims the rest (opacity only). */
+.aff-logo img { mix-blend-mode: multiply; }
+@media (hover: hover) {
+  .aff-grid:has(.aff-logo:hover) .aff-logo:not(:hover) { opacity: 0.35; }
+}
+.aff-grid:has(.aff-logo:focus-visible) .aff-logo:not(:focus-visible) { opacity: 0.35; }
+@media (prefers-reduced-motion: reduce) {
+  .aff-logo, .aff-logo img { transition: none !important; }
+}

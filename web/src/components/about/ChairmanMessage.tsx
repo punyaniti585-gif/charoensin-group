@@ -14,7 +14,7 @@ export default function ChairmanMessage() {
   return (
     <section
       id="chairman"
-      className="relative w-full pt-4 md:pt-6 pb-12 md:pb-16 bg-[#F7F1E7] overflow-hidden scroll-mt-28"
+      className="relative w-full pt-4 md:pt-6 pb-12 md:pb-16 bg-[#FCFBF9] overflow-hidden scroll-mt-28"
     >
       {/* Decorative Gold Radial Glow */}
       <div className="absolute inset-0 pointer-events-none">

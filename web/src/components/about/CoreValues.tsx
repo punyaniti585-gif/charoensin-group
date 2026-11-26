@@ -50,7 +50,7 @@ export default function CoreValues() {
     <>
     <section
       id="values"
-      className="relative w-full py-12 md:py-16 bg-[#F7F1E7] overflow-hidden scroll-mt-28 border-b border-[#CCA369]/25"
+      className="relative w-full py-12 md:py-16 bg-[#FCFBF9] overflow-hidden scroll-mt-28"
     >
       {/* Background Subtle Ambience */}
       <div className="absolute inset-0 pointer-events-none">
