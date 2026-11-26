@@ -401,11 +401,13 @@ svg[data-map-active="false"] .map-hub-pulse {
   transition: opacity 0.35s ease, scale 0.35s cubic-bezier(0.22, 1, 0.36, 1), translate 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .hero-frame { transition: opacity 0.35s ease; }
+.hero-badge-in { transition: opacity 0.35s ease, scale 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
 /* Act 2 guard: the spotlight only runs once the cards are shown (.is-act2),
    so the Act 1 photo can never fade, even if a hover state lingers. */
 @media (hover: hover) {
   .hero-vp.is-act2:has(.hero-pillar:hover) .hero-pillar:not(:hover),
-  .hero-vp.is-act2:has(.hero-pillar:hover) .hero-frame {
+  .hero-vp.is-act2:has(.hero-pillar:hover) .hero-frame,
+  .hero-vp.is-act2:has(.hero-pillar:hover) .hero-badge-in {
     opacity: 0.42;
     scale: 0.98;
   }
@@ -419,7 +421,7 @@ svg[data-map-active="false"] .map-hub-pulse {
 /* Expanded card content: staggered rise after the morph */
 .pillar-in { animation: hero-rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
 @media (prefers-reduced-motion: reduce) {
-  .hero-pillar, .hero-frame { transition: none; }
+  .hero-pillar, .hero-frame, .hero-badge-in { transition: none; }
   .pillar-in { animation: none; }
 }
 

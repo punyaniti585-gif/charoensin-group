@@ -126,6 +126,9 @@ export default function HeroStage() {
   const frameImgRef = useRef<HTMLDivElement>(null);
   const slotRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLDivElement>(null);
+  /** 80th-anniversary sash + crest: sits over the Act 2 frame's top-left corner */
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const [slotBox, setSlotBox] = useState({ x: 0, y: 0, w: 0, h: 0, r: 0 });
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -171,6 +174,9 @@ export default function HeroStage() {
       const fCx = frame.offsetLeft + fw / 2;
       const fCy = frame.offsetTop + fh / 2;
       target = { s: sr.width / fw, tx: sCx - fCx, ty: sCy - fCy };
+      // Where the frame lands (for the 80th badge — a separate layer so it
+      // isn't shrunk with the frame); radius = the frame's 24px at that scale
+      setSlotBox({ x: sr.left - vr.left, y: sr.top - vr.top, w: sr.width, h: sr.height, r: 24 * (sr.width / fw) });
 
     };
 
@@ -202,6 +208,15 @@ export default function HeroStage() {
       const t = titleRef.current!;
       t.style.opacity = e3.toFixed(3);
       t.style.transform = `translate3d(0, ${((1 - e3) * 18).toFixed(2)}px, 0)`;
+
+      // 80th badge: reveals as the frame settles into its slot (opacity + scale)
+      const b = badgeRef.current;
+      if (b) {
+        const e4 = easeOut(range(p, 0.6, 0.78));
+        b.style.opacity = e4.toFixed(3);
+        b.style.transform = `scale(${(0.92 + 0.08 * e4).toFixed(4)})`;
+        b.style.visibility = e4 <= 0 ? "hidden" : "";
+      }
 
       // Act 2 entered → cards play their own stagger (no further scrolling
       // needed). Hysteresis avoids flicker around the threshold.
@@ -378,6 +393,44 @@ export default function HeroStage() {
           {/* Warm daylight grade */}
           <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,236,200,0.18),rgba(255,236,200,0)_40%,rgba(80,55,20,0.12))]" />
         </div>
+
+        {/* ================= 80th anniversary corner sash + crest (Act 2 only) =================
+            Navy CI sash at 45° with bright-gold edges across the frame's
+            top-left corner, a cream crest with a double gold ring on it and
+            the 80th logo inside. Clipped to the frame's rounded corner;
+            opacity / scale driven by scroll (see render). */}
+        {(() => {
+          const size = slotBox.w < 260 ? 60 : slotBox.w < 520 ? 96 : 112; // crest Ø
+          const c = size * 0.72; // crest centre (px from the corner, both axes)
+          const len = c * 2 * Math.SQRT2 + 40; // sash long enough to cross the corner
+          const band = Math.round(size * 0.3);
+          return (
+            <div
+              ref={badgeRef}
+              aria-hidden
+              className="pointer-events-none absolute z-[25] origin-top-left will-change-transform"
+              style={{ left: slotBox.x, top: slotBox.y, width: slotBox.w, height: slotBox.h, opacity: reduce ? 1 : 0, visibility: reduce ? undefined : "hidden" }}
+            >
+              {/* inner wrapper follows the frame's hover dim (.hero-badge-in in globals.css) */}
+              <div className="hero-badge-in absolute inset-0">
+              <div className="absolute inset-0 overflow-hidden" style={{ borderRadius: slotBox.r }}>
+                <div
+                  className="absolute border-y-[1.5px] border-[#D4B675] bg-[#111e46] shadow-md"
+                  style={{ width: len, height: band, left: c - len / 2, top: c - band / 2, transform: "rotate(-45deg)" }}
+                />
+              </div>
+              <div
+                className="absolute grid place-items-center rounded-full bg-[#FAF8F3] shadow-[0_0_0_2px_#D4B675,0_0_0_5px_#FAF8F3,0_0_0_6.5px_#D4B675,0_10px_24px_-8px_rgba(17,30,70,0.45)]"
+                style={{ width: size, height: size, left: c - size / 2, top: c - size / 2 }}
+              >
+                <span className="relative block h-[78%] w-[78%]">
+                  <Image src={heroCopy.emblem} alt="" fill sizes="112px" className="object-contain" />
+                </span>
+              </div>
+              </div>
+            </div>
+          );
+        })()}
 
         {/* ================= Act 1 type (fades + slides down on scroll) ================= */}
         {/* Same inset + radius as the frame, so the scrims stop at its edge */}

@@ -125,7 +125,11 @@ export default function NewsSection() {
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-12">
           {/* ---------------- Intro (4/12, centred against the cards) ---------------- */}
           <Reveal className="lg:col-span-4 lg:flex lg:flex-col lg:justify-center lg:pb-16">
-            <motion.h2 id="news-title" variants={fadeUp} className="font-kanit font-normal text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.15] text-[#14171F]">
+            <motion.p variants={fadeUp} className="inline-flex items-center gap-3 font-inter text-[11px] font-medium uppercase tracking-[0.3em] text-[#a28757]">
+              <span aria-hidden className="h-px w-8 bg-[#a28757]" />
+              {t.eyebrow}
+            </motion.p>
+            <motion.h2 id="news-title" variants={fadeUp} className="mt-3 font-kanit font-normal text-3xl sm:text-4xl lg:text-[2.6rem] leading-[1.15] text-[#14171F]">
               {t.title}
             </motion.h2>
             <motion.span variants={fadeUp} aria-hidden className="mt-5 block h-px w-16 bg-gradient-to-r from-[#a28757] to-transparent" />
