@@ -65,6 +65,9 @@ const PLACEMENT = [
 
 /** Intro timeline (seconds) — the frame finishes opening at OPEN_AT + 0.9 (photo settles by +1.1) */
 const OPEN_AT = 1.2;
+/** Set after the first HeroStage mount in this JS session: later mounts come
+    from client-side navigation (the first one is the page load). */
+let heroMountedBefore = false;
 const INTRO_END_MS = 2400;
 
 export default function HeroStage() {
@@ -76,6 +79,13 @@ export default function HeroStage() {
   /** Intro: re-keyed on every mount / bfcache restore so it always replays */
   const [animKey, setAnimKey] = useState(0);
   const [introDone, setIntroDone] = useState(false);
+  /** Mounted by client-side navigation (Navbar → หน้าแรก) rather than a page
+      load: the CSS intro restarts from 0 on mount, so the wordmark must time
+      itself from mount too (not from the original page load). */
+  const [clientNav] = useState(() => heroMountedBefore);
+  useEffect(() => {
+    heroMountedBefore = true;
+  }, []);
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = React.useCallback(() => setMenuOpen(false), []);
   const menuBtnRef = useRef<HTMLButtonElement>(null);
@@ -145,6 +155,11 @@ export default function HeroStage() {
     const slot = slotRef.current;
     if (!root || !viewport || !frame || !slot) return;
 
+    // Guards against callbacks that outlive the component: on client-side
+    // navigation React detaches refs before this cleanup runs, so a queued
+    // rAF / scroll / ResizeObserver callback must never touch a null ref.
+    let isMounted = true;
+
     // Geometry (resize only)
     let vw = 0;
     let vh = 0;
@@ -152,6 +167,7 @@ export default function HeroStage() {
     let entered = false;
 
     const measure = () => {
+      if (!isMounted || !viewport.isConnected) return;
       vw = viewport.clientWidth;
       vh = viewport.clientHeight;
       // Tuck the stage under the sticky header so the photo fills the screen
@@ -176,12 +192,17 @@ export default function HeroStage() {
       target = { s: sr.width / fw, tx: sCx - fCx, ty: sCy - fCy };
       // Where the frame lands (for the 80th badge — a separate layer so it
       // isn't shrunk with the frame); radius = the frame's 24px at that scale
-      setSlotBox({ x: sr.left - vr.left, y: sr.top - vr.top, w: sr.width, h: sr.height, r: 24 * (sr.width / fw) });
+      if (isMounted) setSlotBox({ x: sr.left - vr.left, y: sr.top - vr.top, w: sr.width, h: sr.height, r: 24 * (sr.width / fw) });
 
     };
 
     let lastP = -1;
     const render = (force = false) => {
+      if (!isMounted) return;
+      const a1 = act1Ref.current;
+      const img = frameImgRef.current;
+      const t = titleRef.current;
+      if (!a1 || !img || !t || !root.isConnected) return;
       const r = root.getBoundingClientRect();
       const len = Math.max(1, r.height - vh);
       const p = reduce ? 1 : clamp01(-r.top / len);
@@ -192,7 +213,6 @@ export default function HeroStage() {
 
       // Act 1 type: ease down 40px and fade
       const e1 = easeOut(range(p, 0, 0.32));
-      const a1 = act1Ref.current!;
       a1.style.opacity = (1 - e1).toFixed(3);
       a1.style.transform = `translate3d(0, ${(e1 * 40).toFixed(2)}px, 0)`;
       a1.style.visibility = e1 >= 1 ? "hidden" : "";
@@ -201,11 +221,10 @@ export default function HeroStage() {
       const e2 = easeInOut(range(p, 0.1, 0.68));
       const s = 1 + (target.s - 1) * e2;
       frame.style.transform = `translate3d(${(target.tx * e2).toFixed(2)}px, ${(target.ty * e2).toFixed(2)}px, 0) scale(${s.toFixed(4)})`;
-      frameImgRef.current!.style.transform = `scale(${(1.12 - 0.12 * e2).toFixed(4)})`;
+      img.style.transform = `scale(${(1.12 - 0.12 * e2).toFixed(4)})`;
 
       // Act 2 heading
       const e3 = easeOut(range(p, 0.5, 0.78));
-      const t = titleRef.current!;
       t.style.opacity = e3.toFixed(3);
       t.style.transform = `translate3d(0, ${((1 - e3) * 18).toFixed(2)}px, 0)`;
 
@@ -223,7 +242,7 @@ export default function HeroStage() {
       const next = entered ? p > 0.3 : p >= 0.42;
       if (next !== entered) {
         entered = next;
-        setStage2(next);
+        if (isMounted) setStage2(next);
       }
     };
 
@@ -241,12 +260,22 @@ export default function HeroStage() {
     };
 
     onResize();
+    // First paint after a client-side mount (e.g. Navbar → หน้าแรก): the header
+    // and fonts may still be settling, so measure + render once more on the
+    // next frame — the stage is complete from the very first frame.
+    let settle = requestAnimationFrame(() => {
+      settle = 0;
+      onResize();
+    });
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     const ro = new ResizeObserver(onResize);
     ro.observe(viewport);
     return () => {
+      isMounted = false;
       if (raf) cancelAnimationFrame(raf);
+      if (settle) cancelAnimationFrame(settle);
+      raf = 0;
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       ro.disconnect();
@@ -484,7 +513,7 @@ export default function HeroStage() {
           </div>
 
           {/* V.3 wordmark (bottom-left): italic kicker + per-letter gold-sweep reveal */}
-          <HeroWordmark replay={animKey > 0} reduce={reduce} />
+          <HeroWordmark replay={animKey > 0 || clientNav} reduce={reduce} />
          </div>
         </div>
       </div>
