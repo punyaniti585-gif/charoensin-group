@@ -1,0 +1,16 @@
+const fs = require("fs");
+const file = process.argv[2];
+let s = fs.readFileSync(file, "utf8");
+const a = s.indexOf("/* ---------------- Board ---------------- */");
+const b = s.indexOf("export default function LeadershipView");
+if (a < 0 || b < 0) throw new Error("markers");
+const board = fs.readFileSync(process.argv[3], "utf8");
+s = s.slice(0, a) + board + "\n" + s.slice(b);
+const q = '          <Quote className="h-10 w-10 text-[#C8A96A]" aria-hidden />\n          <p className="mt-4 font-kanit';
+if (!s.includes(q)) throw new Error("quote");
+s = s.replace(q, '          <p className="font-kanit');
+s = s.replace('import { Quote } from "lucide-react";\n', "");
+s = s.replace('import React from "react";', 'import React, { useId, useState } from "react";');
+s = s.replace("\n\n\n/* ---------------- S6", "\n\n/* ---------------- S6");
+fs.writeFileSync(file, s);
+console.log("Quote left:", /Quote/.test(s));
