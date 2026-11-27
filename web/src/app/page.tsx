@@ -64,7 +64,7 @@ export default function Home() {
       </main>
 
       <div className="relative z-20 shadow-[0_-18px_40px_-12px_rgba(20,23,31,0.28)]">
-        <Footer hideAffiliates />
+        <Footer />
       </div>
     </div>
   );
