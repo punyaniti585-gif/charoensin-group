@@ -66,7 +66,7 @@ export default function AboutPage() {
       </main>
 
       {/* Global Footer */}
-      <Footer hideAffiliates />
+      <Footer />
     </div>
   );
 }
