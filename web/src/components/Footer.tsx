@@ -3,9 +3,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useReducedMotion } from "framer-motion";
-import { footerAffiliateLogos } from "@/data/asset-map";
-import { FadeUp } from "@/components/ui/MotionWrapper";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/components/common/LanguageSwitcher";
 import { useT } from "@/i18n";
@@ -84,70 +81,15 @@ const footerSections = [
 const linkClass =
   "group/link inline-flex items-start gap-1.5 text-[12.5px] sm:text-[13px] leading-relaxed text-[#E5E7EB] hover:text-[#9CA3AF] transition-colors duration-200";
 
-/**
- * @param hideAffiliates  drop the running affiliate-logo band (home page —
- *   keeps the page clean and stops the infinite marquee animation)
- */
-export default function Footer({ hideAffiliates = false }: { hideAffiliates?: boolean } = {}) {
+export default function Footer() {
   const [lang] = useLanguage();
   const zh = lang === "zh-CN" || lang === "zh-TW";
   const { t } = useT();
-  const shouldReduceMotion = useReducedMotion();
-  const half = Math.ceil(footerAffiliateLogos.length / 2);
-  const row1 = footerAffiliateLogos.slice(0, half);
-  const row2 = footerAffiliateLogos.slice(half);
 
   return (
     <footer className="relative w-full">
       {/* ========================================================
-          PART 1: AFFILIATE LOGOS BAND (cream — the 24 colour logos
-          are JPG/PNG on light grounds and read poorly on dark)
-         ======================================================== */}
-      {!hideAffiliates && (
-      <div className="bg-[#F7F1E7] border-t border-[#B39B6B]/30 pt-12 lg:pt-14 pb-6 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeUp delay={0.1} distance={20}>
-            <div className="flex items-end justify-between mb-6">
-              <div>
-                <span className="text-xs font-semibold text-[#6B5A3A] uppercase tracking-widest font-inter block">
-                  AFFILIATE COMPANIES & BRANDS
-                </span>
-                <h4 className="text-lg sm:text-xl font-bold font-kanit text-[#1F1F1F]">
-                  {t("บริษัทและแบรนด์ในเครือกลุ่มเจริญสิน")}
-                </h4>
-              </div>
-              <span className="hidden sm:inline-block text-xs text-[#6B5A3A] font-sarabun">
-                {t("ชี้เมาส์ที่โลโก้เพื่อดูชื่อบริษัท")}
-              </span>
-            </div>
-
-            {shouldReduceMotion ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 sm:gap-8 py-4 items-center">
-                {footerAffiliateLogos.map((item) => (
-                  <AffiliateLogo key={item.id} item={item} tooltip="top" fluid />
-                ))}
-              </div>
-            ) : (
-              <div className="relative w-full overflow-hidden pt-4 pb-8 space-y-4 sm:space-y-6 [mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_right,transparent_0%,black_8%,black_92%,transparent_100%)]">
-                <div className="animate-marquee-left flex items-center gap-8 sm:gap-10 lg:gap-14">
-                  {[...row1, ...row1].map((item, idx) => (
-                    <AffiliateLogo key={`${item.id}-r1-${idx}`} item={item} tooltip="bottom" />
-                  ))}
-                </div>
-                <div className="animate-marquee-left flex items-center gap-8 sm:gap-10 lg:gap-14">
-                  {[...row2, ...row2].map((item, idx) => (
-                    <AffiliateLogo key={`${item.id}-r2-${idx}`} item={item} tooltip="top" />
-                  ))}
-                </div>
-              </div>
-            )}
-          </FadeUp>
-        </div>
-      </div>
-      )}
-
-      {/* ========================================================
-          PART 2: DARK CHARCOAL-INDIGO MAIN FOOTER
+          MAIN FOOTER (navy)
          ======================================================== */}
       <div className="relative overflow-hidden bg-[#111e46] text-[#E5E7EB]">
         {/* Faint architectural backdrop (static → filter is free after first paint) */}
@@ -259,39 +201,5 @@ export default function Footer({ hideAffiliates = false }: { hideAffiliates?: bo
         </div>
       </div>
     </footer>
-  );
-}
-
-/* ------------------------------------------------------------------
-   Affiliate logo tile with name tooltip (marquee + reduced-motion grid)
-   ------------------------------------------------------------------ */
-function AffiliateLogo({
-  item,
-  tooltip,
-  fluid = false,
-}: {
-  item: { id: string; name: string; logo: string };
-  tooltip: "top" | "bottom";
-  fluid?: boolean;
-}) {
-  const { name } = useT();
-  const below = tooltip === "bottom";
-  return (
-    <div
-      className={`group/logo relative h-9 sm:h-10 ${fluid ? "w-full" : "w-32 sm:w-36 shrink-0"} flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110`}
-    >
-      <div className="relative w-full h-full">
-        <Image src={item.logo} alt={name(item.name)} fill sizes="(max-width: 640px) 140px, 180px" className="object-contain" />
-      </div>
-      <div
-        className={`absolute ${below ? "-bottom-8" : "-top-8"} left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-md bg-[#1F1F1F] text-white text-xs font-sarabun whitespace-nowrap opacity-0 group-hover/logo:opacity-100 transition-opacity duration-200 pointer-events-none z-50 shadow-xl border border-[#B39B6B]/40 flex items-center gap-1.5`}
-      >
-        <div
-          className={`absolute ${below ? "-top-1 border-l border-t" : "-bottom-1 border-r border-b"} left-1/2 -translate-x-1/2 w-2 h-2 rotate-45 bg-[#1F1F1F] border-[#B39B6B]/40`}
-        />
-        <span className="w-1.5 h-1.5 rounded-full bg-[#B39B6B] shrink-0" />
-        <span className="font-medium">{name(item.name)}</span>
-      </div>
-    </div>
   );
 }
