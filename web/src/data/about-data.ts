@@ -529,3 +529,73 @@ export const leadershipData = {
     },
   ] as AdvisoryPerson[],
 };
+
+/* --------------------------------------------------------------------------
+   About V.2 additions (feat/02-about-v2)
+   -------------------------------------------------------------------------- */
+
+export interface ConductPrinciple {
+  id: string;
+  icon: "scale" | "shield" | "handshake" | "users" | "leaf";
+  title: string;
+  text: string;
+}
+
+export const aboutV2Data = {
+  /** Pre-converted black-and-white hero image (no CSS filter at runtime) */
+  heroImageBw: "/img/about/banner-bw.webp",
+  /** Vision section. `visionCutout` = transparent PNG/WebP of the executive
+      (background removed). While it is null the section shows `vision.webp`
+      inside the arch window instead; once set, the figure stands in front of
+      the arch backdrop and rises above its top edge. */
+  visionCutout: "/img/about/vision-cutout.webp" as string | null,
+  /** Focal point of vision.webp inside the arch window (the main figure) */
+  visionFocus: "47% 30%",
+  /** Timeline years shown in the sticky timeline. 2475 is told in the hero
+      intro; Caltree Farm waits for a confirmed year. */
+  timelineFrom: 2488,
+  /** One photo per mission item (01–06), in order. Placeholder picks from
+      the existing gallery — swap for dedicated photos when supplied. */
+  missionImages: [
+    "/img/about/g3.webp",
+    "/img/about/g5.webp",
+    "/img/about/g2.webp",
+    "/img/about/g9.webp",
+    "/img/about/g8.webp",
+    "/img/about/oldphoto.webp",
+  ],
+  /** DRAFT — not supplied by the client yet; based on the existing code of
+      conduct summary. Replace with the official 5 principles once confirmed. */
+  conductPrinciples: [
+    {
+      id: "c1",
+      icon: "scale",
+      title: "ซื่อสัตย์และโปร่งใส",
+      text: "ดำเนินธุรกิจอย่างซื่อตรง เปิดเผยข้อมูลที่ถูกต้องครบถ้วน และตรวจสอบได้",
+    },
+    {
+      id: "c2",
+      icon: "shield",
+      title: "ต่อต้านการทุจริตคอร์รัปชัน",
+      text: "ไม่เรียก รับ หรือให้สินบนในทุกรูปแบบ และปฏิบัติตามกฎหมายอย่างเคร่งครัด",
+    },
+    {
+      id: "c3",
+      icon: "handshake",
+      title: "เป็นธรรมต่อคู่ค้าและลูกค้า",
+      text: "แข่งขันอย่างเสรีและเป็นธรรม เคารพสัญญา และรักษาความลับทางการค้า",
+    },
+    {
+      id: "c4",
+      icon: "users",
+      title: "เคารพสิทธิและดูแลบุคลากร",
+      text: "ปฏิบัติต่อทุกคนอย่างเท่าเทียม ดูแลความปลอดภัย และส่งเสริมการเติบโตของพนักงาน",
+    },
+    {
+      id: "c5",
+      icon: "leaf",
+      title: "รับผิดชอบต่อสังคมและสิ่งแวดล้อม",
+      text: "ลดผลกระทบต่อสิ่งแวดล้อม และร่วมสร้างคุณค่าให้ชุมชนอย่างยั่งยืน",
+    },
+  ] as ConductPrinciple[],
+};

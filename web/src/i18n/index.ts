@@ -5,6 +5,7 @@ import { useLanguage } from "@/components/common/LanguageSwitcher";
 import { FALLBACK_LANGUAGE, type LanguageCode } from "@/data/languages";
 import { homeDict, type HomeDict } from "./home";
 import { translateMenuLabel } from "./menu";
+import { aboutDict, type AboutDict } from "./about";
 
 /* Translation hooks. The page is exported as static Thai HTML; on mount each
    hook reads the saved language and re-renders in it, and every instance
@@ -43,6 +44,27 @@ export function getHomeCopy(lang: LanguageCode): HomeDict {
 export function useHomeCopy() {
   const [lang] = useLanguage();
   return useMemo(() => getHomeCopy(lang), [lang]);
+}
+
+const aboutCache = new Map<LanguageCode, AboutDict>();
+
+/** About page (V.2) copy for a language: chosen → English → Thai */
+export function getAboutCopy(lang: LanguageCode): AboutDict {
+  let hit = aboutCache.get(lang);
+  if (!hit) {
+    hit =
+      lang === "th"
+        ? aboutDict.th
+        : merge(merge(aboutDict.th, aboutDict[FALLBACK_LANGUAGE as Exclude<LanguageCode, "th">]), aboutDict[lang]);
+    aboutCache.set(lang, hit);
+  }
+  return hit;
+}
+
+/** About page strings in the visitor's language */
+export function useAboutCopy() {
+  const [lang] = useLanguage();
+  return { lang, copy: useMemo(() => getAboutCopy(lang), [lang]) };
 }
 
 /** Main-menu label translator: tm("เกี่ยวกับเรา") → "About Us" / "关于我们" … */
