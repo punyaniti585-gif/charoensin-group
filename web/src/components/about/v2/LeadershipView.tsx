@@ -130,12 +130,21 @@ function Profile({ src, name, role, bio, size = "md" }: { src: string; name: str
   );
 }
 
-function TierLabel({ children }: { children: React.ReactNode }) {
+/** Tier heading (Board of Directors / Advisory Board): small gold English
+    eyebrow over a large navy title, framed by champagne rules. The eyebrow
+    is skipped when it would repeat the title (English). */
+function TierLabel({ eyebrow, children }: { eyebrow: string; children: string }) {
+  const repeat = eyebrow.toLowerCase() === children.toLowerCase();
   return (
-    <Reveal className="flex items-center gap-4">
-      <span className="h-px flex-1 bg-[#C8A96A]/40" aria-hidden />
-      <h3 className="font-kanit text-sm uppercase tracking-[0.28em] text-[#111e46]/60">{children}</h3>
-      <span className="h-px flex-1 bg-[#C8A96A]/40" aria-hidden />
+    <Reveal className="mb-10 flex items-center gap-4 sm:gap-6 lg:mb-12">
+      <span className="h-[1px] flex-1 bg-[#C8A96A]/55" aria-hidden />
+      <div className="text-center">
+        {!repeat && <p className="font-kanit text-xs uppercase tracking-[0.2em] text-[#a28757]">{eyebrow}</p>}
+        <h3 className={`font-kanit text-2xl font-semibold tracking-normal text-[#111e46] sm:text-3xl lg:text-[34px] ${repeat ? "" : "mt-1.5"}`}>
+          {children}
+        </h3>
+      </div>
+      <span className="h-[1px] flex-1 bg-[#C8A96A]/55" aria-hidden />
     </Reveal>
   );
 }
@@ -191,36 +200,40 @@ function Board({ copy }: { copy: AboutDict["board"] }) {
       <GeoDivider />
 
       {/* Board of directors: vice chairmen (3), then directors (rows of 4) */}
-      <div className="mt-10 space-y-8">
-        <TierLabel>{copy.boardLabel}</TierLabel>
-        <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-3">
-          {L.viceChairmen.map((p, i) => (
-            <Reveal key={p.name} delay={0.06 * i}>
-              <Profile src={p.image} name={copy.vice[i].name} role={copy.vice[i].role} bio={copy.vice[i].bio} />
-            </Reveal>
-          ))}
-        </div>
-        <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-y-6">
-          {L.executiveDirectors.map((p, i) => (
-            <Reveal key={p.name} delay={0.04 * (i % 4)} className="w-1/2 sm:w-1/3 lg:w-1/4">
-              <Profile src={p.image} name={copy.directors[i].name} role={copy.directors[i].role} size="sm" />
-            </Reveal>
-          ))}
+      <div className="mt-10">
+        <TierLabel eyebrow="Board of Directors">{copy.boardLabel}</TierLabel>
+        <div className="space-y-8">
+          <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-3">
+            {L.viceChairmen.map((p, i) => (
+              <Reveal key={p.name} delay={0.06 * i}>
+                <Profile src={p.image} name={copy.vice[i].name} role={copy.vice[i].role} bio={copy.vice[i].bio} />
+              </Reveal>
+            ))}
+          </div>
+          <div className="mx-auto flex max-w-6xl flex-wrap justify-center gap-y-6">
+            {L.executiveDirectors.map((p, i) => (
+              <Reveal key={p.name} delay={0.04 * (i % 4)} className="w-1/2 sm:w-1/3 lg:w-1/4">
+                <Profile src={p.image} name={copy.directors[i].name} role={copy.directors[i].role} size="sm" />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
 
       {/* Advisors — same profile style as the board */}
-      <div className="mt-20 space-y-8">
-        <TierLabel>{copy.advisorsLabel}</TierLabel>
-        <Reveal>
-          <p className="mx-auto max-w-3xl text-center font-sarabun text-base leading-relaxed text-[#111e46]/70 lg:text-[17px]">{copy.advisorsDescription}</p>
-        </Reveal>
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {L.advisors.map((p, i) => (
-            <Reveal key={p.name} delay={0.05 * (i % 3)}>
-              <Profile src={p.image} name={copy.advisors[i].name} role={copy.advisors[i].role} bio={copy.advisors[i].desc} />
-            </Reveal>
-          ))}
+      <div className="mt-20">
+        <TierLabel eyebrow="Advisory Board">{copy.advisorsLabel}</TierLabel>
+        <div className="space-y-8">
+          <Reveal>
+            <p className="mx-auto max-w-3xl text-center font-sarabun text-base leading-relaxed text-[#111e46]/70 lg:text-[17px]">{copy.advisorsDescription}</p>
+          </Reveal>
+          <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {L.advisors.map((p, i) => (
+              <Reveal key={p.name} delay={0.05 * (i % 3)}>
+                <Profile src={p.image} name={copy.advisors[i].name} role={copy.advisors[i].role} bio={copy.advisors[i].desc} />
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
