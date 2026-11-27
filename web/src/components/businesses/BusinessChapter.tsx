@@ -2,10 +2,13 @@
 
 import React, { useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { ArrowUpRight, Globe, Clock3 } from "lucide-react";
-import type { BusinessGroup, Company } from "@/data/businesses-data";
+import { ArrowRight, Clock3, ExternalLink } from "lucide-react";
+import { companyPhotos, type BusinessGroup, type Company } from "@/data/businesses-data";
+import { useT } from "@/i18n";
 import { luxEase } from "./motion";
+import Lightbox, { ZoomBadge } from "./Lightbox";
 
 interface Props {
   group: BusinessGroup;
@@ -21,6 +24,7 @@ interface Props {
  */
 export default function BusinessChapter({ group, index }: Props) {
   const reduce = useReducedMotion();
+  const { t, name } = useT();
   const flip = index % 2 === 1;
   const ready = group.companies.filter((c) => c.status === "ready");
   const pending = group.companies.filter((c) => c.status === "pending");
@@ -72,7 +76,7 @@ export default function BusinessChapter({ group, index }: Props) {
             >
               <Image
                 src={group.image}
-                alt={group.imageAlt}
+                alt={t(group.imageAlt)}
                 fill
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
@@ -100,11 +104,11 @@ export default function BusinessChapter({ group, index }: Props) {
               id={`${group.id}-title`}
               className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold font-kanit tracking-tight text-[#1F1F1F]"
             >
-              {group.nameTh}
+              {t(group.nameTh)}
             </h2>
-            <p className="mt-2 font-kanit text-base sm:text-lg text-[#6B5A3A]">{group.tagline}</p>
+            <p className="mt-2 font-kanit text-base sm:text-lg text-[#6B5A3A]">{t(group.tagline)}</p>
             <p className="mt-4 font-sarabun text-sm sm:text-base text-[#1F1F1F]/75 leading-relaxed">
-              {group.description}
+              {t(group.description)}
             </p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {group.highlights.map((h) => (
@@ -112,7 +116,7 @@ export default function BusinessChapter({ group, index }: Props) {
                   key={h}
                   className="px-3.5 py-1.5 rounded-full border border-[#CCA369]/50 bg-white/80 text-xs sm:text-[13px] font-kanit text-[#6B5A3A]"
                 >
-                  {h}
+                  {t(h)}
                 </li>
               ))}
             </ul>
@@ -124,7 +128,7 @@ export default function BusinessChapter({ group, index }: Props) {
           <div className="mt-12 lg:mt-16">
             <div
               role="tablist"
-              aria-label={`บริษัทใน${group.nameTh}`}
+              aria-label={`${t("บริษัทในกลุ่ม")}: ${t(group.nameTh)}`}
               className="flex gap-2 overflow-x-auto no-scrollbar snap-x -mx-4 px-4 sm:mx-0 sm:px-0 pb-1 border-b border-[#CCA369]/30"
             >
               {ready.map((c, i) => {
@@ -151,7 +155,7 @@ export default function BusinessChapter({ group, index }: Props) {
                     <span className="relative w-8 h-8 rounded-full overflow-hidden bg-white border border-[#CCA369]/30 shrink-0">
                       <Image src={c.logo} alt="" fill sizes="32px" className="object-contain p-0.5" />
                     </span>
-                    <span className="font-kanit text-sm font-medium whitespace-nowrap">{c.shortName}</span>
+                    <span className="font-kanit text-sm font-medium whitespace-nowrap">{t(c.shortName)}</span>
                     {selected && (
                       <motion.span
                         layoutId={`${group.id}-tab-underline`}
@@ -178,7 +182,7 @@ export default function BusinessChapter({ group, index }: Props) {
                   exit={reduce ? { opacity: 0 } : { opacity: 0, y: -10 }}
                   transition={{ duration: reduce ? 0.15 : 0.45, ease: luxEase }}
                 >
-                  <CompanyPanel company={active} fallbackImage={group.image} />
+                  <CompanyPanel company={active} group={group} />
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -189,7 +193,7 @@ export default function BusinessChapter({ group, index }: Props) {
         {pending.length > 0 && (
           <div className={active ? "mt-10" : "mt-12 lg:mt-16"}>
             <h3 className="font-kanit text-base sm:text-lg font-semibold text-[#1F1F1F] flex items-center gap-3">
-              {active ? "บริษัทอื่นในกลุ่ม" : "บริษัทในกลุ่ม"}
+              {t(active ? "บริษัทอื่นในกลุ่ม" : "บริษัทในกลุ่ม")}
               <span className="flex-1 h-px bg-[#CCA369]/30" />
             </h3>
             <ul className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
@@ -200,20 +204,23 @@ export default function BusinessChapter({ group, index }: Props) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-40px" }}
                   transition={{ duration: 0.6, delay: i * 0.06, ease: luxEase }}
-                  className="flex items-center gap-3 p-3 rounded-2xl bg-white border border-[#CCA369]/25 hover:border-[#CCA369]/60 transition-colors"
+                  className="flex flex-col gap-3 p-3 rounded-2xl bg-white border border-[#CCA369]/25 hover:border-[#CCA369]/60 transition-colors"
                 >
-                  <span className="relative w-12 h-12 rounded-xl overflow-hidden bg-white border border-[#CCA369]/25 shrink-0">
-                    <Image src={c.logo} alt="" fill sizes="48px" className="object-contain p-1" />
-                  </span>
-                  <span className="min-w-0">
-                    <span className="block font-kanit text-sm font-medium text-[#1F1F1F] leading-snug">
-                      {c.nameTh}
+                  <div className="flex items-center gap-3">
+                    <span className="relative w-12 h-12 rounded-xl overflow-hidden bg-white border border-[#CCA369]/25 shrink-0">
+                      <Image src={c.logo} alt="" fill sizes="48px" className="object-contain p-1" />
                     </span>
-                    <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-sarabun text-[#9A7B3E]">
-                      <Clock3 className="w-3 h-3" aria-hidden="true" />
-                      รอข้อมูลจากบริษัท
+                    <span className="min-w-0">
+                      <span className="block font-kanit text-sm font-medium text-[#1F1F1F] leading-snug">
+                        {name(c.nameTh, c.nameEn)}
+                      </span>
+                      <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-sarabun text-[#9A7B3E]">
+                        <Clock3 className="w-3 h-3" aria-hidden="true" />
+                        {t("รอข้อมูลจากบริษัท")}
+                      </span>
                     </span>
-                  </span>
+                  </div>
+                  <CompanyActions company={c} size="sm" className="mt-auto" />
                 </motion.li>
               ))}
             </ul>
@@ -224,23 +231,64 @@ export default function BusinessChapter({ group, index }: Props) {
   );
 }
 
+/** "ดูรายละเอียด" (→ /businesses/[slug]) + "เยี่ยมชมเว็บไซต์" (only when the company has one) */
+export function CompanyActions({
+  company,
+  size = "md",
+  className = "",
+}: {
+  company: Company;
+  size?: "sm" | "md";
+  className?: string;
+}) {
+  const { t } = useT();
+  const pad = size === "sm" ? "px-3.5 py-1.5 text-xs" : "px-5 py-2.5 text-sm";
+  return (
+    <div className={`flex flex-wrap gap-3 ${className}`}>
+      <Link
+        href={`/businesses/${company.slug}`}
+        className={`group inline-flex items-center gap-2 ${pad} rounded-full bg-[#111e46] hover:bg-[#a28757] text-white font-kanit font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96A] focus-visible:ring-offset-2`}
+      >
+        {t("ดูรายละเอียด")}
+        <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true" />
+      </Link>
+      {company.website && (
+        <a
+          href={company.website}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`inline-flex items-center gap-2 ${pad} rounded-full border border-[#a28757] text-[#111e46] bg-white hover:bg-[#111e46] hover:border-[#111e46] hover:text-white font-kanit font-medium transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96A] focus-visible:ring-offset-2`}
+        >
+          {t("เยี่ยมชมเว็บไซต์")}
+          <ExternalLink className="w-4 h-4" aria-hidden="true" />
+          <span className="sr-only">{t("(เปิดในแท็บใหม่)")}</span>
+        </a>
+      )}
+    </div>
+  );
+}
+
 /** Detail panel for one company (photo + gallery | content + actions) */
-function CompanyPanel({ company, fallbackImage }: { company: Company; fallbackImage: string }) {
-  const photos = [
-    ...(company.image ? [{ src: company.image, alt: company.nameTh }] : []),
-    ...(company.gallery ?? []),
-  ];
-  if (photos.length === 0) photos.push({ src: fallbackImage, alt: company.nameTh });
+function CompanyPanel({ company, group }: { company: Company; group: BusinessGroup }) {
+  const { t, name, lang } = useT();
+  const photos = companyPhotos(company, group);
   const [photoIdx, setPhotoIdx] = useState(0);
+  const [lightbox, setLightbox] = useState<number | null>(null);
   const photo = photos[photoIdx] ?? photos[0];
+  const companyName = name(company.nameTh, company.nameEn);
 
   return (
     <article className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 p-4 sm:p-6 lg:p-8 rounded-3xl bg-white border border-[#CCA369]/30 shadow-[0_14px_40px_rgba(107,90,58,0.10)]">
       {/* Photo */}
       <div className="lg:col-span-5">
-        <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-[#E9DFCC]">
+        <button
+          type="button"
+          onClick={() => setLightbox(photoIdx)}
+          aria-label={`${t("ขยายภาพ")}: ${t(photo.alt)}`}
+          className="group relative block w-full aspect-[4/3] rounded-2xl overflow-hidden bg-[#E9DFCC] cursor-zoom-in focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96A] focus-visible:ring-offset-2"
+        >
           <AnimatePresence mode="popLayout" initial={false}>
-            <motion.div
+            <motion.span
               key={photo.src}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -248,10 +296,13 @@ function CompanyPanel({ company, fallbackImage }: { company: Company; fallbackIm
               transition={{ duration: 0.4 }}
               className="absolute inset-0"
             >
-              <Image src={photo.src} alt={photo.alt} fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
-            </motion.div>
+              <span className="absolute inset-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+                <Image src={photo.src} alt={t(photo.alt)} fill sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
+              </span>
+            </motion.span>
           </AnimatePresence>
-        </div>
+          <ZoomBadge />
+        </button>
         {photos.length > 1 && (
           <div className="mt-3 grid grid-cols-5 gap-2">
             {photos.map((p, i) => (
@@ -259,30 +310,34 @@ function CompanyPanel({ company, fallbackImage }: { company: Company; fallbackIm
                 key={p.src}
                 type="button"
                 onClick={() => setPhotoIdx(i)}
-                aria-label={`ดูภาพ: ${p.alt}`}
+                aria-label={`${t("ดูภาพ")}: ${t(p.alt)}`}
                 aria-pressed={i === photoIdx}
-                className={`relative aspect-square rounded-lg overflow-hidden border-2 transition-all cursor-pointer ${
+                className={`group relative aspect-square rounded-lg overflow-hidden border-2 transition-[border-color,opacity] cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C8A96A] ${
                   i === photoIdx ? "border-[#CCA369]" : "border-transparent opacity-70 hover:opacity-100"
                 }`}
               >
-                <Image src={p.src} alt="" fill sizes="80px" className="object-cover" />
+                <span className="absolute inset-0 transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.03] motion-reduce:transition-none motion-reduce:group-hover:scale-100">
+                  <Image src={p.src} alt="" fill sizes="80px" className="object-cover" />
+                </span>
+                <ZoomBadge className="!top-1 !right-1 !w-5 !h-5 [&_svg]:!w-2.5 [&_svg]:!h-2.5" />
               </button>
             ))}
           </div>
         )}
+        <Lightbox photos={photos} index={lightbox} onIndex={(i) => { setLightbox(i); setPhotoIdx(i); }} onClose={() => setLightbox(null)} label={companyName} />
       </div>
 
       {/* Content */}
       <div className="lg:col-span-7 flex flex-col">
         <div className="flex items-center gap-4">
           <span className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-2xl overflow-hidden bg-white border border-[#CCA369]/30 shrink-0">
-            <Image src={company.logo} alt={`โลโก้ ${company.shortName}`} fill sizes="64px" className="object-contain p-1" />
+            <Image src={company.logo} alt={`${t("โลโก้")} ${companyName}`} fill sizes="64px" className="object-contain p-1" />
           </span>
           <div className="min-w-0">
             <h3 className="font-kanit text-lg sm:text-xl lg:text-2xl font-semibold text-[#1F1F1F] leading-snug">
-              {company.nameTh}
+              {companyName}
             </h3>
-            {company.nameEn && (
+            {company.nameEn && lang === "th" && (
               <p className="font-inter text-[11px] sm:text-xs uppercase tracking-[0.15em] text-[#9A7B3E] mt-0.5">
                 {company.nameEn}
               </p>
@@ -291,7 +346,7 @@ function CompanyPanel({ company, fallbackImage }: { company: Company; fallbackIm
         </div>
 
         {company.tagline && (
-          <p className="mt-4 font-kanit text-base sm:text-lg text-[#6B5A3A]">{company.tagline}</p>
+          <p className="mt-4 font-kanit text-base sm:text-lg text-[#6B5A3A]">{t(company.tagline)}</p>
         )}
 
         {company.facts && company.facts.length > 0 && (
@@ -306,11 +361,11 @@ function CompanyPanel({ company, fallbackImage }: { company: Company; fallbackIm
           >
             {company.facts.map((f) => (
               <div key={f.label} className="bg-[#FAF7F2] px-4 py-3">
-                <dt className="sr-only">{f.label}</dt>
+                <dt className="sr-only">{t(f.label)}</dt>
                 <dd className="font-playfair text-2xl sm:text-3xl font-semibold text-[#1F1F1F] leading-none">
-                  {f.value}
+                  {t(f.value)}
                 </dd>
-                <dd className="mt-1.5 font-sarabun text-xs text-[#6B5A3A]">{f.label}</dd>
+                <dd className="mt-1.5 font-sarabun text-xs text-[#6B5A3A]">{t(f.label)}</dd>
               </div>
             ))}
           </dl>
@@ -318,36 +373,11 @@ function CompanyPanel({ company, fallbackImage }: { company: Company; fallbackIm
 
         {company.description && (
           <p className="mt-5 font-sarabun text-sm sm:text-[15px] text-[#1F1F1F]/80 leading-relaxed">
-            {company.description}
+            {t(company.description)}
           </p>
         )}
 
-        {(company.detailHref || company.website) && (
-          <div className="mt-6 lg:mt-auto lg:pt-6 flex flex-wrap gap-3">
-            {company.detailHref && (
-              <a
-                href={company.detailHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#6B5A3A] hover:bg-[#1F1F1F] text-white font-kanit text-sm font-medium transition-colors duration-300"
-              >
-                ดูรายละเอียด
-                <ArrowUpRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-              </a>
-            )}
-            {company.website && (
-              <a
-                href={company.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-[#CCA369] text-[#6B5A3A] hover:bg-[#CCA369] hover:text-[#1F1F1F] font-kanit text-sm font-medium transition-colors duration-300"
-              >
-                <Globe className="w-4 h-4" />
-                เว็บไซต์บริษัท
-              </a>
-            )}
-          </div>
-        )}
+        <CompanyActions company={company} className="mt-6 lg:mt-auto lg:pt-6" />
       </div>
     </article>
   );

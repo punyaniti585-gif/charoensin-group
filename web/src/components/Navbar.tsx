@@ -19,6 +19,7 @@ import {
 } from "@/data/asset-map";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
 import { useMenuT } from "@/i18n";
+import { companyHref } from "@/data/businesses-data";
 
 const easeCurve = [0.16, 1, 0.3, 1] as const;
 
@@ -296,7 +297,7 @@ export default function Navbar() {
                                         onClick={() => setActiveMega(null)}
                                         className="hover:underline underline-offset-4 decoration-[#CCA369]"
                                       >
-                                        {cat.titleTh.replace(/^[0-9]\./, "")}
+                                        {tm(cat.titleTh.replace(/^[0-9]\./, ""))}
                                       </Link>
                                     </h4>
                                   </div>
@@ -306,9 +307,12 @@ export default function Navbar() {
 
                                   <div className="flex flex-col gap-2 mt-auto pt-2 border-t border-[#F2EFE9]">
                                     {cat.companies.map((company) => (
-                                      <div
+                                      <Link
                                         key={company.id}
-                                        className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white transition-shadow group/item"
+                                        href={companyHref(company.id)}
+                                        onClick={() => setActiveMega(null)}
+                                        title={tm(company.nameTh)}
+                                        className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-white transition-shadow group/item focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#CCA369]"
                                       >
                                         <div className="relative w-7 h-7 rounded border border-gray-200 bg-white overflow-hidden shrink-0">
                                           <Image
@@ -319,9 +323,9 @@ export default function Navbar() {
                                           />
                                         </div>
                                         <span className="text-xs text-[#1F1F1F]/85 line-clamp-1 group-hover/item:text-[#6B5A3A] transition-colors">
-                                          {company.shortName || company.nameTh}
+                                          {company.shortName || tm(company.nameTh)}
                                         </span>
-                                      </div>
+                                      </Link>
                                     ))}
                                   </div>
                                 </div>
@@ -532,9 +536,11 @@ export default function Navbar() {
                               </span>
                               <div className="grid grid-cols-1 gap-1.5 pl-5">
                                 {cat.companies.map((c) => (
-                                  <div
+                                  <Link
                                     key={c.id}
-                                    className="flex items-center gap-2 text-xs text-[#1F1F1F]/80 py-0.5"
+                                    href={companyHref(c.id)}
+                                    onClick={() => setMobileOpen(false)}
+                                    className="flex items-center gap-2 text-xs text-[#1F1F1F]/80 hover:text-[#6B5A3A] py-0.5"
                                   >
                                     <div className="relative w-5 h-5 shrink-0 rounded bg-white border border-gray-200 overflow-hidden">
                                       <Image
@@ -544,8 +550,8 @@ export default function Navbar() {
                                         className="object-contain p-0.5"
                                       />
                                     </div>
-                                    <span className="line-clamp-1">{c.shortName || c.nameTh}</span>
-                                  </div>
+                                    <span className="line-clamp-1">{c.shortName || tm(c.nameTh)}</span>
+                                  </Link>
                                 ))}
                               </div>
                             </div>

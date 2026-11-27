@@ -28,7 +28,7 @@ export interface CompanyFact {
 
 export interface Company {
   id: string;
-  /** URL-safe key reserved for future internal routes: /businesses/[group]/[slug] */
+  /** URL key of the company summary page: /businesses/[slug] */
   slug: string;
   nameTh: string;
   nameEn?: string;
@@ -41,9 +41,11 @@ export interface Company {
   tagline?: string;
   description?: string;
   facts?: CompanyFact[];
+  /** Key strengths shown on /businesses/[slug] */
+  strengths?: string[];
   /** Company's own website / official page */
   website?: string;
-  /** "ดูรายละเอียด" target — existing company page (WordPress) for now */
+  /** Legacy WordPress company page (reference only; "ดูรายละเอียด" opens /businesses/[slug]) */
   detailHref?: string;
   /** "pending" = content not yet supplied by the company */
   status: CompanyStatus;
@@ -75,18 +77,6 @@ export interface BusinessStat {
   /** Photo revealed on hover */
   image: string;
   imageAlt: string;
-}
-
-export interface BusinessPrinciple {
-  th: string;
-  en: string;
-  description: string;
-}
-
-export interface BusinessMilestone {
-  year: string;
-  title: string;
-  description: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -137,6 +127,7 @@ export const businessGroups: BusinessGroup[] = [
           { value: "35+", label: "ปีประสบการณ์" },
         ],
         detailHref: `${WP}/charoensin-asset-2026.html`,
+        strengths: ["ห้องพักให้เช่ากว่า 40,000 ห้องใน 25 โครงการ", "ประสบการณ์บริหารชุมชนขนาดใหญ่กว่า 35 ปี", "ทำเลใกล้นิคมอุตสาหกรรมและศูนย์กลางธุรกิจ"],
         status: "ready",
       },
       {
@@ -155,6 +146,7 @@ export const businessGroups: BusinessGroup[] = [
           { value: "28–176", label: "ตร.ม. ต่อห้อง" },
         ],
         website: "https://www.marnipattaya.com/th/",
+        strengths: ["ห้องพักและสวีท 40 ห้อง ออกแบบใหม่สไตล์ร่วมสมัย", "ทุกห้องมีระเบียงหรือเทอร์เรซส่วนตัว", "วิวสระน้ำและวิวทะเลพัทยา"],
         status: "ready",
       },
       {
@@ -197,6 +189,7 @@ export const businessGroups: BusinessGroup[] = [
           { value: "20", label: "กม. จากกรุงเทพฯ" },
         ],
         detailHref: `${WP}/cpl-leather-2026.html`,
+        strengths: ["หนึ่งในโรงฟอกหนังชั้นนำของโลก", "สำนักงานตัวแทนใน 4 ประเทศ", "ทำเลใกล้สนามบินสุวรรณภูมิ"],
         status: "ready",
       },
       {
@@ -215,6 +208,7 @@ export const businessGroups: BusinessGroup[] = [
           { value: "ISO", label: "9001:2008" },
         ],
         website: "https://pangolin.co.th/",
+        strengths: ["รองเท้าเซฟตี้รายแรกของไทยที่ได้รับ มอก.523-2528", "ระบบคุณภาพ ISO 9001:2008 จาก Bureau Veritas", "สมาชิกศูนย์เทคโนโลยี SATRA"],
         status: "ready",
       },
       {
@@ -230,6 +224,7 @@ export const businessGroups: BusinessGroup[] = [
           "ผู้นำด้านรองเท้าหนังแท้สัญชาติไทย ภายใต้แบรนด์ MANWOOD ที่ผสมผสานความประณีตและคุณภาพเหนือกาลเวลา ตั้งแต่การคัดสรรหนังแท้คุณภาพสูง การตัดเย็บอย่างประณีต ไปจนถึงการออกแบบที่ใส่ใจสรีระของผู้สวมใส่ เพื่อความมั่นใจและความสบายในทุกย่างก้าว",
         website: "https://www.facebook.com/Manwoodofficial/",
         detailHref: `${WP}/manwood-intertrade-2026.html`,
+        strengths: ["รองเท้าหนังแท้แบรนด์ไทย MANWOOD", "คัดสรรหนังแท้คุณภาพสูง ตัดเย็บอย่างประณีต", "ออกแบบใส่ใจสรีระของผู้สวมใส่"],
         status: "ready",
       },
     ],
@@ -261,6 +256,7 @@ export const businessGroups: BusinessGroup[] = [
         facts: [{ value: "35+", label: "ปีประสบการณ์" }],
         website: "https://www.ttnsnonwoven.com/",
         detailHref: `${WP}/ttn-nonwoven-2026.html`,
+        strengths: ["ประสบการณ์ผลิตผ้าใยสังเคราะห์กว่า 35 ปี", "ได้รับความไว้วางใจจากลูกค้าทั่วโลก", "พัฒนาเทคนิคการผลิต non-woven อย่างต่อเนื่อง"],
         status: "ready",
       },
       {
@@ -275,6 +271,7 @@ export const businessGroups: BusinessGroup[] = [
           "ผู้เชี่ยวชาญด้านการผลิตและจำหน่ายผ้าใยสังเคราะห์ทุกชนิดที่มีคุณภาพ มีผลิตภัณฑ์เส้นใยหลากหลายที่ตอบสนองความต้องการของกลุ่มอุตสาหกรรมต่างๆ และเป็นที่ยอมรับจากลูกค้าแบรนด์ดังระดับโลก",
         facts: [{ value: "25+", label: "ปีที่ก่อตั้ง" }],
         detailHref: `${WP}/songmao-nonwoven-2026.html`,
+        strengths: ["ก่อตั้งมากว่า 25 ปี", "ผลิตภัณฑ์เส้นใยหลากหลายสำหรับหลายอุตสาหกรรม", "ได้รับการยอมรับจากแบรนด์ดังระดับโลก"],
         status: "ready",
       },
       {
@@ -296,6 +293,7 @@ export const businessGroups: BusinessGroup[] = [
         tagline: "สิ่งทอ non-woven และผลิตภัณฑ์ที่เกี่ยวข้อง",
         description:
           "ประกอบธุรกิจอุตสาหกรรมทอผ้า อุตสาหกรรมผ้าที่ผลิตโดยไม่ผ่านกระบวนการถักทอ (non-woven) การผลิตเสื้อผ้า สิ่งทอ และผลิตภัณฑ์ที่เกี่ยวข้อง รวมถึงการผลิตและจำหน่ายผ้า เสื้อผ้า รองเท้า หมวก ร่ม และเครื่องประดับ",
+        strengths: ["ผลิตสิ่งทอ non-woven ครบวงจร", "ต่อยอดสู่เสื้อผ้า รองเท้า หมวก และร่ม"],
         status: "ready",
       },
     ],
@@ -328,6 +326,8 @@ export const businessGroups: BusinessGroup[] = [
           { value: "2548", label: "ปีที่ก่อตั้ง" },
           { value: "mai", label: "จดทะเบียนปี 2560" },
         ],
+        website: "https://www.adb.co.th/",
+        strengths: ["จดทะเบียนในตลาดหลักทรัพย์ เอ็ม เอ ไอ ปี 2560", "ผู้ผลิตกาวอุตสาหกรรมและเม็ดพลาสติกคอมปาวด์"],
         status: "ready",
       },
       {
@@ -341,6 +341,8 @@ export const businessGroups: BusinessGroup[] = [
         description:
           "บริษัทร่วมทุนระหว่างกลุ่มเจริญสินและหุ้นส่วนชาวไต้หวัน ตั้งแต่ปี พ.ศ. 2533 ดำเนินธุรกิจเคมีภัณฑ์สำหรับอุตสาหกรรมฟอกหนังและพิมพ์ผ้า ปัจจุบันเป็น One Stop Service ทั้งผลิตเองและเป็นตัวแทนจัดจำหน่ายเคมีภัณฑ์จากทั่วโลก เช่น Stahl, Lanxess, GSC, Alpa, Pulcra และ Bussetti พร้อมพัฒนาเทคนิคการผลิตหนังไปพร้อมกับลูกค้า",
         facts: [{ value: "2533", label: "เริ่มร่วมทุน" }],
+        website: "https://www.eaglechem.co.th/",
+        strengths: ["ร่วมทุนไทย–ไต้หวันตั้งแต่ปี 2533", "One Stop Service ทั้งผลิตเองและตัวแทนจำหน่าย", "ตัวแทนแบรนด์เคมีระดับโลก เช่น Stahl และ Lanxess"],
         status: "ready",
       },
       {
@@ -350,6 +352,7 @@ export const businessGroups: BusinessGroup[] = [
         nameEn: "CS Rubber Industry Co., Ltd.",
         shortName: "ซี เอส รับเบอร์",
         logo: "/img/CSR.jpg",
+        website: "https://www.csrubber.co.th/",
         status: "pending",
       },
       {
@@ -359,6 +362,7 @@ export const businessGroups: BusinessGroup[] = [
         nameEn: "CS Unitel Technology Co., Ltd.",
         shortName: "ซีเอส ยูนิเทล",
         logo: "/img/CS UNITEL.jpg",
+        website: "https://www.csunitel.co.th/",
         status: "pending",
       },
       {
@@ -368,6 +372,7 @@ export const businessGroups: BusinessGroup[] = [
         nameEn: "CS Mitsufuku Elastomer Co., Ltd.",
         shortName: "ซี เอส มิตซูฟุกุ",
         logo: "/img/CS MITSUFUKU.jpg",
+        website: "https://www.csmitsufuku.co.th/",
         status: "pending",
       },
       {
@@ -377,6 +382,7 @@ export const businessGroups: BusinessGroup[] = [
         nameEn: "CSJ Rubber Sheet Co., Ltd.",
         shortName: "ซีเอสเจ",
         logo: "/img/CSJ.jpg",
+        website: "https://www.csjrubbersheet.com/home-th/",
         status: "pending",
       },
     ],
@@ -394,12 +400,12 @@ export const businessGroups: BusinessGroup[] = [
     imageAlt: "ธุรกิจอื่นๆ ของกลุ่มเจริญสิน",
     highlights: ["7 บริษัทในกลุ่ม", "การลงทุนในอุตสาหกรรมอนาคต"],
     companies: [
-      { id: "ccap", slug: "charoensin-capital", nameTh: "บริษัท เจริญสิน แคปปิตอล จำกัด", nameEn: "Charoensin Capital Co., Ltd.", shortName: "เจริญสิน แคปปิตอล", logo: "/img/CCAP.jpg", status: "pending" },
-      { id: "tws", slug: "thai-wiring-system", nameTh: "บริษัท ไทย ไวร์ริ่ง ซิสเต็ม จำกัด", nameEn: "Thai Wiring System Co., Ltd.", shortName: "ไทย ไวร์ริ่ง ซิสเต็ม", logo: "/img/TWS.jpg", status: "pending" },
+      { id: "ccap", slug: "charoensin-capital", nameTh: "บริษัท เจริญสิน แคปปิตอล จำกัด", nameEn: "Charoensin Capital Co., Ltd.", shortName: "เจริญสิน แคปปิตอล", logo: "/img/CCAP.jpg", website: "https://www.ccap.co.th/", status: "pending" },
+      { id: "tws", slug: "thai-wiring-system", nameTh: "บริษัท ไทย ไวร์ริ่ง ซิสเต็ม จำกัด", nameEn: "Thai Wiring System Co., Ltd.", shortName: "ไทย ไวร์ริ่ง ซิสเต็ม", logo: "/img/TWS.jpg", website: "http://thaiwiring.com/", status: "pending" },
       { id: "caltree", slug: "saeng-burapa-plantation", nameTh: "บริษัท แสงบูรพา แพลนเทชั่น จำกัด", nameEn: "Saeng Burapa Plantation Co., Ltd.", shortName: "แสงบูรพา แพลนเทชั่น", logo: "/img/CALTREE.jpg", status: "pending" },
       { id: "premium", slug: "fine-food-factor", nameTh: "บริษัท ไฟน์ ฟู้ด แฟกเตอร์ จำกัด", nameEn: "Fine Food Factor Co., Ltd.", shortName: "ไฟน์ ฟู้ด แฟกเตอร์", logo: "/img/PREMIUM.jpg", status: "pending" },
       { id: "smartsense", slug: "smart-sense-industrial-design", nameTh: "บริษัท สมาร์ท เซนส์ อินดัสเตรียล ดีไซน์ จำกัด", nameEn: "Smart Sense Industrial Design Co., Ltd.", shortName: "สมาร์ท เซนส์", logo: "/img/SMART SENSE.jpg", status: "pending" },
-      { id: "endofwaste", slug: "now-end-of-waste", nameTh: "บริษัท นาว เอนด์ออฟเวสท์ จำกัด", nameEn: "Now End of Waste Co., Ltd.", shortName: "นาว เอนด์ออฟเวสท์", logo: "/img/END OF WASTE.jpg", status: "pending" },
+      { id: "endofwaste", slug: "now-end-of-waste", nameTh: "บริษัท นาว เอนด์ออฟเวสท์ จำกัด", nameEn: "Now End of Waste Co., Ltd.", shortName: "นาว เอนด์ออฟเวสท์", logo: "/img/END OF WASTE.jpg", website: "https://www.endofwaste.net/", status: "pending" },
       { id: "bbest", slug: "b-best-service", nameTh: "บริษัท รักษาความปลอดภัย บี-เบสท์ เซอร์วิส จำกัด", nameEn: "B-Best Service Security Co., Ltd.", shortName: "บี-เบสท์ เซอร์วิส", logo: "/img/BEST (หรือ B BEST).jpg", status: "pending" },
     ],
   },
@@ -439,26 +445,6 @@ export const businessManifesto = {
   body: "ดำเนินธุรกิจด้วยการยึดหลัก 4 ข้อสำคัญ เพื่อพัฒนาบุคลากรและกระบวนการทำงานทั้งหมด เพื่อสร้างคุณค่าให้กับสังคม",
 };
 
-export const businessSynergy = {
-  eyebrow: "Integrated Value Chain",
-  title: "เติบโตด้วยกัน ตลอดห่วงโซ่อุตสาหกรรม",
-  body: "ในโลกที่ธุรกิจเปลี่ยนแปลงอย่างรวดเร็ว ความสามารถในการขับเคลื่อนอย่างบูรณาการคือหัวใจสำคัญ กลุ่มบริษัทเจริญสินจึงเชื่อมโยงจุดแข็งของแต่ละกลุ่มธุรกิจเข้าด้วยกัน เพื่อส่งมอบนวัตกรรม โอกาส และความยั่งยืน ให้แก่ประเทศ ประชาชน และองค์กร",
-  image: `${IMG}/building.webp`,
-  imageAlt: "อาคารเจริญสิน ทางเข้าหลังคาทองและรูปปั้นช้าง",
-  principles: [
-    { th: "ความมั่นคง", en: "Strength", description: "บริหารด้วยวินัยทางการเงินและธรรมาภิบาล ให้ทุกธุรกิจในเครือเติบโตบนรากฐานที่แข็งแรง" },
-    { th: "การผนึกกำลัง", en: "Synergy", description: "เชื่อมจุดแข็งของแต่ละกลุ่มธุรกิจและพันธมิตร ให้ต่อยอดกันได้ตลอดห่วงโซ่อุตสาหกรรม" },
-    { th: "ความต่อเนื่อง", en: "Continuity", description: "พัฒนาบุคลากรและกระบวนการทำงานอย่างต่อเนื่อง เพื่อส่งต่อองค์ความรู้และคุณค่าสู่คนรุ่นถัดไป" },
-    { th: "วิสัยทัศน์", en: "Vision", description: "ลงทุนในนวัตกรรมและอุตสาหกรรมแห่งอนาคต ควบคู่กับความรับผิดชอบต่อสังคมและสิ่งแวดล้อม" },
-  ] as BusinessPrinciple[],
-  milestones: [
-    { year: "2533", title: "อีเกิ้ล เคมีคอล อินดัสตรี", description: "ร่วมทุนกับหุ้นส่วนชาวไต้หวัน เริ่มธุรกิจเคมีภัณฑ์สำหรับอุตสาหกรรมฟอกหนังและพิมพ์ผ้า" },
-    { year: "2548", title: "แอ็พพลาย ดีบี (ADB)", description: "ควบรวมผู้ผลิตกาวอุตสาหกรรมและผู้ผลิตเม็ดพลาสติกคอมปาวด์" },
-    { year: "2560", title: "ADB เข้าตลาด mai", description: "เข้าจดทะเบียนในตลาดหลักทรัพย์ เอ็ม เอ ไอ" },
-    { year: "วันนี้", title: `${businessGroups.length} กลุ่มธุรกิจ ${companyCount} บริษัทและธุรกิจในเครือ`, description: "และลูกค้าธุรกิจกว่า 9,000 ราย" },
-  ] as BusinessMilestone[],
-};
-
 // ---------------------------------------------------------------------------
 // Data access (swap these for WordPress REST fetches later)
 // ---------------------------------------------------------------------------
@@ -473,8 +459,39 @@ export async function getBusinessPageData() {
     stats: businessStats,
     manifesto: businessManifesto,
     groups: businessGroups,
-    synergy: businessSynergy,
   };
+}
+
+/** Every company with its group, in page order */
+export function getAllCompanies(): { company: Company; group: BusinessGroup }[] {
+  return businessGroups.flatMap((group) => group.companies.map((company) => ({ company, group })));
+}
+
+export function getCompanyBySlug(slug: string) {
+  return getAllCompanies().find((e) => e.company.slug === slug);
+}
+
+const slugById = new Map(getAllCompanies().map((e) => [e.company.id, e.company.slug]));
+
+/** Summary page URL for a company id (falls back to the businesses page) */
+export function companyHref(id: string): string {
+  const slug = slugById.get(id);
+  return slug ? `/businesses/${slug}` : "/businesses";
+}
+
+export interface CompanyPhoto {
+  src: string;
+  alt: string;
+}
+
+/** Main + gallery photos of a company (the group photo when it has none) */
+export function companyPhotos(company: Company, group: BusinessGroup): CompanyPhoto[] {
+  const photos: CompanyPhoto[] = [
+    ...(company.image ? [{ src: company.image, alt: company.nameTh }] : []),
+    ...(company.gallery ?? []),
+  ];
+  if (photos.length === 0) photos.push({ src: group.image, alt: company.nameTh });
+  return photos;
 }
 
 export type BusinessPageData = Awaited<ReturnType<typeof getBusinessPageData>>;

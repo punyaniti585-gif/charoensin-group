@@ -7,6 +7,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, ChevronDown, ChevronRight, X } from "lucide-react";
 import { brandAssets, businessCategories, navigationMenu } from "@/data/asset-map";
+import { companyHref } from "@/data/businesses-data";
 import { LANGUAGES } from "@/data/languages";
 import { useLanguage } from "@/components/common/LanguageSwitcher";
 import { useMenuT } from "@/i18n";
@@ -35,7 +36,7 @@ const MENU: MenuEntry[] = navigationMenu.map((item) => {
   if (item.isMega && item.megaType === "business") {
     groups = businessCategories.map((cat) => ({
       title: `${cat.number} ${cat.titleTh}`,
-      links: cat.companies.map((c) => ({ label: c.nameTh, href: `/businesses#${cat.key}` })),
+      links: cat.companies.map((c) => ({ label: c.nameTh, href: companyHref(c.id) })),
     }));
   } else if (item.isMega && item.megaType === "governance" && "governanceCategories" in item) {
     groups = (item.governanceCategories ?? []).map((g) => ({ title: g.title, links: g.items }));

@@ -1,4 +1,5 @@
 import type { LanguageCode } from "@/data/languages";
+import { businessPhrases } from "./businesses";
 
 /* ==========================================================================
    Content & UI phrases — keyed by the Thai source text
@@ -630,7 +631,13 @@ const ja: Phrases = {
   "กลุ่มบริษัทเจริญสิน — Charoensin Group": "チャルンシン・グループ",
 };
 
-export const phraseDict: Partial<Record<LanguageCode, Phrases>> = { en, "zh-CN": zhCN, "zh-TW": zhTW, ja };
+/* /businesses phrases first, so an entry already in the tables above wins */
+export const phraseDict: Partial<Record<LanguageCode, Phrases>> = {
+  en: { ...businessPhrases.en, ...en },
+  "zh-CN": { ...businessPhrases["zh-CN"], ...zhCN },
+  "zh-TW": { ...businessPhrases["zh-TW"], ...zhTW },
+  ja: { ...businessPhrases.ja, ...ja },
+};
 
 /** Brand names that must never fall back to English "Charoensin…" in Chinese */
 export const ZH_BRAND = "陳振誠集團";
