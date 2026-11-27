@@ -119,7 +119,7 @@ export const businessCategories = [
       {
         id: "smn",
         nameTh: "บริษัท ซงเม่า นันวูเว่น จำกัด",
-        nameEn: "Songmao Nonwoven Co., Ltd.",
+        nameEn: "Song Mao Nonwoven Co., Ltd.",
         shortName: "SMN",
         logo: "/img/SMN.jpg",
         category: "non-woven" as const,
@@ -153,7 +153,7 @@ export const businessCategories = [
       {
         id: "adb",
         nameTh: "บริษัท แอ็พพลาย ดีบี จำกัด (มหาชน)",
-        nameEn: "Apply DB Public Co., Ltd.",
+        nameEn: "Applied DB Public Co., Ltd.",
         shortName: "ADB",
         logo: "/img/ADB.jpg",
         category: "chemical" as const,

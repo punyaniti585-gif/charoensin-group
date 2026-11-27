@@ -6,6 +6,8 @@ import { ArrowDown } from "lucide-react";
 import type { BusinessPageData } from "@/data/businesses-data";
 import { luxEase } from "./motion";
 import HeroStage3D from "./HeroStage3D";
+import AffiliatesMenu from "@/components/common/AffiliatesMenu";
+import { useT } from "@/i18n";
 
 type Props = Pick<BusinessPageData, "hero"> & {
   /** Id of the section the CTA scrolls to (stats) */
@@ -20,6 +22,7 @@ type Props = Pick<BusinessPageData, "hero"> & {
  */
 export default function BusinessHero({ hero, ctaTargetId }: Props) {
   const reduce = useReducedMotion();
+  const { t } = useT();
   const sectionRef = useRef<HTMLElement>(null);
 
   // 0 → 1 while the hero scrolls from its top to fully out of view
@@ -110,19 +113,24 @@ export default function BusinessHero({ hero, ctaTargetId }: Props) {
               {hero.subtitle}
             </motion.p>
 
-            <motion.a
-              href={`#${ctaTargetId}`}
-              onClick={scrollToTarget}
+            <motion.div
               initial={reduce ? false : { opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 1.05, ease: luxEase }}
-              className="group mt-8 inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-[#1F1F1F] hover:bg-[#6B5A3A] text-white font-kanit text-sm font-medium shadow-[0_10px_30px_rgba(31,31,31,0.18)] transition-colors duration-300"
+              className="mt-8 flex flex-wrap items-center gap-3"
             >
-              ภาพรวมกลุ่มธุรกิจ
+            <a
+              href={`#${ctaTargetId}`}
+              onClick={scrollToTarget}
+              className="group inline-flex items-center gap-3 pl-6 pr-2 py-2 rounded-full bg-[#1F1F1F] hover:bg-[#6B5A3A] text-white font-kanit text-sm font-medium shadow-[0_10px_30px_rgba(31,31,31,0.18)] transition-colors duration-300"
+            >
+              {t("ภาพรวมกลุ่มธุรกิจ")}
               <span className="w-8 h-8 rounded-full bg-[#CCA369] text-[#1F1F1F] flex items-center justify-center transition-transform duration-300 group-hover:translate-y-0.5">
                 <ArrowDown className="w-4 h-4" />
               </span>
-            </motion.a>
+            </a>
+            <AffiliatesMenu variant="hero" />
+            </motion.div>
           </div>
 
           {/* ================= 3D cards ================= */}

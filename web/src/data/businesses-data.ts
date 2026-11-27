@@ -126,6 +126,7 @@ export const businessGroups: BusinessGroup[] = [
           { value: "40,000+", label: "ห้องพัก" },
           { value: "35+", label: "ปีประสบการณ์" },
         ],
+        website: "https://www.charoensin.co.th/",
         detailHref: `${WP}/charoensin-asset-2026.html`,
         strengths: ["ห้องพักให้เช่ากว่า 40,000 ห้องใน 25 โครงการ", "ประสบการณ์บริหารชุมชนขนาดใหญ่กว่า 35 ปี", "ทำเลใกล้นิคมอุตสาหกรรมและศูนย์กลางธุรกิจ"],
         status: "ready",
@@ -188,6 +189,7 @@ export const businessGroups: BusinessGroup[] = [
           { value: "4", label: "ประเทศ สำนักงานตัวแทน" },
           { value: "20", label: "กม. จากกรุงเทพฯ" },
         ],
+        website: "https://www.cpl.co.th/",
         detailHref: `${WP}/cpl-leather-2026.html`,
         strengths: ["หนึ่งในโรงฟอกหนังชั้นนำของโลก", "สำนักงานตัวแทนใน 4 ประเทศ", "ทำเลใกล้สนามบินสุวรรณภูมิ"],
         status: "ready",
@@ -477,6 +479,41 @@ const slugById = new Map(getAllCompanies().map((e) => [e.company.id, e.company.s
 export function companyHref(id: string): string {
   const slug = slugById.get(id);
   return slug ? `/businesses/${slug}` : "/businesses";
+}
+
+/** The 13 affiliate companies ("บริษัทในเครือ" list), in display order */
+const AFFILIATES: { id: string; label: string }[] = [
+  { id: "cpl", label: "บมจ. ซีพีแอล กรุ๊ป" },
+  { id: "csa", label: "บจก. เจริญสิน แอสเสท" },
+  { id: "adb", label: "บมจ. แอ็พพลาย ดีบี" },
+  { id: "ttn", label: "บจก. ทีทีเอ็น นันวูเว่น โซลูชั่น" },
+  { id: "smn", label: "บจก. ซงเม่า นันวูเว่น" },
+  { id: "eagle", label: "บจก. อีเกิ้ล เคมีคอล อินดัสตรี" },
+  { id: "csr", label: "บจก. ซีเอส รับเบอร์ อินดัสตรี" },
+  { id: "unitel", label: "บจก. ซีเอส ยูนิเทล เทคโนโลยี" },
+  { id: "mitsufuku", label: "บจก. ซีเอส มิตซูฟูกุ อีลาสโตเมอร์" },
+  { id: "csj", label: "บจก. ซีเอสเจ รับเบอร์ชีท" },
+  { id: "manwood", label: "บจก. แมนวูด อินเตอร์เทรด" },
+  { id: "tws", label: "บจก. ไทย ไวร์ริ่ง ซิสเต็ม" },
+  { id: "ccap", label: "บจก. เจริญสิน แคปปิตอล" },
+];
+
+export interface AffiliateLink {
+  id: string;
+  /** Short Thai legal name — also the i18n key */
+  label: string;
+  href: string;
+  logo: string;
+}
+
+/** Affiliate companies with their summary-page link and logo */
+export function getAffiliates(): AffiliateLink[] {
+  const byId = new Map(getAllCompanies().map((e) => [e.company.id, e.company]));
+  return AFFILIATES.map(({ id, label }) => {
+    const c = byId.get(id);
+    if (!c) throw new Error(`Affiliate ${id} is missing from businessGroups`);
+    return { id, label, href: `/businesses/${c.slug}`, logo: c.logo };
+  });
 }
 
 export interface CompanyPhoto {

@@ -64,6 +64,26 @@ const ui: Record<string, [string, string, string, string]> = {
   "แมนวูด": ["Manwood", "Manwood", "Manwood", "Manwood"],
 };
 
+/* Affiliate dropdown ("บริษัทในเครือ ▾"): registered English names; zh / ja
+   keep English except the Charoensin-named companies (陳振誠 / チャルンシン) */
+const reg = (en: string): [string, string, string, string] => [en, en, en, en];
+const affiliateNames: Record<string, [string, string, string, string]> = {
+  "ภาพรวมกลุ่มธุรกิจ": ["Business group overview", "业务板块概览", "業務板塊概覽", "事業分野の概要"],
+  "บมจ. ซีพีแอล กรุ๊ป": reg("CPL Group PCL"),
+  "บจก. เจริญสิน แอสเสท": ["Charoensin Asset Co., Ltd.", "陳振誠资产有限公司", "陳振誠資產有限公司", "チャルンシン・アセット株式会社"],
+  "บมจ. แอ็พพลาย ดีบี": reg("Applied DB PCL"),
+  "บจก. ทีทีเอ็น นันวูเว่น โซลูชั่น": reg("TTN Nonwoven Solution Co., Ltd."),
+  "บจก. ซงเม่า นันวูเว่น": reg("Song Mao Nonwoven Co., Ltd."),
+  "บจก. อีเกิ้ล เคมีคอล อินดัสตรี": reg("Eagle Chemical Industry Co., Ltd."),
+  "บจก. ซีเอส รับเบอร์ อินดัสตรี": reg("CS Rubber Industry Co., Ltd."),
+  "บจก. ซีเอส ยูนิเทล เทคโนโลยี": reg("CS Unitel Technology Co., Ltd."),
+  "บจก. ซีเอส มิตซูฟูกุ อีลาสโตเมอร์": reg("CS Mitsufuku Elastomer Co., Ltd."),
+  "บจก. ซีเอสเจ รับเบอร์ชีท": reg("CSJ Rubber Sheet Co., Ltd."),
+  "บจก. แมนวูด อินเตอร์เทรด": reg("Manwood Intertrade Co., Ltd."),
+  "บจก. ไทย ไวร์ริ่ง ซิสเต็ม": reg("Thai Wiring System Co., Ltd."),
+  "บจก. เจริญสิน แคปปิตอล": ["Charoensin Capital Co., Ltd.", "陳振誠资本有限公司", "陳振誠資本有限公司", "チャルンシン・キャピタル株式会社"],
+};
+
 /** Group tagline by group id → [en, zh-CN, zh-TW, ja] */
 const groupTagline: Record<string, [string, string, string, string]> = {
   "real-estate": [
@@ -207,6 +227,16 @@ const companyEn: Record<string, { tagline?: string; description?: string; streng
   },
 };
 
+/* Descriptions whose English text names "Charoensin Group": translated so
+   zh never falls back to "Charoensin" (brand rule) — [zh-CN, zh-TW, ja] */
+const brandedDescription: Record<string, [string, string, string]> = {
+  eagle: [
+    "自 1990 年起由陳振誠集團与台湾合作伙伴合资成立，为制革与印染行业提供化学品。如今提供一站式服务，既自主生产，也代理销售来自全球的化学品，包括 Stahl、Lanxess、GSC、Alpa、Pulcra 和 Bussetti，并与客户共同开发制革技术。",
+    "自 1990 年起由陳振誠集團與台灣合作夥伴合資成立，為製革與印染產業提供化學品。如今提供一站式服務，既自主生產，也代理銷售來自全球的化學品，包括 Stahl、Lanxess、GSC、Alpa、Pulcra 和 Bussetti，並與客戶共同開發製革技術。",
+    "1990年にチャルンシン・グループと台湾のパートナーが設立した合弁会社で、皮革なめし・捺染業界向けの化学品を手がけています。現在は自社製造と、Stahl、Lanxess、GSC、Alpa、Pulcra、Bussettiなど世界各国の化学品の販売を担うワンストップサービスを提供し、顧客とともに皮革製造技術の開発にも取り組んでいます。",
+  ],
+};
+
 const LANGS: Lang[] = ["en", "zh-CN", "zh-TW", "ja"];
 
 function build(): Record<Lang, Phrases> {
@@ -215,7 +245,7 @@ function build(): Record<Lang, Phrases> {
     if (!thai) return;
     LANGS.forEach((l, i) => (out[l][thai] = values[i]));
   };
-  for (const [thai, v] of Object.entries(ui)) put(thai, v);
+  for (const [thai, v] of Object.entries({ ...ui, ...affiliateNames })) put(thai, v);
   for (const g of businessGroups) {
     if (groupTagline[g.id]) put(g.tagline, groupTagline[g.id]);
     g.highlights.forEach((h, i) => groupHighlights[g.id]?.[i] && put(h, groupHighlights[g.id][i]));
@@ -224,6 +254,12 @@ function build(): Record<Lang, Phrases> {
       if (!en) continue;
       if (c.tagline && en.tagline) out.en[c.tagline] = en.tagline;
       if (c.description && en.description) out.en[c.description] = en.description;
+      const branded = brandedDescription[c.id];
+      if (c.description && branded) {
+        out["zh-CN"][c.description] = branded[0];
+        out["zh-TW"][c.description] = branded[1];
+        out.ja[c.description] = branded[2];
+      }
       c.strengths?.forEach((s, i) => en.strengths?.[i] && (out.en[s] = en.strengths[i]));
     }
   }

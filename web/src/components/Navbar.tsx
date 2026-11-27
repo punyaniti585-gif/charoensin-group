@@ -9,7 +9,6 @@ import {
   Menu as MenuIcon,
   X as CloseIcon,
   ChevronDown,
-  ExternalLink,
   ChevronRight,
 } from "lucide-react";
 import {
@@ -18,6 +17,7 @@ import {
   navigationMenu,
 } from "@/data/asset-map";
 import LanguageSwitcher from "@/components/common/LanguageSwitcher";
+import AffiliatesMenu from "@/components/common/AffiliatesMenu";
 import { useMenuT } from "@/i18n";
 import { companyHref } from "@/data/businesses-data";
 
@@ -272,13 +272,7 @@ export default function Navbar() {
                                   {tm("5 เสาหลักกลุ่มธุรกิจเจริญสิน")}
                                 </h3>
                               </div>
-                              <Link
-                                href={item.href}
-                                className="inline-flex items-center gap-1.5 text-xs font-medium text-[#6B5A3A] hover:text-[#B39B6B] transition-colors"
-                              >
-                                <span>{tm("ดูภาพรวมทุกธุรกิจ")}</span>
-                                <ExternalLink className="w-3.5 h-3.5" />
-                              </Link>
+                              <AffiliatesMenu variant="mega" onNavigate={() => setActiveMega(null)} />
                             </div>
 
                             <div className="grid grid-cols-5 gap-6">
